@@ -1,10 +1,11 @@
-// Part 3: a new archive. The plan is in p3-figs.js; the building it rises into
-// when the page is folded, in p3-fold.js.
+// Part 3: a new archive. The plan is in p3-figs.js. Folded, the building it
+// describes stands beside the page, seen whole, with the routes through it
+// (world.js, docs/world.md).
 
 import { FIGS } from './p3-figs.js';
-import { CONSTRUCTS } from './p3-fold.js';
 import { COURSES } from './curriculum.js';
 import { setupPage } from './page.js';
+import { PLACE_P1, placeOfLink } from './world.js';
 
 // the textbooks, with the question each answers
 const host = document.querySelector('#course-index');
@@ -21,4 +22,16 @@ for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']
   host.append(h, ul);
 }
 
-await setupPage({ figs: FIGS, constructs: CONSTRUCTS, stages: 5, unit: 'Section', part: 'Part 3', name: 'A new archive' });
+// the routes drawn through the building: the classical sequence of Part 1, figure
+// by figure, and the three paths of section 4, from their links
+const byNumber = (a, b) => { const [x1, y1] = a.split('.').map(Number); const [x2, y2] = b.split('.').map(Number); return x1 - x2 || y1 - y2; };
+const routes = [
+  { name: 'Part 1, the classical sequence', places: Object.keys(PLACE_P1).sort(byNumber).map((k) => PLACE_P1[k]), c: 'white' },
+  ...[...document.querySelectorAll('.paths section')].map((sec, i) => ({
+    name: sec.querySelector('h3').textContent.split(':')[0],
+    places: [...sec.querySelectorAll('a')].map((a) => placeOfLink(a.getAttribute('href'))).filter(Boolean),
+    c: ['ochre', 'cobalt', 'olive'][i],
+  })),
+];
+
+await setupPage({ figs: FIGS, constructs: {}, world: {}, archive: { figure: '3.1', end: '#a4', routes }, stages: 5, unit: 'Section', part: 'Part 3', name: 'A new archive' });

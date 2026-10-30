@@ -10,7 +10,7 @@
 
 import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
 import { loadAssets } from './maquettes.js';
-import { ROOMS, RW, FH, placeOf, roomGeometry, routeAt, crowdSpots } from './world.js';
+import { ROOMS, RW, RD, FH, OUTSIDE, placeOf, roomGeometry, routeAt, routeOf, crowdSpots } from './world.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -105,7 +105,11 @@ function readingTimes(sheet) {
   return marks;
 }
 
-export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, onChange }) {
+// archive (Part 3): { figure, end, routes: [{ name, places, c }] }. From that
+// figure to the end element the view steps back to the whole building, which
+// stands beside the page, with the routes drawn through it; its rooms' names
+// are doors.
+export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, archive = null, onChange }) {
   if (!htmlInCanvasSupport()) return { supported: false, reason: 'This browser cannot draw HTML into WebGPU textures yet (HTML-in-Canvas).' };
   const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
   if (!adapter) return { supported: false, reason: 'No WebGPU adapter is available.' };
@@ -116,6 +120,15 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   gctx.configure({ device, format, alphaMode: 'premultiplied' });
   const G = makeGpu(device, format);
 
+  // the doors of the archive are links in their own landmark, so that they can
+  // be reached from the keyboard while the rest of the labels stay hidden
+  let doorsRoot = null;
+  if (archive) {
+    doorsRoot = document.createElement('nav');
+    doorsRoot.id = 'expo-doors';
+    doorsRoot.setAttribute('aria-label', 'Rooms of the archive');
+    document.body.appendChild(doorsRoot);
+  }
   const st = { t: 0, target: 0, captured: false, busy: false, running: false, tiles: [], scene: null, sheetBox: null, last: 0, time: 0, mouse: [0, 0], orbit: [0, 0], drag: null, returning: false };
 
   // ---- capture: the sheet, cloned into the canvas and copied in tiles ----
@@ -276,6 +289,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   function buildScene() {
     G.freeScene();
     labelsRoot.replaceChildren();
+    doorsRoot?.replaceChildren();
     const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], world: null };
     const sb = st.sheetBox;
     const H = sb[3] - sb[1];
@@ -377,13 +391,43 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const grid = G.lines(g.grid, [0, 0, 0, 0], COL[r.c], 1, 1, false, 0);
         const plate = G.mesh(quadVerts(g.plate), [0, 0, 0, 0], COL[r.c], 1.1, 0);
         plate.space = 0;
-        const sign = document.createElement('div');
-        sign.className = 'xl room';
+        const sign = document.createElement(archive ? 'a' : 'div');
+        sign.className = archive ? 'xl room door' : 'xl room';
         sign.innerHTML = `<span>${r.layer}</span>${r.name}`;
-        labelsRoot.appendChild(sign);
+        if (archive) {
+          sign.href = r.href;
+          sign.tabIndex = -1;
+          doorsRoot.appendChild(sign);
+        } else labelsRoot.appendChild(sign);
         return { r, lines, grid, plate, sign, at: g.sign, hang: g.hang, atL: g.signL, hangL: g.hangL };
       });
       sc.world = { stops, rooms };
+    }
+
+    // Part 3: the routes through the whole building, each in its own colour,
+    // with its name where it starts
+    if (archive && world) {
+      const fig = sheet.querySelector(`figure[data-fig="${archive.figure}"]`)?.getBoundingClientRect();
+      const end = sheet.querySelector(archive.end)?.getBoundingClientRect();
+      const paths = sheet.querySelector('.paths')?.getBoundingClientRect();
+      const routes = archive.routes.map((rt, i) => {
+        const pts = routeOf(rt.places, 0.22 + 0.11 * i);
+        const segs = pts.slice(1).map((q, k) => [pts[k], q]);
+        const lines = G.lines(segs, [0, 0, 0, 0], COL[rt.c], 3, 1, false, 0);
+        const dots = G.points(pts.map((p) => [...p, 0.9]), [0, 0, 0, 0], COL[rt.c], 7, 1, 0.6);
+        dots.space = 0;
+        const el = document.createElement('div');
+        el.className = `xl route ${rt.c}`;
+        el.textContent = rt.name;
+        labelsRoot.appendChild(el);
+        return { ...rt, lines, dots, el, start: pts[0], rooms: new Set(rt.places.flat()), classical: i === 0 };
+      });
+      sc.archive = {
+        c: fig ? (fig.top + fig.bottom) / 2 + scrollY : 0,
+        end: end ? end.bottom + scrollY : 0,
+        paths: paths ? paths.top + scrollY : 0,
+        routes,
+      };
     }
     return sc;
   }
@@ -538,20 +582,30 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // With reduced motion the building does not move: it fades out and back in
     // at the next room.
     const R = sc.world ? routeAt(sc.world.stops, P.focus, REDUCED ? (u) => (u < 0.5 ? 0 : 1) : ease) : null;
-    // the building's offset: building coordinates + O = world
-    const O = R ? [((st.sheetBox[0] + st.sheetBox[2]) / 2 - W / 2) * PX - R.at[0], -R.at[1], -R.at[2]] : null;
+    // the building's offset: building coordinates + O = world. In Part 3 the
+    // building stands beside the page, and from the plan on the view steps
+    // back until it is seen whole (climax).
+    const pageX = st.sheetBox ? ((st.sheetBox[0] + st.sheetBox[2]) / 2 - W / 2) * PX : 0;
+    const A = sc.archive;
+    let O = R ? [pageX - R.at[0], -R.at[1], -R.at[2]] : null;
+    if (A) O = [pageX + OUTSIDE.x, 0, OUTSIDE.z - RD / 2];
+    const climax = A ? ease(smooth(A.c - 1400, A.c - 250, P.focus) * (1 - smooth(A.end + 150, A.end + 1100, P.focus))) : 0;
     const travel = REDUCED ? 0 : Math.min(1, (R?.travel ?? 0) / 8);
 
     // the flat view of the sheet, dollied back into a raised, tilted one
     const T = CAM;
     const fov = (lerp(0.5, T.fov, e) * Math.PI) / 180;
     const hO = lerp(H * 0.5 * PX, T.h, e);
-    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1]) * e, 0, 1.35);
-    const az = (st.mouse[0] * 0.1 + st.orbit[0]) * e;
-    const target = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
+    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + 0.2 * climax) * e, 0, 1.35);
+    const az = (st.mouse[0] * 0.1 + st.orbit[0] - 0.5 * climax) * e;
+    const near0 = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
+    // the whole view looks between the page and the building's middle, so that
+    // the plan on the page and the building it describes are seen together
+    const whole = O ? [O[0] + 1.7 * RW, O[1] + 1.2 * FH, O[2] + 1.3] : near0;
+    const target = near0.map((v, k) => lerp(v, whole[k], climax * e));
     // a turned view also steps back, so the room and its neighbours come into sight
     const turned = Math.min(1, Math.hypot(st.orbit[0] / ORBIT.az, st.orbit[1] / ORBIT.hi));
-    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e);
+    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + 5.6 * climax * e);
     const eye = [target[0] + dist * Math.sin(az) * Math.cos(el), target[1] + dist * Math.sin(el), target[2] + dist * Math.cos(az) * Math.cos(el)];
     const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 6), dist + 40), lookAt(eye, target, [0, 1, 0])));
 
@@ -605,6 +659,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         putAgent(C.asset, F, (it.lift ?? 0) + 0.2 * it.s * Math.abs(Math.sin(it.tilt)), it.s, it.ry ?? 0, g, it.tilt);
       }
     }
+    // Part 3: each agent stands in its room on the top floor
+    if (A && O && climax > 0.03) {
+      for (const r of ROOMS) {
+        if (!r.asset) continue;
+        const F = { o: [O[0] + (r.col + 0.5) * RW, O[1] + r.floor * FH, O[2]], X: [1, 0, 0], N: [0, 1, 0], D: [0, 0, 1] };
+        putAgent(r.asset, F, 0, 0.34, 0, climax * appear);
+      }
+    }
     const solids = allSolids();
     for (const s of solids) s.set(agentQ.get(s) ?? []);
 
@@ -619,15 +681,19 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const over = [];
     // the building moves so that the room of the figure being read surrounds
     // the reading point
-    if (sc.world) {
+    // Part 3: the rooms on a shown route are lit; the three paths come in as
+    // their section approaches
+    const routeOn = (rt) => climax * (rt.classical ? 1 : smooth(A.paths - 1600, A.paths - 400, P.focus));
+    const weights = R ? R.weights : new Map();
+    if (A) for (const rt of A.routes) for (const n of rt.rooms) weights.set(n, Math.max(weights.get(n) ?? 0, 0.7 * routeOn(rt)));
+    if (sc.world && O) {
       // signs show for the rooms being read; once the view is turned, also for
       // their neighbours on the same floor
-      const floor = R.at[1] / FH;
-      const pageX = ((sbx[0] + sbx[2]) / 2 - W / 2) * PX;
+      const floor = R ? R.at[1] / FH : 0;
       const pageHalf = ((sbx[2] - sbx[0]) / 2) * PX + 0.05;
-      const shown = REDUCED ? 1 - Math.sin(Math.PI * R.s) : 1;
+      const shown = R && REDUCED ? 1 - Math.sin(Math.PI * R.s) : 1;
       for (const w of sc.world.rooms) {
-        const k = R.weights.get(w.r.name) ?? 0;
+        const k = weights.get(w.r.name) ?? 0;
         w.lines.box = [...O, 0];
         w.grid.box = [...O, 0];
         w.plate.box = [...O, 0];
@@ -641,15 +707,31 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const left = Math.abs(at[0] - pageX) < pageHalf;
         if (left) at = add(below ? w.hangL : w.atL, O);
         w.sign.classList.toggle('left', left);
-        const level = k > 0.02 || (turned > 0.15 && Math.abs(w.r.floor - floor) < 0.5);
-        const pr = level && Math.hypot(at[0], at[1], at[2]) < 6 ? project(vp, at, W, H) : null;
-        const o = shown * appear * (0.4 + 0.6 * k);
+        const level = A ? climax > 0.3 : k > 0.02 || (turned > 0.15 && Math.abs(w.r.floor - floor) < 0.5);
+        const pr = level && (A || Math.hypot(at[0], at[1], at[2]) < 6) ? project(vp, at, W, H) : null;
+        const o = shown * appear * (A ? climax * (0.7 + 0.3 * k) : 0.4 + 0.6 * k);
+        const door = Boolean(A) && o > 0.5;
+        w.sign.tabIndex = door ? 0 : -1;
+        w.sign.style.pointerEvents = door ? 'auto' : 'none';
         if (!pr || o < 0.02 || pr[0] < -200 || pr[0] > W + 200 || pr[1] < -60 || pr[1] > H + 60) {
           w.sign.style.opacity = '0';
           continue;
         }
         w.sign.style.opacity = String(o);
         w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.6, 1.1).toFixed(3)}) translate(${left ? '0' : '-100%'}, ${below ? '0' : '-100%'})`;
+      }
+    }
+    if (A && O) {
+      for (const rt of A.routes) {
+        const o = appear * routeOn(rt);
+        rt.lines.box = [...O, 0];
+        rt.dots.box = [...O, 0];
+        rt.lines.opacity = o;
+        rt.dots.opacity = o;
+        over.push(rt.lines, rt.dots);
+        const pr = o > 0.02 ? project(vp, add(rt.start, O), W, H) : null;
+        rt.el.style.opacity = pr ? String(o) : '0';
+        if (pr) rt.el.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) translate(-50%, -140%)`;
       }
     }
     for (const it of sc.objs) (it.kind === 'grid' || it.kind === 'edge' ? under : over).push(it.o);
@@ -693,7 +775,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     }
     G.render({
       ctx: gctx,
-      cam: { vp, eye, W: W * dpr, H: H * dpr, focus: P.focus, docW: W, t: e, time: st.time },
+      cam: { vp, eye, W: W * dpr, H: H * dpr, focus: P.focus, docW: W, t: e, time: st.time, fog: e * (1 - 0.85 * climax) },
       bg: { inner: BP_IN.map((v, i) => lerp(DESK[i], v, e)), outer: BP_OUT.map((v, i) => lerp(DESK[i], v, e)), center: [W * dpr * 0.5, H * dpr * 0.42], radius: Math.max(W, H) * dpr * 0.85 },
       fog: BP_OUT,
       tiles: st.tiles.map((T2) => T2.obj),

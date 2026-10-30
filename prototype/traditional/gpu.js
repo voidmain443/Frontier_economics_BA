@@ -418,7 +418,7 @@ export function makeGpu(device, format) {
       const c = new Float32Array(52);
       c.set(cam.vp, 0);
       c.set([...cam.eye, 1], 16);
-      c.set([cam.W, cam.H, cam.focus, cam.docW, cam.t, PX, BEND.k, BEND.u0, BEND.theta, cam.t, cam.time, 0], 20);
+      c.set([cam.W, cam.H, cam.focus, cam.docW, cam.t, PX, BEND.k, BEND.u0, BEND.theta, cam.fog ?? cam.t, cam.time, 0], 20);
       if (light) {
         c.set(light.VP, 32);
         c.set([...light.dir, light.shadow], 48);

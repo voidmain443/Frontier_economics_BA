@@ -141,3 +141,40 @@ export function crowdSpots(items) {
     return [s === 'left' ? -x : x, z];
   });
 }
+
+// ---------- Part 3: the building seen whole ----------
+
+// The building stands beside the page, its first column this far to the right
+// of the page's centre line and its front this far in front of the reading point.
+export const OUTSIDE = { x: 1.25, z: 0.6 };
+
+// The place a link on the site points to: a Part 1 figure or field course
+// (classical.html#f6-1, #c8-10), a Part 1 stage (#s5: its first figure), or a
+// Part 2 section (beyond.html#b3).
+export function placeOfLink(href) {
+  const m = href.match(/(classical|beyond)\.html#([a-z])(\d+)-?(\d+)?/);
+  if (!m) return null;
+  const [, page, kind, a, b] = m;
+  if (page === 'beyond') return PLACE_P2[`2.${a}`] ?? null;
+  if (kind === 'f' || kind === 'c') return PLACE_P1[`${a}.${b}`] ?? null;
+  if (kind === 's') return PLACE_P1[`${a}.1`] ?? null;
+  return null;
+}
+
+// A route through the building, in building coordinates: from room to room it
+// climbs or descends at the room it leaves, then crosses the floor it arrives
+// on, so that it reads as stairs and corridors. lift keeps routes that share
+// rooms apart.
+export function routeOf(places, lift = 0.3) {
+  const pts = [];
+  let last = null;
+  for (const place of places) {
+    const p = placeOf(place).at;
+    const q = [p[0] + lift * 0.4, p[1] + lift, lift * 0.6];
+    if (last && q.every((v, k) => Math.abs(v - last[k]) < 1e-6)) continue;
+    if (last && Math.abs(q[1] - last[1]) > 1e-6) pts.push([last[0], q[1], last[2]]);
+    pts.push(q);
+    last = q;
+  }
+  return pts;
+}

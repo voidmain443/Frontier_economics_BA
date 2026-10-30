@@ -800,6 +800,16 @@ body.site-page .desk { padding-bottom: 96px; }
 #expo-labels a.xl.door { font: 500 15px/1.2 var(--draft); padding: 3px 8px 4px; background: rgba(10, 34, 60, 0.82); border: 1px solid rgba(255, 210, 122, 0.6); }
 #expo-labels a.xl.door:hover, #expo-labels a.xl.door:focus-visible { background: rgba(255, 210, 122, 0.95); color: var(--blueprint); }
 
+/* Part 3, folded: the rooms' names are doors, reachable from the keyboard */
+#expo-doors { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+body:not(.unfolded) #expo-doors { display: none; }
+#expo-doors a.xl.room.door { color: var(--chalk); text-decoration: none; padding: 3px 9px 4px 0; background: rgba(10, 34, 60, 0.55); }
+#expo-doors a.xl.room.door:hover, #expo-doors a.xl.room.door:focus-visible { color: #ffd27a; border-color: #ffd27a; outline: 2px solid #ffd27a; outline-offset: 3px; }
+.xl.route { font: 600 15px/1.2 var(--draft); padding: 3px 8px 4px; color: #fff; background: rgba(8, 26, 46, 0.85); border-left: 3px solid currentColor; text-shadow: none; }
+.xl.route.ochre { color: #ffd27a; }
+.xl.route.cobalt { color: #8fb6ff; }
+.xl.route.olive { color: #bfe07a; }
+
 /* Part 3: the plan of the archive */
 .plot .lb.room { font: 500 17px var(--draft); fill: var(--ink); }
 .plot a.room-door:hover .lb.room, .plot a.room-door:focus .lb.room { fill: var(--cobalt); text-decoration: underline; }
