@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-Section</title>
+<meta name="description" content="How economics has been taught, what the flat textbook cannot show, and a proposal for an archive that teaches it differently.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="site-page">
+<nav class="site" aria-label="Parts">
+  <a class="site-home" href="index.html" aria-current="page">Cross-Section</a>
+  <a href="classical.html"><span>1</span>The classical textbook</a>
+  <a href="beyond.html"><span>2</span>Beyond the flat page</a>
+  <a href="archive.html"><span>3</span>A new archive</a>
+</nav>
+
+<div class="desk">
+<main class="sheet landing">
+  <header class="opening">
+    <h1>Cross-Section</h1>
+    <p class="lede">An economics textbook draws the world as flat slices: one market with everything else held still, one household standing for millions. This project asks what those slices are cut from, what they cannot show, and how economics could be taught without them.</p>
+  </header>
+
+  <ol class="parts-index">
+    <li>
+      <a href="classical.html">
+        <span class="pi-no">1</span>
+        <span class="pi-title">The classical textbook</span>
+        <span class="pi-text">The undergraduate sequence as one story in eight stages, from one market to the eleven field courses. Each stage adds an agent or a market, and every figure is a slice of something larger. Fold the page, and each figure raises the dimension it was drawn without.</span>
+      </a>
+    </li>
+    <li>
+      <a href="beyond.html">
+        <span class="pi-no">2</span>
+        <span class="pi-title">Beyond the flat page</span>
+        <span class="pi-text">What the classical figures cannot draw: who is connected to whom, chains rather than cores, no typical size, how far people reason, and how failures travel between banks. Then the projects rebuilding the textbook around them: CORE, QuantEcon and others.</span>
+      </a>
+    </li>
+    <li>
+      <a href="archive.html">
+        <span class="pi-no">3</span>
+        <span class="pi-title">A new archive</span>
+        <span class="pi-text">A proposal for teaching classical and modern economics together. The archive is arranged by agents, markets, institutions and methods rather than by course titles. It is drawn as a plan that folds up into a building, with three ways through and a door into every textbook.</span>
+      </a>
+    </li>
+  </ol>
+
+  <section class="textbooks">
+    <h2>The textbooks</h2>
+    <p>Each course of the sequence has its own page: its weeks, where it appears in Parts 1 and 2, and outside material to read next.</p>
+    <div id="course-index"></div>
+  </section>
+</main>
+</div>
+
+<script type="module">
+  import { COURSES } from './curriculum.js';
+  const host = document.querySelector('#course-index');
+  for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
+    const h = document.createElement('h3');
+    h.textContent = name;
+    const ul = document.createElement('ul');
+    ul.className = 'course-grid';
+    for (const c of COURSES.filter((x) => x.side === side)) {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="course.html?c=${c.id}"><b>${c.short}</b><span>${c.name}</span><i>${c.weeks.length} weeks</i></a>`;
+      ul.appendChild(li);
+    }
+    host.append(h, ul);
+  }
+</script>
+</body>
+</html>

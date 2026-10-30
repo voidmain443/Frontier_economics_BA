@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>단면 / Cross-Section (프로토타입)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="hero" class="hero">
+  <div class="hero-ui">
+    <header class="masthead dark">
+      <span>단면 / Cross-Section</span>
+      <span>경제학 커리큘럼 재설계 · 프로토타입</span>
+    </header>
+    <div class="hero-copy">
+      <p class="kicker dark">학부 경제학의 온톨로지</p>
+      <h1 class="hero-title">경제학을<br>처음부터<br>다시 설계한다</h1>
+      <p class="hero-sub">학부 경제학의 개념 <b id="stat-concepts">72</b>개와 그 사이의 관계 <b id="stat-edges">100</b>개를 한 공간에 펼쳤다. 과목은 이 그래프 위를 지나가는 <em>경로</em>이고, 같은 개념도 어떤 눈으로 보느냐에 따라 자리가 바뀐다.</p>
+      <div class="chips">
+        <span class="ui-label">보는 눈</span>
+        <button type="button" data-lens="course" class="on">학제</button>
+        <button type="button" data-lens="agent">주체</button>
+        <button type="button" data-lens="history">역사</button>
+        <button type="button" data-lens="math">수학</button>
+      </div>
+      <div class="chips">
+        <span class="ui-label">과목 경로</span>
+        <button type="button" data-path="principles">01 원론</button>
+        <button type="button" data-path="micro">03 미시</button>
+        <button type="button" data-path="macro">04 거시</button>
+        <button type="button" data-path="core">07 CORE식</button>
+      </div>
+      <div id="path-caption" class="path-caption"></div>
+    </div>
+    <div class="hero-foot">
+      <span>드래그 회전 · 노드에 올려 보기 · <b>⤢</b> 개념은 눌러서 그림 1로</span>
+      <span>↓ 수요와 공급에서 시작한다</span>
+    </div>
+  </div>
+</section>
+
+<main>
+  <p class="kicker">03 미시경제학 · 수요와 공급</p>
+  <h1>가장 익숙한 그래프의 단면</h1>
+  <p class="lede">경제학을 배운 사람이라면 누구나 이 X자 그래프를 기억한다. 오른쪽 아래로 내려가는 수요곡선, 오른쪽 위로 올라가는 공급곡선, 그리고 둘이 만나는 균형점.</p>
+  <p>이 그래프는 단순화다. 소득을 하나로 고정했고, 시간을 지웠고, 수천 명의 소비자를 곡선 하나로 합쳤고, 다른 모든 시장을 배경으로 밀어냈다. 단순화는 나쁜 것이 아니다. 덕분에 시장을 한눈에 볼 수 있다. 다만 무엇을 접어 두었는지 알 때 비로소 좋은 틀이 된다.</p>
+
+  <figure id="fig1" class="figure">
+    <div class="figure-stage" data-scene="supply-demand"></div>
+    <div class="figure-controls">
+      <label class="ctl">소득 <i>I</i>
+        <input id="income" type="range" min="0.5" max="1.5" step="0.01" value="1">
+        <output id="income-out">1.00</output>
+      </label>
+      <button id="expo-btn" class="expo-btn" type="button">펼치기 <span aria-hidden="true">⤢</span></button>
+    </div>
+    <figcaption><b>그림 1.</b> 수요와 공급. 소득 <i>I</i>를 움직이면 수요곡선이 이동하고 균형점 <i>E*</i>가 옮겨 간다. <b>펼치기</b>를 누르면 이 평면이 접어 둔 네 개의 차원(소득, 시간, 소비자, 다른 시장)이 차례로 드러난다.</figcaption>
+  </figure>
+
+  <p>교과서는 여기서 멈춘다. 곡선이 "이동"했고, 균형가격이 올랐다. 그런데 곡선은 왜 이동하는가? 가격은 새 균형까지 어떻게 가는가? 이 수요곡선은 애초에 어디서 왔는가? 그리고 다른 시장들이 함께 움직이면 이 균형은 여전히 안정적인가?</p>
+  <p>이 질문에 답하려면 평면을 벗어나야 한다. 다변수 미적분, 미분방정식, 제약 최적화, 선형대수. 경제수학 시간에 배우는 도구들이 바로 이 접힌 차원을 펴는 도구다.</p>
+  <p class="colophon">프로토타입 · 위의 온톨로지 그래프와 그림 1은 하나의 WebGPU 캔버스에서 두 개의 뷰로 그린다. 소비자 8,192명의 집계와 입자 24,576개의 흐름은 compute 셰이더가 계산한다.</p>
+</main>
+
+<canvas id="gpu"></canvas>
+<div id="hero-labels" aria-hidden="true"></div>
+<div id="labels" aria-hidden="true"></div>
+<div id="tooltip" role="tooltip"></div>
+<div id="orbit-hit"></div>
+
+<div id="expo-ui">
+  <aside class="expo-panel">
+    <div class="brand">단면 · 그림 1 펼침</div>
+    <nav class="tabs">
+      <button type="button" data-stage="1">① 곡면</button>
+      <button type="button" data-stage="2">② 시간</button>
+      <button type="button" data-stage="3">③ 소비자</button>
+      <button type="button" data-stage="4">④ 시장들</button>
+    </nav>
+    <h2 id="st-title"></h2>
+    <p id="st-body"></p>
+    <div id="st-formula" class="formula"></div>
+    <div class="math"><span class="math-label">필요한 수학</span><span id="st-math"></span></div>
+    <label class="ctl dark" id="income-ctl2">소득 <i>I</i>
+      <input id="income2" type="range" min="0.5" max="1.5" step="0.01" value="1">
+      <output id="income2-out">1.00</output>
+    </label>
+    <label class="ctl dark" id="cross-ctl" hidden>교차효과 <i>c</i>
+      <input id="cross" type="range" min="-1.6" max="1.6" step="0.01" value="0.4">
+      <output id="cross-out">0.40</output>
+    </label>
+    <button id="back-btn" class="back-btn" type="button">← 종이로 돌아가기</button>
+    <p class="hint">드래그 회전 · 휠 확대 · 1 2 3 4 단계 전환 · Esc 돌아가기</p>
+  </aside>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

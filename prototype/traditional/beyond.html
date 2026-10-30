@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 2: Beyond the flat page — Cross-Section</title>
+<meta name="description" content="What the classical figures cannot draw: who is connected to whom, how unequal sizes are, how far people reason, how a failure travels; and the projects rebuilding the textbook around them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="p1 p2">
+<nav class="site" aria-label="Parts">
+  <a class="site-home" href="index.html">Cross-Section</a>
+  <a href="classical.html"><span>1</span>The classical textbook</a>
+  <a href="beyond.html" aria-current="page"><span>2</span>Beyond the flat page</a>
+  <a href="archive.html"><span>3</span>A new archive</a>
+</nav>
+
+<div class="desk">
+<article id="sheet" class="sheet">
+  <div class="zones" aria-hidden="true"></div>
+
+  <header class="opening">
+    <h1>Beyond the flat page</h1>
+    <p class="lede"><a href="classical.html#s9">Part 1</a> ended with an assumption that unfolding its figures does not remove: every agent of a type is alike, and nobody is connected to anybody in particular. Much of what economists now study lives inside that assumption: who is connected to whom, how unequal sizes are, how far people reason, and how a failure travels.</p>
+    <p>This part keeps Part 1’s grammar. Each section starts from one of Part 1’s figures and names what that figure holds fixed. It then draws what replaces the assumption. The last section is about the projects now rebuilding the textbook around these ideas.</p>
+    <p class="needs-fold" hidden>Fold the page with the control in the corner, and each drawing raises the dimension the classical figure does not have.</p>
+    <ol class="contents" aria-label="Sections">
+      <li><a href="#b1"><span>1</span>Who trades with whom</a></li>
+      <li><a href="#b2"><span>2</span>Chains, not cores</a></li>
+      <li><a href="#b3"><span>3</span>No representative firm</a></li>
+      <li><a href="#b4"><span>4</span>Games real people play</a></li>
+      <li><a href="#b5"><span>5</span>Contagion between banks</a></li>
+      <li><a href="#b6"><span>6</span>Projects rebuilding the textbook</a></li>
+    </ol>
+  </header>
+
+  <!-- ============================================================ 1 -->
+  <section class="stage" id="b1" data-no="1" data-name="Who trades with whom">
+    <h2><span class="no">1</span>Who trades with whom</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 1">1</span>Relaxes: anyone can trade with anyone.</p></div>
+
+    <p>The market of <a href="classical.html#f1-2">Figure 1.2</a> has no geography. Every buyer can reach every seller, so the distance between any two people is one step. Real exchange runs through acquaintances, suppliers and neighbours, and the question becomes how far apart people are.</p>
+    <p>In 1967 Stanley Milgram asked people in Nebraska and Kansas to pass a letter, through people they knew by first name, to a stranger in Massachusetts. The letters that arrived took about six steps. In 1998 Duncan Watts and Steven Strogatz showed why this is unsurprising. Start with a ring in which each person knows only the nearest neighbours: distances are long, and friends of friends know each other. Then rewire a small share of ties at random. Average distance collapses long before local clustering does.</p>
+
+    <figure class="fig" data-fig="2.1" id="f2-1">
+      <div class="fig-art"></div>
+      <div class="fig-ctl"><label>Share of ties rewired <input id="ctl-p" type="range" min="0" max="0.2" step="0.005" value="0.05"></label><output id="out-p">0.05</output></div>
+      <figcaption><span class="fig-no">Figure 2.1</span>Eighty people on a ring, each tied to the six nearest; red ties have been rewired into shortcuts. Right: average distance and clustering relative to the ring, as more ties are rewired (averaged over three networks).</figcaption>
+      <p class="held"><span>Held fixed</span>in Figure 1.2, who can reach whom: everyone, in one step.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f1-2">Figure 1.2</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
+    <p>Folded, each person rises by the number of steps it takes to reach them from you. On the plain ring the far side stands fourteen steps high. Eight shortcuts pull the whole ring down to eight. Mark Granovetter (1973) found that people often hear about jobs through acquaintances rather than close friends: the weak ties are the shortcuts.</p>
+    <p class="aha">A few shortcuts make a large world small. Distance collapses long before neighbours stop knowing one another, which is why jobs, prices and panics travel faster than any local picture suggests.</p>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="stage" id="b2" data-no="2" data-name="Chains, not cores">
+    <h2><span class="no">2</span>Chains, not cores</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 2">2</span>Relaxes: an average describes the network.</p></div>
+
+    <p>Peter Bearman, James Moody and Katherine Stovel (2004) mapped the romantic relationships among the students of one American high school over eighteen months. They expected a dense core of popular students. Instead, most of the students who had been in a relationship were linked in one long, sparse structure with short branches, close to a spanning tree. In such a structure there are few redundant paths: breaking one tie can split it, and one new tie can join two distant parts.</p>
+
+    <figure class="fig" data-fig="2.2" id="f2-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.2</span>A schematic, not the study’s data: twenty-four students linked as a chain with short branches, and the same number linked around a core.</figcaption>
+      <p class="held"><span>Held fixed</span>by an average, how many partners each student has: one to three in both.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="#f2-1">Figure 2.1</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
+    <p>Folded, every tie raises a wall as tall as the number of pairs of students who would be cut off from each other if it broke. In the chain the middle ties stand 144 pairs high; in the core no tie stands higher than 23, and those only where one student hangs off the edge.</p>
+    <p class="aha">Two networks with similar averages can differ completely in what one broken tie does. The structure, not the count, decides what can travel through a network and what can be cut.</p>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="stage" id="b3" data-no="3" data-name="No representative firm">
+    <h2><span class="no">3</span>No representative firm</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 3">3</span>Relaxes: one firm stands for all.</p></div>
+
+    <p>The firms of <a href="classical.html#s3">Stage 3</a> are identical, so one firm can stand for the industry, and the households of <a href="classical.html#s6">Stage 6</a> are added up into one. Vilfredo Pareto noticed in the 1890s that the number of people with income above <i>x</i> falls roughly like a power of <i>x</i>. The same shape describes city sizes (Zipf’s law) and the sizes of American firms (Axtell 2001). When newcomers prefer to link to those already well connected (Barabási and Albert 1999), the result is the same: a few giants and a long tail of everyone else.</p>
+
+    <figure class="fig" data-fig="2.3" id="f2-3">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.3</span>Four hundred firms grown by preferential attachment, standing in for firm sizes; Axtell (2001) finds the same shape in U.S. Census data. Left: the firms on a plan, darker for larger. Right: size against rank on log scales, a straight line, with the mean.</figcaption>
+      <p class="held"><span>Held fixed</span>in Stage 3, size: every firm alike.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f3-2">Figure 3.2</a>. <b>Taught in</b> <a href="https://quantecon.org/">QuantEcon</a>, <a href="https://www.complexityexplorer.org/">Complexity Explorer</a>.</aside>
+    <p>Folded, every firm rises as tall as it is large, and the mean becomes a plane at height 4 that cuts through the skyline. Seventy-two percent of the firms stand below it, and the largest stands nearly ten times above it. Xavier Gabaix (2011) argued that this matters for macroeconomics: if firm sizes follow a power law, shocks to the largest firms do not average out, and they move total output.</p>
+    <p class="aha">When sizes follow a power law there is no typical firm. The mean is a plane that runs through no actual firm, and a few giants can move the whole economy.</p>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="stage" id="b4" data-no="4" data-name="Games real people play">
+    <h2><span class="no">4</span>Games real people play</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 4">4</span>Relaxes: every player reasons all the way.</p></div>
+
+    <p>The equilibria of <a href="classical.html#s4">Stage 4</a> assume that each player knows the others will reason as far as logic goes. Keynes (1936) compared investing to a newspaper beauty contest in which you win by picking the face others will pick. In the experimental version everyone chooses a number from 0 to 100, and the winner is closest to two-thirds of the average. The only Nash equilibrium is 0. In Rosemarie Nagel’s (1995) experiments, first-round guesses averaged 36.7: most players reason one or two steps and stop. When others reason only a little, guessing 0 loses.</p>
+
+    <figure class="fig" data-fig="2.4" id="f2-4">
+      <div class="fig-art"></div>
+      <div class="fig-ctl grid">
+        <label>level 0 <input data-mix="0" type="range" min="0" max="10" value="3"></label>
+        <label>level 1 <input data-mix="1" type="range" min="0" max="10" value="4"></label>
+        <label>level 2 <input data-mix="2" type="range" min="0" max="10" value="2"></label>
+        <label>level 3 <input data-mix="3" type="range" min="0" max="10" value="1"></label>
+        <label>Nash <input data-mix="4" type="range" min="0" max="10" value="1"></label>
+      </div>
+      <figcaption><span class="fig-no">Figure 2.4</span>How many players reason zero, one, two or three steps, or all the way to equilibrium. A level-0 player guesses 50; each level guesses two-thirds of the level below. The winning number moves with the mix.</figcaption>
+      <p class="held"><span>Held fixed</span>in Stage 4, how far players reason: all the way.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f4-2">Figure 4.2</a>. <b>Taught in</b> <a href="https://ncase.me/trust/">The Evolution of Trust</a>; <a href="classical.html#c8-9">behavioral economics</a>.</aside>
+    <p>Folded, each level stands at its own height: level 0 on the page at 50, each step up a third lower, Nash at the top at 0. The guesses trace a staircase down to equilibrium, and the bars show how few players climb it. In the ultimatum game, too, play departs from the selfish equilibrium. Across many studies, summarized by Colin Camerer (2003), offers of 40 to 50 percent are the most common, and offers below about 20 percent are rejected about half the time.</p>
+    <p class="aha">Equilibrium is the top of a staircase of reasoning. Most people climb one or two steps, so the best guess depends on how far the others climb, not on how far logic goes.</p>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="stage" id="b5" data-no="5" data-name="Contagion between banks">
+    <h2><span class="no">5</span>Contagion between banks</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 5">5</span>Relaxes: a bank stands alone.</p></div>
+
+    <p>The bank of <a href="classical.html#f8-3">Figure 8.3</a> fails or survives on its own depositors. In 2008 losses at a few institutions spread through the claims banks held on one another. Daron Acemoglu, Asuman Ozdaglar and Alireza Tahbaz-Salehi (2015) showed that a densely connected system spreads a small loss thin and absorbs it. A loss larger than the system’s combined buffers is instead carried to every bank. A sparse ring absorbs a large shock somewhere along the line, and loses a few banks to a small one.</p>
+
+    <figure class="fig" data-fig="2.5" id="f2-5">
+      <div class="fig-art"></div>
+      <div class="fig-ctl"><label>Loss at the first bank <input id="ctl-shock" type="range" min="0.5" max="12" step="0.5" value="4"></label><output id="out-shock">4</output></div>
+      <figcaption><span class="fig-no">Figure 2.5</span>Ten banks with a buffer of 1 each. A failed bank passes its loss beyond the buffer, in equal parts, to the banks it owes. Left: each owes only the next. Right: each owes all the others. Numbers: the round in which a bank fails.</figcaption>
+      <p class="held"><span>Held fixed</span>in Figure 8.3, who owes whom: nobody; the bank stands alone.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f8-3">Figure 8.3</a>. <b>Taught in</b> <a href="classical.html#c8-3">money and banking</a>; <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
+    <p>Folded, each bank rises to the round in which it fails, and the ones that survive stay on the page. On the ring a loss of 4 makes a short staircase of three banks, while the dense network loses only the first. Raise the loss above 10 and the ring becomes a spiral ten rounds tall, while the dense network falls all at once, in round 2.</p>
+    <p class="aha">The dense web that spreads a small loss thin carries a large one to everyone. Which network is safer depends on the size of the shock, not on the network alone.</p>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="stage" id="b6" data-no="6" data-name="Projects rebuilding the textbook">
+    <h2><span class="no">6</span>Projects rebuilding the textbook</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 6">6</span>Each project relaxes one of the textbook’s simplifications, for teaching.</p></div>
+
+    <p>None of these projects throws the classical sequence away. Each takes it off the flat page in its own direction, and together they cover the assumptions this part has relaxed.</p>
+
+    <h3 class="group">Start from problems and evidence</h3>
+    <ul class="projects">
+      <li><a href="https://www.core-econ.org/"><b>CORE Econ</b><span>The Economy 2.0, Economy, Society, and Public Policy, Doing Economics</span><i>Starts each unit from a real problem (inequality, climate, innovation) and teaches models as tools for it, with power, institutions and data from the first week. Free online.</i></a></li>
+      <li><a href="https://ourworldindata.org/"><b>Our World in Data</b><span>Long-run data on living conditions, with the research behind it</span><i>The record behind growth, health, poverty and climate, drawn so that it can be read without a course in statistics.</i></a></li>
+    </ul>
+    <h3 class="group">Make the models run</h3>
+    <ul class="projects">
+      <li><a href="https://quantecon.org/"><b>QuantEcon</b><span>Lectures in Python and Julia, founded by Thomas Sargent and John Stachurski</span><i>Every model is code the learner runs: dynamic programming, heterogeneous agents, networks. Computation replaces the closed-form special case.</i></a></li>
+      <li><a href="https://www.econgraphs.org/"><b>EconGraphs</b><span>Interactive graphs for intermediate microeconomics</span><i>Every textbook diagram becomes something the reader can move, so a shift is seen as a cause rather than memorized as a rule.</i></a></li>
+      <li><a href="https://ncase.me/trust/"><b>The Evolution of Trust</b><span>Nicky Case’s explorable explanation of the repeated prisoner’s dilemma</span><i>Game theory taught by playing it, with populations of strategies that evolve.</i></a></li>
+    </ul>
+    <h3 class="group">Add structure and difference</h3>
+    <ul class="projects">
+      <li><a href="https://web.stanford.edu/~jacksonm/"><b>Social and Economic Networks</b><span>Matthew O. Jackson’s book and course</span><i>Networks as an economic object: how ties form, how information and behavior spread, why position in a network matters.</i></a></li>
+      <li><a href="https://www.complexityexplorer.org/"><b>Complexity Explorer</b><span>The Santa Fe Institute’s courses on complex systems</span><i>Agent-based models, scaling and power laws, and dynamics away from equilibrium.</i></a></li>
+    </ul>
+    <h3 class="group">Add identification</h3>
+    <ul class="projects">
+      <li><a href="https://mixtape.scunning.com/"><b>Causal Inference: The Mixtape</b><span>Scott Cunningham; read with The Effect by Nick Huntington-Klein</span><i>The credibility revolution as a textbook: research designs first, with code.</i></a></li>
+    </ul>
+    <h3 class="group">Compare the schools, and keep the baseline</h3>
+    <ul class="projects">
+      <li><a href="https://www.exploring-economics.org/"><b>Exploring Economics</b><span>A pluralist platform from students and researchers</span><i>Places the neoclassical sequence beside other schools so that a reader can compare how each frames a question.</i></a></li>
+      <li><a href="https://mru.org/"><b>Marginal Revolution University</b><span>Short videos by Tyler Cowen and Alex Tabarrok</span><i>Principles in pieces small enough to reorder, with applications first.</i></a></li>
+      <li><a href="https://ocw.mit.edu/"><b>MIT OpenCourseWare</b><span>The sequence studied in Part 1, open</span><i>The classical staircase itself, lecture by lecture: the baseline the projects above reorganize.</i></a></li>
+    </ul>
+    <p class="transition"><a href="archive.html">Part 3</a> proposes how to put these together: an archive arranged by what economics studies, in which the classical sequence is one way through among several.</p>
+  </section>
+</article>
+</div>
+
+<aside class="titleblock" aria-label="Title block">
+  <div class="tb-row tb-title"><span class="tb-name">Cross-Section</span><span class="tb-sheet" id="tb-sheet">Part 2</span></div>
+  <div class="tb-row tb-sub" id="tb-course">Beyond the flat page</div>
+  <div class="tb-row tb-counts">
+    <div><span class="tb-k">Figures</span><span class="tb-v" id="tb-figs">0</span></div>
+    <div><span class="tb-k">Part</span><span class="tb-v">2</span></div>
+    <div><span class="tb-k">of</span><span class="tb-v">3</span></div>
+  </div>
+  <button class="tb-unfold" id="unfold" type="button" aria-pressed="false" hidden>Fold the page into space</button>
+  <p class="tb-status" id="tb-status" role="status"></p>
+</aside>
+
+<canvas id="stage" layoutsubtree aria-hidden="true"></canvas>
+<div id="expo-labels" aria-hidden="true"></div>
+
+<script type="module" src="p2.js"></script>
+</body>
+</html>

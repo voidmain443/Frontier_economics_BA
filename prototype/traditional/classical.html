@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 1: The classical textbook — Cross-Section</title>
+<meta name="description" content="The undergraduate economics sequence as one story in eight stages, in which each stage adds an agent or a market, and every textbook figure is a slice of something larger.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="p1">
+<nav class="site" aria-label="Parts">
+  <a class="site-home" href="index.html">Cross-Section</a>
+  <a href="classical.html" aria-current="page"><span>1</span>The classical textbook</a>
+  <a href="beyond.html"><span>2</span>Beyond the flat page</a>
+  <a href="archive.html"><span>3</span>A new archive</a>
+</nav>
+
+<div class="desk">
+<article id="sheet" class="sheet">
+  <div class="zones" aria-hidden="true"></div>
+
+  <header class="opening">
+    <h1>The classical textbook</h1>
+    <p class="lede">Every figure in an economics textbook is a slice. A demand curve is drawn at one income, one set of other prices, and one moment in time. Everything that is not on the two axes is held still. The diagrams are slices out of necessity: a page has two dimensions, and the economy has many. What they leave out is what makes the subject hard, and what makes it powerful.</p>
+    <p>Every hidden axis in this part is a parameter of a model. A textbook figure is the model solved at one value of that parameter. Comparative statics, which the mathematics course teaches as derivatives, is how the solution moves as the parameter changes. Under each figure, this page names what the figure holds fixed and then follows that axis.</p>
+    <p>This part follows the undergraduate sequence as a single story. It starts with the simplest economy a textbook can draw: one market, anonymous buyers on one side, anonymous sellers on the other, and one price. Then, stage by stage, it adds what that picture lacked:</p>
+    <ul>
+      <li>it opens up the household, then the firm;</li>
+      <li>it lets a few firms watch one another;</li>
+      <li>it joins every market at once;</li>
+      <li>it adds time, money and government;</li>
+      <li>it learns to measure.</li>
+    </ul>
+    <p>Those seven stages are the core every major takes. The eighth is the third and fourth years: eleven field courses, each shown by the one thing it adds to the core.</p>
+    <p class="needs-fold" hidden>At any point you can fold the page into space with the control in the corner. In the folded page, as each figure reaches your reading line, the dimension it was drawn without rises out of the paper, and the flat figure turns out to be one slice of something larger. Fold it back and you are where you were, on the same page.</p>
+    <ol class="contents" aria-label="Stages">
+      <li><a href="#s1"><span>1</span>One market</a></li>
+      <li><a href="#s2"><span>2</span>Opening up the household</a></li>
+      <li><a href="#s3"><span>3</span>Opening up the firm</a></li>
+      <li><a href="#s4"><span>4</span>A few firms</a></li>
+      <li><a href="#s5"><span>5</span>All markets at once</a></li>
+      <li><a href="#s6"><span>6</span>Time, money and government</a></li>
+      <li><a href="#s7"><span>7</span>Measurement</a></li>
+      <li><a href="#s8"><span>8</span>The field courses</a></li>
+    </ol>
+  </header>
+
+  <!-- ============================================================ 1 -->
+  <section class="stage" id="s1" data-no="1" data-name="One market">
+    <h2><span class="no">1</span>One market</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 1">1</span>Adds two anonymous groups, buyers and sellers, and one price.</p>
+      <ul class="cast" aria-label="On the page so far"><li class="new">buyers</li><li class="new">sellers</li><li class="new">one market</li></ul>
+    </div>
+
+    <p>Principles begins with a market, the simplest thing economics can say anything definite about. There are buyers and sellers, and a price at which they trade. Nobody in the picture has a name, a history or a plan beyond this market. Demand and supply are given to the student as facts about the world, and the equilibrium is where they cross.</p>
+    <p>Three questions are taught with these figures. Why does the price settle where it does? What happens when something changes, such as income or a tax? And who gains from the trade? The textbook answers all three by moving or shading curves. The answers are right, but each depends on something the figure does not show:</p>
+    <ul>
+      <li>the shift of a curve is a movement along an axis that is not drawn;</li>
+      <li>the surplus triangle is a sum over people who are not drawn;</li>
+      <li>elasticity is quoted as one number, though it depends on how long buyers have had to adjust.</li>
+    </ul>
+    <p>This stage takes the textbook at its word, using only what Principles teaches, and lets the figures show what they are slices of.</p>
+
+    <figure class="fig" data-fig="1.1" id="f1-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 1.1</span>Supply and demand. Demand <i>P</i> = 10 − <i>Q</i> meets supply <i>P</i> = 1 + <i>Q</i> at E, where <i>Q</i> = 4.5 and <i>P</i> = 5.5. A rise in income shifts demand to D′, <i>P</i> = 12 − <i>Q</i>, and the equilibrium to E′ (5.5, 6.5). The faint lines are demand at other incomes.</figcaption>
+      <p class="held"><span>Held fixed</span>income <i>I</i>: D is drawn at <i>I</i> = 1, D′ at <i>I</i> = 1.2.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#s2">Stage 2</a>, which builds demand from choice; <a href="#f6-2">Figure 6.2</a>, the same move for a whole economy; <a href="#f7-2">Figure 7.2</a>, data from this market.</aside>
+    <p>Demand is really a function of two things, <i>Q</i> = 10<i>I</i> − <i>P</i>. Stack the demand curves by income, from <i>I</i> = 1 to 1.4, and they form a sloping surface. D is the slice at <i>I</i> = 1, D′ the slice at <i>I</i> = 1.2, and the shift the textbook draws as a sideways move is a move up the income axis. Supply does not depend on income, so in that space it stands as a wall. The equilibrium at each income lies where surface and wall meet, along a line that climbs from E to E′.</p>
+    <p class="aha">A shift is a move along an axis the figure does not draw. “Ceteris paribus” means: this slice.</p>
+
+    <figure class="fig" data-fig="1.2" id="f1-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 1.2</span>Surplus, and the trades a tax stops. Twenty buyers will pay 19.5, 18.5, …, 0.5 and twenty sellers have costs 0.5, 1.5, …, 19.5, drawn as two staircases. With a tax of 6, buyers pay 13 and sellers keep 7, and seven trades remain. Blue: buyers’ gains. Green: sellers’ gains. Ochre: the tax. Red: trades that no longer happen.</figcaption>
+      <p class="held"><span>Held fixed</span>who the people are: each step is one person.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#s4">Stage 4</a>, where market power stops trades the same way; <a href="#f8-5">Figure 8.5</a>, the cost of a tax as the rate rises; <a href="#f8-6">Figure 8.6</a>.</aside>
+    <p>A curve is drawn as a line, but a market is made of people. Give each step its own column. A buyer’s column rises by what the buyer gains, willingness to pay minus price, and a seller’s by price minus cost. Without the tax, ten trades happen at a price of 10 and the columns total 100.</p>
+    <p>With the tax, each of the seven remaining trades hands 6 to the state, 42 in all, and buyers and sellers keep 49. The three marginal trades disappear. Their gains, 5, 3 and 1, were real but smaller than the tax. The 9 they would have earned is the deadweight loss.</p>
+    <p class="aha">A curve is a list of people. A tax moves some of their gains to the state and destroys the rest, and what it destroys is the trades that no longer happen.</p>
+
+    <figure class="fig" data-fig="1.3" id="f1-3">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 1.3</span>Elasticity grows with time. Demand curves through the same point, <i>Q</i> = 5 and <i>P</i> = 5, at different horizons: |<i>ε</i>| = 0.2 in the first month, 1.5 after five years. The dashed outlines are revenue after a 10 percent price rise.</figcaption>
+      <p class="held"><span>Held fixed</span>the time buyers have had to adjust.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#s4">Stage 4</a>, where the markup is 1/|<i>ε</i>|; <a href="#f3-1">Figure 3.1</a>, where cost obeys the same rule; <a href="#f8-5">Figure 8.5</a>.</aside>
+    <p>Elasticity, <i>ε</i> = (d<i>Q</i>/d<i>P</i>)(<i>P</i>/<i>Q</i>), decides what a price rise does to revenue. Where |<i>ε</i>| &lt; 1 revenue rises, where |<i>ε</i>| &gt; 1 it falls, and the turn is at |<i>ε</i>| = 1, because d<i>R</i>/d<i>P</i> = <i>Q</i>(1 + <i>ε</i>).</p>
+    <p>The textbook gives one curve, but buyers need time to find substitutes. Stack the curves through today’s point by how long buyers have had: steep in the first month, flat after years. The same 10 percent price rise first lifts revenue from 25 to about 27, then, as buyers adjust, lowers it to about 23.4.</p>
+    <p class="aha">Elasticity is not one number; it depends on how long you wait. The long run is more elastic because more can adjust, the same reason the long-run cost curve of Figure 3.1 lies under every short-run one (Samuelson’s Le Chatelier principle).</p>
+
+    <p class="transition">Every curve in this stage was given. The next two stages open the two sides of the market and ask where the curves come from.</p>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="stage" id="s2" data-no="2" data-name="Opening up the household">
+    <h2><span class="no">2</span>Opening up the household</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 2">2</span>Adds a decision-maker with preferences and a budget, and time as a second good.</p>
+      <ul class="cast" aria-label="On the page so far"><li>buyers</li><li>sellers</li><li>one market</li><li class="new">the household</li></ul>
+    </div>
+
+    <p>Intermediate microeconomics replaces the demand curve with a person. The household has preferences over bundles of goods, a budget it cannot exceed, and a rule for choosing: take the best bundle it can afford. The rest of the course is about what follows from that rule.</p>
+    <p>The mathematics arrives here because the question needs it. “The best bundle it can afford” is a constrained optimization problem, and its solution is a tangency: the Lagrange condition written in economic language.</p>
+    <div class="eq">max <i>u</i>(<i>x</i>, <i>y</i>) subject to <i>p<sub>x</sub>x</i> + <i>p<sub>y</sub>y</i> = <i>m</i> &nbsp;⇒&nbsp; MRS = <i>p<sub>x</sub></i>/<i>p<sub>y</sub></i>, &nbsp;∇<i>u</i> = <i>λ</i>∇<i>g</i></div>
+    <p>Once the household has a rule, demand is no longer a fact. It is what the rule produces when prices change. Saving is no longer a habit. It is the same rule applied to consumption now and consumption later, with time entering as a second good.</p>
+
+    <figure class="fig" data-fig="2.1" id="f2-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.1</span>The best affordable bundle. Indifference curves of <i>u</i> = √(<i>xy</i>) and the budget line <i>x</i> + <i>y</i> = 12. The optimum is at (6, 6), where the highest reachable curve touches the line.</figcaption>
+      <p class="held"><span>Held fixed</span>utility, read only as contour lines.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#s3">Stage 3</a>, cost minimization; <a href="#f5-1">Figure 5.1</a>, two hills in one box; <a href="#f6-4">Figure 6.4</a>, the central bank.</aside>
+    <p>The indifference curves are contour lines of a utility hill rising from the page. The budget line is a fence standing on it. Walk along the fence and the hill’s profile is a single arch, whose top is exactly the tangency point. The constrained optimum is the highest point of the hill the fence lets you reach.</p>
+    <p class="aha">MRS = price ratio means the top of the hill along the fence. That is ∇<i>u</i> = <i>λ</i>∇<i>g</i>, and <i>λ</i> is how much higher you could climb if the fence moved out by one unit.</p>
+
+    <figure class="fig" data-fig="2.2" id="f2-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.2</span>Demand is a list of choices. Above: the price of <i>x</i> rises from 1 to 2, and the choice moves from A (6, 6) to B (3, 6). The compensated budget line, tangent to the old curve at C (4.24, 8.49), splits the move into a substitution effect A → C (−1.76) and an income effect C → B (−1.24). Below: the same choices against the price.</figcaption>
+      <p class="held"><span>Held fixed</span>the price of <i>x</i>, one value per budget line.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#f1-1">Figure 1.1</a>, whose demand surface is built this way; <a href="#c8-7">labor supply</a>, with leisure as the good.</aside>
+    <p>Stand the price up as a second axis below the figure. For each price between 1 and 3, carry the chosen <i>x</i> down to that price, and the points trace the demand curve <i>x</i> = 6/<i>p<sub>x</sub></i>. A second, steeper curve traces the compensated choices through C: demand with the income effect taken out. The flat demand curve of Stage 1 was this panel seen on its own. Stack such panels by income and add them across households, and you get Figure 1.1’s surface; its straight lines are a simpler stand-in.</p>
+    <p class="aha">The demand curve is a list of optima. The substitution effect always works against the price. The income effect works the other way for an inferior good, and only if it outweighs the substitution effect does demand slope up (a Giffen good).</p>
+
+    <figure class="fig" data-fig="2.3" id="f2-3">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.3</span>Choice over time. Consumption now (<i>c</i><sub>1</sub>) and later (<i>c</i><sub>2</sub>). The endowment is (6, 4.5), and at an interest rate of 25 percent the budget line through it has slope −1.25. With <i>u</i> = ln <i>c</i><sub>1</sub> + ln <i>c</i><sub>2</sub>, the household chooses (4.8, 6.0) and saves 1.2. Faint: the budget lines at 0 and 60 percent.</figcaption>
+      <p class="held"><span>Held fixed</span>the interest rate, <i>r</i> = 0.25.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#s6">Stage 6</a>, where saving meets investment; <a href="#f8-2">Figure 8.2</a>, the current account; <a href="#f8-4">Figure 8.4</a>, asset prices; <a href="#f8-9">Figure 8.9</a>.</aside>
+    <p>As the interest rate rises from 0 to 60 percent, the budget line steepens around the endowment and the chosen <i>c</i><sub>1</sub> falls from 5.25 to 4.4. Carried to an interest-rate axis, the saving at each rate traces the household’s saving curve.</p>
+    <p>The same figure has a second reading. Label the axes “if it rains” and “if it does not”. The endowment is then an uninsured income, the budget line is a market for insurance, and the same tangency chooses how much to insure. Uncertainty enters micro as a choice across states, just as time entered as a choice across dates.</p>
+    <div class="eq"><i>u</i>′(<i>c</i><sub>1</sub>) = <i>β</i>(1 + <i>r</i>)<i>u</i>′(<i>c</i><sub>2</sub>)</div>
+    <p class="aha">Saving is demand for future consumption, and insurance is demand for consumption in bad states. The tangency is the Euler equation, and it returns in macro, finance and international finance.</p>
+
+    <p class="transition">The household is now a choosing agent. The seller’s side is still a curve. Open it.</p>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="stage" id="s3" data-no="3" data-name="Opening up the firm">
+    <h2><span class="no">3</span>Opening up the firm</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 3">3</span>Adds a producer with a technology, costs and a choice of scale; then many producers who can enter.</p>
+      <ul class="cast" aria-label="On the page so far"><li>buyers</li><li>sellers</li><li>one market</li><li>the household</li><li class="new">the firm</li><li class="new">entry</li></ul>
+    </div>
+
+    <p>The supply curve of Stage 1 hides a firm deciding how to produce at least cost and how much to produce at a given price. It also hides an industry: many firms deciding whether to be in the market at all. Microeconomics opens both.</p>
+    <p>The firm’s problem has the same shape as the household’s in Figure 2.1: an isoquant touching the lowest isocost line, MRTS = <i>w</i>/<i>r</i>. Time enters again, in a different role. For the household it was a second good; for the firm it is a horizon for adjustment. In the short run the plant is fixed. In the long run the firm chooses its plant, and new firms can enter.</p>
+
+    <figure class="fig" data-fig="3.1" id="f3-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 3.1</span>Plants of every size, and their envelope. Short-run average cost for five plant sizes, and long-run average cost LRAC(<i>Q</i>) = 2 + 0.06(<i>Q</i> − 6)², the lower envelope of the short-run curves of every plant size. Dots mark where each short-run curve touches the envelope; rings mark its own minimum.</figcaption>
+      <p class="held"><span>Held fixed</span>plant size <i>K</i>, one value per short-run curve.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#f3-2">Figure 3.2</a>; <a href="#c8-8">industrial organization</a>, natural monopoly; <a href="#f1-3">Figure 1.3</a>, long-run demand.</aside>
+    <p>Give each plant size its own plane, ordered into the page. Seen from the front, the planes collapse and the lowest cost at each output traces the envelope. Seen from the side, each curve touches the envelope at one point only, and that point is the curve’s own minimum only at the bottom of the envelope. The mathematics course calls this the envelope theorem.</p>
+    <p>In 1931 Jacob Viner asked his draftsman, Y. K. Wong, for a long-run curve that touched every short-run curve at its minimum. Wong objected that no curve can do that. Viner printed the impossible curve and later conceded the error.</p>
+    <p class="aha">The long-run curve is not a curve the firm moves along. It is the best of many short-run curves, and economies of scale are the falling part of the envelope.</p>
+
+    <figure class="fig" data-fig="3.2" id="f3-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 3.2</span>Entry, until the price is the minimum of cost. Market demand <i>Q</i> = 60 − 8<i>P</i>, and industry supply with 3 to 7 identical firms, each with the cost of Figure 3.1 and supplying along its marginal cost, 2 + 0.18(<i>q</i> − 6)(<i>q</i> − 2). The long-run supply is flat at <i>P</i> = 2.</figcaption>
+      <p class="held"><span>Held fixed</span>the number of firms <i>N</i>, one value per supply curve.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#s4">Stage 4</a>, where entry is blocked or slow; <a href="#c8-7">labor demand</a>, the firm read from the other side.</aside>
+    <p>With 3 firms the price is about 4.4, well above the minimum of average cost, so firms make profits and others come in. As <i>N</i> rises from 3 to 7, industry supply moves out and the price falls step by step: 4.4, 3.7, 3.0, 2.5, 2.1. An eighth firm would make a loss, so entry stops. The equilibrium points form a path that descends and flattens near <i>P</i> = 2.</p>
+    <p class="aha">Perfect competition is the end of an entry process. Price equals the minimum of average cost, and profits are zero, because that is where entry stops.</p>
+
+    <p class="transition">Every firm so far was a price taker, too small to matter. Take most of them away.</p>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="stage" id="s4" data-no="4" data-name="A few firms">
+    <h2><span class="no">4</span>A few firms</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 4">4</span>Adds strategy: each firm’s best choice depends on what the others do.</p>
+      <ul class="cast" aria-label="On the page so far"><li>buyers</li><li>sellers</li><li>one market</li><li>the household</li><li>the firm</li><li>entry</li><li class="new">rivals</li></ul>
+    </div>
+
+    <p>With one seller the market is a monopoly. The seller faces the whole demand curve and climbs its own profit hill to the top, where marginal revenue equals marginal cost. That sets the markup, (<i>P</i> − MC)/<i>P</i> = 1/|<i>ε</i>|.</p>
+    <p>With two or three sellers, each one’s profit depends on the others’ output, so the top of the hill moves whenever a rival moves. Game theory enters the sequence here, as a tool for this situation. It asks what happens when each player picks the best response to the others and nobody wants to change: a Nash equilibrium.</p>
+    <p>A second idea follows when moves come in order. Some equilibria then rest on threats that would never be carried out, and the game-theory course adds the time axis that removes them.</p>
+
+    <figure class="fig" data-fig="4.1" id="f4-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 4.1</span>Two sellers. Cournot duopoly with demand <i>P</i> = 12 − <i>Q</i> and marginal cost 2. Firm 1’s best response is <i>q</i><sub>1</sub> = (10 − <i>q</i><sub>2</sub>)/2 and firm 2’s is symmetric; they cross at the Nash equilibrium, <i>q</i><sub>1</sub> = <i>q</i><sub>2</sub> = 3.33, with a price of 5.33. Through it run each firm’s contour of equal profit. The shaded lens holds output pairs that pay both firms more.</figcaption>
+      <p class="held"><span>Held fixed</span>profit, read only as contour lines.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#f8-8">Figure 8.8</a>, the cartel; <a href="#f5-1">Figure 5.1</a>, where contours touch instead.</aside>
+    <p>Over the plane of outputs, each firm’s profit is a ridge-shaped surface. For each output of its rival, a firm’s best output is the highest point along its own direction, and those highest points form a line: the ridge. That ridge is the reaction curve, and the Nash equilibrium is where the two ridges cross.</p>
+    <p>At that point firm 1’s contour runs flat and firm 2’s runs upright, so they cross rather than touch, and both firms could earn more by producing less. With <i>n</i> identical firms the Cournot price is (12 + 2<i>n</i>)/(<i>n</i> + 1): 7 for a monopoly, 5.33 for two, 4.5 for three, falling toward the marginal cost of 2, and each firm’s markup is 1/(<i>n</i>|<i>ε</i>|). If the firms compete in prices instead (Bertrand), two are already enough to reach marginal cost.</p>
+    <p class="aha">A best-response curve is the ridge of a profit surface, and Nash equilibrium is where two ridges cross. Because the contours cross there, the firms could both do better together: the cartel of Figure 8.8, and the opposite of the touching contours of Figure 5.1.</p>
+
+    <figure class="fig" data-fig="4.2" id="f4-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 4.2</span>A threat that would not be carried out. Left: the entry game as a payoff table, (entrant, incumbent). It has two Nash equilibria, ringed. Right: the same game with its moves in order. The entrant chooses first; at the incumbent’s node, fighting pays 2 and accommodating 5.</figcaption>
+      <p class="held"><span>Held fixed</span>the order of moves, flattened into one table.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-8">industrial organization</a>, capacity as commitment; <a href="#f6-4">Figure 6.4</a>, the credibility of a central bank.</aside>
+    <p>In the table, (Out, Fight) is an equilibrium: if the incumbent will fight, staying out is best, and if nobody enters, fighting costs the incumbent nothing. Stand the table up into a tree along a time axis, and the threat is tested at the moment it would have to be carried out. After entry, fighting pays 2 and accommodating 5, so the incumbent accommodates, and the entrant, who can see this, enters. Only (In, Accommodate) survives: the subgame-perfect equilibrium.</p>
+    <p class="aha">A payoff table is a game with its time axis flattened. Subgame perfection puts the time back and removes the threats nobody would carry out.</p>
+
+    <p class="transition">So far, one market at a time, with everything else held still. Now let every market move together.</p>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="stage" id="s5" data-no="5" data-name="All markets at once">
+    <h2><span class="no">5</span>All markets at once</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 5">5</span>Adds the connection between markets, and the conditions under which their outcome is efficient.</p>
+      <ul class="cast" aria-label="On the page so far"><li>buyers</li><li>sellers</li><li>one market</li><li>the household</li><li>the firm</li><li>entry</li><li>rivals</li><li class="new">every market</li><li class="new">public goods</li><li class="new">hidden information</li></ul>
+    </div>
+
+    <p>General equilibrium asks whether there is a set of prices at which every market clears together, and whether the result is any good.</p>
+    <ul>
+      <li>Under convexity and continuity, an equilibrium exists. The course proves it with a fixed-point theorem.</li>
+      <li>Walras’ law says the values of excess demand across markets always add to zero, so if every market but one clears, the last one does too.</li>
+      <li>The first welfare theorem says a competitive equilibrium is Pareto efficient.</li>
+      <li>The second says any efficient allocation can be reached with lump-sum transfers.</li>
+    </ul>
+    <p>With production added, efficiency is the same tangency three times. The rate at which the economy can turn one good into another equals the rate at which households will trade them, and both equal the price ratio.</p>
+    <div class="eq">MRT = MRS = <i>p<sub>x</sub></i>/<i>p<sub>y</sub></i></div>
+    <p>Each assumption behind these theorems is a door to a field course, and the end of intermediate micro opens two of them. A public good is used by everyone at once, so no price can ration it. Hidden information means one side of a trade knows what the other cannot see, so the price cannot sort good from bad. The figures of this stage are the theorem and those two doors.</p>
+
+    <figure class="fig" data-fig="5.1" id="f5-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 5.1</span>Two consumers make a box. Households A and B, both with <i>u</i> = √(<i>xy</i>), share 10 units of each good; the endowment ω is (8, 2) in A’s coordinates. A’s curves start at the lower left, B’s at the upper right, and the contract curve runs along the diagonal. The price line through ω settles at slope −1, where both choices meet at E (5, 5). Shaded: the trades both would accept from ω.</figcaption>
+      <p class="held"><span>Held fixed</span>two utilities, read only as contour lines.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-1">trade</a>, the same box with factors of production; <a href="#c8-5">public economics</a>, the second theorem’s transfers.</aside>
+    <p>A’s utility hill rises from A’s corner and B’s from B’s corner, facing each other, and the contract curve is the line along which their contour lines touch. The price line stands as a fence through ω, and each household climbs to the top of its own hill along the fence. While the two tops are at different places on the fence there is excess demand, and the fence turns until they meet. Both tops always lie on the same fence: Walras’ law made visible.</p>
+    <p class="aha">Pareto efficiency is the contour lines of two hills touching. A Walrasian equilibrium is a price that brings both choices to one of those points.</p>
+
+    <figure class="fig" data-fig="5.2" id="f5-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 5.2</span>A good that everyone uses. A public good <i>G</i>, such as street lighting. Each household would pay 10 − <i>G</i> for one more unit, and a unit costs 6. With a public good the lines add vertically, because every household uses the same <i>G</i>: drawn for one, two and three households.</figcaption>
+      <p class="held"><span>Held fixed</span>the number of households <i>n</i>.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-5">public economics</a>; <a href="#c8-6">environmental economics</a>, the climate as a good shared by countries.</aside>
+    <p>The efficient amount is where the vertical sum meets cost, <i>n</i>(10 − <i>G</i>) = 6: 4 with one household, 7 with two, 8 with three and 9.5 with twelve. Voluntary giving stops at <i>G</i> = 4, however it is shared, because past that point no single household values one more unit at its cost. Add households one by one, and the gap between 4 and the efficient amount keeps growing.</p>
+    <div class="eq">Σ<sub><i>i</i></sub> MRS<sub><i>i</i></sub> = MRT</div>
+    <p class="aha">For a public good, willingness to pay adds up vertically (Samuelson). The more people share a good, the larger the gap between what they would pay together and what anyone pays alone.</p>
+
+    <figure class="fig" data-fig="5.3" id="f5-3">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 5.3</span>The buyer cannot see the hidden axis. A market for 100 used cars of quality <i>θ</i> spread evenly from 0 to 10; a car is worth <i>θ</i> to its seller and <i>θ</i> + 3 to any buyer. At a price <i>p</i> only cars with <i>θ</i> &lt; <i>p</i> are offered, so the average car on offer is worth <i>p</i>/2, and buyers pay at most <i>p</i>/2 + 3. The market settles at <i>p</i> = 6.</figcaption>
+      <p class="held"><span>Held fixed</span>quality, which the buyer cannot see.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-5">insurance</a>, adverse selection; <a href="#c8-3">banking</a>, screening borrowers; <a href="#c8-7">labor</a>, signaling; <a href="#c8-10">development</a>, missing credit.</aside>
+    <p>Give each car a column as tall as its quality. At <i>p</i> = 6 the 60 cars below 6 trade, and the 40 best stay home, though each is worth 3 more to a buyer than to its owner. Of the 300 in possible gains, 120 are lost, and they are lost from the top of the market.</p>
+    <p class="aha">Every other hidden axis in this part is hidden from the reader. This one is hidden from the buyer, and the best part of the market disappears (Akerlof).</p>
+
+    <p class="transition">The economy is now a system of markets, with its theorem and its doors. Macroeconomics asks how the whole moves over time and what money and government do to it. It needs one more step first: adding the households up.</p>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="stage" id="s6" data-no="6" data-name="Time, money and government">
+    <h2><span class="no">6</span>Time, money and government</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 6">6</span>Adds the economy as one object moving through time, and two agents who try to steer it.</p>
+      <ul class="cast" aria-label="On the page so far"><li>buyers</li><li>sellers</li><li>one market</li><li>the household</li><li>the firm</li><li>entry</li><li>rivals</li><li>every market</li><li>public goods</li><li>hidden information</li><li class="new">money</li><li class="new">the government</li><li class="new">the central bank</li></ul>
+    </div>
+
+    <p>Macroeconomics changes the object. Instead of a market it studies totals: output, the price level, the interest rate, unemployment. To get there it must assume that the many households of Stage 2 add up to something that behaves like one. Strictly, that holds only if every household spends an extra unit of income the same way: Gorman’s condition.</p>
+    <p>It then keeps the long run of general equilibrium, with flexible prices and every market clearing, and adds what the long run cannot explain: capital accumulating, money, prices that adjust slowly, and expectations. Time changes role a third time. It is no longer a good or a horizon but a state that accumulates: capital, prices and expectations carry each year into the next.</p>
+
+    <figure class="fig" data-fig="6.1" id="f6-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 6.1</span>Capital accumulates. Above: output per worker <i>f</i>(<i>k</i>) = <i>k</i><sup>0.35</sup>, saving 0.3<i>f</i>(<i>k</i>) and break-even investment 0.08<i>k</i>, which cross at <i>k</i>* ≈ 7.6 (dashed: saving at 0.4, <i>k</i>* ≈ 11.9). Below: Korea, real GDP per person (index, 1960 = 1, log scale) and fixed investment as a share of GDP, from Bank of Korea national accounts.</figcaption>
+      <p class="held"><span>Held fixed</span>time: the diagram shows where <i>k</i> is heading, not when it gets there.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-10">development</a>; <a href="#c8-11">economic history</a>.</aside>
+    <p>The flat figure is the model’s phase diagram: at every <i>k</i> it says whether capital grows or shrinks. Time is the axis it leaves out. Start from four different levels of capital and follow them through time, and every path bends toward <i>k</i>*; with these numbers, half the gap closes in about 13 years. Raise the saving rate to 0.4 and the paths lean toward a higher steady state, then flatten again.</p>
+    <p>Korea’s real GDP per person rose about 36-fold from 1960 to 2025, while fixed investment rose from 11 percent of GDP in 1960 to 38 percent in 1991. Did that growth come mostly from piling up capital and labor, a climb along one Solow path that must slow, or from rising productivity? That is the growth-accounting debate of the 1990s (Young; Krugman).</p>
+    <p class="aha">The steady state is where every path goes. A higher saving rate raises the level, not the long-run growth rate; only technology does that.</p>
+
+    <figure class="fig" data-fig="6.2" id="f6-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 6.2</span>AD is a list of IS–LM equilibria. Left: IS, <i>r</i> = 9 − 0.75<i>Y</i>, and LM, <i>r</i> = 0.9<i>Y</i> − 6/<i>P</i>, drawn for <i>P</i> = 1, 1.5 and 2. Right: the equilibrium output at each price level, which traces aggregate demand.</figcaption>
+      <p class="held"><span>Held fixed</span>the price level, one value per LM curve.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#f2-3">Figure 2.3</a>, the Euler equation behind the modern IS curve; <a href="#c8-2">international finance</a>.</aside>
+    <p>IS is itself a list of equilibria. Planned spending, <i>C</i> + <i>I</i>(<i>r</i>) + <i>G</i> with <i>C</i> = 0.8 + 0.6<i>Y</i>, <i>I</i> = 2.5 − 0.533<i>r</i> and <i>G</i> = 1.5, meets output at a different <i>Y</i> for each interest rate: the Keynesian cross, with a multiplier of 2.5. LM is the money market, where real money demand 0.9<i>Y</i> − <i>r</i> equals real balances <i>M</i>/<i>P</i>, with <i>M</i> = 6. The government places IS through <i>G</i>; the central bank places LM through <i>M</i>.</p>
+    <p>Now let the price level vary. A higher <i>P</i> shrinks real balances and lifts LM, so output falls: 9.09 at <i>P</i> = 1, 7.88 at 1.5, 7.27 at 2. Those points trace aggregate demand, <i>Y</i>(<i>P</i>) = (9 + 6/<i>P</i>)/1.65.</p>
+    <p class="aha">Aggregate demand is not a demand curve in the sense of Stage 1. It is a list of equilibria of a list of equilibria: Keynesian crosses stacked by the interest rate make IS, and IS–LM pairs stacked by the price level make AD. Its <i>C</i> is Stage 2’s households, simplified so that spending depends only on this year’s income, and its <i>I</i> is Stage 3’s firms.</p>
+
+    <figure class="fig" data-fig="6.3" id="f6-3">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 6.3</span>The Phillips curve moves with expectations. Short-run curves <i>π</i> = <i>π</i><sup>e</sup> − 1.2(<i>u</i> − 5) for expected inflation from 2 to 14 percent, and the long-run curve at the natural rate <i>u</i> = 5. The path is the United States, 1960–1986 (FRED: unemployment and CPI inflation, annual).</figcaption>
+      <p class="held"><span>Held fixed</span>expected inflation, one value per short-run curve.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#f6-4">Figure 6.4</a>; <a href="#c8-7">labor</a>, the flows behind unemployment.</aside>
+    <p>Stack the short-run curves by expected inflation and they form a sloping surface. When inflation runs above what was expected, expectations rise and the economy climbs to a higher slice. Taking each year’s expected inflation as the previous year’s inflation, the United States moved up and to the left along one slice in the 1960s, onto ever higher slices in the 1970s, and back down after the disinflation of 1980–82. The points sit near the slices rather than on them, because of the oil shocks and a natural rate above 5 in those years.</p>
+    <p class="aha">The trade-off between inflation and unemployment holds only along one slice. Friedman and Phelps added the axis, and the 1970s moved along it.</p>
+
+    <figure class="fig" data-fig="6.4" id="f6-4">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 6.4</span>The central bank chooses on a Phillips curve. The slice at <i>π</i><sup>e</sup> = 5, and circles of equal loss (<i>π</i> − 2)² + (<i>u</i> − 5)² around the bank’s target. The bank picks the point closest to the target: <i>u</i> ≈ 6.5, <i>π</i> ≈ 3.2. Dashed: the choices on every slice.</figcaption>
+      <p class="held"><span>Held fixed</span>the bank’s loss, read only as contour lines.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-3">money and banking</a>; <a href="#c8-2">international finance</a>; <a href="#f4-2">Figure 4.2</a>, credibility.</aside>
+    <p>The loss is a bowl whose lowest point is the target. The Phillips curve is a fence across it, and the bank goes to the lowest point of the bowl along the fence. Do this on every slice of Figure 6.3, and the chosen points trace a line, <i>π</i> − 2 = 0.83(<i>u</i> − 5): the monetary rule (Carlin and Soskice’s MR curve).</p>
+    <p class="aha">The central bank is Figure 2.1’s household, with a bowl for a hill and the Phillips curve for a budget. A promise of low inflation is believed only if keeping it will be the bank’s best move when the time comes, the same test as Figure 4.2’s threat (Kydland and Prescott).</p>
+
+    <p class="transition">Every figure so far has been a claim about how the economy works. The next stage asks how anyone could check.</p>
+  </section>
+
+  <!-- ============================================================ 7 -->
+  <section class="stage" id="s7" data-no="7" data-name="Measurement">
+    <h2><span class="no">7</span>Measurement</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 7">7</span>Adds data, and the question of what the data can identify.</p>
+      <ul class="cast" aria-label="On the page so far"><li>buyers</li><li>sellers</li><li>one market</li><li>the household</li><li>the firm</li><li>entry</li><li>rivals</li><li>every market</li><li>public goods</li><li>hidden information</li><li>money</li><li>the government</li><li>the central bank</li><li class="new">data</li></ul>
+    </div>
+
+    <p>Econometrics turns the curves into numbers. Its first tool, least squares, fits a line by minimizing squared vertical distances; its fitted values are the projection of the outcome vector onto the space the regressors span. Its first worry is that the line can be wrong in a systematic way. When a variable that matters is left out and moves with the one that is in, the slope picks up both. When the data are crossings of two moving curves, the line may describe neither.</p>
+    <p>The rest of the course is a catalogue of designs that recover a causal effect anyway: instruments, panel data, differences-in-differences, discontinuities and experiments.</p>
+
+    <figure class="fig" data-fig="7.1" id="f7-1">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 7.1</span>The scatter is a shadow. Outcome <i>y</i> against <i>x</i><sub>1</sub>, with the least-squares line (red), whose slope is about 1.0. Darker points have more of a second variable <i>x</i><sub>2</sub>; the thin blue lines show the true effect of <i>x</i><sub>1</sub>, 0.5, at three values of <i>x</i><sub>2</sub>.</figcaption>
+      <p class="held"><span>Held fixed</span>nothing: <i>x</i><sub>2</sub> is left out, not held.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> <a href="#c8-7">labor</a>, the return to schooling; every empirical field course.</aside>
+    <p>Lift each point to its value of <i>x</i><sub>2</sub>, and the points lie close to a tilted plane, <i>y</i> = 1 + 0.5<i>x</i><sub>1</sub> + 0.8<i>x</i><sub>2</sub>. The flat scatter is what you see looking straight down the <i>x</i><sub>2</sub> axis. Because <i>x</i><sub>2</sub> rises with <i>x</i><sub>1</sub>, by about 0.62 per unit, the line fitted to that shadow tilts by 0.8 × 0.62: its slope is <i>β</i><sub>1</sub> + <i>β</i><sub>2</sub><i>δ</i> ≈ 1.0. An instrument is a variable that moves <i>x</i><sub>1</sub>, is unrelated to <i>x</i><sub>2</sub>, and affects <i>y</i> only through <i>x</i><sub>1</sub>.</p>
+    <p class="aha">A flat scatter is the shadow of a cloud with more dimensions. Omitted-variable bias is the tilt a hidden dimension adds to the shadow’s line, the same idea as every other figure in this part.</p>
+
+    <figure class="fig" data-fig="7.2" id="f7-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 7.2</span>A cloud of prices is not a demand curve. Twelve months from the market of Figure 1.1. Demand <i>P</i> = 10<i>I</i> − <i>Q</i> moves with income (1.0 to 1.2), and supply <i>P</i> = 1 + <i>Q</i> + <i>v</i> moves with the weather (−1 to 1). Faint: each month’s two curves. Red: the least-squares line through the points. Blue: the true demand slope.</figcaption>
+      <p class="held"><span>Held fixed</span>nothing: each point is a different month.</p>
+    </figure>
+    <aside class="note later"><b>Returns in</b> every field course’s identification problem; natural experiments in <a href="#c8-7">labor</a> and <a href="#c8-11">history</a>.</aside>
+    <p>The months are chosen so that income and the weather are unrelated and shift the curves by the same amount. The least-squares line through the points is then flat, slope about 0, though demand slopes down at −1 and supply up at +1. Give each month its own plane, carrying that month’s curves, and each point is just where they cross. Months that differ only in the weather slide along one demand curve, so using the weather as an instrument recovers the slope of −1.</p>
+    <p class="aha">Data are crossings of moving curves. To see one curve you need something that moves only the other. That is where instrumental variables began (Working 1927; Wright 1928).</p>
+
+    <p class="transition">The core is complete. Each field course now adds one agent, one market, one friction or a longer horizon to it.</p>
+  </section>
+
+  <!-- ============================================================ 8 -->
+  <section class="stage" id="s8" data-no="8" data-name="The field courses">
+    <h2><span class="no">8</span>The field courses</h2>
+    <div class="adds">
+      <p><span class="rev" aria-label="Revision 8">8</span>Adds, course by course, a second economy, money and risk, the state, wage and price setters, a different household, and the long run of history.</p>
+    </div>
+
+    <p>The third and fourth years look like eleven separate subjects. They are not. Each field course keeps the core of Stages 1–7 and changes one thing: it adds an agent, a market, a friction or a longer horizon. That is why the field courses can be taken in almost any order once the core is done.</p>
+    <p>This stage goes through them one at a time. For each it says what the course adds and which parts of the core it stands on, and shows the one figure where the addition is easiest to see. Each course also has its own page with its weeks, its sources and its reading.</p>
+
+    <h3 class="group">A second economy</h3>
+
+    <section class="course" id="c8-1">
+      <h4><span class="cno">8.1</span>International trade adds a second country <a class="cpage" href="course.html?c=trade">Course page</a></h4>
+      <p>Trade theory starts from comparative advantage: two countries gain from trade whenever their costs differ in proportion, even if one is better at everything. The course then asks what Principles skipped. The gains from trade are a country’s gains; inside the country, some people lose. With two factors of production, opening to trade moves factor prices, and the Heckscher–Ohlin model says which way. Later models explain why similar countries trade similar goods (increasing returns and love of variety, Krugman), why only the most productive firms export (Melitz), and why trade policy becomes a game between governments.</p>
+      <p class="builds"><b>Builds on</b> comparative advantage, <a href="#f5-1">the box</a>, <a href="#s4">games</a>.</p>
+      <figure class="fig" data-fig="8.1" id="f8-1">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.1</span>Who inside the country gains. Textiles use mostly labor (labor’s share of cost 0.8), machines mostly capital (0.2). In the plane of the wage <i>w</i> and the rental rate <i>r</i>, each curve is the set of factor prices at which a good just breaks even; today’s factor prices are where they cross. Dashed: textiles after a 10 percent price rise.</figcaption>
+        <p class="held"><span>Held fixed</span>the price of textiles relative to machines.</p>
+      </figure>
+      <p>Opening to trade raises the price of textiles for a country with plenty of labor. As that price rises, the crossing moves: a 10 percent rise raises the wage by 13.6 percent and lowers the return to capital by 3.1 percent. The wage outruns both prices, and capital loses against both.</p>
+      <p class="aha">Trade raises the country’s income and redistributes inside it, by more than the prices move (Stolper–Samuelson). Comparative advantage explains the gains; factor prices explain the politics.</p>
+    </section>
+
+    <section class="course" id="c8-2">
+      <h4><span class="cno">8.2</span>International finance adds the exchange rate and capital flows <a class="cpage" href="course.html?c=intlfin">Course page</a></h4>
+      <p>A second economy brings a second currency and the chance to borrow abroad. A current account deficit is <a href="#f2-3">Figure 2.3</a> for a country: borrowing from the future, CA = <i>S</i> − <i>I</i>. An exchange rate is an asset price: when money moves freely, the returns on deposits in each currency are linked by uncovered interest parity, <i>i</i> = <i>i</i>* + expected depreciation. Purchasing power parity holds roughly in the long run and poorly in the short. Mundell–Fleming adds the open economy to IS–LM and leads to the trilemma: no country can have a fixed exchange rate, free capital movement and its own monetary policy at once.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f2-3">choice over time</a>, <a href="#f6-2">IS–LM</a>, <a href="#f6-3">expectations</a>.</p>
+      <figure class="fig" data-fig="8.2" id="f8-2">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.2</span>The exchange rate today depends on tomorrow. Above: the foreign-exchange market as Krugman, Obstfeld and Melitz draw it. Won deposits pay <i>i</i> = 5 percent; dollar deposits are expected to pay <i>i</i>* + (<i>E</i><sup>e</sup> − <i>E</i>)/<i>E</i> in won, with <i>i</i>* = 3 percent, drawn for <i>E</i><sup>e</sup> = 1.05 and 1.10. Below: Korea, June 1997 to April 1998, won per dollar and the overnight call rate (Bank of Korea, monthly averages).</figcaption>
+        <p class="held"><span>Held fixed</span>the expected future exchange rate <i>E</i><sup>e</sup>.</p>
+      </figure>
+      <p>Today’s rate is <i>E</i> = <i>E</i><sup>e</sup>/(1 + <i>i</i> − <i>i</i>*). A rise in the expected rate from 1.05 to 1.10 moves today’s rate from 1.03 to 1.08 at once, with no change in trade or output. Raising the domestic interest rate pushes back, but only through the interest differential.</p>
+      <p>In 1997 the won fell from 889 per dollar in June to 1,707 in January, while the call rate stayed between 11 and 14 percent until November and reached 25 percent only in January, under the IMF program. Expectations moved before the interest-rate defense began. Korea’s gross official reserves fell from 33 to 20 billion dollars between June and December. The won recovered to 1,392 by April, with the call rate still above 20 percent; how much of that recovery the high rates bought is still debated.</p>
+      <p class="aha">An exchange rate is an asset price. It jumps when expectations of the future move, and an interest-rate defense works only if it moves expectations too.</p>
+    </section>
+
+    <h3 class="group">Money and risk</h3>
+
+    <section class="course" id="c8-3">
+      <h4><span class="cno">8.3</span>Money and banking adds the balance sheet <a class="cpage" href="course.html?c=banking">Course page</a></h4>
+      <p>Macro’s LM curve treats money as a quantity the central bank sets. Money and banking opens up the institutions that create it. A bank holds long, illiquid loans against short, liquid deposits and a thin layer of capital: useful, because savers stay liquid while long projects are funded, and fragile for the same reason. The course follows the policy rate through the term structure to the rates households pay. In Korea’s 2021–23 cycle, the base rate rose from 0.5 percent in July 2021 to 3.5 percent in January 2023, and the average rate on new mortgages went from 2.8 percent to a peak of 4.8 percent in October 2022. Then the course turns to failure: runs, contagion, and the rules written after each crisis.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f6-2">LM</a>, <a href="#s4">Nash equilibrium</a>, <a href="#f5-3">hidden information</a>.</p>
+      <figure class="fig" data-fig="8.3" id="f8-3">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.3</span>A run is an equilibrium. Above: the Diamond–Dybvig bank. Each of 100 depositors deposits 1; the project pays 1.5 at the end or 1 if liquidated early, and the bank promises 1.1 to anyone who withdraws early. A quarter of depositors need their money early. Plotted against the share <i>f</i> who withdraw early: what a patient depositor gets by waiting, and by withdrawing. Below: the TED spread, 2006–2010 (FRED, weekly).</figcaption>
+        <p class="held"><span>Held fixed</span>the deposit guarantee, here zero.</p>
+      </figure>
+      <p>If only the impatient quarter withdraws, waiting pays 1.45, more than 1.1, so patient depositors wait. If more than 73 percent are expected to withdraw, waiting pays less than 1.1 and everyone runs. Now let the state guarantee each depositor who waits an amount <i>g</i>, a floor under the waiting curve. Below <i>g</i> = 1 it changes nothing, because in a full run each depositor still gets 1. Between 1 and 1.1 the full run disappears but a partial run survives, at <i>f</i> = 1/<i>g</i>. At <i>g</i> = 1.1, the amount promised, waiting is never worse than running: no run equilibrium is left, and in the good equilibrium the guarantee is never paid.</p>
+      <p>In 2008 the run was on wholesale funding rather than on deposits. The TED spread, the premium banks charged one another over Treasury bills, rose from about 0.5 percentage points in 2006 to 4.1 in the week ending 17 October 2008.</p>
+      <p class="aha">A run need not be irrational: each depositor is right to run if the others do. Deposit insurance and a lender of last resort work by removing that equilibrium. When they work they cost nothing on the equilibrium path; their real cost is the risk-taking they invite.</p>
+    </section>
+
+    <section class="course" id="c8-4">
+      <h4><span class="cno">8.4</span>Financial economics adds prices of risk <a class="cpage" href="course.html?c=finance">Course page</a></h4>
+      <p>Finance asks what an uncertain future payment is worth today. Present value is Figure 2.3’s budget line read as a price. Risk has a price, but not all risk: risk that can be diversified away earns nothing, because nobody has to bear it. What remains, the part that moves with the market as a whole, is what expected returns pay for. That is the CAPM, E[<i>R<sub>i</sub></i>] − <i>r<sub>f</sub></i> = <i>β<sub>i</sub></i>(E[<i>R<sub>m</sub></i>] − <i>r<sub>f</sub></i>). The course ends where the household began. The price of any asset is <i>p</i> = E[<i>m·x</i>], with <i>m</i> = <i>βu</i>′(<i>c</i><sub>2</sub>)/<i>u</i>′(<i>c</i><sub>1</sub>), the tangency of Figure 2.3 taken one state of the world at a time. An asset is valuable when it pays in the states where consumption is scarce.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f2-3">choice over time and across states</a>, <a href="#f7-1">regression</a> (a beta is a slope).</p>
+      <figure class="fig" data-fig="8.4" id="f8-4">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.4</span>Diversification is correlation. Asset A has an expected return of 4 percent and a standard deviation of 10; B has 10 and 20. Every mix of the two, in the plane of risk and expected return, drawn for correlations of 1, 0.5, 0, −0.5 and −1.</figcaption>
+        <p class="held"><span>Held fixed</span>the correlation <i>ρ</i> between the two assets.</p>
+      </figure>
+      <p>At <i>ρ</i> = 1 the mixes lie on a straight line and mixing removes no risk. As <i>ρ</i> falls the line bends to the left. At <i>ρ</i> = 0 the least risky mix, 20 percent in B, has a standard deviation of 8.9, below either asset alone; at <i>ρ</i> = −1 a third in B removes risk entirely and earns 6 percent.</p>
+      <p class="aha">Diversification lives on the correlation axis: combining assets that do not move together removes risk without giving up return.</p>
+    </section>
+
+    <h3 class="group">Missing markets and the state</h3>
+
+    <section class="course" id="c8-5">
+      <h4><span class="cno">8.5</span>Public economics adds the state as a choosing agent <a class="cpage" href="course.html?c=public">Course page</a></h4>
+      <p>The welfare theorems of Stage 5 say when markets need no help, and its last two figures showed where they fail. Public economics studies the state as the agent that steps in, and the cost of stepping in. The state must raise money with taxes that change behavior, and its choices are made by voters and interest groups. Tax incidence shows that who bears a tax depends on elasticities, not on who writes the check. Optimal taxation weighs the revenue a tax raises against the trades it stops, and equity against the cost of discouraging work (Ramsey; Mirrlees). Social insurance meets the hidden information of Figure 5.3 as adverse selection and moral hazard.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f1-2">the tax wedge</a>, <a href="#f1-3">elasticity</a>, <a href="#s5">the welfare theorems and their doors</a>.</p>
+      <figure class="fig" data-fig="8.5" id="f8-5">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.5</span>The cost of a tax grows with its square. Left: the market of Figure 1.1 with a tax of 2 per unit; quantity falls to 3.5, and buyers and sellers each bear half the tax. Right: revenue and deadweight loss at every tax rate from 0 to 9.</figcaption>
+        <p class="held"><span>Held fixed</span>the tax rate, <i>t</i> = 2 on the left.</p>
+      </figure>
+      <p>Revenue, <i>t</i>(9 − <i>t</i>)/2, rises as an arch that peaks at <i>t</i> = 4.5. The deadweight loss, <i>t</i>²/4, rises as a parabola. From <i>t</i> = 2 to <i>t</i> = 4, revenue goes from 7 to 10 and the loss from 1 to 4; the extra loss for one more unit of revenue is 0.4 at <i>t</i> = 2 and 4 at <i>t</i> = 4.</p>
+      <p class="aha">A small tax is nearly free and a large one is not, because the loss grows with the square of the rate. That is why broad bases with low rates win, and it is where optimal taxation starts.</p>
+    </section>
+
+    <section class="course" id="c8-6">
+      <h4><span class="cno">8.6</span>Environmental economics adds the very long horizon <a class="cpage" href="course.html?c=environmental">Course page</a></h4>
+      <p>Pollution is an externality, a cost borne by someone outside the trade. The course starts with the remedies: a Pigouvian tax, tradable permits, and the choice between a price and a quantity when costs are uncertain (Weitzman). Climate change then adds what no other course has: costs that fall decades or centuries later, on people not yet born. How much those costs count today depends on the discount rate, and the Ramsey rule, <i>r</i> = <i>ρ</i> + <i>ηg</i>, splits it into three parts: how impatient we are (<i>ρ</i>), how much a richer future lowers the value of an extra unit (<i>η</i>), and how fast consumption grows (<i>g</i>). Since every country shares the climate, an agreement is the public-goods problem of Figure 5.2 played between countries.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f1-2">the tax wedge</a>, <a href="#f2-3">discounting</a>, <a href="#f5-2">public goods</a>, <a href="#s4">strategy</a>.</p>
+      <figure class="fig" data-fig="8.6" id="f8-6">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.6</span>A cost that arrives a century later. Demand <i>P</i> = 10 − <i>Q</i> and private marginal cost 1 + <i>Q</i>. Each unit also does 10 of damage, 100 years later; its present value is a layer on top of private cost, drawn at discount rates of 1.4 and 4.5 percent.</figcaption>
+        <p class="held"><span>Held fixed</span>the time until the damage arrives, 100 years.</p>
+      </figure>
+      <p>At <i>r</i> = 1.4 percent the layer is 2.49 thick (annual discounting); that rate combines pure time preference of 0.1 percent and <i>η</i> = 1, the Stern Review’s choices, with consumption growing at 1.3 percent. The efficient output is then 3.25 instead of 4.5, and the corrective tax is 2.49. At <i>r</i> = 4.5 percent the layer is 0.12 thick, and the market is almost efficient as it is.</p>
+      <p class="aha">An externality is a missing market. Climate change is a missing market with people not yet born, and the discount rate decides how much of their cost we see.</p>
+    </section>
+
+    <h3 class="group">Who sets the price</h3>
+
+    <section class="course" id="c8-7">
+      <h4><span class="cno">8.7</span>Labor economics adds people as the commodity <a class="cpage" href="course.html?c=labor">Course page</a></h4>
+      <p>In a labor market the thing sold is a person’s time, and the seller comes with it. Labor supply is Figure 2.2 with leisure as the good, so a higher wage can raise or lower hours. Labor demand is Stage 3’s firm read from the other side: hire until the value of the marginal product equals the wage. Schooling is an investment with a return, and estimating that return is the problem of Figure 7.1, because ability is the omitted <i>x</i><sub>2</sub>. Unemployment, one number in macro, becomes flows: each month some workers lose jobs and some of the unemployed find them, and the rate settles where the flows balance, <i>u</i>* = <i>s</i>/(<i>s</i> + <i>f</i>). Labor is also where economics learned to measure with natural experiments: the Vietnam draft lottery, the Mariel boatlift, and the minimum wage.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f2-2">the two effects of a price change</a>, <a href="#s3">the firm</a>, <a href="#s7">identification</a>.</p>
+      <figure class="fig" data-fig="8.7" id="f8-7">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.7</span>What a minimum wage does depends on who sets the wage. Left: labor supply <i>w</i> = 2 + <i>L</i> and the value of the marginal product <i>w</i> = 14 − <i>L</i>. A price-taking market employs 6 at a wage of 8; a single employer hires where the marginal cost of labor, 2 + 2<i>L</i>, meets the marginal product, and employs 4 at a wage of 6. Right: employment at every minimum wage.</figcaption>
+        <p class="held"><span>Held fixed</span>the minimum wage, here none.</p>
+      </figure>
+      <p>Under the single employer, employment stays at 4 for minimum wages up to 6, rises to 6 at a minimum of 8, then falls to zero at 14: a tent. In the price-taking market there is no rising side; employment only falls once the minimum passes 8.</p>
+      <p class="aha">Theory alone cannot say whether a minimum wage costs jobs; it depends on whether employers set wages. That is why the question moved to natural experiments, such as Card and Krueger’s comparison of New Jersey and Pennsylvania (1994).</p>
+    </section>
+
+    <section class="course" id="c8-8">
+      <h4><span class="cno">8.8</span>Industrial organization adds strategy among firms, in detail <a class="cpage" href="course.html?c=io">Course page</a></h4>
+      <p>Stage 4 showed that market power is a matter of degree. Industrial organization measures it and studies what firms do with it. The Lerner index, (<i>P</i> − MC)/<i>P</i>, is Stage 4’s markup. Firms with power do not charge one price: they discriminate, bundle and use two-part tariffs. Products differ (Hotelling) and prices compete (Bertrand). Incumbents use capacity as a commitment to keep entrants out, Figure 4.2 with an investment added. Auctions and platforms are markets designed by the firms that run them. The course ends with antitrust: mergers, monopolization, and natural monopoly, where Figure 3.1’s envelope is still falling where demand cuts it.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f3-1">the envelope</a>, <a href="#f4-1">Cournot</a> and <a href="#f4-2">the entry game</a>.</p>
+      <figure class="fig" data-fig="8.8" id="f8-8">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.8</span>The future holds a cartel together. The duopoly of Figure 4.1. Left: profit per period if both keep the cartel (12.5 each), or if one cheats (14.1 once, then the Cournot 11.1 for ever after). Right: what each stream is worth at every discount factor <i>δ</i>.</figcaption>
+        <p class="held"><span>Held fixed</span>how much the firms care about tomorrow, <i>δ</i>.</p>
+      </figure>
+      <p>Each later period counts <i>δ</i> times the one before. The cartel’s stream is worth 12.5/(1 − <i>δ</i>); the cheat’s, 14.06 + 11.11<i>δ</i>/(1 − <i>δ</i>). They cross at <i>δ</i>* = 9/17, about 0.53: above it collusion pays, below it cheating does. Figure 4.1 is the <i>δ</i> = 0 slice, where only today counts.</p>
+      <p class="aha">A cartel is held together by the future. Anything that makes cheating quicker to detect or punishment more certain helps collusion; leniency programs break cartels by rewarding the first to confess.</p>
+    </section>
+
+    <h3 class="group">A different household</h3>
+
+    <section class="course" id="c8-9">
+      <h4><span class="cno">8.9</span>Behavioral economics adds psychology to the household <a class="cpage" href="course.html?c=behavioral">Course page</a></h4>
+      <p>Every model of choice in the core rests on a household whose preferences are complete, consistent and stable, and who uses all the information it has. Behavioral economics keeps the method and changes the agent, one documented departure at a time:</p>
+      <ul>
+        <li><b>present bias:</b> the near future is discounted far more than the distant one, so plans change as dates approach;</li>
+        <li><b>prospect theory:</b> outcomes are judged as gains and losses from a reference point, and losses weigh roughly twice as much as gains;</li>
+        <li><b>social preferences:</b> people pay to punish unfairness;</li>
+        <li><b>limited attention:</b> not every price is seen.</li>
+      </ul>
+      <p>Each departure is established in experiments or field data. Each leads to policy, because a default can change behavior where a price would not.</p>
+      <p class="builds"><b>Builds on</b> <a href="#s2">every model of choice</a>, <a href="#s4">games</a>, <a href="#s7">experiments</a>.</p>
+      <figure class="fig" data-fig="8.9" id="f8-9">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.9</span>The plan changes as the day approaches. A choice between 100 on day 10 and 110 on day 11, valued with quasi-hyperbolic discounting (<i>β</i> = 0.7, <i>δ</i> = 1): every future payment is multiplied by <i>β</i>, and only the present escapes. Left: seen from day 0. Right: seen from day 10.</figcaption>
+        <p class="held"><span>Held fixed</span>the day on which you decide.</p>
+      </figure>
+      <p>On day 0 both payments are in the future, 70 against 77, so you plan to wait for 110. On day 10 the first payment is now, 100 against 77, so you take 100. An exponential discounter (<i>β</i> = 1) ranks the two the same way on every day.</p>
+      <p class="aha">Present bias makes the household of Figure 2.3 disagree with itself. Commitment devices, pension defaults and “save more tomorrow” plans are designed around that disagreement.</p>
+    </section>
+
+    <h3 class="group">Why growth happened, and where it did not</h3>
+
+    <section class="course" id="c8-10">
+      <h4><span class="cno">8.10</span>Development economics adds institutions and missing markets <a class="cpage" href="course.html?c=development">Course page</a></h4>
+      <p>The Solow model of Figure 6.1 predicts that poor countries with the same saving and technology catch up. Many have not. Development economics asks why, and what helps the poor in the meantime. Institutions, property rights and limits on rulers, decide whether investment pays at all, and many were set under colonial rule (Acemoglu, Johnson and Robinson). Missing markets decide who can invest: without credit or insurance, a poor household cannot borrow against a good project or get through a bad harvest without selling its tools. Whether whole economies can be caught in a poverty trap is still argued; that individual firms and households are held back by missing markets is well measured. Development is also where randomized experiments became a standard method.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f6-1">Solow</a>, <a href="#s3">the firm</a>, <a href="#f5-3">hidden information</a>, <a href="#s7">experiments</a>.</p>
+      <figure class="fig" data-fig="8.10" id="f8-10">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.10</span>Capital goes to those who have it. A small firm with output √<i>k</i> earns a marginal product of 1/(2√<i>k</i>) on its capital. With credit at 10 percent, every firm would invest up to <i>k</i> = 25. Without credit, each invests only its owner’s wealth: dots for owners worth 1, 4, 9, 16 and 25.</figcaption>
+        <p class="held"><span>Held fixed</span>the owner’s wealth, one value per firm.</p>
+      </figure>
+      <p>Lined up by wealth, the poorest firms have the highest returns: 50 percent at a wealth of 1, 25 percent at 4, and 10 percent only at 25. Capital is not where it earns the most; it is where wealth already is. Randomized cash grants to small firms in Sri Lanka earned about 5 percent a month (de Mel, McKenzie and Woodruff, 2008).</p>
+      <p class="aha">A missing credit market makes the poorest firms the most productive at the margin and the least able to grow. High returns at small scale are the fingerprint of a missing market.</p>
+    </section>
+
+    <section class="course" id="c8-11">
+      <h4><span class="cno">8.11</span>Economic history adds time beyond the model <a class="cpage" href="course.html?c=history">Course page</a></h4>
+      <p>The core courses describe economies that grow. For almost all of history, economies did not, at least not per person, and economic history starts there. In a Malthusian economy a gain in technology or land raises income per person only for a while: better-fed families raise more surviving children, the population grows, and income returns to the level at which births equal deaths. Around 1800 north-western Europe escaped, and the course asks why there and then: wages, energy, institutions, the accumulation of knowledge. It follows the world economy through the Great Depression, the macroeconomics of Stage 6 under the gold standard and banking panics, and through two waves of globalization. It also uses the past as a laboratory: accidents of history, such as where a border was drawn, supply the natural experiments Stage 7 looks for.</p>
+      <p class="builds"><b>Builds on</b> <a href="#f6-1">Solow</a>, <a href="#f6-2">AD and money</a>, <a href="#f8-3">runs</a>, <a href="#c8-10">institutions</a>, <a href="#s7">identification</a>.</p>
+      <figure class="fig" data-fig="8.11" id="f8-11">
+        <div class="fig-art"></div>
+        <figcaption><span class="fig-no">Figure 8.11</span>Before 1800, progress made more people. Above: Malthus in two linked panels, as Gregory Clark draws them. Birth and death rates against income per person cross at subsistence income <i>y</i>*; for a given technology, income per person falls as population grows, and a better technology lifts the whole curve. Below: income per person since 1250 in England, the Netherlands, China and India (Maddison Project 2023, 2011 dollars, log scale).</figcaption>
+        <p class="held"><span>Held fixed</span>technology, one value per curve.</p>
+      </figure>
+      <p>Each step in technology lifts income above <i>y</i>*, births exceed deaths, and the population grows until income is back at <i>y</i>*. Stacked over centuries, income per person traces a flat ridge while population climbs beside it, until technology grows faster than population can respond.</p>
+      <p>The record bends this story without breaking it. England’s income per person rose from about 1,230 dollars in 1348 to 1,720 by 1400, after the Black Death had killed a large share of its people: fewer people, richer people. It stayed near 1,700 until 1600, then climbed, to 3,300 by 1800 and 7,600 by 1900. China’s was about 1,200 in 1500 and 1,000 in 1900.</p>
+      <p class="aha">The Solow model takes growth per person for granted. For most of history, technical progress produced more people, not richer ones.</p>
+    </section>
+  </section>
+
+  <!-- ============================================================ closing -->
+  <section class="stage closing" id="s9">
+    <h2>What the sequence leaves out</h2>
+    <p>The staircase works. Each stage added one agent, one market or one dimension, and each field course added one more. Two stages quietly set something aside along the way: general equilibrium returned to price-taking, and macroeconomics added the households up.</p>
+    <p>Each figure is still a slice, and the slices share an assumption that unfolding them does not remove: every agent of a type is alike, and nobody is connected to anybody in particular. <a href="beyond.html">Part 2</a> shows what that assumption hides.</p>
+  </section>
+</article>
+</div>
+
+<aside class="titleblock" aria-label="Title block">
+  <div class="tb-row tb-title"><span class="tb-name">Cross-Section</span><span class="tb-sheet" id="tb-sheet">Part 1</span></div>
+  <div class="tb-row tb-sub" id="tb-course">The classical textbook</div>
+  <div class="tb-row tb-counts">
+    <div><span class="tb-k">Agents</span><span class="tb-v" id="tb-agents">0</span></div>
+    <div><span class="tb-k">Figures</span><span class="tb-v" id="tb-figs">0</span></div>
+    <div><span class="tb-k">Equations</span><span class="tb-v" id="tb-eqs">0</span></div>
+  </div>
+  <button class="tb-unfold" id="unfold" type="button" aria-pressed="false" hidden>Fold the page into space</button>
+  <p class="tb-status" id="tb-status" role="status"></p>
+</aside>
+
+<canvas id="stage" layoutsubtree aria-hidden="true"></canvas>
+<div id="expo-labels" aria-hidden="true"></div>
+
+<script type="module" src="p1.js"></script>
+</body>
+</html>

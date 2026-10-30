@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 3: A new archive — Cross-Section</title>
+<meta name="description" content="A proposal for teaching classical and modern economics together: an archive arranged by agents, markets and methods, with three ways through.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="site-page">
+<nav class="site" aria-label="Parts">
+  <a class="site-home" href="index.html">Cross-Section</a>
+  <a href="classical.html"><span>1</span>The classical textbook</a>
+  <a href="beyond.html"><span>2</span>Beyond the flat page</a>
+  <a href="archive.html" aria-current="page"><span>3</span>A new archive</a>
+</nav>
+
+<div class="desk">
+<article id="sheet" class="sheet">
+  <header class="opening">
+    <h1>A new archive</h1>
+    <p class="lede">How I would teach classical and modern economics together, based on the curriculum and the ontology built in Parts 1 and 2. The archive is arranged by what economics studies, so that a learner can enter from an agent, a market or a question, and every course is one door among many.</p>
+    <div class="enter-row">
+      <button id="enter-archive" type="button" class="enter">Enter the archive in 3D</button>
+      <button id="enter-world" type="button" class="enter quiet">The world economy, assembled</button>
+      <button id="fold-page" type="button" class="enter quiet" aria-pressed="false">Fold this page into space</button>
+      <p id="enter-status" class="tb-status" role="status"></p>
+    </div>
+  </header>
+
+  <div id="archive-anchor"></div>
+
+  <section class="chapter" id="a1">
+    <h2><span class="no">1</span>Explain the ontology first</h2>
+    <p class="lede">Every model is a choice of which agents and which markets to hold still.</p>
+    <p>Economics studies a small set of things. <b>Agents</b> decide: households, firms, workers, banks, governments, central banks, other countries. <b>Markets</b> are where agents meet: goods, labor, money, capital, foreign exchange. <b>Institutions</b> set the rules they meet under: property, contracts, money, regulation. <b>Mechanisms</b> say how outcomes follow: optimization, equilibrium, strategic interaction, diffusion through networks, learning.</p>
+    <p>A textbook graph is a cross-section of this space. The supply and demand diagram keeps one market and two kinds of agent and holds everything else fixed. IS–LM keeps two markets and one of each agent. Telling the learner which slice is being cut, and from what, is the first thing an archive should do. Part 1 shows each cut being assembled from its parts.</p>
+  </section>
+
+  <section class="chapter" id="a2">
+    <h2><span class="no">2</span>Classical and modern, as one sequence</h2>
+    <p class="lede">Each modern field relaxes one classical assumption.</p>
+    <div class="partslist">
+      <table>
+        <caption>Assumptions and what replaces them</caption>
+        <thead><tr><th>Classical assumption</th><th>Built in</th><th>What relaxes it</th><th>Where to see it</th></tr></thead>
+        <tbody>
+          <tr><td>One representative household</td><td><a href="classical.html#anat-aggregate">aggregation</a></td><td>heterogeneous agents, distributions</td><td><a href="beyond.html#b3">power laws</a>, <a href="https://quantecon.org/">QuantEcon</a></td></tr>
+          <tr><td>Anonymous markets, everyone a price taker</td><td><a href="classical.html#anat-entry">competition</a></td><td>networks, strategic interaction</td><td><a href="beyond.html#b1">six degrees</a>, <a href="course.html?c=games">game theory</a></td></tr>
+          <tr><td>Rational, consistent choice</td><td><a href="classical.html#anat-consumer">the consumer</a></td><td>behavioral economics</td><td><a href="beyond.html#b4">games real people play</a></td></tr>
+          <tr><td>Equilibrium reached at once</td><td><a href="classical.html#anat-box">general equilibrium</a></td><td>dynamics, adjustment, agent-based models</td><td><a href="classical.html#anat-market">the price rod</a>, <a href="https://www.complexityexplorer.org/">Complexity Explorer</a></td></tr>
+          <tr><td>Everyone knows the same things</td><td><a href="classical.html#anat-welfare">welfare theorems</a></td><td>information, contracts, runs</td><td><a href="beyond.html#b5">contagion</a>, <a href="course.html?c=banking">money and banking</a></td></tr>
+          <tr><td>Data given, relationships assumed</td><td><a href="classical.html#anat-ols">least squares</a></td><td>research designs, causal inference</td><td><a href="course.html?c=metrics">econometrics</a>, <a href="https://mixtape.scunning.com/">The Mixtape</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Taught this way, the modern fields are not a separate economics. Each removes one simplification the core made so that the core could be drawn on a page. The classical sequence stays as base camp: optimization and equilibrium, done carefully, are what every relaxation is measured against.</p>
+  </section>
+
+  <section class="chapter" id="a3">
+    <h2><span class="no">3</span>How to study: three ways through</h2>
+    <p class="lede">Paths, not only courses.</p>
+    <div class="paths">
+      <section>
+        <h3>By a question: why are some countries rich?</h3>
+        <ol>
+          <li><a href="classical.html#anat-opportunity">the frontier</a>: what an economy can produce</li>
+          <li><a href="classical.html#anat-longrun">the classical economy</a>: firms and households, added up</li>
+          <li><a href="classical.html#anat-solow">Solow</a>: capital accumulates, then levels off</li>
+          <li><a href="classical.html#ch7">Korea, 1960–2025</a>: the tank on real data</li>
+          <li><a href="course.html?c=development">development</a> and <a href="course.html?c=history">economic history</a>: institutions and centuries</li>
+        </ol>
+      </section>
+      <section>
+        <h3>By an agent: the household</h3>
+        <ol>
+          <li><a href="classical.html#anat-consumer">choice</a> and <a href="classical.html#anat-demand">demand</a></li>
+          <li><a href="classical.html#anat-time">choice over time</a>: the Euler equation</li>
+          <li><a href="classical.html#anat-euler">consumption in macro</a> and <a href="classical.html#anat-nk">the IS equation</a></li>
+          <li><a href="course.html?c=finance">finance</a>: the same equation prices assets</li>
+          <li><a href="course.html?c=behavioral">behavioral</a>: when the household is not that consumer</li>
+        </ol>
+      </section>
+      <section>
+        <h3>By a market: labor</h3>
+        <ol>
+          <li><a href="classical.html#anat-envelope">the firm’s costs</a> and its demand for labor</li>
+          <li><a href="classical.html#anat-longrun">the labor market</a> in the classical economy</li>
+          <li><a href="classical.html#anat-adas">aggregate supply</a> with sticky wages</li>
+          <li><a href="course.html?c=labor">labor economics</a>: search, human capital, discrimination</li>
+          <li><a href="classical.html#anat-iv">instruments</a>: measuring the return to schooling</li>
+        </ol>
+      </section>
+    </div>
+  </section>
+
+  <section class="chapter" id="a4">
+    <h2><span class="no">4</span>The textbooks</h2>
+    <p class="lede">Every door, and what to read next.</p>
+    <div id="course-index"></div>
+  </section>
+</article>
+</div>
+
+<section id="dive" class="dive" hidden aria-label="Inside the archive">
+  <div class="dive-head"><span id="dive-fig"></span><span id="dive-count"></span></div>
+  <h2 id="dive-title" class="dive-title"></h2>
+  <p id="dive-text" class="dive-text"></p>
+  <div id="dive-eq" class="dive-eq"></div>
+  <label id="dive-slider" class="dive-slider" hidden>
+    <span id="dive-slider-label"></span>
+    <input id="dive-range" type="range">
+    <output id="dive-out"></output>
+  </label>
+  <div class="dive-nav">
+    <button id="dive-prev" type="button">Previous</button>
+    <div id="dive-dots" class="dive-dots"></div>
+    <button id="dive-next" type="button">Next</button>
+  </div>
+  <button id="dive-exit" class="dive-exit" type="button">Close the space</button>
+  <p class="dive-hint">Scroll or use the arrow keys to step. Drag to turn the space.</p>
+</section>
+
+<canvas id="stage" layoutsubtree aria-hidden="true"></canvas>
+<div id="expo-labels"></div>
+
+<script type="module" src="archive.js"></script>
+</body>
+</html>

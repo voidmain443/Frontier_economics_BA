@@ -1,0 +1,1186 @@
+{
+ "korea-growth": {
+  "title": "Korea, 1960 onward: output, investment, population, employment",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "rgdp",
+    "label": "Real GDP (expenditure side, chained 2020 prices)",
+    "unit": "KRW trillion (2020 prices)",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "200Y110 (2.1.2.2.4 국내총생산에 대한 지출, 원계열, 실질, 분기 및 연간), cycle A, item 10601 국내총생산에 대한 지출",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/200Y110/A/{START}/{END}/10601",
+     "transform": "KRW billion / 1000 -> KRW trillion; restricted to 1960+"
+    },
+    "first": "1960",
+    "last": "2025",
+    "n": 66
+   },
+   {
+    "key": "pop",
+    "label": "Population (mid-year estimate)",
+    "unit": "million persons",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "901Y028 (8.6.1 추계인구/고령인구비율/합계출산율), cycle A, item I35A 추계인구",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/901Y028/A/{START}/{END}/I35A",
+     "transform": "persons / 1e6; cut at the last GDP year (the table continues with projections to 2072)"
+    },
+    "first": "1960",
+    "last": "2025",
+    "n": 66
+   },
+   {
+    "key": "rgdppc",
+    "label": "Real GDP per capita (chained 2020 prices)",
+    "unit": "million KRW per person (2020 prices)",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "200Y110/10601 and 901Y028/I35A",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/200Y110/A/{START}/{END}/10601",
+     "transform": "real GDP (KRW) / population, in million KRW"
+    },
+    "first": "1960",
+    "last": "2025",
+    "n": 66
+   },
+   {
+    "key": "gfcf_share",
+    "label": "Gross fixed capital formation, share of GDP (nominal)",
+    "unit": "% of GDP",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "200Y109 (2.1.2.2.3 국내총생산에 대한 지출, 원계열, 명목, 분기 및 연간), cycle A, items 1020110 총고정자본형성, 10601 국내총생산에 대한 지출",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/200Y109/A/{START}/{END}/1020110",
+     "transform": "nominal GFCF / nominal GDP * 100 (matches ECOS 200Y101/60102 to 1 decimal)"
+    },
+    "first": "1960",
+    "last": "2025",
+    "n": 66
+   },
+   {
+    "key": "popgrowth",
+    "label": "Population growth rate",
+    "unit": "% per year",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "901Y028/I35A",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/901Y028/A/{START}/{END}/I35A",
+     "transform": "(P_t / P_{t-1} - 1) * 100 of mid-year population"
+    },
+    "first": "1961",
+    "last": "2025",
+    "n": 65
+   },
+   {
+    "key": "emp",
+    "label": "Employed persons (Economically Active Population Survey)",
+    "unit": "million persons",
+    "freq": "A",
+    "note": "Survey basis changed in 1999 (4-week job search); employment counts are comparable across the break.",
+    "doc": {
+     "provider": "KOSIS OpenAPI (Statistics Korea, orgId 101)",
+     "codes": "orgId 101, tblId DT_1DA7010S (종사상지위별 취업자), itmId T30 취업자, objL1 00 계, prdSe Y",
+     "url": "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey={KEY}&orgId=101&tblId=DT_1DA7010S&itmId=T30&objL1=00&objL2=&objL3=&objL4=&objL5=&objL6=&objL7=&objL8=&prdSe=Y&startPrdDe={START}&endPrdDe={END}&format=json&jsonVD=Y",
+     "transform": "thousand persons / 1000 -> million persons"
+    },
+    "first": "1963",
+    "last": "2025",
+    "n": 63
+   },
+   {
+    "key": "rgdppw",
+    "label": "Real GDP per employed person (chained 2020 prices)",
+    "unit": "million KRW per worker (2020 prices)",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "ECOS + KOSIS",
+     "codes": "200Y110/10601 and KOSIS DT_1DA7010S/T30/00",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/200Y110/A/{START}/{END}/10601",
+     "transform": "real GDP (KRW) / employed persons, in million KRW"
+    },
+    "first": "1963",
+    "last": "2025",
+    "n": 63
+   }
+  ]
+ },
+ "us-phillips": {
+  "title": "United States, 1948 onward: unemployment, inflation, expectations",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "unrate",
+    "label": "US unemployment rate, annual mean",
+    "unit": "%",
+    "freq": "A",
+    "note": "Annual mean over the months available for 2025 (missing 2025-10). BLS published no October 2025 figure (US federal government shutdown).",
+    "doc": {
+     "provider": "FRED; original source U.S. Bureau of Labor Statistics",
+     "codes": "UNRATE",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=UNRATE&api_key={KEY}&file_type=json",
+     "transform": "annual mean of monthly values; current (unfinished) year dropped"
+    },
+    "first": "1948",
+    "last": "2025",
+    "n": 78
+   },
+   {
+    "key": "cpi_infl",
+    "label": "US CPI inflation, annual average over annual average",
+    "unit": "%",
+    "freq": "A",
+    "note": "Annual mean over the months available for 2025 (missing 2025-10). BLS published no October 2025 figure (US federal government shutdown).",
+    "doc": {
+     "provider": "FRED; original source U.S. Bureau of Labor Statistics",
+     "codes": "CPIAUCSL",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=CPIAUCSL&api_key={KEY}&file_type=json",
+     "transform": "annual mean of monthly index, then (A_t / A_{t-1} - 1) * 100; current (unfinished) year dropped"
+    },
+    "first": "1948",
+    "last": "2025",
+    "n": 78
+   },
+   {
+    "key": "mich",
+    "label": "Expected inflation next 12 months (Michigan survey median), annual mean",
+    "unit": "%",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "FRED; original source University of Michigan Surveys of Consumers",
+     "codes": "MICH",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=MICH&api_key={KEY}&file_type=json",
+     "transform": "annual mean of 12 monthly values; current (unfinished) year dropped"
+    },
+    "first": "1978",
+    "last": "2025",
+    "n": 48
+   }
+  ]
+ },
+ "oil": {
+  "title": "Crude oil prices, monthly",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "wti",
+    "label": "WTI crude spot price, monthly average",
+    "unit": "USD per barrel",
+    "freq": "M",
+    "note": "Before the mid-1980s this is a posted/administered price, not a market spot price.",
+    "doc": {
+     "provider": "FRED; original source Federal Reserve Bank of St. Louis / Dow Jones & Co. (pre-1982 posted prices)",
+     "codes": "WTISPLC",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=WTISPLC&api_key={KEY}&file_type=json",
+     "transform": "none (as published)"
+    },
+    "first": "1946-01",
+    "last": "2026-09",
+    "n": 969
+   },
+   {
+    "key": "brent",
+    "label": "Brent crude spot price, monthly average",
+    "unit": "USD per barrel",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "U.S. Energy Information Administration (EIA) API v2",
+     "codes": "route petroleum/pri/spt, facet series=RBRTE, frequency monthly",
+     "url": "https://api.eia.gov/v2/petroleum/pri/spt/data/?api_key={KEY}&frequency=monthly&data%5B0%5D=value&facets%5Bseries%5D%5B%5D=RBRTE&sort%5B0%5D%5Bcolumn%5D=period&sort%5B0%5D%5Bdirection%5D=asc&offset=0&length=5000",
+     "transform": "none (EIA monthly average of daily spot prices)"
+    },
+    "first": "1987-05",
+    "last": "2026-09",
+    "n": 473
+   }
+  ]
+ },
+ "korea-1997": {
+  "title": "Korea's currency crisis, 1995-1999",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "krwusd",
+    "label": "Won per dollar, monthly average",
+    "unit": "KRW per USD",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "731Y004 (3.1.2.1 주요국 통화의 대원화환율), cycle M, item1 0000001 원/미국달러(매매기준율), item2 0000100 평균자료",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/731Y004/M/{START}/{END}/0000001/0000100",
+     "transform": "none (as published)"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   },
+   {
+    "key": "krwusd_eom",
+    "label": "Won per dollar, end of month",
+    "unit": "KRW per USD",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "731Y004 (3.1.2.1 주요국 통화의 대원화환율), cycle M, item1 0000001 원/미국달러(매매기준율), item2 0000200 말일자료",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/731Y004/M/{START}/{END}/0000001/0000200",
+     "transform": "none (as published)"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   },
+   {
+    "key": "reserves",
+    "label": "Official foreign exchange reserves (gross, end of month)",
+    "unit": "USD billion",
+    "freq": "M",
+    "note": "Gross official reserves; 'usable' reserves in Dec 1997 were far lower (about USD 9bn) because of deposits at banks' overseas branches.",
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "732Y001 (3.5 외환보유액), cycle M, item 99 합계",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/732Y001/M/{START}/{END}/99",
+     "transform": "thousand USD / 1e6 -> USD billion"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   },
+   {
+    "key": "callrate",
+    "label": "Overnight call rate (uncollateralized), monthly average",
+    "unit": "% per year",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "721Y001 (1.3.2.2 시장금리 월,분기,년), cycle M, item 1010000 무담보콜금리(1일)",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/721Y001/M/{START}/{END}/1010000",
+     "transform": "none (ECOS monthly average)"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   },
+   {
+    "key": "ca",
+    "label": "Current account balance, monthly",
+    "unit": "USD billion",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "301Y013 (2.5.1.1 국제수지), cycle M, item 000000 경상수지",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/301Y013/M/{START}/{END}/000000",
+     "transform": "USD million / 1000 -> USD billion"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   },
+   {
+    "key": "kospi",
+    "label": "KOSPI, monthly average of daily closes",
+    "unit": "index (1980-01-04 = 100)",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "802Y001 (1.5.1.1 주식시장(일)), cycle D, item 0001000 KOSPI지수",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/802Y001/D/{START}/{END}/0001000",
+     "transform": "monthly mean of daily closing values (ECOS monthly KOSPI table 901Y014 starts only in 2000)"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   },
+   {
+    "key": "kospi_eom",
+    "label": "KOSPI, last close of month",
+    "unit": "index (1980-01-04 = 100)",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "802Y001, cycle D, item 0001000 KOSPI지수",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/802Y001/D/{START}/{END}/0001000",
+     "transform": "value on the last trading day of each month"
+    },
+    "first": "1995-01",
+    "last": "1999-12",
+    "n": 60
+   }
+  ]
+ },
+ "crisis-2008": {
+  "title": "The 2008 financial crisis, 2006-2010",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "ted",
+    "label": "TED spread (3-month LIBOR minus 3-month T-bill), monthly average",
+    "unit": "percentage points",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "FRED; ICE Benchmark Administration / Board of Governors",
+     "codes": "TEDRATE",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=TEDRATE&api_key={KEY}&file_type=json&observation_start=2006-01-01&observation_end=2010-12-31&frequency={m|wef}&aggregation_method=avg",
+     "transform": "FRED server-side aggregation frequency=m, aggregation_method=avg"
+    },
+    "first": "2006-01",
+    "last": "2010-12",
+    "n": 60
+   },
+   {
+    "key": "ted_w",
+    "label": "TED spread, weekly average (week ending Friday)",
+    "unit": "percentage points",
+    "freq": "W",
+    "note": null,
+    "doc": {
+     "provider": "FRED; ICE Benchmark Administration / Board of Governors",
+     "codes": "TEDRATE",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=TEDRATE&api_key={KEY}&file_type=json&observation_start=2006-01-01&observation_end=2010-12-31&frequency={m|wef}&aggregation_method=avg",
+     "transform": "FRED server-side aggregation frequency=wef (week ending Friday), aggregation_method=avg; keys are the week-ending date"
+    },
+    "first": "2006-01-06",
+    "last": "2010-12-31",
+    "n": 261
+   },
+   {
+    "key": "fedfunds",
+    "label": "US effective federal funds rate",
+    "unit": "% per year",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "FRED (Federal Reserve Bank of St. Louis); original source Board of Governors",
+     "codes": "FEDFUNDS",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=FEDFUNDS&api_key={KEY}&file_type=json&observation_start={START}&observation_end={END}",
+     "transform": "none (as published)"
+    },
+    "first": "2006-01",
+    "last": "2010-12",
+    "n": 60
+   },
+   {
+    "key": "baa10y",
+    "label": "Moody's Baa corporate yield minus 10-year Treasury, monthly average",
+    "unit": "percentage points",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "FRED; Moody's / Board of Governors",
+     "codes": "BAA10Y",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=BAA10Y&api_key={KEY}&file_type=json&observation_start=2006-01-01&observation_end=2010-12-31&frequency=m&aggregation_method=avg",
+     "transform": "FRED server-side aggregation frequency=m, aggregation_method=avg"
+    },
+    "first": "2006-01",
+    "last": "2010-12",
+    "n": 60
+   },
+   {
+    "key": "krwusd",
+    "label": "Won per dollar, monthly average",
+    "unit": "KRW per USD",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "731Y004 (3.1.2.1 주요국 통화의 대원화환율), cycle M, item1 0000001 원/미국달러(매매기준율), item2 0000100 평균자료",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/731Y004/M/{START}/{END}/0000001/0000100",
+     "transform": "none (as published)"
+    },
+    "first": "2006-01",
+    "last": "2010-12",
+    "n": 60
+   },
+   {
+    "key": "bok_rate",
+    "label": "Bank of Korea base rate",
+    "unit": "% per year",
+    "freq": "M",
+    "note": "Series starts May 1999. Until Mar 2008 the policy instrument was the overnight call-rate target; since then the BOK base rate.",
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "722Y001 (1.3.1 한국은행 기준금리 및 여수신금리), cycle M, item 0101000 한국은행 기준금리",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/722Y001/M/{START}/{END}/0101000",
+     "transform": "none; ECOS monthly value is the rate in force at month end (e.g. 2008-10 = 4.25 after the 27 Oct cut)"
+    },
+    "first": "2006-01",
+    "last": "2010-12",
+    "n": 60
+   }
+  ]
+ },
+ "dart-firms": {
+  "title": "Five Korean manufacturers: revenue, operating income, finance costs",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "samsung.revenue",
+    "label": "Samsung Electronics: Revenue",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00126380 (stock 005930), reprt_code 11011, fs_div CFS; accounts used: IS ifrs-full_Revenue 매출액; IS ifrs-full_Revenue 수익(매출액); IS ifrs-full_Revenue 영업수익",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00126380&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "samsung.op_income",
+    "label": "Samsung Electronics: Operating income",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00126380 (stock 005930), reprt_code 11011, fs_div CFS; accounts used: IS dart_OperatingIncomeLoss 영업이익; IS dart_OperatingIncomeLoss 영업이익(손실)",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00126380&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "samsung.fin_costs",
+    "label": "Samsung Electronics: Finance costs (income statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "IFRS finance costs: interest plus FX and derivative losses booked as finance costs.",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00126380 (stock 005930), reprt_code 11011, fs_div CFS; accounts used: IS -표준계정코드 미사용- 금융비용; IS ifrs-full_FinanceCosts 금융비용",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00126380&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "samsung.interest_paid",
+    "label": "Samsung Electronics: Interest paid (cash flow statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "Cash interest paid, a proxy for interest expense (which appears only in the notes, not as a standard face-statement account).",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00126380 (stock 005930), reprt_code 11011, fs_div CFS; accounts used: ifrs-full_InterestPaidClassifiedAsOperatingActivities 이자의 지급",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00126380&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "skhynix.revenue",
+    "label": "SK hynix: Revenue",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164779 (stock 000660), reprt_code 11011, fs_div CFS; accounts used: CIS ifrs-full_Revenue 매출액",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164779&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "skhynix.op_income",
+    "label": "SK hynix: Operating income",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164779 (stock 000660), reprt_code 11011, fs_div CFS; accounts used: CIS dart_OperatingIncomeLoss 영업이익; CIS dart_OperatingIncomeLoss 영업이익(손실)",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164779&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "skhynix.fin_costs",
+    "label": "SK hynix: Finance costs (income statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "IFRS finance costs: interest plus FX and derivative losses booked as finance costs.",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164779 (stock 000660), reprt_code 11011, fs_div CFS; accounts used: CIS ifrs-full_FinanceCosts 금융비용",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164779&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "skhynix.interest_paid",
+    "label": "SK hynix: Interest paid (cash flow statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "Cash interest paid, a proxy for interest expense (which appears only in the notes, not as a standard face-statement account).",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164779 (stock 000660), reprt_code 11011, fs_div CFS; accounts used: ifrs-full_InterestPaidClassifiedAsOperatingActivities 이자의 지급",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164779&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "hyundai.revenue",
+    "label": "Hyundai Motor: Revenue",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164742 (stock 005380), reprt_code 11011, fs_div CFS; accounts used: IS ifrs-full_Revenue 매출액",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164742&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "hyundai.op_income",
+    "label": "Hyundai Motor: Operating income",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164742 (stock 005380), reprt_code 11011, fs_div CFS; accounts used: IS -표준계정코드 미사용- 영업이익; IS dart_OperatingIncomeLoss 영업이익",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164742&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "hyundai.fin_costs",
+    "label": "Hyundai Motor: Finance costs (income statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "IFRS finance costs: interest plus FX and derivative losses booked as finance costs.",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164742 (stock 005380), reprt_code 11011, fs_div CFS; accounts used: IS ifrs-full_FinanceCosts 금융비용",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164742&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "hyundai.interest_paid",
+    "label": "Hyundai Motor: Interest paid (cash flow statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "Cash interest paid, a proxy for interest expense (which appears only in the notes, not as a standard face-statement account). Includes interest paid by the group's captive-finance subsidiaries.",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00164742 (stock 005380), reprt_code 11011, fs_div CFS; accounts used: ifrs-full_InterestPaidClassifiedAsOperatingActivities 이자의 지급",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00164742&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "posco.revenue",
+    "label": "POSCO Holdings: Revenue",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00155319 (stock 005490), reprt_code 11011, fs_div CFS; accounts used: CIS -표준계정코드 미사용- 매출액; CIS ifrs-full_Revenue 매출액",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00155319&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "posco.op_income",
+    "label": "POSCO Holdings: Operating income",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00155319 (stock 005490), reprt_code 11011, fs_div CFS; accounts used: CIS dart_OperatingIncomeLoss 영업이익",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00155319&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "posco.fin_costs",
+    "label": "POSCO Holdings: Finance costs (income statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "IFRS finance costs: interest plus FX and derivative losses booked as finance costs.",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00155319 (stock 005490), reprt_code 11011, fs_div CFS; accounts used: CIS -표준계정코드 미사용- 금융비용; CIS ifrs-full_FinanceCosts 금융비용",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00155319&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "posco.interest_paid",
+    "label": "POSCO Holdings: Interest paid (cash flow statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "Cash interest paid, a proxy for interest expense (which appears only in the notes, not as a standard face-statement account).",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00155319 (stock 005490), reprt_code 11011, fs_div CFS; accounts used: ifrs-full_InterestPaidClassifiedAsOperatingActivities 이자의 지급; ifrs-full_InterestPaidClassifiedAsOperatingActivities 이자지급",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00155319&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "lgchem.revenue",
+    "label": "LG Chem: Revenue",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00356361 (stock 051910), reprt_code 11011, fs_div CFS; accounts used: IS ifrs-full_Revenue 매출; IS ifrs-full_Revenue 영업수익",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00356361&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "lgchem.op_income",
+    "label": "LG Chem: Operating income",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00356361 (stock 051910), reprt_code 11011, fs_div CFS; accounts used: IS dart_OperatingIncomeLoss 영업이익; IS dart_OperatingIncomeLoss 영업이익 (손실); IS dart_OperatingIncomeLoss 영업이익(손실)",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00356361&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "lgchem.fin_costs",
+    "label": "LG Chem: Finance costs (income statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "IFRS finance costs: interest plus FX and derivative losses booked as finance costs.",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00356361 (stock 051910), reprt_code 11011, fs_div CFS; accounts used: IS ifrs-full_FinanceCosts 금융비용",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00356361&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   },
+   {
+    "key": "lgchem.interest_paid",
+    "label": "LG Chem: Interest paid (cash flow statement)",
+    "unit": "KRW trillion",
+    "freq": "A",
+    "note": "Cash interest paid, a proxy for interest expense (which appears only in the notes, not as a standard face-statement account).",
+    "doc": {
+     "provider": "OpenDART (Financial Supervisory Service)",
+     "codes": "corp_code 00356361 (stock 051910), reprt_code 11011, fs_div CFS; accounts used: ifrs-full_InterestPaidClassifiedAsOperatingActivities 이자의 지급",
+     "url": "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key={KEY}&corp_code=00356361&bsns_year={YEAR}&reprt_code=11011&fs_div=CFS",
+     "transform": "won / 1e12 -> KRW trillion; thstrm_amount of each fiscal year's own annual report (as first reported)"
+    },
+    "first": "2019",
+    "last": "2025",
+    "n": 7
+   }
+  ]
+ },
+ "rates-2022": {
+  "title": "The 2022 rate cycle, 2019 onward: Korea and the United States",
+  "retrieved": "2026-10-29",
+  "series": [
+   {
+    "key": "bok_rate",
+    "label": "Bank of Korea base rate",
+    "unit": "% per year",
+    "freq": "M",
+    "note": "Series starts May 1999. Until Mar 2008 the policy instrument was the overnight call-rate target; since then the BOK base rate.",
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "722Y001 (1.3.1 한국은행 기준금리 및 여수신금리), cycle M, item 0101000 한국은행 기준금리",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/722Y001/M/{START}/{END}/0101000",
+     "transform": "none; ECOS monthly value is the rate in force at month end (e.g. 2008-10 = 4.25 after the 27 Oct cut)"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "kr_cpi",
+    "label": "Korea CPI inflation, year over year",
+    "unit": "%",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "901Y009 (4.2.1 소비자물가지수), cycle M, item 0 총지수",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/901Y009/M/{START}/{END}/0",
+     "transform": "YoY % change of monthly index (I_t / I_{t-12} - 1) * 100; may differ from Statistics Korea's headline by +-0.1 pt because the published index is rounded"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "hh_loan_rate",
+    "label": "Household loan rate, new loans (deposit banks, weighted average)",
+    "unit": "% per year",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "121Y006 (1.3.3.2.1 예금은행 대출금리, 신규취급액 기준), cycle M, item BECBLA03 가계대출",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/121Y006/M/{START}/{END}/BECBLA03",
+     "transform": "none (as published)"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "mortgage_rate",
+    "label": "Mortgage loan rate, new loans (deposit banks, weighted average)",
+    "unit": "% per year",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "121Y006, cycle M, item BECBLA0302 주택담보대출",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/121Y006/M/{START}/{END}/BECBLA0302",
+     "transform": "none (as published)"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "krwusd",
+    "label": "Won per dollar, monthly average",
+    "unit": "KRW per USD",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS",
+     "codes": "731Y004 (3.1.2.1 주요국 통화의 대원화환율), cycle M, item1 0000001 원/미국달러(매매기준율), item2 0000100 평균자료",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/731Y004/M/{START}/{END}/0000001/0000100",
+     "transform": "none (as published)"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "fedfunds",
+    "label": "US effective federal funds rate",
+    "unit": "% per year",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "FRED (Federal Reserve Bank of St. Louis); original source Board of Governors",
+     "codes": "FEDFUNDS",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=FEDFUNDS&api_key={KEY}&file_type=json&observation_start={START}&observation_end={END}",
+     "transform": "none (as published)"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "us_cpi",
+    "label": "US CPI inflation, year over year",
+    "unit": "%",
+    "freq": "M",
+    "note": "No value for 2025-10 (BLS did not publish October 2025 CPI because of the federal shutdown).",
+    "doc": {
+     "provider": "FRED; original source U.S. Bureau of Labor Statistics",
+     "codes": "CPIAUCSL",
+     "url": "https://api.stlouisfed.org/fred/series/observations?series_id=CPIAUCSL&api_key={KEY}&file_type=json",
+     "transform": "YoY % change of monthly index: (I_t / I_{t-12} - 1) * 100"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 92
+   },
+   {
+    "key": "brent",
+    "label": "Brent crude spot price, monthly average",
+    "unit": "USD per barrel",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "U.S. Energy Information Administration (EIA) API v2",
+     "codes": "route petroleum/pri/spt, facet series=RBRTE, frequency monthly",
+     "url": "https://api.eia.gov/v2/petroleum/pri/spt/data/?api_key={KEY}&frequency=monthly&data%5B0%5D=value&facets%5Bseries%5D%5B%5D=RBRTE&sort%5B0%5D%5Bcolumn%5D=period&sort%5B0%5D%5Bdirection%5D=asc&offset=0&length=5000",
+     "transform": "none (EIA monthly average of daily spot prices)"
+    },
+    "first": "2019-01",
+    "last": "2026-09",
+    "n": 93
+   },
+   {
+    "key": "house_price",
+    "label": "Housing sale price index, nationwide, all types (KB)",
+    "unit": "index (2026-01 = 100)",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS (data from KB Kookmin Bank)",
+     "codes": "901Y062 (4.4.1.1 주택매매가격지수(KB)), cycle M, item P63A",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/901Y062/M/{START}/{END}/P63A",
+     "transform": "none (as published; KB rebases the index periodically, so the base month may change between runs)"
+    },
+    "first": "2019-01",
+    "last": "2026-10",
+    "n": 94
+   },
+   {
+    "key": "house_price_seoul_apt",
+    "label": "Apartment sale price index, Seoul (KB)",
+    "unit": "index (2026-01 = 100)",
+    "freq": "M",
+    "note": null,
+    "doc": {
+     "provider": "Bank of Korea ECOS (data from KB Kookmin Bank)",
+     "codes": "901Y062 (4.4.1.1 주택매매가격지수(KB)), cycle M, item P63ACA",
+     "url": "https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/10000/901Y062/M/{START}/{END}/P63ACA",
+     "transform": "none (as published; KB rebases the index periodically, so the base month may change between runs)"
+    },
+    "first": "2019-01",
+    "last": "2026-10",
+    "n": 94
+   }
+  ]
+ },
+ "maddison": {
+  "title": "The long run: income and population since 1250 (Maddison Project 2023)",
+  "retrieved": "2026-10-30",
+  "series": [
+   {
+    "key": "gdppc_gbr",
+    "label": "United Kingdom (England before 1700): GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "GBR",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1000",
+    "last": "2022",
+    "n": 772
+   },
+   {
+    "key": "pop_gbr",
+    "label": "United Kingdom (England before 1700): population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "GBR",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   },
+   {
+    "key": "gdppc_nld",
+    "label": "Netherlands: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "NLD",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1348",
+    "last": "2022",
+    "n": 669
+   },
+   {
+    "key": "pop_nld",
+    "label": "Netherlands: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "NLD",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   },
+   {
+    "key": "gdppc_ita",
+    "label": "Italy: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "ITA",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 230
+   },
+   {
+    "key": "pop_ita",
+    "label": "Italy: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "ITA",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   },
+   {
+    "key": "gdppc_chn",
+    "label": "China: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "CHN",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1000",
+    "last": "2022",
+    "n": 136
+   },
+   {
+    "key": "pop_chn",
+    "label": "China: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "CHN",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   },
+   {
+    "key": "gdppc_ind",
+    "label": "India: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "IND",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1600",
+    "last": "2022",
+    "n": 152
+   },
+   {
+    "key": "pop_ind",
+    "label": "India: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "IND",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   },
+   {
+    "key": "gdppc_jpn",
+    "label": "Japan: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "JPN",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "730",
+    "last": "2022",
+    "n": 154
+   },
+   {
+    "key": "pop_jpn",
+    "label": "Japan: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "JPN",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   },
+   {
+    "key": "gdppc_kor",
+    "label": "Korea: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "KOR",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1820",
+    "last": "2022",
+    "n": 112
+   },
+   {
+    "key": "pop_kor",
+    "label": "Korea: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "KOR",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1820",
+    "last": "2022",
+    "n": 118
+   },
+   {
+    "key": "gdppc_usa",
+    "label": "United States: GDP per person",
+    "unit": "2011 international $",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "USA",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1650",
+    "last": "2022",
+    "n": 226
+   },
+   {
+    "key": "pop_usa",
+    "label": "United States: population",
+    "unit": "thousands",
+    "freq": "A",
+    "note": null,
+    "doc": {
+     "provider": "Maddison Project Database 2023 (Bolt and van Zanden, CC BY 4.0)",
+     "codes": "USA",
+     "url": "https://dataverse.nl/api/access/datafile/421302",
+     "transform": "as published; years with no estimate omitted"
+    },
+    "first": "1",
+    "last": "2022",
+    "n": 208
+   }
+  ]
+ }
+}
