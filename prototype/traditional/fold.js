@@ -342,14 +342,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       for (const e of X.eqs ?? []) label(e.html, 'xeq', L(e.at), box, group);
       for (const t of X.tags ?? []) label(t.text, `tag ${t.c ?? ''}${t.href ? ' door' : ''}`, L(t.at), box, group, t.href);
       for (const a of X.agents ?? []) sc.agents.push({ name: a.asset, local: L(a.at), box, group, scale: a.scale ?? 0.05, ry: a.ry ?? 0 });
-      // a dimension line along the raised axis, with its name and range
+      // a dimension line along the raised axis, its name and range at the top end
       for (const dm of X.dims ?? []) {
         const p = L(dm.from);
         const q = L(dm.to);
         const t = 0.012;
         const segs = [[p, q], [[p[0] - t, p[1], p[2]], [p[0] + t, p[1], p[2]]], [[q[0] - t, q[1], q[2]], [q[0] + t, q[1], q[2]]]];
         sc.objs.push({ o: G.lines(segs, box, COL.chalk, 1.3, 0.95), group, kind: 'fig' });
-        label(dm.text, 'dim', [q[0] + 0.02, q[1], (p[2] + q[2]) / 2], box, group);
+        label(dm.text, 'dim', [q[0] + 0.02, q[1], q[2]], box, group);
       }
       // the margin callout: the figure's number and what it holds fixed
       const no = fig.querySelector('.fig-no');

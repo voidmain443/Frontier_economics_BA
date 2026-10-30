@@ -1,0 +1,11 @@
+{
+ "household": 2300,
+ "firm": 1804,
+ "bank": 3120,
+ "government": 6140,
+ "central_bank": 3708,
+ "rest_of_world": 3628,
+ "person": 2652,
+ "person_crowd": 616,
+ "firm_crowd": 492
+}
