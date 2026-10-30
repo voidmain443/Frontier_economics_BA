@@ -135,21 +135,9 @@ p { max-width: 640px; margin: 0 0 1em; hyphens: auto; }
 
 .opening .lede { font-style: normal; color: var(--ink); max-width: 700px; }
 
-.howto { font-size: 17px; color: var(--ink-2); max-width: 620px; }
-
 .chapter { padding-top: 40px; margin-bottom: 140px; clear: both; }
 
 .chapter.closing h2 { font-size: clamp(40px, 4.4vw, 60px); }
-
-.leaves {
-  margin-top: 2.2em;
-  padding-top: 0.8em;
-  border-top: 1px solid var(--rule);
-  font-size: 17px;
-  color: var(--ink-2);
-}
-
-.leaves b { font: 600 18px var(--draft); letter-spacing: 0.01em; color: var(--ink); margin-right: 0.3em; }
 
 .chapter { counter-reset: eq; }
 
@@ -233,7 +221,7 @@ figcaption {
 .plot .f-madder { fill: rgba(176, 59, 59, 0.12); }
 .plot .f-olive { fill: rgba(88, 118, 32, 0.1); }
 .plot .f-ochre { fill: rgba(168, 118, 28, 0.16); }
-.plot .f-paper { fill: var(--sheet); }
+
 .plot .f-hatch { fill: rgba(31, 35, 30, 0.06); }
 
 .plot .lb { font-family: var(--serif); font-size: 18px; fill: var(--ink); stroke: none; }
@@ -247,11 +235,6 @@ figcaption {
 .plot .lb.note.md { fill: var(--madder); }
 .plot .lb.note.oc { fill: var(--ochre); }
 .plot .lb.step { font: 600 21px var(--draft); }
-.plot .lb.stepnote { font-size: 13px; font-style: italic; }
-.plot .lb.stepno { font: 500 15px var(--draft); fill: var(--ink-2); }
-.plot .lb.dimnote { font-size: 13px; }
-.plot .lb.boxt { font: 600 18px var(--draft); }
-.plot .lb.nodet { font-size: 13.5px; }
 
 /* ---------- parts list ---------- */
 
@@ -430,234 +413,10 @@ body:not(.unfolded) #expo-labels { display: none; }
   .titleblock { transition: none; }
 }
 
-/* ---------- deeper chapters: schedule and links ---------- */
-
-.schedule {
-  max-width: 640px;
-  margin: 2.4em 0 1.2em;
-  border: 1.5px solid var(--ink);
-  background: var(--sheet);
-}
-
-.schedule-title {
-  margin: 0;
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--ink);
-  font: 600 17px var(--draft);
-  letter-spacing: 0.01em;
-}
-
-.schedule ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: wk;
-  font-size: 16px;
-  line-height: 1.4;
-}
-
-.schedule li {
-  counter-increment: wk;
-  display: grid;
-  grid-template-columns: 3.4em 1fr;
-  border-bottom: 1px solid var(--rule);
-}
-
-.schedule li:last-child { border-bottom: 0; }
-
-.schedule li::before {
-  content: counter(wk);
-  margin-right: 12px;
-  text-align: center;
-  border-right: 1px solid var(--rule);
-  font: 500 15px var(--draft);
-  color: var(--ink-2);
-}
-
-.schedule li { padding: 6px 12px 6px 0; align-items: center; }
+/* ---------- links ---------- */
 
 .links { font-size: 16.5px; color: var(--ink-2); }
 .links b { font: 600 17px var(--draft); color: var(--ink); letter-spacing: 0.01em; }
-
-/* ---------- look inside: entry points ---------- */
-
-.fig-dive {
-  display: inline-block;
-  margin-left: 0.6em;
-  padding: 1px 9px 2px;
-  border: 1px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  font: 600 14.5px var(--draft);
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  vertical-align: 1px;
-}
-
-.fig-dive:hover { background: var(--ink); color: var(--sheet); }
-.fig-dive:focus-visible { outline: 3px solid var(--ochre); outline-offset: 2px; }
-
-.xl.dive-chip {
-  font: 600 14px/1 var(--draft);
-  letter-spacing: 0.03em;
-  color: var(--blueprint);
-  background: var(--chalk);
-  border: 0;
-  padding: 6px 10px 5px;
-  cursor: pointer;
-  text-shadow: none;
-}
-
-.xl.dive-chip:hover { background: #fff; }
-
-html.lock, html.lock body { overflow: hidden; }
-
-/* ---------- the dive panel ---------- */
-
-.dive {
-  position: fixed;
-  left: 20px;
-  top: 20px;
-  bottom: 20px;
-  z-index: 60;
-  width: 420px;
-  display: flex;
-  flex-direction: column;
-  padding: 18px 22px 16px;
-  overflow-y: auto;
-  color: var(--chalk);
-  background: rgba(8, 26, 46, 0.86);
-  border: 1.5px solid rgba(220, 231, 243, 0.55);
-  backdrop-filter: blur(8px);
-}
-
-.dive[hidden] { display: none; }
-
-.dive-head {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(220, 231, 243, 0.35);
-  font: 500 15px var(--draft);
-  letter-spacing: 0.02em;
-  color: #a9bdd3;
-}
-
-.dive-title {
-  font: 500 34px/1.05 var(--draft);
-  letter-spacing: -0.005em;
-  margin: 16px 0 12px;
-  color: #fff;
-}
-
-.dive-text {
-  font-size: 17px;
-  line-height: 1.6;
-  color: #d4e0ee;
-  margin: 0 0 18px;
-  max-width: none;
-}
-
-.dive-eq {
-  font: italic 19px/1.75 var(--serif);
-  color: var(--redline);
-  padding: 10px 12px;
-  border-left: 2px solid var(--redline);
-  background: rgba(255, 154, 134, 0.07);
-  margin-bottom: 18px;
-}
-
-.dive-eq[hidden] { display: none; }
-
-.term {
-  padding: 0 2px;
-  border-bottom: 1px solid transparent;
-  transition: background 0.2s, color 0.2s;
-  cursor: default;
-}
-
-.term.live { border-bottom-color: rgba(255, 154, 134, 0.6); cursor: help; }
-.term.on, .term:hover { background: rgba(255, 154, 134, 0.22); color: #fff; }
-
-.dive-slider {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 6px 12px;
-  align-items: center;
-  font: 500 16px var(--draft);
-  letter-spacing: 0.01em;
-  margin-bottom: 18px;
-}
-
-.dive-slider[hidden] { display: none; }
-.dive-slider i { font: italic 17px var(--serif); text-transform: none; }
-.dive-slider input { grid-column: 1 / -1; width: 100%; accent-color: var(--chalk); }
-.dive-slider output { font-variant-numeric: tabular-nums; grid-row: 1; grid-column: 2; }
-
-.dive-nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: auto;
-  padding-top: 12px;
-}
-
-.dive-nav button, .dive-exit {
-  font: 600 16px var(--draft);
-  letter-spacing: 0.02em;
-  padding: 8px 14px;
-  border: 1px solid rgba(220, 231, 243, 0.7);
-  background: transparent;
-  color: var(--chalk);
-  cursor: pointer;
-}
-
-#dive-next { background: var(--chalk); color: var(--blueprint); border-color: var(--chalk); }
-.dive-nav button:disabled { opacity: 0.35; cursor: default; }
-.dive-nav button:focus-visible, .dive-exit:focus-visible { outline: 3px solid var(--ochre); outline-offset: 2px; }
-
-.dive-dots { flex: 1; display: flex; justify-content: center; gap: 6px; }
-.dive-dots button { width: 9px; height: 9px; padding: 0; border-radius: 50%; border: 1px solid var(--chalk); background: transparent; }
-.dive-dots button.on { background: var(--chalk); }
-
-.dive-exit { margin-top: 10px; width: 100%; }
-.dive-hint { margin: 10px 0 0; font: 400 14px var(--draft); color: #8ea3bb; letter-spacing: 0.01em; max-width: none; }
-
-body.diving .titleblock { opacity: 0.25; pointer-events: none; }
-
-@media (max-width: 979px) {
-  .dive { top: auto; left: 10px; right: 10px; width: auto; max-height: 42vh; }
-}
-
-/* ---------- atlas labels: towers and their floors ---------- */
-
-.xl.tower {
-  font: 600 15px/1 var(--draft);
-  letter-spacing: 0.03em;
-  color: #c9d8ea;
-  text-shadow: 0 0 12px rgba(8, 24, 44, 0.95);
-}
-
-.xl.tower.on { color: #fff; font-size: 18px; }
-
-.xl.floor {
-  font: italic 15px/1.25 var(--serif);
-  color: #fff;
-  padding: 4px 9px 5px;
-  background: rgba(8, 26, 46, 0.85);
-  border-left: 2px solid #ffd27a;
-  max-width: 300px;
-  white-space: normal;
-  text-shadow: none;
-}
-
-.xl.floor span {
-  display: block;
-  font: 600 12px/1.2 var(--draft);
-  font-style: normal;
-  letter-spacing: 0.04em;
-  color: #ffd27a;
-}
 
 /* ---------- week ladders ---------- */
 
@@ -765,93 +524,19 @@ body.diving .titleblock { opacity: 0.25; pointer-events: none; }
 .field-q b, .field-from b, .field-adds b { font: 600 16px var(--draft); letter-spacing: 0.01em; margin-right: 0.35em; }
 .field-src { font-size: 13.5px; color: var(--ink-2); margin: 0 0 4px; }
 
-/* ---------- the bench ---------- */
+/* ---------- charts of real data ---------- */
 
-/* An element copied into the unfolded scene: it carries the sheet's own paper,
-   offset so the grid lines meet the page's exactly. */
-.plate-src {
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: var(--sheet);
-  background-image:
-    linear-gradient(var(--grid-major) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
-    linear-gradient(var(--grid-minor) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
-  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
-}
-.plate-src svg { display: block; width: 100%; height: auto; overflow: visible; }
-
-/* Names on the bench: small, quiet, in the book's italic. */
-.xl.bench {
-  padding: 2px 7px 3px;
-  font: italic 14.5px/1.2 var(--serif);
-  color: var(--chalk);
-  background: rgba(8, 26, 46, 0.8);
-  text-shadow: none;
-}
-.xl.bench.year { font: 600 26px/1 var(--draft); font-style: normal; letter-spacing: 0.02em; color: #fff; }
-
-/* ---------- the record ---------- */
-
-.episode { margin: 2.6em 0 0; }
-.episode h3 { margin-bottom: 0.4em; }
-.fig.record { max-width: 760px; }
 .plot .dot.md { fill: var(--madder); }
 .plot.chart .ln.faint { opacity: 0.22; stroke-width: 1.4; }
 .plot.chart .ln.thick { stroke-width: 2.2; }
-.plot.chart .ln.cursor { stroke: var(--madder); stroke-width: 1.2; stroke-dasharray: 3 3; }
+
 .plot.chart .lb.tick { font-size: 12.5px; fill: var(--ink-2); }
 .plot.chart .lb.ptitle { font: 600 14px var(--draft); fill: var(--ink); letter-spacing: 0.01em; }
-.plot.chart .lb.val { font-size: 13.5px; }
+
 .plot.chart .lb.now { font: 600 14px var(--draft); fill: var(--madder); }
 .plot.chart .lb.now.big { font-size: 40px; fill: var(--ink); opacity: 0.85; }
-.plot.chart .lb.yr { font-size: 11.5px; fill: var(--ink-2); }
+
 .plot.chart .lb.note { font-size: 12.5px; }
-
-/* ---------- cards on the stage: each part is a small drawing sheet ---------- */
-.plate-src.card { box-shadow: inset 0 0 0 2px var(--ink); }
-.card-head {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding: 9px 16px 7px;
-  border-bottom: 1.5px solid var(--ink);
-  background: rgba(238, 242, 234, 0.92);
-}
-.card-no { font: 600 18px/1 var(--draft); color: var(--madder); min-width: 2.4em; }
-.card-title { flex: 1; font: 600 18px/1.1 var(--draft); color: var(--ink); }
-.card-src { font: italic 14px/1 var(--serif); color: var(--ink-2); }
-.card-body { padding: 0 8px; }
-.card-body.eqs p { margin: 0; padding: 20px 24px; font: 23px/1.65 var(--serif); color: var(--ink); }
-.card-body .em { color: var(--madder); }
-.card-body .from { font-size: 0.72em; font-style: italic; color: var(--ink-2); }
-.card-body .q { font-style: italic; }
-.xl.bench.stage.caption { color: #ffd27a; font-size: 15.5px; }
-
-/* ---------- anatomy: the derivation, with its parts list ---------- */
-.anatomy {
-  list-style: none;
-  margin: 1.6em 0 1.8em;
-  padding: 18px 22px 20px;
-  border: 1.5px solid var(--ink);
-  border-left-width: 5px;
-  background: rgba(238, 242, 234, 0.8);
-}
-li.anatomy { margin-left: 0; }
-.an-title { margin: 0 0 0.6em; font: 600 21px/1.25 var(--draft); color: var(--ink); }
-.an-title span { display: inline-block; margin-right: 12px; padding: 1px 8px; font: 600 14px/1.5 var(--draft); color: var(--sheet); background: var(--ink); vertical-align: 2px; }
-.an-steps { margin: 0 0 1em; padding-left: 1.4em; }
-.an-steps li { margin: 0.35em 0; line-height: 1.55; }
-.an-parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
-.an-part { border: 1px solid var(--ink-2); background: var(--sheet); font-size: 0.7em; }
-.an-part .card-head { padding: 5px 8px 4px; gap: 6px; flex-wrap: wrap; }
-.an-part .card-no { font-size: 13px; min-width: 0; }
-.an-part .card-title { font-size: 13px; }
-.an-part .card-src { font-size: 11px; }
-.an-part .card-body.eqs p { padding: 8px 10px; font-size: 13px; line-height: 1.5; }
-.an-part svg { display: block; width: 100%; height: auto; }
 
 /* ---------- the site: three parts and the textbooks ---------- */
 nav.site {
@@ -878,29 +563,11 @@ nav.site a span { font-weight: 600; color: var(--madder); }
 nav.site a.site-home { font-weight: 600; background: var(--ink); color: var(--sheet); border-color: var(--ink); }
 nav.site a[aria-current='page'] { border-color: var(--ink); box-shadow: inset 0 -3px 0 var(--madder); }
 nav.site a:hover { background: #fff; }
-nav.site a:focus-visible, .an-open:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
-body.unfolded nav.site, body.exhibiting nav.site { display: none; }
-
-.an-open {
-  float: right;
-  margin-left: 12px;
-  padding: 4px 10px 3px;
-  font: 600 14px/1.3 var(--draft);
-  color: var(--sheet);
-  background: var(--blueprint);
-  border: 0;
-  cursor: pointer;
-}
-.an-open:hover { background: #17406b; }
-.an-open:disabled { opacity: 0.6; cursor: progress; }
+nav.site a:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
+body.unfolded nav.site { display: none; }
 
 /* in an exhibit the panel lists the parts in play */
-.dive-eq .parts-k { display: block; margin-bottom: 6px; font: 600 13px/1 var(--draft); color: var(--chalk); opacity: 0.7; }
-.dive-eq .part-chip { display: block; margin: 3px 0; font: 14px/1.35 var(--serif); color: var(--chalk); }
-.dive-eq .part-chip b { font: 600 13px var(--draft); color: var(--redline); margin-right: 6px; }
-.dive-eq .part-chip i { opacity: 0.65; margin-left: 4px; }
-body.exhibiting .titleblock { display: none; }
-body.exhibiting #stage { pointer-events: none; }
+
 #expo-labels a.xl { color: #ffd27a; text-decoration: none; border-bottom: 1px solid rgba(255, 210, 122, 0.5); cursor: pointer; }
 #expo-labels a.xl:hover { color: #fff; }
 #expo-labels a.xl i { font-style: normal; font: 600 11px var(--draft); color: var(--redline); margin-right: 4px; }
@@ -943,18 +610,8 @@ body.site-page .desk { padding-bottom: 96px; }
   .pi-no { font-size: 40px; }
 }
 
-/* ---------- part 2: live figures and the project list ---------- */
-.fig.interactive .viz canvas { display: block; width: 100%; background: rgba(255, 255, 255, 0.35); border: 1px solid var(--rule); }
-.fig.interactive .ctl { display: flex; align-items: center; gap: 12px; margin-top: 10px; font: 500 16px var(--draft); }
-.fig.interactive .ctl input { flex: 1; max-width: 420px; accent-color: var(--madder); }
-.fig.interactive .ctl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px 18px; margin-top: 10px; font: 500 16px var(--draft); }
-.fig.interactive .ctl-grid input { width: 100%; accent-color: var(--madder); }
-.fig.interactive .ctl-row { display: flex; gap: 10px; margin-top: 10px; }
-.fig.interactive button { padding: 6px 12px; font: 600 15px var(--draft); color: var(--sheet); background: var(--ink); border: 0; cursor: pointer; }
-.fig.interactive button:hover { background: var(--blueprint); }
-.fig.interactive button:focus-visible, .fig.interactive input:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
-.readout { margin: 8px 0 0; font-size: 0.95em; color: var(--ink-2); }
-.readout b { color: var(--ink); }
+/* ---------- part 2: the project list ---------- */
+
 .projects { list-style: none; padding: 0; margin: 1em 0 1.6em; display: grid; gap: 10px; }
 .projects a { display: grid; gap: 3px; padding: 12px 16px; color: var(--ink); text-decoration: none; border: 1px solid var(--ink-2); border-left: 4px solid var(--blueprint); background: var(--sheet); }
 .projects a:hover { background: #fff; border-color: var(--ink); }
@@ -964,13 +621,7 @@ body.site-page .desk { padding-bottom: 96px; }
 .projects i { font-style: normal; line-height: 1.5; }
 
 /* ---------- part 3 and the course pages ---------- */
-.enter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 1.2em; }
-.enter { padding: 10px 16px 9px; font: 600 17px var(--draft); color: var(--sheet); background: var(--blueprint); border: 0; cursor: pointer; }
-.enter:hover { background: #17406b; }
-.enter.quiet { color: var(--ink); background: transparent; border: 1.5px solid var(--ink); }
-.enter:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
-.enter:disabled { opacity: 0.6; cursor: progress; }
-.enter-row .tb-status { flex-basis: 100%; margin: 0; color: var(--madder); }
+
 .paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .paths section { padding: 12px 16px; border: 1px solid var(--ink-2); background: var(--sheet); }
 .paths h3 { margin: 0 0 0.4em; font-size: 1.05em; }
@@ -982,75 +633,8 @@ body.site-page .desk { padding-bottom: 96px; }
 .course-links a { color: var(--ink); }
 .course-links a b { font: 600 17px var(--draft); }
 .course-links a span { margin-left: 8px; font-style: italic; color: var(--ink-2); }
-.course-links a.quiet { font-size: 0.9em; color: var(--ink-2); }
+
 .course-page .weeks { margin-top: 0.8em; }
-#expo-labels a.xl.bench { font-size: 15px; padding: 3px 8px 4px; }
-
-/* ---------- concept anatomy: the figure taken apart in place ---------- */
-.dissect {
-  list-style: none;
-  margin: 2em 0 2.4em;
-  padding: 18px 22px 8px;
-  border: 1.5px solid var(--ink);
-  border-left-width: 5px;
-  background: rgba(238, 242, 234, 0.8);
-  width: 100%;
-}
-/* inside a week list the column is narrow: widen to the sheet's content width */
-li.dissect { margin-left: 0; width: min(calc(100% + 270px), calc(100vw - 400px)); }
-@media (max-width: 1100px) { .dissect { width: 100%; } }
-.ds-eq { margin: 0 0 0.6em; font: 22px/1.4 var(--serif); }
-.ds-eq .t { padding: 0 3px; border-bottom: 2px solid currentColor; }
-.ds-eq .t.ol { color: var(--olive); }
-.ds-eq .t.md { color: var(--madder); }
-.ds-eq .t.oc { color: var(--ochre); }
-.ds-eq .t.cb { color: var(--cobalt); }
-.ds-grid { display: grid; grid-template-columns: minmax(250px, 0.82fr) 1.18fr; gap: 26px; align-items: start; }
-.ds-step { min-height: 58vh; padding: 10px 0 24px; opacity: 0.38; transition: opacity 0.35s; }
-.ds-step:last-child { min-height: 46vh; }
-.ds-step.on { opacity: 1; }
-.ds-step p { margin: 0 0 0.7em; line-height: 1.6; }
-.ds-k { font: 600 18px/1.25 var(--draft); color: var(--ink); }
-.ds-next { font-style: italic; color: var(--ink-2); }
-.ds-view { position: sticky; top: 13vh; height: 66vh; min-height: 360px; }
-.ds-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.ds-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.ds-name { position: absolute; left: 0; top: 0; white-space: nowrap; transition: opacity 0.2s; will-change: transform; }
-.ds-name.sheet { font: 500 13px/1 var(--draft); color: var(--ink-2); padding: 2px 5px; background: rgba(238, 242, 234, 0.85); border: 1px solid rgba(84, 92, 81, 0.35); }
-.ds-name.val { font: italic 15px/1.2 var(--serif); color: var(--ink); padding: 2px 7px; background: rgba(255, 255, 255, 0.88); border: 1px solid var(--ink-2); }
-.ds-name.key { font: 600 14px/1.2 var(--draft); color: #fff; padding: 3px 8px; background: var(--madder); }
-.ds-flat { display: none; position: relative; aspect-ratio: 640 / 420; }
-.ds-flat-layer { position: absolute; inset: 0; }
-.ds-flat-layer svg, .ds-layer svg { display: block; width: 100%; height: auto; overflow: visible; }
-.dissect.no-gpu .ds-flat { display: block; }
-.dissect.no-gpu .ds-canvas { display: none; }
-@media (max-width: 820px) {
-  .ds-grid { grid-template-columns: 1fr; }
-  .ds-view { top: 8px; height: 46vh; order: -1; }
-  .ds-step { min-height: 44vh; }
-}
-@media (prefers-reduced-motion: reduce) { .ds-step { transition: none; } }
-
-/* ---------- concept anatomy on the flat page: the figure and its reasoning ---------- */
-.dissect .ds-cols { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(260px, 1fr); gap: 22px; align-items: start; }
-.ds-fig { margin: 0; max-width: none; }
-.ds-fig .fig-art { position: relative; }
-.ds-print + .ds-print { position: absolute; inset: 0; }
-.ds-print svg { display: block; width: 100%; height: auto; overflow: visible; }
-.ds-list { margin: 0; padding-left: 1.3em; }
-.ds-list li { margin: 0 0 0.55em; line-height: 1.55; }
-.ds-list b { font: 600 16px var(--draft); }
-.sheet-src { position: absolute; left: 0; top: 0; }
-.sheet-src svg { display: block; width: 100%; height: auto; overflow: visible; }
-.dive-eq .t { padding: 0 2px; border-bottom: 2px solid currentColor; }
-.dive-eq .t.ol { color: #bfe07a; }
-.dive-eq .t.md { color: #ff9c9c; }
-.dive-eq .t.oc { color: #ffd27a; }
-.dive-eq .t.cb { color: #8fb6ff; }
-@media (max-width: 820px) { .dissect .ds-cols { grid-template-columns: 1fr; } }
-
-/* the archive page can fold: keep its fold control reachable over the space */
-body.unfolded:not(.exhibiting):not(.diving) #fold-page { visibility: visible; position: fixed; right: 20px; bottom: 20px; z-index: 45; background: var(--chalk); color: var(--blueprint); border-color: var(--chalk); }
 
 /* ================================================================
    Part 1, flat (classical.html): eight stages, each a revision of one drawing.

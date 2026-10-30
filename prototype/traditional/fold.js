@@ -2,12 +2,12 @@
 // in space, and as each figure reaches the reading line, the axis it holds fixed
 // rises out of the paper in place. Fold it back and you are on the same page.
 //
-// Reuses the engine's renderer, ribbon and capture (expo.js); everything a figure
+// The renderer, ribbon and capture are in gpu.js; everything a figure
 // raises comes from a construct registry in figure-local coordinates:
 // (a, b) in the plot box, h in plot widths.
 
-import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './expo.js';
-import { loadAssets } from './bench.js';
+import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
+import { loadAssets } from './maquettes.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -328,14 +328,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       bg: { inner: BP_IN.map((v, i) => lerp(DESK[i], v, e)), outer: BP_OUT.map((v, i) => lerp(DESK[i], v, e)), center: [W * dpr * 0.5, H * dpr * 0.42], radius: Math.max(W, H) * dpr * 0.85 },
       fog: BP_OUT,
       tiles: st.tiles.map((T2) => T2.obj),
-      plates: [],
-      shadows: [],
-      slabs: [],
       solids,
-      glass: [],
-      cards: [],
-      sheets: [],
-      bench: { lightVP, lightDir: [-Nl[0], -Nl[1], -Nl[2]], shadow: shadowK, catchRect: [sbx[0] - 1000, P.focus - 1300, sbx[2] + 1000, P.focus + 1700], catchStrength: shadowK * 0.55 },
+      light: { VP: lightVP, dir: [-Nl[0], -Nl[1], -Nl[2]], shadow: shadowK, catchRect: [sbx[0] - 1000, P.focus - 1300, sbx[2] + 1000, P.focus + 1700], catchStrength: shadowK * 0.55 },
       over,
       under,
       bloom: 0,

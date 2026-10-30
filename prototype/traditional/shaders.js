@@ -117,156 +117,6 @@ struct VO { @builtin(position) pos: vec4f, @location(0) uv: vec2f, @location(1) 
 }
 `;
 
-// A card lifted off the page: the textured top face of a thin slab hinged at its
-// bottom edge, plus its four sides. One draw per (card, tile) piece.
-export const SLAB = COMMON + /* wgsl */ `
-// card: page rect of the whole card; piece: (s0, s1) of the part inside this tile;
-// tile: page rect of the tile; lift: (height, tilt, thickness, opacity); misc: (spot strength, glow, stack, hinge s)
-// hole: page rect that child cards have lifted out of (zero when none)
-struct SlabU { card: vec4f, piece: vec4f, tile: vec4f, lift: vec4f, misc: vec4f, fogColor: vec4f, spot: vec4f, edge: vec4f, hole: vec4f };
-@group(1) @binding(0) var<uniform> su: SlabU;
-@group(1) @binding(1) var tex: texture_2d<f32>;
-@group(1) @binding(2) var samp: sampler;
-
-struct VO { @builtin(position) pos: vec4f, @location(0) uv: vec2f, @location(1) wp: vec3f, @location(2) page: vec2f, @location(3) side: f32, @location(4) nrm: vec3f };
-
-// The card hinges on the line s = hinge (its own bottom edge, or its parent's when it
-// rides on another card), rises h along the page normal, and stacks along its own normal.
-fn hingeS() -> f32 { return select(su.card.w, su.misc.w, su.misc.w > 0.0); }
-
-fn cardFrame() -> mat4x3f {
-  let xc = (su.card.x + su.card.z) * 0.5;
-  let hs = hingeS();
-  let base = ribbonPos(xc, hs);
-  let n = ribbonNormal(hs);
-  let t = normalize(ribbonPos(xc, hs + 4.0) - ribbonPos(xc, hs - 4.0));
-  let up = -t * cos(su.lift.y) + n * sin(su.lift.y);
-  let X = vec3f(1.0, 0.0, 0.0);
-  let cn = normalize(cross(X, up));
-  return mat4x3f(base + n * su.lift.x + cn * su.misc.z, X, up, cn);
-}
-
-fn cardPoint(f: mat4x3f, x: f32, s: f32, z: f32) -> vec3f {
-  let xc = (su.card.x + su.card.z) * 0.5;
-  return f[0] + f[1] * ((x - xc) * cam.px) + f[2] * ((hingeS() - s) * cam.px) + f[3] * z;
-}
-
-@vertex fn vs(@builtin(vertex_index) vi: u32) -> VO {
-  let f = cardFrame();
-  let face = vi / 6u;
-  var cs = array<vec2f, 6>(vec2f(0.0, 0.0), vec2f(1.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 1.0));
-  let c = cs[vi % 6u];
-  let x0 = su.card.x;
-  let x1 = su.card.z;
-  let s0 = su.piece.x;
-  let s1 = su.piece.y;
-  let th = su.lift.z;
-  var x = 0.0;
-  var s = 0.0;
-  var z = th;
-  var side = 0.0;
-  var nrm = f[3];
-  if (face == 0u) {
-    // top face, wound counter-clockwise as seen from above
-    x = mix(x0, x1, c.x);
-    s = mix(s1, s0, c.y);
-  } else if (face == 1u) {
-    x = mix(x0, x1, c.x); s = s1; z = th * c.y; side = 1.0; nrm = -f[2];
-  } else if (face == 2u) {
-    x = mix(x1, x0, c.x); s = s0; z = th * c.y; side = 1.0; nrm = f[2];
-  } else if (face == 3u) {
-    x = x0; s = mix(s0, s1, c.x); z = th * c.y; side = 1.0; nrm = -f[1];
-  } else {
-    x = x1; s = mix(s1, s0, c.x); z = th * c.y; side = 1.0; nrm = f[1];
-  }
-  let wp = cardPoint(f, x, s, z);
-  var o: VO;
-  o.pos = cam.viewProj * vec4f(wp, 1.0);
-  o.uv = vec2f((x - su.tile.x) / (su.tile.z - su.tile.x), (s - su.tile.y) / (su.tile.w - su.tile.y));
-  o.wp = wp;
-  o.page = vec2f(x, s);
-  o.side = side;
-  o.nrm = nrm;
-  return o;
-}
-
-@fragment fn fs(i: VO) -> FO {
-  let L = normalize(vec3f(-0.35, 0.9, 0.55));
-  let lam = 0.72 + 0.28 * max(dot(normalize(i.nrm), L), 0.0);
-  // sample before branching: derivatives need uniform control flow
-  let c = textureSample(tex, samp, i.uv);
-  let view = normalize(cam.eye.xyz - i.wp);
-  // a faint sheen sweeping across the lifted card
-  let spec = pow(max(dot(reflect(-L, normalize(i.nrm)), view), 0.0), 24.0) * 0.12;
-  var rgb = select(c.rgb * (0.94 + 0.06 * lam) + spec, su.edge.rgb * lam, i.side > 0.5);
-  // where the proof steps came from: a recess ruled like the computation paper
-  let inHole = step(su.hole.x, i.page.x) * step(i.page.x, su.hole.z) * step(su.hole.y, i.page.y) * step(i.page.y, su.hole.w) * (1.0 - i.side);
-  let g = abs(fract(i.page / 24.0) - 0.5);
-  let rule = 1.0 - smoothstep(0.0, 0.04, min(g.x, g.y));
-  rgb = mix(rgb, mix(vec3f(0.62, 0.67, 0.61), vec3f(0.5, 0.58, 0.62), rule * 0.6), inHole * 0.93);
-  let f = max(fogMix(i.wp), su.misc.x * 0.82 * spotOut(i.page, su.spot));
-  rgb = mix(rgb, su.fogColor.rgb, f);
-  let a = su.lift.w;
-  var o: FO;
-  o.color = vec4f(rgb * a, a);
-  o.glow = vec4f(su.edge.rgb * su.misc.y * i.side * a, 0.0);
-  return o;
-}
-`;
-
-// The hole a lifted card leaves, and the soft shadow it casts on the page.
-export const SHADOW = COMMON + /* wgsl */ `
-// card: page rect; p: (lift amount 0..1, blur radius px, shadow offset px, opacity); recess: colour of the hole
-struct ShadowU { card: vec4f, p: vec4f, recess: vec4f, spot: vec4f };
-@group(1) @binding(0) var<uniform> sh: ShadowU;
-
-struct VO { @builtin(position) pos: vec4f, @location(0) page: vec2f, @location(1) wp: vec3f };
-
-@vertex fn vs(@builtin(vertex_index) vi: u32) -> VO {
-  var cs = array<vec2f, 6>(vec2f(0.0, 0.0), vec2f(1.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 1.0));
-  let c = cs[vi % 6u];
-  let r = sh.p.y + sh.p.z;
-  let page = vec2f(mix(sh.card.x - r, sh.card.z + r, c.x), mix(sh.card.y - r, sh.card.w + r, c.y));
-  let wp = ribbonPos(page.x, page.y) + ribbonNormal(page.y) * 0.0006;
-  var o: VO;
-  o.pos = cam.viewProj * vec4f(wp, 1.0);
-  o.page = page;
-  o.wp = wp;
-  return o;
-}
-
-fn boxSdf(p: vec2f, lo: vec2f, hi: vec2f, r: f32) -> f32 {
-  let c = (lo + hi) * 0.5;
-  let h = (hi - lo) * 0.5 - vec2f(r);
-  let q = abs(p - c) - h;
-  return length(max(q, vec2f(0.0))) + min(max(q.x, q.y), 0.0) - r;
-}
-
-@fragment fn fs(i: VO) -> FO {
-  let k = sh.p.x;
-  let lo = sh.card.xy;
-  let hi = sh.card.zw;
-  // the recess: where the card was
-  let dIn = boxSdf(i.page, lo, hi, 3.0);
-  let inside = 1.0 - smoothstep(-1.0, 1.0, dIn);
-  let rim = smoothstep(-26.0, 0.0, dIn) * inside;
-  let recessA = inside * k * (0.93 + 0.07 * rim);
-  // the shadow: offset toward the reader, softened with height
-  let off = vec2f(0.0, sh.p.z);
-  let dSh = boxSdf(i.page - off, lo, hi, 6.0);
-  let shadowA = (1.0 - smoothstep(-sh.p.y * 0.4, sh.p.y, dSh)) * 0.42 * k * (1.0 - inside);
-  let g = abs(fract(i.page / 24.0) - 0.5);
-  let rule = 1.0 - smoothstep(0.0, 0.04, min(g.x, g.y));
-  let recessRgb = mix(sh.recess.rgb, vec3f(0.5, 0.58, 0.62), rule * 0.5) * (1.0 - 0.25 * rim);
-  let a = max(recessA, shadowA) * sh.p.w;
-  let rgb = select(vec3f(0.05, 0.08, 0.1), recessRgb, recessA >= shadowA);
-  var o: FO;
-  o.color = vec4f(rgb * a, a);
-  o.glow = vec4f(0.0);
-  return o;
-}
-`;
-
 // Lit translucent surfaces with contour lines (the folded-away dimensions).
 export const MESH = COMMON + /* wgsl */ `
 struct MeshU { box: vec4f, color: vec4f, line: vec4f, p: vec4f };
@@ -482,7 +332,7 @@ export const COMPOSITE = FULLSCREEN + /* wgsl */ `
 }
 `;
 
-// ---------- the bench: solids, glass, water, and their shadows ----------
+// ---------- the maquettes and their shadows ----------
 
 // Shadow lookup with contact-hardening penumbrae: a blocker search sets the
 // filter width, so a shadow is sharp where an object touches the page and
@@ -572,29 +422,6 @@ export const SOLID = COMMON + SHADOWFN + SOLID_VS + /* wgsl */ `
 }
 `;
 
-// Glass: nearly invisible face-on, bright at grazing angles, with a sharp
-// reflection of the overhead light.
-export const GLASS = COMMON + SOLID_VS + /* wgsl */ `
-@fragment fn fs(i: VO, @builtin(front_facing) ff: bool) -> FO {
-  let it = inst[i.ii];
-  var n = normalize(i.n);
-  if (!ff) { n = -n; }
-  let v = normalize(cam.eye.xyz - i.wp);
-  let nv = abs(dot(n, v));
-  let fres = 0.04 + 0.96 * pow(1.0 - nv, 5.0);
-  let L = -cam.light.xyz;
-  let h = normalize(L + v);
-  let spec = pow(max(dot(n, h), 0.0), 120.0);
-  let env = mix(vec3f(0.3, 0.42, 0.58), vec3f(0.95, 0.97, 1.0), clamp(reflect(-v, n).y * 0.5 + 0.5, 0.0, 1.0));
-  let a = clamp((0.05 + fres * 0.75 + spec * 0.8) * it.p.y, 0.0, 1.0) * it.color.a;
-  let rgb = env * fres + it.color.rgb * 0.05 + vec3f(spec);
-  var o: FO;
-  o.color = vec4f(rgb * it.p.y * it.color.a, a);
-  o.glow = vec4f(0.0);
-  return o;
-}
-`;
-
 // Depth only, from the light.
 export const DEPTH = COMMON + /* wgsl */ `
 struct Inst { model: mat4x4f, color: vec4f, p: vec4f };
@@ -634,89 +461,6 @@ struct VO { @builtin(position) pos: vec4f, @location(0) wp: vec3f, @location(1) 
   let a = (1.0 - sh) * cu.p.x * e;
   var o: FO;
   o.color = vec4f(vec3f(0.035, 0.07, 0.12) * a, a);
-  o.glow = vec4f(0.0);
-  return o;
-}
-`;
-
-// A card standing in the space: a part drawn with html-in-canvas on a sheet
-// of the same paper. The back is plain paper.
-export const CARD = COMMON + /* wgsl */ `
-struct CardU { model: mat4x4f, p: vec4f };
-@group(1) @binding(0) var<uniform> ku: CardU;
-@group(1) @binding(1) var tex: texture_2d<f32>;
-@group(1) @binding(2) var samp: sampler;
-struct VO { @builtin(position) pos: vec4f, @location(0) uv: vec2f, @location(1) wp: vec3f, @location(2) n: vec3f };
-
-@vertex fn vs(@builtin(vertex_index) vi: u32) -> VO {
-  var cs = array<vec2f, 6>(vec2f(0.0, 0.0), vec2f(1.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 1.0));
-  let c = cs[vi % 6u];
-  let wp = (ku.model * vec4f(c.x - 0.5, c.y, 0.0, 1.0)).xyz;
-  var o: VO;
-  o.pos = cam.viewProj * vec4f(wp, 1.0);
-  o.uv = vec2f(c.x, 1.0 - c.y);
-  o.wp = wp;
-  o.n = normalize(ku.model[2].xyz);
-  return o;
-}
-
-@fragment fn fs(i: VO, @builtin(front_facing) ff: bool) -> FO {
-  let c = textureSample(tex, samp, i.uv);
-  var n = i.n;
-  if (!ff) { n = -n; }
-  let lam = 0.86 + 0.14 * max(dot(n, -cam.light.xyz), 0.0);
-  let paper = vec3f(0.9, 0.92, 0.89);
-  var rgb = select(paper * lam, c.rgb * lam, ff);
-  rgb = mix(rgb, vec3f(0.03, 0.09, 0.17), fogMix(i.wp));
-  let a = ku.p.x;
-  var o: FO;
-  o.color = vec4f(rgb * a, a);
-  o.glow = vec4f(0.0);
-  return o;
-}
-`;
-
-// A sheet lifted off the page: one component of a figure, drawn with
-// html-in-canvas, placed in the figure's own coordinates so that at height 0 it
-// lies exactly on the printed figure. mode 0: level at height h. mode 1: a wall
-// standing on the line b = wall.x, its own vertical axis rising to wall.y.
-export const SHEET = COMMON + /* wgsl */ `
-struct SheetU { box: vec4f, range: vec4f, p: vec4f, wall: vec4f, tint: vec4f };
-@group(1) @binding(0) var<uniform> su: SheetU;
-@group(1) @binding(1) var tex: texture_2d<f32>;
-@group(1) @binding(2) var samp: sampler;
-struct VO { @builtin(position) pos: vec4f, @location(0) uv: vec2f, @location(1) wp: vec3f };
-
-@vertex fn vs(@builtin(vertex_index) vi: u32) -> VO {
-  let seg = vi / 6u;
-  var cs = array<vec2f, 6>(vec2f(0.0, 0.0), vec2f(1.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 0.0), vec2f(1.0, 1.0), vec2f(0.0, 1.0));
-  let c0 = cs[vi % 6u];
-  // eight strips across b so a sheet follows the bend of the page
-  let c = vec2f(c0.x, (f32(seg) + c0.y) / 8.0);
-  let a = mix(su.range.x, su.range.z, c.x);
-  let b = mix(su.range.y, su.range.w, c.y);
-  var local = vec3f(a, b, su.p.x);
-  if (su.p.w > 0.5) {
-    // a wall: the sheet's own vertical (b = 0 at its x axis, 1 at the top of its plot) rises from the line b = wall.x
-    local = vec3f(a, su.wall.x, max(b, -0.15) * su.wall.y);
-  }
-  let wp = toWorld(local, su.box, 1.0, 1.0);
-  var o: VO;
-  o.pos = cam.viewProj * vec4f(wp, 1.0);
-  o.uv = vec2f(c.x, 1.0 - c.y);
-  o.wp = wp;
-  return o;
-}
-
-@fragment fn fs(i: VO) -> FO {
-  let t = textureSample(tex, samp, i.uv);
-  // the acetate shows only while the sheet stands off the page
-  let e = min(min(i.uv.x, 1.0 - i.uv.x), min(i.uv.y, 1.0 - i.uv.y));
-  let edge = 1.0 - smoothstep(0.0, 0.006, e);
-  let sa = su.p.z * (0.07 + 0.6 * edge);
-  let sheet = vec4f(su.tint.rgb * sa, sa);
-  var o: FO;
-  o.color = (t + sheet * (1.0 - t.a)) * su.p.y;
   o.glow = vec4f(0.0);
   return o;
 }

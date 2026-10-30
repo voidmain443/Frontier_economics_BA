@@ -1,6 +1,6 @@
-// Solid geometry for the bench: procedural parts (tanks, pipes, rods, springs)
-// and a minimal GLB reader for the Blender maquettes. Every geometry is
-// { pos: Float32Array, nrm: Float32Array, idx: Uint32Array }, +Y up.
+// Solid geometry for the maquettes: a minimal GLB reader for the Blender models,
+// and the plain cylinder and box that stand in when a model is missing. Every
+// geometry is { pos: Float32Array, nrm: Float32Array, idx: Uint32Array }, +Y up.
 
 const TAU = Math.PI * 2;
 
@@ -24,8 +24,6 @@ const norm = (a) => {
   const l = Math.hypot(a[0], a[1], a[2]) || 1;
   return [a[0] / l, a[1] / l, a[2] / l];
 };
-const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 
 // Cylinder of radius r from y = 0 to y = h. caps: [bottom, top].
 export function cylinder(r = 1, h = 1, seg = 40, caps = [true, true]) {
@@ -50,24 +48,6 @@ export function cylinder(r = 1, h = 1, seg = 40, caps = [true, true]) {
   return B.done();
 }
 
-export function sphere(r = 1, seg = 24) {
-  const B = builder();
-  const rows = [];
-  for (let j = 0; j <= seg; j++) {
-    const th = (j / seg) * Math.PI;
-    const row = [];
-    for (let i = 0; i <= seg * 2; i++) {
-      const ph = (i / (seg * 2)) * TAU;
-      const n = [Math.sin(th) * Math.cos(ph), Math.cos(th), Math.sin(th) * Math.sin(ph)];
-      row.push(B.v([n[0] * r, n[1] * r, n[2] * r], n));
-    }
-    rows.push(row);
-  }
-  for (let j = 0; j < seg; j++) for (let i = 0; i < seg * 2; i++) B.quad(rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]);
-  return B.done();
-}
-
-// Axis-aligned box with its base on y = 0.
 export function box(w = 1, h = 1, d = 1) {
   const B = builder();
   const x = w / 2;
@@ -85,120 +65,6 @@ export function box(w = 1, h = 1, d = 1) {
     B.quad(...ids);
   }
   return B.done();
-}
-
-// A tube of radius r swept along a polyline (parallel-transported frame).
-export function tube(path, r = 0.01, seg = 12, caps = true) {
-  const B = builder();
-  const n = path.length;
-  const T = path.map((p, i) => norm(sub(path[Math.min(n - 1, i + 1)], path[Math.max(0, i - 1)])));
-  let N = Math.abs(T[0][1]) < 0.9 ? norm(cross(T[0], [0, 1, 0])) : norm(cross(T[0], [1, 0, 0]));
-  const rings = [];
-  const frames = [];
-  for (let i = 0; i < n; i++) {
-    if (i > 0) {
-      const b = cross(T[i - 1], T[i]);
-      if (Math.hypot(...b) > 1e-6) {
-        // rotate N by the turn between consecutive tangents
-        const axis = norm(b);
-        const ang = Math.acos(Math.max(-1, Math.min(1, T[i - 1][0] * T[i][0] + T[i - 1][1] * T[i][1] + T[i - 1][2] * T[i][2])));
-        const c = Math.cos(ang);
-        const s = Math.sin(ang);
-        const d = axis[0] * N[0] + axis[1] * N[1] + axis[2] * N[2];
-        const k = cross(axis, N);
-        N = norm([N[0] * c + k[0] * s + axis[0] * d * (1 - c), N[1] * c + k[1] * s + axis[1] * d * (1 - c), N[2] * c + k[2] * s + axis[2] * d * (1 - c)]);
-      }
-    }
-    const Bn = cross(T[i], N);
-    const dirs = Array.from({ length: seg + 1 }, (_, j) => {
-      const a = (j / seg) * TAU;
-      return [N[0] * Math.cos(a) + Bn[0] * Math.sin(a), N[1] * Math.cos(a) + Bn[1] * Math.sin(a), N[2] * Math.cos(a) + Bn[2] * Math.sin(a)];
-    });
-    frames.push(dirs);
-    rings.push(dirs.map((d) => B.v([path[i][0] + d[0] * r, path[i][1] + d[1] * r, path[i][2] + d[2] * r], d)));
-  }
-  for (let i = 0; i < n - 1; i++) for (let j = 0; j < seg; j++) B.quad(rings[i][j], rings[i + 1][j], rings[i + 1][j + 1], rings[i][j + 1]);
-  if (caps) {
-    for (const [i, s] of [[0, -1], [n - 1, 1]]) {
-      const t = T[i].map((v) => v * s);
-      const c = B.v(path[i], t);
-      const rim = frames[i].map((d) => B.v([path[i][0] + d[0] * r, path[i][1] + d[1] * r, path[i][2] + d[2] * r], t));
-      for (let j = 0; j < seg; j++) (s > 0 ? B.tri(c, rim[j], rim[j + 1]) : B.tri(c, rim[j + 1], rim[j]));
-    }
-  }
-  return B.done();
-}
-
-// A unit helix spring along +Y (length 1), wire radius rw, coil radius rc.
-export function spring(coils = 8, rc = 0.25, rw = 0.04) {
-  const pts = [];
-  const n = coils * 16;
-  for (let i = 0; i <= n; i++) {
-    const t = i / n;
-    const a = t * coils * TAU;
-    pts.push([rc * Math.cos(a), t, rc * Math.sin(a)]);
-  }
-  return tube(pts, rw, 6, false);
-}
-
-// Quarter-circle bends and straight runs for pipes: points at a fixed spacing.
-export function polyline(points, step = 0.01, bend = 0.03) {
-  const out = [points[0]];
-  for (let i = 1; i < points.length; i++) {
-    const a = points[i - 1];
-    const b = points[i];
-    const L = Math.hypot(...sub(b, a));
-    const n = Math.max(1, Math.ceil(L / step));
-    for (let k = 1; k <= n; k++) out.push(a.map((v, j) => v + ((b[j] - v) * k) / n));
-  }
-  // round the corners by averaging neighbours over the bend length
-  const r = Math.max(1, Math.round(bend / step));
-  return out.map((p, i) => {
-    if (i < r || i > out.length - 1 - r) return p;
-    const acc = [0, 0, 0];
-    for (let k = -r; k <= r; k++) for (let j = 0; j < 3; j++) acc[j] += out[i + k][j];
-    return acc.map((v) => v / (2 * r + 1));
-  });
-}
-
-export function merge(...gs) {
-  let nv = 0;
-  let ni = 0;
-  for (const g of gs) {
-    nv += g.pos.length;
-    ni += g.idx.length;
-  }
-  const pos = new Float32Array(nv);
-  const nrm = new Float32Array(nv);
-  const idx = new Uint32Array(ni);
-  let ov = 0;
-  let oi = 0;
-  for (const g of gs) {
-    pos.set(g.pos, ov);
-    nrm.set(g.nrm, ov);
-    for (let i = 0; i < g.idx.length; i++) idx[oi + i] = g.idx[i] + ov / 3;
-    ov += g.pos.length;
-    oi += g.idx.length;
-  }
-  return { pos, nrm, idx };
-}
-
-export function transform(g, { t = [0, 0, 0], s = [1, 1, 1], ry = 0, rx = 0, rz = 0 } = {}) {
-  const pos = new Float32Array(g.pos.length);
-  const nrm = new Float32Array(g.nrm.length);
-  const rot = (v) => {
-    let [x, y, z] = v;
-    if (rx) [y, z] = [y * Math.cos(rx) - z * Math.sin(rx), y * Math.sin(rx) + z * Math.cos(rx)];
-    if (rz) [x, y] = [x * Math.cos(rz) - y * Math.sin(rz), x * Math.sin(rz) + y * Math.cos(rz)];
-    if (ry) [x, z] = [x * Math.cos(ry) + z * Math.sin(ry), -x * Math.sin(ry) + z * Math.cos(ry)];
-    return [x, y, z];
-  };
-  for (let i = 0; i < g.pos.length; i += 3) {
-    const p = rot([g.pos[i] * s[0], g.pos[i + 1] * s[1], g.pos[i + 2] * s[2]]);
-    pos.set([p[0] + t[0], p[1] + t[1], p[2] + t[2]], i);
-    nrm.set(norm(rot([g.nrm[i] / s[0], g.nrm[i + 1] / s[1], g.nrm[i + 2] / s[2]])), i);
-  }
-  return { pos, nrm, idx: g.idx };
 }
 
 // ---------- GLB ----------
