@@ -57,9 +57,9 @@ export const CONSTRUCTS = {
         X.agents.push({ asset: 'firm', at: [i + 0.5, 0.5 + i, (6.5 - i) * k], scale: 0.022 });
       }
       for (const [i, g] of [[7, 5], [8, 3], [9, 1]]) column(X, i + 0.2, i + 0.8, 10, 0.35, g * k, 'madder', 0.08, { o: 0.6 });
-      X.tags.push({ text: 'buyers keep 24.5', at: [3.5, 16, 3.5 * k], c: 'cobalt' }, { text: 'sellers keep 24.5', at: [3.5, 3.5, 3.5 * k], c: 'olive' },
+      X.tags.push({ text: 'buyers keep 24.5', at: [1.5, 18, 5.5 * k], c: 'cobalt' }, { text: 'sellers keep 24.5', at: [3.5, 3.5, 3.5 * k], c: 'olive' },
         { text: 'the state takes 42', at: [6.5, 10, 6 * k], c: 'ochre' }, { text: 'lost: 5 + 3 + 1', at: [9.5, 10, 1 * k], c: 'madder' });
-      X.dims.push({ from: [0.2, 19.5, 0], to: [0.2, 19.5, 6.5 * k], text: 'first buyer keeps 6.5' });
+      X.dims.push({ from: [0.2, 20, 0], to: [6.8, 20, 0], text: 'seven buyers who trade, a column each' });
       return X;
     },
   },
@@ -207,6 +207,7 @@ export const CONSTRUCTS = {
       X.lines.push(post(10 / 3, 10 / 3, k * (100 / 9), 'white'));
       X.agents.push({ asset: 'firm', at: [8.5, 0.6, 0], scale: 0.06 }, { asset: 'firm', at: [0.6, 8.5, 0], scale: 0.06, ry: Math.PI / 2 });
       X.tags.push({ text: 'firm 1’s ridge', at: [5, 0, k * 25], c: 'cobalt' }, { text: 'firm 2’s ridge', at: [0, 5, k * 25], c: 'madder' }, { text: 'profit', at: [10 / 3, 10 / 3, k * (100 / 9) + 0.04] });
+      X.dims.push({ from: [10 / 3, 10 / 3, 0], to: [10 / 3, 10 / 3, k * (100 / 9)], text: 'π = 11.1 each at the Nash point' });
       return X;
     },
   },
@@ -224,6 +225,7 @@ export const CONSTRUCTS = {
       X.points.push({ at: R, size: 10 }, { at: I, size: 10, c: 'cobalt' }, { at: O, c: 'chalk' }, { at: F, c: 'madder' }, { at: A, c: 'cobalt' });
       X.lines.push(line([[8, 30, 0.34], [8, 30, 0]], 'chalk', 1.4, { o: 0.7 }));
       X.tags.push({ text: 'entrant moves first', at: R }, { text: 'incumbent: fight pays 2, accommodate 5', at: I, c: 'cobalt' }, { text: 'time', at: [8, 30, 0.34] });
+      X.dims.push({ from: [8, 30, 0], to: [8, 30, 0.34], text: 'two moves, entrant first' });
       return X;
     },
   },
@@ -244,6 +246,7 @@ export const CONSTRUCTS = {
       X.points.push({ at: [5, 5, 5 * k], size: 10 }, { at: [8, 2, 0], c: 'chalk' });
       X.agents.push({ asset: 'household', at: [0.6, 0.6, 0], scale: 0.07 }, { asset: 'household', at: [9.4, 9.4, 0], scale: 0.07, ry: Math.PI });
       X.tags.push({ text: 'both tops on one fence', at: [5, 5, 5 * k + 0.02] }, { text: 'A’s hill', at: [10, 10, k * 10], c: 'cobalt' }, { text: 'B’s hill', at: [0, 0, k * 10], c: 'madder' });
+      X.dims.push({ from: [5, 5, 0], to: [5, 5, 5 * k], text: 'u = 5 for each at the equilibrium' });
       return X;
     },
   },
@@ -263,6 +266,7 @@ export const CONSTRUCTS = {
       X.lines.push(line(eff, 'cobalt', 2.8));
       X.lines.push(line([[4, 6, 0], [4, 6, hn(6)]], 'white', 2.4));
       X.tags.push({ text: 'households, one plane each', at: [0, 30, hn(6)] }, { text: 'efficient: 4, 7, 8 … 9', at: eff[5], c: 'cobalt' }, { text: 'voluntary: 4', at: [4, 6, hn(6)] });
+      X.dims.push({ from: [10, 0, 0], to: [10, 0, hn(6)], text: 'n = 1 … 6 households' });
       return X;
     },
   },
@@ -279,6 +283,7 @@ export const CONSTRUCTS = {
       }
       X.quads.push(flat(0, 0, 100, 14, 6 * k, 'ochre', 0.05));
       X.tags.push({ text: 'quality θ: the buyer cannot see this axis', at: [0, 13, 0.27] }, { text: 'p = 6: cars below trade', at: [30, 3, 6 * k], c: 'ochre' }, { text: 'the best stay home', at: [90, 9, 10 * k], c: 'madder' });
+      X.dims.push({ from: [100, 0, 0], to: [100, 0, 10 * k], text: 'quality θ = 0 … 10' });
       return X;
     },
   },
@@ -303,6 +308,7 @@ export const CONSTRUCTS = {
       X.lines.push(line(jump, 'ochre', 2, { dash: true }));
       X.lines.push(line([[ks, 0.08 * ks, 0], [ks, 0.08 * ks, 60 * kt]], 'white', 1.6, { dash: true }));
       X.tags.push({ text: 'time', at: [16, 0.4, 0.3] }, { text: 'k* = 7.6 at every date', at: [ks, 0.08 * ks, 0.3] }, { text: 's = 0.4', at: jump[60], c: 'ochre' });
+      X.dims.push({ from: [16, 0, 0], to: [16, 0, 60 * kt], text: 'year 0 … 60' });
       return X;
     },
   },
@@ -318,6 +324,7 @@ export const CONSTRUCTS = {
       X.lines.push(fnLine((P) => [eq(P), 9 - 0.75 * eq(P), hP(P)], 1, 2, 'white', 3, {}, 30));
       for (const P of [1, 1.5, 2]) X.points.push({ at: [eq(P), 9 - 0.75 * eq(P), hP(P)] });
       X.tags.push({ text: 'price level P', at: [12, 0, hP(2)] }, { text: 'AD', at: [eq(2), 9 - 0.75 * eq(2), hP(2) + 0.02] }, { text: 'IS does not move', at: [11.6, 0.3, hP(2)], c: 'chalk' });
+      X.dims.push({ from: [12, 0, 0], to: [12, 0, hP(2)], text: 'P = 1 … 2' });
       return X;
     },
   },
@@ -344,6 +351,7 @@ export const CONSTRUCTS = {
         for (const p of path) X.points.push({ at: p, c: 'madder', size: 5 });
       }
       X.tags.push({ text: 'expected inflation', at: [2, 16, k * 14] });
+      X.dims.push({ from: [11, 0, k * 2], to: [11, 0, k * 14], text: 'π<sup>e</sup> = 2 … 14 percent' });
       return X;
     },
   },
@@ -363,6 +371,7 @@ export const CONSTRUCTS = {
       X.lines.push(post(c[0], c[1], c[2], 'white'));
       X.agents.push({ asset: 'central_bank', at: [5, 2, 0], scale: 0.07 });
       X.tags.push({ text: 'loss: a bowl around the target', at: [8.5, 2, k * 12], c: 'ochre' }, { text: 'lowest point along the fence', at: c });
+      X.dims.push({ from: [c[0], c[1], 0], to: c, text: 'loss 3.7 at the chosen point' });
       return X;
     },
   },
@@ -379,6 +388,7 @@ export const CONSTRUCTS = {
         X.lines.push(line([[x1, y, 0], [x1, y, k * x2]], 'chalk', 1, { o: 0.25 }));
       }
       X.tags.push({ text: 'x₂, lifted', at: [10, 12.4, k * 8] }, { text: 'slope 0.5 along the plane', at: [0.5, 4.6, k * 4.5], c: 'cobalt' });
+      X.dims.push({ from: [10, 0, 0], to: [10, 0, 8 * k], text: 'x₂ = 0 … 8' });
       return X;
     },
   },
@@ -399,6 +409,7 @@ export const CONSTRUCTS = {
         X.lines.push(line([[q, (10 * I + 1 + v) / 2, 0], [q, (10 * I + 1 + v) / 2, h]], 'chalk', 1, { o: 0.3 }));
       });
       X.tags.push({ text: 'month 1', at: [7.5, 3.2, 0] }, { text: 'month 12', at: [7.5, 3.2, 0.22] });
+      X.dims.push({ from: [8, 3, 0], to: [8, 3, 0.22], text: 'months 1 … 12' });
       return X;
     },
   },
@@ -414,6 +425,7 @@ export const CONSTRUCTS = {
       X.lines.push(fnLine((p) => { const w = p ** (1 / 0.75); return [w, w ** -0.25, hp(p)]; }, 1, 1.15, 'white', 3, {}, 20));
       X.points.push({ at: [1, 1, 0] }, { at: [1.1 ** (1 / 0.75), 1.1 ** (-1 / 3), hp(1.1)] });
       X.tags.push({ text: 'price of textiles', at: [1.5, 0.7, hp(1.15)] }, { text: 'wage up, return to capital down', at: [1.2, 0.95, hp(1.15)] });
+      X.dims.push({ from: [1.5, 0.7, 0], to: [1.5, 0.7, hp(1.15)], text: 'p = 1 … 1.15' });
       return X;
     },
   },
@@ -430,6 +442,7 @@ export const CONSTRUCTS = {
       X.lines.push(fnLine((Ee) => [0.05, Ee / 1.02, he(Ee)], 1, 1.2, 'white', 3, {}, 20));
       X.points.push({ at: [0.05, 1.05 / 1.02, he(1.05)] }, { at: [0.05, 1.1 / 1.02, he(1.1)] });
       X.tags.push({ text: 'expected future rate', at: [0.2, 0.9, he(1.2)] }, { text: 'today’s rate follows', at: [0.05, 1.2 / 1.02, he(1.2)] });
+      X.dims.push({ from: [0.2, 0.9, 0], to: [0.2, 0.9, he(1.2)], text: 'E<sup>e</sup> = 1 … 1.2' });
       return X;
     },
   },
@@ -451,6 +464,7 @@ export const CONSTRUCTS = {
       X.agents.push({ asset: 'bank', at: [0.94, 0.18, 0], scale: 0.07 });
       for (const x of [0.58, 0.66, 0.74, 0.82]) X.agents.push({ asset: 'person', at: [x, 0.18, 0], scale: 0.03 });
       X.tags.push({ text: 'deposit guarantee g', at: [0, 1.6, hg(1.1)] }, { text: 'the run: shrinks above g = 1, gone at 1.1', at: [1 / 1.1, 1.1, hg(1.1)], c: 'madder' });
+      X.dims.push({ from: [0, 1.6, 0], to: [0, 1.6, hg(1.1)], text: 'g = 0 … 1.1' });
       return X;
     },
   },
@@ -465,6 +479,7 @@ export const CONSTRUCTS = {
       X.lines.push(fnLine((r) => { const w = Math.min(1, Math.max(0, (1 - 2 * r) / (5 - 4 * r))); return [sd(w, r), 4 + 6 * w, hr(r)]; }, -1, 1, 'white', 2.8, {}, 40));
       X.lines.push(line([[10, 4, 0], [10, 4, hr(-1)]], 'chalk', 1.4), line([[20, 10, 0], [20, 10, hr(-1)]], 'chalk', 1.4));
       X.tags.push({ text: 'correlation ρ: 1 on the page, −1 at the top', at: [20, 10, hr(-1)] }, { text: 'least risky mix', at: [0, 6, hr(-1)] });
+      X.dims.push({ from: [22, 0, 0], to: [22, 0, hr(-1)], text: 'ρ = 1 … −1' });
       return X;
     },
   },
@@ -480,6 +495,7 @@ export const CONSTRUCTS = {
         X.quads.push({ q: [[Q, 10 - Q, ht(t)], [Q, 1 + Q, ht(t)], [4.5, 5.5, ht(t)], [4.5, 5.5, ht(t)]], c: 'madder', alpha: 0.3, w: 1 });
       }
       X.tags.push({ text: 'tax rate t', at: [10, 0, ht(8)] }, { text: 't = 2: revenue 7, loss 1', at: [3.5, 6.5, ht(2)], c: 'ochre' }, { text: 't = 8: revenue 4, loss 16', at: [0.5, 9.5, ht(8)], c: 'madder' });
+      X.dims.push({ from: [10, 0, 0], to: [10, 0, ht(8)], text: 't = 2 … 8' });
       return X;
     },
   },
@@ -495,6 +511,7 @@ export const CONSTRUCTS = {
       X.lines.push(line([[1.5, 2.5, 0], [1.5, 2.5, H]], 'chalk', 1.4));
       X.points.push({ at: [1.5, 12, H], c: 'madder', size: 10 }, { at: [1.5, 4.99, 0], c: 'madder' }, { at: [1.5, 2.62, 0], c: 'madder' });
       X.tags.push({ text: 'damage of 10, a century ahead', at: [1.5, 12, H], c: 'madder' }, { text: 'today: 2.49 at 1.4%', at: [1.5, 4.99, 0.01], c: 'madder' }, { text: '0.12 at 4.5%', at: [1.5, 2.62, 0.01], c: 'madder' }, { text: 'years ahead', at: [1.5, 2.5, H * 0.6] });
+      X.dims.push({ from: [1.5, 2.5, 0], to: [1.5, 2.5, H], text: 'year 0 … 100' });
       return X;
     },
   },
@@ -515,6 +532,7 @@ export const CONSTRUCTS = {
       X.lines.push(line(tops, 'white', 2.4));
       X.agents.push({ asset: 'firm', at: [12, 2, 0], scale: 0.07 });
       X.tags.push({ text: 'employment as height: most jobs at m = 8', at: [6, 8, 6 * k], c: 'cobalt' });
+      X.dims.push({ from: [0, 16, 0], to: [0, 16, 6 * k], text: 'employment up to 6, at m = 8' });
       return X;
     },
   },
@@ -533,6 +551,7 @@ export const CONSTRUCTS = {
         X.tags.push({ text: `δ = ${d}`, at: [7.2, 0, h] });
       }
       X.tags.push({ text: 'at δ = 0.53 the two streams are worth the same', at: [0.5, 14.06, 0.53 * 0.3] });
+      X.dims.push({ from: [8, 0, 0], to: [8, 0, 0.8 * 0.3], text: 'δ = 0.25 … 0.8' });
       return X;
     },
   },
@@ -549,6 +568,7 @@ export const CONSTRUCTS = {
         if (d !== 9) X.tags.push({ text: now ? 'day 10: take 100' : `day ${d}`, at: [3.8, 0, h], c: now ? 'cobalt' : '' });
       }
       X.tags.push({ text: 'the day you decide', at: [0, 112, 0.24] });
+      X.dims.push({ from: [10, 0, 0], to: [10, 0, 10 * 0.024], text: 'day 0 … 10' });
       return X;
     },
   },
@@ -564,6 +584,7 @@ export const CONSTRUCTS = {
         if (w < 25) X.lines.push(line([[w, m, 0], [25, 0.1, 0]], 'chalk', 1, { dash: true, o: 0.45 }));
       }
       X.tags.push({ text: 'owner’s wealth, as height', at: [25, 0.1, 0.22] }, { text: 'with credit, all would be here', at: [25, 0.1, 0.01], c: 'chalk' });
+      X.dims.push({ from: [30, 0, 0], to: [30, 0, 25 * 0.008], text: 'wealth 1 … 25' });
       return X;
     },
   },
@@ -586,6 +607,7 @@ export const CONSTRUCTS = {
       X.lines.push(line(path, 'white', 2.6));
       X.quads.push({ q: [[0, 1, 0], [16, 1, 0], [16, 1, 0.3], [0, 1, 0.3]], c: 'chalk', alpha: 0.06 });
       X.tags.push({ text: 'centuries', at: [0, 1.8, 0.3] }, { text: 'back to y* each time', at: [13.2, 1, 2 * hs], c: 'cobalt' }, { text: 'after 1800: the escape', at: [16, 1.75, 0.3] });
+      X.dims.push({ from: [16, 0.5, 0], to: [16, 0.5, 0.3], text: 'centuries, to 1800 and after' });
       return X;
     },
   },

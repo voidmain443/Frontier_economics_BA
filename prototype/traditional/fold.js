@@ -390,7 +390,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         sign.className = 'xl room';
         sign.innerHTML = `<span>${r.layer}</span>${r.name}`;
         labelsRoot.appendChild(sign);
-        return { r, lines, grid, plate, sign, at: g.sign, hang: g.hang };
+        return { r, lines, grid, plate, sign, at: g.sign, hang: g.hang, atL: g.signL, hangL: g.hangL };
       });
       sc.world = { stops, rooms };
     }
@@ -421,6 +421,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const dpr = Math.min(devicePixelRatio || 1, 2);
     G.resize(canvas, Math.round(W * dpr), Math.round(H * dpr));
     const P = { focus: scrollY + H / 2, docW: W, t: e };
+    const sc = st.scene;
+    // where the building stands; a long move between rooms steps the camera back.
+    // With reduced motion the building does not move: it fades out and back in
+    // at the next room.
+    const R = sc.world ? routeAt(sc.world.stops, P.focus, REDUCED ? (u) => (u < 0.5 ? 0 : 1) : ease) : null;
+    const travel = REDUCED ? 0 : Math.min(1, (R?.travel ?? 0) / 8);
 
     // the flat view of the sheet, dollied back into a raised, tilted one
     const T = CAM;
@@ -431,11 +437,10 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const target = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
     // a turned view also steps back, so the room and its neighbours come into sight
     const turned = Math.min(1, Math.hypot(st.orbit[0] / ORBIT.az, st.orbit[1] / ORBIT.hi));
-    const dist = (hO / Math.tan(fov / 2)) * (1 + 1.4 * turned * e);
+    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e);
     const eye = [target[0] + dist * Math.sin(az) * Math.cos(el), target[1] + dist * Math.sin(el), target[2] + dist * Math.cos(az) * Math.cos(el)];
     const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 6), dist + 40), lookAt(eye, target, [0, 1, 0])));
 
-    const sc = st.scene;
     const appear = smooth(0.6, 1, e);
     const near = (g) => (g.center == null ? 1 : 1 - smooth(2600, 5200, Math.abs(g.center - P.focus)));
     // a figure's axis rises as it comes up to the reading line and settles back
@@ -479,31 +484,37 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // the building moves so that the room of the figure being read surrounds
     // the reading point
     if (sc.world) {
-      const R = routeAt(sc.world.stops, P.focus, ease);
       const O = [((sbx[0] + sbx[2]) / 2 - W / 2) * PX - R.at[0], -R.at[1], -R.at[2]];
       // signs show for the rooms being read; once the view is turned, also for
       // their neighbours on the same floor
       const floor = R.at[1] / FH;
+      const pageX = ((sbx[0] + sbx[2]) / 2 - W / 2) * PX;
+      const pageHalf = ((sbx[2] - sbx[0]) / 2) * PX + 0.05;
+      const shown = REDUCED ? 1 - Math.sin(Math.PI * R.s) : 1;
       for (const w of sc.world.rooms) {
         const k = R.weights.get(w.r.name) ?? 0;
         w.lines.box = [...O, 0];
         w.grid.box = [...O, 0];
         w.plate.box = [...O, 0];
-        w.lines.opacity = appear * (0.18 + 0.72 * k);
-        w.grid.opacity = appear * (0.05 + 0.3 * k);
-        w.plate.opacity = appear * (0.35 + 0.65 * k);
+        w.lines.opacity = shown * appear * (0.18 + 0.72 * k);
+        w.grid.opacity = shown * appear * (0.05 + 0.3 * k);
+        w.plate.opacity = shown * appear * (0.35 + 0.65 * k);
         under.push(w.plate, w.grid, w.lines);
         const below = w.r.floor < floor - 0.5;
-        const at = add(below ? w.hang : w.at, O);
+        // a sign the page would cover moves to the room's other back corner
+        let at = add(below ? w.hang : w.at, O);
+        const left = Math.abs(at[0] - pageX) < pageHalf;
+        if (left) at = add(below ? w.hangL : w.atL, O);
+        w.sign.classList.toggle('left', left);
         const level = k > 0.02 || (turned > 0.15 && Math.abs(w.r.floor - floor) < 0.5);
         const pr = level && Math.hypot(at[0], at[1], at[2]) < 6 ? project(vp, at, W, H) : null;
-        const o = appear * (0.4 + 0.6 * k);
+        const o = shown * appear * (0.4 + 0.6 * k);
         if (!pr || o < 0.02 || pr[0] < -200 || pr[0] > W + 200 || pr[1] < -60 || pr[1] > H + 60) {
           w.sign.style.opacity = '0';
           continue;
         }
         w.sign.style.opacity = String(o);
-        w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.6, 1.1).toFixed(3)}) translate(-100%, ${below ? '0' : '-100%'})`;
+        w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.6, 1.1).toFixed(3)}) translate(${left ? '0' : '-100%'}, ${below ? '0' : '-100%'})`;
       }
     }
     for (const it of sc.objs) (it.kind === 'grid' || it.kind === 'edge' ? under : over).push(it.o);
