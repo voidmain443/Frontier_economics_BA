@@ -53,6 +53,7 @@ M0 착수 전. 핵심 경험을 검증한 프로토타입 둘이 있다.
 |---|---|
 | `page.js` | 세 부분 공통: 그림 그리기, 식 번호, 표제란, 접힘 버튼 연결 |
 | `fold.js` | 접힘 하나: 캡처, 카메라, 그림별 구조의 솟음과 내려앉음, 라벨과 문 |
+| `world.js` | 접힌 공간의 건물: 방 24개, 1·2부의 배치표, 페이지가 지나는 길, 군중이 설 자리 (`docs/world.md`) |
 | `gpu.js`, `shaders.js` | WebGPU 렌더러와 WGSL, 리본 좌표(`toWorld`), html-in-canvas 복사 |
 | `maquettes.js`, `geo3d.js` | Blender 주체 모형(GLB) 로더 |
 | `figures.js` | SVG `plot()`과 그림 7.1의 회귀 데이터 |

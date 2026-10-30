@@ -10,7 +10,7 @@
 
 import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
 import { loadAssets } from './maquettes.js';
-import { ROOMS, FH, placeOf, roomGeometry, routeAt } from './world.js';
+import { ROOMS, RW, FH, placeOf, roomGeometry, routeAt, crowdSpots } from './world.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -48,6 +48,10 @@ const FIG_MIN = 0.5;
 // (radians); scrolling brings it back at BACK per second
 const ORBIT = { az: 1.05, lo: -0.17, hi: 0.87, back: 6, key: 0.08 };
 const SVGNS = 'http://www.w3.org/2000/svg';
+// a failed bank in a crowd topples TOPPLE seconds after the one that failed a
+// round before it, and takes FALL seconds to fall
+const TOPPLE = 0.35;
+const FALL = 0.5;
 const PLASTER = [0.95, 0.945, 0.92, 1];
 const SHADE = [0.7, 0.73, 0.72, 1];
 const MATTE = [0.04, 1, 0, 0];
@@ -169,6 +173,69 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     st.captured = true;
   }
 
+  // The reader changed a figure while the page is folded: copy the tiles it
+  // covers again, and rebuild its construct alone. Changes that arrive while
+  // this runs are gathered and done next, at most about twenty times a second.
+  async function recapture(top, bottom) {
+    const tiles = st.tiles.filter((T) => T.rect[3] > top && T.rect[1] < bottom);
+    if (!tiles.length) return;
+    const W = sheet.getBoundingClientRect().width;
+    const clone = sheet.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.inert = true;
+    clone.style.cssText = `width:${W}px;margin:0;pointer-events:none;`;
+    canvas.appendChild(clone);
+    try {
+      await new Promise((resolve, reject) => {
+        pending = { clone, W, tiles, resolve, reject };
+        canvas.requestPaint();
+        setTimeout(() => { if (pending) { pending = null; reject(new Error('No paint event from the canvas.')); } }, 4000);
+      });
+    } finally {
+      clone.remove();
+    }
+    for (const T of tiles) G.mips(T.tex);
+  }
+  function rebuildFigure(fig) {
+    const sc = st.scene;
+    const fid = fig.dataset.fold ?? fig.dataset.fig;
+    const keep = { callout: sc.callouts.find((c) => c.fid === fid), crowd: sc.crowds.find((c) => c.fid === fid) };
+    for (const it of sc.objs) if (it.fid === fid) it.o.destroy();
+    for (const L of sc.labels) if (L.fid === fid) L.el.remove();
+    sc.objs = sc.objs.filter((it) => it.fid !== fid);
+    sc.labels = sc.labels.filter((L) => L.fid !== fid);
+    sc.agents = sc.agents.filter((a) => a.fid !== fid);
+    sc.crowds = sc.crowds.filter((c) => c.fid !== fid);
+    buildFigure(sc, fig, keep);
+  }
+  const queued = new Set();
+  let refreshing = false;
+  async function refresh(id) {
+    queued.add(id);
+    if (refreshing) return;
+    refreshing = true;
+    try {
+      while (queued.size) {
+        const ids = [...queued];
+        queued.clear();
+        for (const fid of ids) {
+          const fig = sheet.querySelector(`figure[data-fig="${fid}"], [data-fold="${fid}"]`);
+          if (!fig || !st.scene) continue;
+          const r = fig.getBoundingClientRect();
+          await recapture(r.top + scrollY, r.bottom + scrollY);
+          rebuildFigure(fig);
+        }
+        await new Promise((res) => setTimeout(res, 50));
+      }
+    } catch (err) {
+      console.error('refresh', err);
+      st.captured = false;
+    } finally {
+      refreshing = false;
+    }
+  }
+
   // ---- agents: plaster maquettes from tools/blender ----
   let AG = null;
   const agentQ = new Map();
@@ -177,7 +244,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const assets = await loadAssets();
     AG = {};
     for (const [name, parts] of Object.entries(assets)) {
-      AG[name] = parts.map((p) => ({ solid: G.solid(p.geometry, { max: 32 }), color: p.material === 'shade' ? SHADE : PLASTER }));
+      const max = name.endsWith('_crowd') ? 512 : 64;
+      AG[name] = parts.map((p) => ({ solid: G.solid(p.geometry, { max }), color: p.material === 'shade' ? SHADE : PLASTER }));
     }
   }
   const allSolids = () => Object.values(AG ?? {}).flatMap((parts) => parts.map((p) => p.solid));
@@ -188,13 +256,16 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const D = unit(sub(toWorld([0, 0, 0], [x, s + 3, x, s + 3], P), toWorld([0, 0, 0], [x, s - 3, x, s - 3], P)));
     return { o, X: [1, 0, 0], N, D };
   }
-  function putAgent(name, F, lift, sc, ry, grow) {
+  // tilt turns the agent about its own x axis: −π/2 lays it on its back
+  function putAgent(name, F, lift, sc, ry, grow, tilt = 0) {
     if (grow < 0.03) return;
     const c = Math.cos(ry);
     const s = Math.sin(ry);
     const ax = add(scl(F.X, c), scl(F.D, -s));
     const az = add(scl(F.X, s), scl(F.D, c));
-    const m = basis(add(F.o, scl(F.N, lift)), scl(ax, sc), scl(F.N, sc * grow), scl(az, sc));
+    const up = add(scl(F.N, Math.cos(tilt)), scl(az, Math.sin(tilt)));
+    const fwd = add(scl(F.N, -Math.sin(tilt)), scl(az, Math.cos(tilt)));
+    const m = basis(add(F.o, scl(F.N, lift)), scl(ax, sc), scl(up, sc * grow), scl(fwd, sc));
     for (const part of AG?.[name] ?? []) {
       if (!agentQ.has(part.solid)) agentQ.set(part.solid, []);
       agentQ.get(part.solid).push({ m, color: part.color, p: MATTE });
@@ -205,7 +276,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   function buildScene() {
     G.freeScene();
     labelsRoot.replaceChildren();
-    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], world: null };
+    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], world: null };
     const sb = st.sheetBox;
     const H = sb[3] - sb[1];
     const bOf = (s) => 1 - (s - sb[1]) / H;
@@ -266,6 +337,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const leaders = document.createElementNS(SVGNS, 'svg');
     leaders.setAttribute('class', 'leaders');
     labelsRoot.appendChild(leaders);
+    Object.assign(sc, { label, leaders, sb });
 
     // stage titles stand in the margin beside their headings
     for (const stg of sheet.querySelectorAll('.stage[data-no]')) {
@@ -292,89 +364,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // figures raise their held-fixed axis over their plot box; other marked
     // elements (data-fold) raise theirs over their own box
     for (const fig of sheet.querySelectorAll('figure[data-fig], [data-fold]')) {
-      const id = fig.dataset.fold ?? fig.dataset.fig;
-      const spec = constructs[id];
-      if (!spec) continue;
-      const pbEl = spec.whole ? fig : fig.querySelectorAll('.plotbox')[spec.panel ?? 0];
-      if (!pbEl) continue;
-      const pb = pbEl.getBoundingClientRect();
-      const box = [pb.left + scrollX, pb.top + scrollY, pb.right + scrollX, pb.bottom + scrollY];
-      const dom = typeof spec.dom === 'function' ? spec.dom(data) : spec.dom;
-      const L = ([x, y, h]) => [(x - dom.x[0]) / (dom.x[1] - dom.x[0]), (y - dom.y[0]) / (dom.y[1] - dom.y[0]), h];
-      const group = { center: (box[1] + box[3]) / 2 };
-      let X;
-      try {
-        X = spec.build(data);
-      } catch (err) {
-        console.error(`construct ${id}`, err);
-        continue;
-      }
-      for (const s of X.surfaces ?? []) {
-        const v = surfaceVerts(s, L, s.n ?? 46);
-        if (v.length) sc.objs.push({ o: G.mesh(v, box, COL[s.c], Math.min(0.95, (s.alpha ?? 0.3) * SURF), s.freq ?? 0), group, kind: 'fig' });
-      }
-      for (const q of X.quads ?? []) {
-        const pts = q.q.map(L);
-        if (q.fill !== false) sc.objs.push({ o: G.mesh(quadVerts(pts), box, COL[q.c], Math.min(0.95, (q.alpha ?? 0.25) * SURF), 0), group, kind: 'fig' });
-        if (q.edge !== false) sc.objs.push({ o: G.lines(pts.map((p, i) => [p, pts[(i + 1) % pts.length]]), box, COL[q.c], q.w ?? 1.2, q.o ?? 0.85), group, kind: 'fig' });
-      }
-      // batches: many quads in one mesh, many segments in one set of lines
-      for (const m of X.meshes ?? []) {
-        const parts = m.quads.map((q) => quadVerts(q.map(L)));
-        const v = new Float32Array(parts.reduce((n, a) => n + a.length, 0));
-        let off = 0;
-        for (const a of parts) { v.set(a, off); off += a.length; }
-        if (v.length) sc.objs.push({ o: G.mesh(v, box, COL[m.c], Math.min(0.95, (m.alpha ?? 0.3) * SURF), 0), group, kind: 'fig' });
-      }
-      for (const s of X.segs ?? []) {
-        const segs = s.segs.map(([p, q]) => [L(p), L(q)]).filter(([p, q]) => p.every(Number.isFinite) && q.every(Number.isFinite));
-        if (segs.length) sc.objs.push({ o: G.lines(segs, box, COL[s.c ?? 'white'], s.w ?? 1.2, s.o ?? 1, Boolean(s.dash)), group, kind: 'fig' });
-      }
-      for (const c of X.lines ?? []) {
-        const pts = c.pts.map(L);
-        const segs = [];
-        for (let i = 1; i < pts.length; i++) if (pts[i - 1].every(Number.isFinite) && pts[i].every(Number.isFinite)) segs.push([pts[i - 1], pts[i]]);
-        if (segs.length) sc.objs.push({ o: G.lines(segs, box, COL[c.c ?? 'white'], c.w ?? 2, c.o ?? 1, Boolean(c.dash)), group, kind: 'fig' });
-      }
-      const byColor = {};
-      for (const p of X.points ?? []) (byColor[p.c ?? 'white'] ??= []).push([...L(p.at), (p.size ?? 8) / 8]);
-      for (const c in byColor) sc.objs.push({ o: G.points(byColor[c], box, COL[c], 8, 1, 1), group, kind: 'fig' });
-      for (const e of X.eqs ?? []) label(e.html, 'xeq', L(e.at), box, group);
-      for (const t of X.tags ?? []) label(t.text, `tag ${t.c ?? ''}${t.href ? ' door' : ''}`, L(t.at), box, group, t.href);
-      for (const a of X.agents ?? []) sc.agents.push({ name: a.asset, local: L(a.at), box, group, scale: a.scale ?? 0.05, ry: a.ry ?? 0 });
-      // a dimension line along the raised axis, its name and range at the top end
-      for (const dm of X.dims ?? []) {
-        const p = L(dm.from);
-        const q = L(dm.to);
-        const t = 0.012;
-        const segs = [[p, q], [[p[0] - t, p[1], p[2]], [p[0] + t, p[1], p[2]]], [[q[0] - t, q[1], q[2]], [q[0] + t, q[1], q[2]]]];
-        sc.objs.push({ o: G.lines(segs, box, COL.chalk, 1.3, 0.95), group, kind: 'fig' });
-        label(dm.text, 'dim', [q[0] + 0.02, q[1], q[2]], box, group);
-      }
-      // the margin callout: the figure's number and what it holds fixed
-      const no = fig.querySelector('.fig-no');
-      if (no) {
-        const el = document.createElement('div');
-        el.className = 'xl callout';
-        const b = document.createElement('b');
-        b.textContent = no.textContent;
-        el.append(b);
-        const held = fig.querySelector('.held');
-        if (held) {
-          const s = document.createElement('span');
-          const i = document.createElement('i');
-          i.textContent = 'Held fixed';
-          s.append(i, ` ${held.textContent.replace(/^\s*Held fixed\s*/, '')}`);
-          el.append(s);
-        }
-        labelsRoot.appendChild(el);
-        const line = document.createElementNS(SVGNS, 'line');
-        leaders.appendChild(line);
-        const dm = X.dims?.[0];
-        const target = dm ? L(dm.from.map((v, k) => (v + dm.to[k]) / 2)) : [0.5, 0.5, 0];
-        sc.callouts.push({ el, line, group, box, target, x: sb[2] + 36 });
-      }
-      if (world?.[id]) stops.push({ c: group.center, p: placeOf(world[id]) });
+      const made = buildFigure(sc, fig);
+      if (made && world?.[made.id]) stops.push({ c: made.group.center, p: placeOf(world[made.id]) });
     }
 
     // the building: every room's edges and floor plate, and its sign
@@ -395,6 +386,127 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       sc.world = { stops, rooms };
     }
     return sc;
+  }
+
+  // One figure's construct, labels, callout and crowd. Every item carries the
+  // figure's id, so that the figure can be rebuilt alone when the reader changes
+  // it; keep holds what survives a rebuild (the callout with its controls, and
+  // the crowd's state).
+  function buildFigure(sc, fig, keep = null) {
+    const id = fig.dataset.fold ?? fig.dataset.fig;
+    const spec = constructs[id];
+    if (!spec) return null;
+    const pbEl = spec.whole ? fig : fig.querySelectorAll('.plotbox')[spec.panel ?? 0];
+    if (!pbEl) return null;
+    const pb = pbEl.getBoundingClientRect();
+    const box = [pb.left + scrollX, pb.top + scrollY, pb.right + scrollX, pb.bottom + scrollY];
+    const dom = typeof spec.dom === 'function' ? spec.dom(data) : spec.dom;
+    const L = ([x, y, h]) => [(x - dom.x[0]) / (dom.x[1] - dom.x[0]), (y - dom.y[0]) / (dom.y[1] - dom.y[0]), h];
+    const group = { center: (box[1] + box[3]) / 2 };
+    const obj = (o) => sc.objs.push({ o, group, kind: 'fig', fid: id });
+    const label = (...a) => Object.assign(sc.label(...a), { fid: id });
+    let X;
+    try {
+      X = spec.build(data);
+    } catch (err) {
+      console.error(`construct ${id}`, err);
+      return null;
+    }
+    for (const s of X.surfaces ?? []) {
+      const v = surfaceVerts(s, L, s.n ?? 46);
+      if (v.length) obj(G.mesh(v, box, COL[s.c], Math.min(0.95, (s.alpha ?? 0.3) * SURF), s.freq ?? 0));
+    }
+    for (const q of X.quads ?? []) {
+      const pts = q.q.map(L);
+      if (q.fill !== false) obj(G.mesh(quadVerts(pts), box, COL[q.c], Math.min(0.95, (q.alpha ?? 0.25) * SURF), 0));
+      if (q.edge !== false) obj(G.lines(pts.map((p, i) => [p, pts[(i + 1) % pts.length]]), box, COL[q.c], q.w ?? 1.2, q.o ?? 0.85));
+    }
+    // batches: many quads in one mesh, many segments in one set of lines
+    for (const m of X.meshes ?? []) {
+      const parts = m.quads.map((q) => quadVerts(q.map(L)));
+      const v = new Float32Array(parts.reduce((n, a) => n + a.length, 0));
+      let off = 0;
+      for (const a of parts) { v.set(a, off); off += a.length; }
+      if (v.length) obj(G.mesh(v, box, COL[m.c], Math.min(0.95, (m.alpha ?? 0.3) * SURF), 0));
+    }
+    for (const s of X.segs ?? []) {
+      const segs = s.segs.map(([p, q]) => [L(p), L(q)]).filter(([p, q]) => p.every(Number.isFinite) && q.every(Number.isFinite));
+      if (segs.length) obj(G.lines(segs, box, COL[s.c ?? 'white'], s.w ?? 1.2, s.o ?? 1, Boolean(s.dash)));
+    }
+    for (const c of X.lines ?? []) {
+      const pts = c.pts.map(L);
+      const segs = [];
+      for (let i = 1; i < pts.length; i++) if (pts[i - 1].every(Number.isFinite) && pts[i].every(Number.isFinite)) segs.push([pts[i - 1], pts[i]]);
+      if (segs.length) obj(G.lines(segs, box, COL[c.c ?? 'white'], c.w ?? 2, c.o ?? 1, Boolean(c.dash)));
+    }
+    const byColor = {};
+    for (const p of X.points ?? []) (byColor[p.c ?? 'white'] ??= []).push([...L(p.at), (p.size ?? 8) / 8]);
+    for (const c in byColor) obj(G.points(byColor[c], box, COL[c], 8, 1, 1));
+    for (const e of X.eqs ?? []) label(e.html, 'xeq', L(e.at), box, group);
+    for (const t of X.tags ?? []) label(t.text, `tag ${t.c ?? ''}${t.href ? ' door' : ''}`, L(t.at), box, group, t.href);
+    for (const a of X.agents ?? []) sc.agents.push({ name: a.asset, local: L(a.at), box, group, scale: a.scale ?? 0.05, ry: a.ry ?? 0, fid: id });
+    // a dimension line along the raised axis, its name and range at the top end
+    for (const dm of X.dims ?? []) {
+      const p = L(dm.from);
+      const q = L(dm.to);
+      const t = 0.012;
+      const segs = [[p, q], [[p[0] - t, p[1], p[2]], [p[0] + t, p[1], p[2]]], [[q[0] - t, q[1], q[2]], [q[0] + t, q[1], q[2]]]];
+      obj(G.lines(segs, box, COL.chalk, 1.3, 0.95));
+      label(dm.text, 'dim', [q[0] + 0.02, q[1], q[2]], box, group);
+    }
+    // the margin callout: the figure's number and what it holds fixed, and the
+    // figure's controls, so that it can be changed while the page is folded
+    const dm0 = X.dims?.[0];
+    const target = dm0 ? L(dm0.from.map((v, k) => (v + dm0.to[k]) / 2)) : [0.5, 0.5, 0];
+    const no = fig.querySelector('.fig-no');
+    if (keep?.callout) Object.assign(keep.callout, { group, box, target });
+    else if (no) {
+      const el = document.createElement('div');
+      el.className = 'xl callout';
+      const b = document.createElement('b');
+      b.textContent = no.textContent;
+      el.append(b);
+      const held = fig.querySelector('.held');
+      if (held) {
+        const s = document.createElement('span');
+        const i = document.createElement('i');
+        i.textContent = 'Held fixed';
+        s.append(i, ` ${held.textContent.replace(/^\s*Held fixed\s*/, '')}`);
+        el.append(s);
+      }
+      const ctl = fig.querySelector('.fig-ctl');
+      if (ctl) {
+        const copy = ctl.cloneNode(true);
+        for (const e of [copy, ...copy.querySelectorAll('[id]')]) e.removeAttribute('id');
+        const from = [...ctl.querySelectorAll('input')];
+        const outs = [...ctl.querySelectorAll('output')];
+        const outsTo = [...copy.querySelectorAll('output')];
+        [...copy.querySelectorAll('input')].forEach((input, i) => input.addEventListener('input', () => {
+          from[i].value = input.value;
+          from[i].dispatchEvent(new Event('input', { bubbles: true }));
+          outs.forEach((o, k) => { outsTo[k].textContent = o.textContent; });
+        }));
+        el.append(copy);
+        el.classList.add('live');
+      }
+      labelsRoot.appendChild(el);
+      const line = document.createElementNS(SVGNS, 'line');
+      sc.leaders.appendChild(line);
+      sc.callouts.push({ el, line, group, box, target, x: sc.sb[2] + 36, fid: id });
+    }
+    // a crowd on the floor of the figure's room
+    if (X.crowd && world?.[id]) {
+      const room = placeOf(world[id]).rooms[0];
+      const spots = crowdSpots(X.crowd.items);
+      const before = keep?.crowd;
+      const items = X.crowd.items.map((it, i) => {
+        const was = before?.items[i];
+        const start = !before?.shown ? null : was && was.fall === it.fall ? was.start : st.time + (it.fall ? (it.round ?? 0) * TOPPLE : 0);
+        return { ...it, at: spots[i], tilt: was?.tilt ?? 0, start };
+      });
+      sc.crowds.push({ fid: id, room, group, asset: X.crowd.asset, items, shown: Boolean(before?.shown) });
+    }
+    return { id, group };
   }
 
   // ---- frame ----
@@ -426,6 +538,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // With reduced motion the building does not move: it fades out and back in
     // at the next room.
     const R = sc.world ? routeAt(sc.world.stops, P.focus, REDUCED ? (u) => (u < 0.5 ? 0 : 1) : ease) : null;
+    // the building's offset: building coordinates + O = world
+    const O = R ? [((st.sheetBox[0] + st.sheetBox[2]) / 2 - W / 2) * PX - R.at[0], -R.at[1], -R.at[2]] : null;
     const travel = REDUCED ? 0 : Math.min(1, (R?.travel ?? 0) / 8);
 
     // the flat view of the sheet, dollied back into a raised, tilted one
@@ -469,6 +583,28 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         putAgent(a.name, pageFrame(x, s, P), a.local[2] * bw * ease(grow(a.group)) * LIFT, a.scale * bw, a.ry, gr);
       }
     }
+    // crowds stand on the floor of their room while their figure is read; a
+    // failed bank topples, later the later the round in which it failed
+    for (const C of sc.crowds) {
+      const k = R?.weights.get(C.room.name) ?? 0;
+      const g = ease(grow(C.group)) * appear * k;
+      if (g > 0.5 && !C.shown) {
+        C.shown = true;
+        for (const it of C.items) it.start = st.time + 0.4 + (it.round ?? 0) * TOPPLE;
+      }
+      if (g < 0.03 || !O) continue;
+      const base = [O[0] + (C.room.col + 0.5) * RW, O[1] + C.room.floor * FH, O[2]];
+      for (const it of C.items) {
+        if (it.fall && it.start != null && st.time >= it.start) {
+          const p = REDUCED ? 1 : Math.min(1, (st.time - it.start) / FALL);
+          it.tilt = Math.min(it.tilt, -(Math.PI / 2) * p * p);
+        } else {
+          it.tilt *= REDUCED ? 0 : Math.exp(-dt * 8);
+        }
+        const F = { o: [base[0] + it.at[0], base[1], base[2] + it.at[1]], X: [1, 0, 0], N: [0, 1, 0], D: [0, 0, 1] };
+        putAgent(C.asset, F, (it.lift ?? 0) + 0.2 * it.s * Math.abs(Math.sin(it.tilt)), it.s, it.ry ?? 0, g, it.tilt);
+      }
+    }
     const solids = allSolids();
     for (const s of solids) s.set(agentQ.get(s) ?? []);
 
@@ -484,7 +620,6 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // the building moves so that the room of the figure being read surrounds
     // the reading point
     if (sc.world) {
-      const O = [((sbx[0] + sbx[2]) / 2 - W / 2) * PX - R.at[0], -R.at[1], -R.at[2]];
       // signs show for the rooms being read; once the view is turned, also for
       // their neighbours on the same floor
       const floor = R.at[1] / FH;
@@ -527,10 +662,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const b = a ? project(vp, toWorld(C.target, C.box, P, ease(r) * LIFT), W, H) : null;
       if (!a || !b) {
         C.el.style.opacity = '0';
+        C.el.style.pointerEvents = 'none';
         C.line.style.opacity = '0';
         continue;
       }
       C.el.style.opacity = String(o);
+      C.el.style.pointerEvents = o > 0.5 ? '' : 'none';
       C.el.style.transform = `translate(${a[0].toFixed(1)}px, ${a[1].toFixed(1)}px) scale(${clamp(1.6 / a[2], 0.6, 0.95).toFixed(3)}) translate(0, -50%)`;
       C.line.setAttribute('x1', a[0].toFixed(1));
       C.line.setAttribute('y1', a[1].toFixed(1));
@@ -602,7 +739,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     st.returning = false;
   };
   addEventListener('pointerdown', (ev) => {
-    if (!turnable() || ev.button !== 0 || ev.target.closest('a, button, input, nav, .titleblock')) return;
+    if (!turnable() || ev.button !== 0 || ev.target.closest('a, button, input, nav, .titleblock, .callout')) return;
     st.drag = { x: ev.clientX, y: ev.clientY, orbit: [...st.orbit] };
     document.body.classList.add('turning');
   });
@@ -668,6 +805,11 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // the page has changed (a figure was redrawn): capture it again next time
     invalidate() {
       st.captured = false;
+    },
+    // a figure was redrawn: while folded, show the change at once
+    refresh(id) {
+      if (st.target === 1 && st.captured && st.scene) refresh(id);
+      else st.captured = false;
     },
     get open() { return st.target === 1; },
     get busy() { return st.busy; },

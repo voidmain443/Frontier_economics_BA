@@ -3,7 +3,7 @@
 
 import { cylinder, box, loadGLB } from './geo3d.js';
 
-const ASSETS = ['household', 'firm', 'bank', 'government', 'central_bank', 'rest_of_world', 'person'];
+const ASSETS = ['household', 'firm', 'bank', 'government', 'central_bank', 'rest_of_world', 'person', 'person_crowd', 'firm_crowd'];
 
 export async function loadAssets() {
   const out = {};
@@ -11,7 +11,7 @@ export async function loadAssets() {
     try {
       out[name] = await loadGLB(`assets/agents/${name}.glb`);
     } catch {
-      out[name] = [{ node: name, material: 'plaster', geometry: name === 'person' ? cylinder(0.12, 1, 12) : box(1, 0.55, 0.7), fallback: true }];
+      out[name] = [{ node: name, material: 'plaster', geometry: name.startsWith('person') ? cylinder(0.12, 1, 12) : box(1, 0.55, 0.7), fallback: true }];
     }
   }));
   return out;

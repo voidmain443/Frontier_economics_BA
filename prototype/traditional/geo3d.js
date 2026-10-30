@@ -87,7 +87,8 @@ function nodeMatrix(n) {
 
 // → [{ node, material, geometry }]; node transforms are baked in.
 export async function loadGLB(url) {
-  const buf = await (await fetch(url)).arrayBuffer();
+  // revalidate, so that a rebuilt model is not served stale from the cache
+  const buf = await (await fetch(url, { cache: 'no-cache' })).arrayBuffer();
   const dv = new DataView(buf);
   if (dv.getUint32(0, true) !== 0x46546c67) throw new Error(`${url} is not a GLB file`);
   let off = 12;

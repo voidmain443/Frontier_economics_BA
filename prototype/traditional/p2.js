@@ -4,11 +4,14 @@
 import { FIGS } from './p2-figs.js';
 import { CONSTRUCTS } from './p2-fold.js';
 import { setupPage } from './page.js';
+import { PLACE_P2 } from './world.js';
 
 const state = { p: 0.05, mix: [3, 4, 2, 1, 1], shock: 4 };
 const page = await setupPage({
   figs: FIGS,
   constructs: CONSTRUCTS,
+  // the room of the archive building each section opens in (docs/world.md)
+  world: PLACE_P2,
   data: { state },
   stages: 6,
   unit: 'Section',

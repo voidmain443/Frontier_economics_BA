@@ -150,11 +150,12 @@ export async function setupPage({ figs, constructs, world = null, files = [], ag
 
   return {
     data,
-    // redraw one figure after its controls change; the next fold captures it anew
+    // redraw one figure after its controls change; while folded the fold shows
+    // it at once, otherwise the next fold captures it anew
     redraw(id) {
       const fig = sheet.querySelector(`figure[data-fig="${id}"]`);
       if (fig) draw(fig);
-      fold?.invalidate();
+      fold?.refresh(id);
     },
   };
 }

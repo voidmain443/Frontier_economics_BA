@@ -34,6 +34,10 @@ export const PLACE_P1 = {
   '8.6': 'Land and air', '8.7': ['Labor', 'Regulation'], '8.8': 'Regulation', '8.9': 'Households', '8.10': 'Property', '8.11': 'History',
 };
 
+// Part 2: each section opens in the room of the Part 1 figure it starts from;
+// the chains of 2.2, which start from 2.1, stand in Networks.
+export const PLACE_P2 = { '2.1': 'Goods', '2.2': 'Networks', '2.3': 'Firms', '2.4': 'Strategy', '2.5': 'Banks' };
+
 // Where a place sits, in building coordinates: the point that is brought to the
 // reading point. A room: its centre, on its floor. A wall: the middle of the
 // shared wall. A floor between two rooms: the upper room's floor, so the page
@@ -106,4 +110,34 @@ const clamp01 = (x) => Math.min(1, Math.max(0, x));
 
 function weightsOf(p, w) {
   return new Map(p.rooms.map((r) => [r.name, w]));
+}
+
+// Spots on a room's floor for a crowd, clear of the page: two strips beside it,
+// filled in rows from just in front of the reading point (the floor nearer the
+// camera is below the bottom of the view) to the back of the room. In room coordinates
+// (x across from the room's centre line, z from back to front). An item with
+// side 'left' or 'right' keeps to that strip; others alternate.
+const PAGE_HALF = 0.72;
+const COLS = 4;
+export function crowdSpots(items) {
+  const x0 = PAGE_HALF;
+  const x1 = RW / 2 - 0.06;
+  const z0 = -RD / 2 + 0.12;
+  const z1 = ZR + 0.5;
+  const sides = items.map((it, i) => it.side ?? (i % 2 ? 'right' : 'left'));
+  const count = { left: 0, right: 0 };
+  for (const s of sides) count[s]++;
+  // a small crowd stands in two files, a large one in four
+  const per = Math.max(count.left, count.right, 1);
+  const cols = per <= 12 ? 2 : COLS;
+  const dx = (x1 - x0) / cols;
+  const dz = Math.min(0.12, (z1 - z0) / Math.ceil(per / cols));
+  const next = { left: 0, right: 0 };
+  return sides.map((s, i) => {
+    const j = next[s]++;
+    const jit = (k) => (Math.abs(Math.sin((i + 1) * 12.9898 + k * 78.233) * 43758.5453) % 1) - 0.5;
+    const x = x0 + ((j % cols) + 0.5 + 0.35 * jit(1)) * dx;
+    const z = z1 - (Math.floor(j / cols) + 0.5 + 0.35 * jit(2)) * dz;
+    return [s === 'left' ? -x : x, z];
+  });
 }

@@ -421,6 +421,13 @@ body.unfolded.turning { cursor: grabbing; }
 .xl.title.top .no { -webkit-text-stroke-color: var(--ink); }
 #expo-labels .leaders { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 #expo-labels .leaders line { stroke: var(--chalk); stroke-width: 1; }
+/* a figure's controls, inside its callout, work while the page is folded */
+.xl.callout.live { width: 290px; cursor: default; }
+.xl.callout .fig-ctl { max-width: none; margin-top: 8px; gap: 8px; font: 500 14px var(--draft); color: var(--chalk); }
+.xl.callout .fig-ctl.grid { grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+.xl.callout .fig-ctl label { gap: 6px; }
+.xl.callout .fig-ctl input { min-width: 0; accent-color: var(--redline); }
+.xl.callout .fig-ctl input:focus-visible { outline: 2px solid var(--redline); outline-offset: 2px; }
 
 /* ---------- small screens ---------- */
 

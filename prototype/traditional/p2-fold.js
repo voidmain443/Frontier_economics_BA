@@ -5,7 +5,11 @@
 import { SW, smallWorld, distances, chainAndCore, chainLayout, coreLayout, cutPairs, preferential, LEVELS, beauty, contagion } from './p2-models.js';
 import { ringPos } from './p2-figs.js';
 
-const blank = () => ({ surfaces: [], quads: [], meshes: [], segs: [], lines: [], points: [], tags: [], eqs: [], agents: [] });
+// dims: a dimension line along the raised axis. crowd: { asset, items }, the
+// many agents that fill the figure's room in place of one representative
+// (fold.js places them; an item may keep to a side, and a bank may fall)
+const blank = () => ({ surfaces: [], quads: [], meshes: [], segs: [], lines: [], points: [], tags: [], eqs: [], agents: [], dims: [] });
+const jitter = (i) => ((Math.abs(Math.sin((i + 1) * 91.17) * 43758.5453) % 1) - 0.5) * 0.6;
 
 // columns standing on a plan, batched: tops and two faces in one mesh, edges in one set of lines
 function columns(list, c, alpha) {
@@ -38,6 +42,8 @@ export const CONSTRUCTS = {
       const far = d.indexOf(Math.max(...d));
       X.agents.push({ asset: 'person', at: [pos[0][0], pos[0][1], 0], scale: 0.045 });
       X.tags.push({ text: `the farthest person: ${d[far]} steps`, at: at(far) }, { text: 'steps from you, as height', at: [-1.2, 1.2, Math.max(...d) * k] });
+      X.dims.push({ from: [1.2, -1.2, 0], to: [1.2, -1.2, d[far] * k], text: `steps 0 … ${d[far]}` });
+      X.crowd = { asset: 'person_crowd', items: Array.from({ length: SW.n }, (_, i) => ({ s: 0.05, ry: jitter(i) })) };
       return X;
     },
   },
@@ -63,6 +69,9 @@ export const CONSTRUCTS = {
         X.segs.push({ segs: walls.map((q) => [q[3], q[2]]), c: 'madder', w: 1.8, o: 0.95 });
       }
       X.tags.push({ text: 'pairs cut off if this tie breaks: up to 144', at: [0.5, 0.6, 0.3], c: 'madder' }, { text: 'the core: at most 23, one student', at: [1.7, 0.95, 0.06] });
+      X.dims.push({ from: [2.2, 0, 0], to: [2.2, 0, 0.3], text: 'pairs cut 0 … 144' });
+      // the chain's students on the left of the page, the core's on the right
+      X.crowd = { asset: 'person_crowd', items: Array.from({ length: 2 * n }, (_, i) => ({ s: 0.05, ry: jitter(i), side: i < n ? 'left' : 'right' })) };
       return X;
     },
   },
@@ -81,6 +90,12 @@ export const CONSTRUCTS = {
       X.quads.push({ q: [[0, 0, mean * k], [20, 0, mean * k], [20, 20, mean * k], [0, 20, mean * k]], c: 'ochre', alpha: 0.1 });
       const big = order.indexOf(deg.indexOf(Math.max(...deg)));
       X.tags.push({ text: `mean ${mean.toFixed(1)}: the representative firm, which no firm is`, at: [20, 0, mean * k], c: 'ochre' }, { text: `largest: ${Math.max(...deg)}`, at: [(big % 20) + 0.5, Math.floor(big / 20) + 0.5, Math.max(...deg) * k] });
+      const max = Math.max(...deg);
+      X.dims.push({ from: [20, 20, 0], to: [20, 20, max * k], text: `size ${Math.min(...deg)} … ${max}` });
+      // four hundred firms, larger as they are larger (by the square root, so
+      // that they fit the room: the skyline gives the sizes); small ones in front
+      const sizes = [...deg].sort((a, b) => a - b);
+      X.crowd = { asset: 'firm_crowd', items: sizes.map((v, i) => ({ s: 0.024 + 0.05 * Math.sqrt((v - sizes[0]) / (max - sizes[0])), ry: jitter(i) * 0.5 })) };
       return X;
     },
   },
@@ -107,6 +122,9 @@ export const CONSTRUCTS = {
       X.lines.push({ pts: stair, c: 'white', w: 2.4 });
       X.lines.push({ pts: [[beauty(mix).target, 0, 0], [beauty(mix).target, top, 0]], c: 'madder', w: 2 });
       X.tags.push({ text: 'level 1 reasons one step', at: [LEVELS[1].guess, 0.3, hk[1]] }, { text: 'Nash: the top of a staircase few climb', at: [0, 0.3, hk[4]], c: 'madder' }, { text: 'reasoning level, as height', at: [100, 0, 0.25] });
+      X.dims.push({ from: [100, 0, 0], to: [100, 0, hk[4]], text: 'level 0 … Nash' });
+      // the players, level 0 at the front of the room and Nash at the back
+      X.crowd = { asset: 'person_crowd', items: mix.flatMap((m, lv) => Array.from({ length: m }, (_, j) => ({ s: 0.055, ry: jitter(lv * 10 + j) }))) };
       return X;
     },
   },
@@ -119,6 +137,8 @@ export const CONSTRUCTS = {
       const s = data.state.shock;
       const pos = ringPos(10);
       const k = 0.06;
+      const banks = [];
+      let last = 0;
       for (const [cx, complete] of [[0.5, false], [1.7, true]]) {
         const r = contagion(s, complete);
         const at = (i) => [cx + 0.38 * pos[i][0], 0.5 + 0.42 * pos[i][1], r[i] * k];
@@ -131,12 +151,17 @@ export const CONSTRUCTS = {
         X.segs.push({ segs: r.map((v, i) => [[...at(i).slice(0, 2), 0], at(i)]).filter((q) => q[1][2] > 0), c: 'madder', w: 1.4, o: 0.6 });
         r.forEach((v, i) => {
           X.points.push({ at: at(i), c: v ? 'madder' : 'cobalt', size: 9 });
-          X.agents.push({ asset: 'bank', at: at(i), scale: 0.03 });
+          banks.push({ s: 0.07, side: complete ? 'right' : 'left', fall: v > 0, round: v });
         });
-        const last = Math.max(...r);
-        if (last) X.tags.push({ text: complete ? `all at once, round ${last}` : `one after another, to round ${last}`, at: at(r.indexOf(last)), c: 'madder' });
+        const end = Math.max(...r);
+        last = Math.max(last, end);
+        if (end) X.tags.push({ text: complete ? `all at once, round ${end}` : `one after another, to round ${end}`, at: at(r.indexOf(end)), c: 'madder' });
       }
       X.tags.push({ text: 'the round a bank fails, as height', at: [0, 1, 0.3] });
+      if (last) X.dims.push({ from: [2.2, 0, 0], to: [2.2, 0, last * k], text: `round 1 … ${last}` });
+      // the banks themselves stand in the room: each ring of the drawing on its own
+      // side of the page, and a failed bank falls in the round it fails
+      X.crowd = { asset: 'bank', items: banks };
       return X;
     },
   },
