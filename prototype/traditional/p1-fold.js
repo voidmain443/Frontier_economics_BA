@@ -19,7 +19,8 @@ function column(out, x0, x1, y, dy, h, c, alpha = 0.35, o = {}) {
 }
 // keep a polyline inside a y range by dropping points outside it
 const clipY = (pts, y0, y1) => pts.map((p) => (p[1] >= y0 - 1e-9 && p[1] <= y1 + 1e-9 ? p : [NaN, NaN, NaN]));
-const blank = () => ({ surfaces: [], quads: [], lines: [], points: [], tags: [], eqs: [], agents: [] });
+// dims: a dimension line along the raised axis, { from, to, text }
+const blank = () => ({ surfaces: [], quads: [], lines: [], points: [], tags: [], eqs: [], agents: [], dims: [] });
 const series = (data, file, key) => Object.fromEntries(data?.[file]?.series.find((s) => s.key === key)?.points ?? []);
 
 export const CONSTRUCTS = {
@@ -38,6 +39,7 @@ export const CONSTRUCTS = {
       for (const I of [1.1, 1.2, 1.3, 1.4]) X.lines.push(line([[10, 0, hI(I)], [10.3, 0, hI(I)]], 'chalk', 1.2));
       X.tags.push({ text: 'income I', at: [10, 0, hI(1.4) + 0.02] }, { text: 'D′, I = 1.2', at: [0.4, 11.6, hI(1.2)], c: 'cobalt' }, { text: 'equilibria', at: [6.5, 7.5, hI(1.4)] }, { text: 'supply does not move', at: [9.6, 10.6, hI(1.4)], c: 'madder' });
       X.eqs.push({ html: 'Q = 10I − P', at: [0.5, 14, hI(1.4)] });
+      X.dims.push({ from: [10, 0, 0], to: [10, 0, hI(1.4)], text: 'I = 1 … 1.4' });
       return X;
     },
   },
@@ -57,6 +59,7 @@ export const CONSTRUCTS = {
       for (const [i, g] of [[7, 5], [8, 3], [9, 1]]) column(X, i + 0.2, i + 0.8, 10, 0.35, g * k, 'madder', 0.08, { o: 0.6 });
       X.tags.push({ text: 'buyers keep 24.5', at: [3.5, 16, 3.5 * k], c: 'cobalt' }, { text: 'sellers keep 24.5', at: [3.5, 3.5, 3.5 * k], c: 'olive' },
         { text: 'the state takes 42', at: [6.5, 10, 6 * k], c: 'ochre' }, { text: 'lost: 5 + 3 + 1', at: [9.5, 10, 1 * k], c: 'madder' });
+      X.dims.push({ from: [0.2, 19.5, 0], to: [0.2, 19.5, 6.5 * k], text: 'first buyer keeps 6.5' });
       return X;
     },
   },
@@ -76,6 +79,7 @@ export const CONSTRUCTS = {
       X.quads.push(flat(0, 0, 4.25, 5.5, hs(1), 'ochre', 0.1, { w: 1.4 }));
       X.points.push({ at: [4.9, 5.5, 0], c: 'ochre' }, { at: [4.25, 5.5, hs(1)], c: 'ochre' });
       X.tags.push({ text: 'five years: R = 23.4', at: [4.25, 5.5, hs(1)], c: 'ochre' }, { text: 'time to adjust', at: [8.5, 5 - 3.5 / eps(1), hs(1)] });
+      X.dims.push({ from: [12, 0, 0], to: [12, 0, hs(1)], text: 'first month … five years' });
       return X;
     },
   },
@@ -93,6 +97,7 @@ export const CONSTRUCTS = {
       X.agents.push({ asset: 'household', at: [6, 6, 6 * k], scale: 0.06 });
       X.tags.push({ text: 'utility', at: [14, 14, 14 * k] }, { text: 'the budget, a fence', at: [1, 11, 0.04], c: 'madder' });
       X.eqs.push({ html: '∇u = λ∇g', at: [7.5, 7.5, 6 * k + 0.03] });
+      X.dims.push({ from: [14, 0, 0], to: [14, 0, 6 * k], text: 'u = 6 at the best bundle' });
       return X;
     },
   },
@@ -110,6 +115,7 @@ export const CONSTRUCTS = {
         X.points.push({ at: [x, 14, hp(p)], c });
       }
       X.tags.push({ text: 'price of x', at: [0, 14, hp(3.2) + 0.02] }, { text: 'p = 1', at: [6, 14, hp(1)] }, { text: 'p = 2', at: [3, 14, hp(2)], c: 'madder' }, { text: 'compensated', at: [4.24, 14, hp(2) + 0.04], c: 'cobalt' });
+      X.dims.push({ from: [14, 14, 0], to: [14, 14, hp(3.2)], text: 'p = 0 … 3.2' });
       return X;
     },
   },
@@ -130,6 +136,7 @@ export const CONSTRUCTS = {
       X.lines.push(post(6, 4.5, hr(0.6), 'white', { dash: false, o: 0.9 }));
       X.tags.push({ text: 'r = 0', at: [5.25, 5.25, 0] }, { text: 'r = 0.6', at: [4.41, 7.05, hr(0.6)] }, { text: 'interest rate', at: [6, 4.5, hr(0.6) + 0.02] });
       X.eqs.push({ html: 'u′(c<sub>1</sub>) = β(1 + r)u′(c<sub>2</sub>)', at: [7, 11, hr(0.6)] });
+      X.dims.push({ from: [12, 0, 0], to: [12, 0, hr(0.6)], text: 'r = 0 … 0.6' });
       return X;
     },
   },
@@ -154,6 +161,7 @@ export const CONSTRUCTS = {
       });
       X.lines.push(line(tan, 'white', 2.4));
       X.tags.push({ text: 'plant size K', at: [10, 5.2, 0.27] }, { text: 'touches the envelope once', at: [2, L(2), 0.01], c: 'cobalt' });
+      X.dims.push({ from: [12, 1.5, 0], to: [12, 1.5, 0.24], text: 'five plant sizes' });
       return X;
     },
   },
@@ -178,6 +186,7 @@ export const CONSTRUCTS = {
       X.lines.push(line(path, 'white', 2.8));
       for (const p of path) X.points.push({ at: p });
       X.tags.push({ text: 'firms enter', at: path[4] });
+      X.dims.push({ from: [60, 0, 0], to: [60, 0, hN(7)], text: 'N = 3 … 7 firms' });
       return X;
     },
   },

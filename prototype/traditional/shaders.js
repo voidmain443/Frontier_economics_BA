@@ -61,10 +61,11 @@ fn ribbonNormal(spx: f32) -> vec3f {
   return d[0] * sin(phi) + d[1] * cos(phi);
 }
 
-// space 0: world. space 1: figure-local (a, b in the plot box, h in plot widths).
+// space 0: world, moved by box.xyz (the building is placed this way).
+// space 1: figure-local (a, b in the plot box, h in plot widths).
 // hs scales heights, so a construct can grow out of the page.
 fn toWorld(p: vec3f, box: vec4f, space: f32, hs: f32) -> vec3f {
-  if (space < 0.5) { return p; }
+  if (space < 0.5) { return p + box.xyz; }
   let xp = mix(box.x, box.z, p.x);
   let sp = mix(box.w, box.y, p.y);
   return ribbonPos(xp, sp) + ribbonNormal(sp) * (p.z * hs * (box.z - box.x) * cam.px);

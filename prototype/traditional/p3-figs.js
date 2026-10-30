@@ -5,21 +5,24 @@ import { plot } from './figures.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
+// The order of rooms on each floor is the building's plan (docs/world.md): a
+// figure that spans two rooms rises where they meet, so rooms that share a
+// figure stand next to each other or one above the other.
 export const LAYERS = [
   { name: 'Methods', c: 'chalk', rooms: [
     ['Optimization', 'course.html?c=math'], ['Equilibrium', 'course.html?c=micro'], ['Strategy', 'course.html?c=games'],
     ['Measurement', 'course.html?c=metrics'], ['Computation', 'https://quantecon.org/'], ['History', 'course.html?c=history']] },
   { name: 'Institutions', c: 'olive', rooms: [
-    ['Property', 'course.html?c=development'], ['Contracts', 'course.html?c=micro'], ['Regulation', 'course.html?c=io'],
-    ['Taxes', 'course.html?c=public'], ['Policy rules', 'course.html?c=macro'], ['Networks', 'beyond.html#b1']] },
+    ['Property', 'course.html?c=development'], ['Taxes', 'course.html?c=public'], ['Contracts', 'course.html?c=micro'],
+    ['Regulation', 'course.html?c=io'], ['Policy rules', 'course.html?c=macro'], ['Networks', 'beyond.html#b1']] },
   { name: 'Markets', c: 'ochre', rooms: [
-    ['Goods', 'course.html?c=principles'], ['Labor', 'course.html?c=labor'], ['Money', 'course.html?c=banking'],
-    ['Capital', 'course.html?c=finance'], ['Foreign exchange', 'course.html?c=intlfin'], ['Land and air', 'course.html?c=environmental']] },
+    ['Capital', 'course.html?c=finance'], ['Goods', 'course.html?c=principles'], ['Money', 'course.html?c=banking'],
+    ['Labor', 'course.html?c=labor'], ['Foreign exchange', 'course.html?c=intlfin'], ['Land and air', 'course.html?c=environmental']] },
+  // agents carry the maquette that stands in their room
   { name: 'Agents', c: 'cobalt', rooms: [
-    ['Households', 'course.html?c=micro'], ['Firms', 'course.html?c=io'], ['Banks', 'course.html?c=banking'],
-    ['Governments', 'course.html?c=public'], ['Central banks', 'course.html?c=macro'], ['Other countries', 'course.html?c=trade']] },
+    ['Firms', 'course.html?c=io', 'firm'], ['Households', 'course.html?c=micro', 'household'], ['Banks', 'course.html?c=banking', 'bank'],
+    ['Central banks', 'course.html?c=macro', 'central_bank'], ['Other countries', 'course.html?c=trade', 'rest_of_world'], ['Governments', 'course.html?c=public', 'government']] },
 ];
-export const AGENT_ASSETS = ['household', 'firm', 'bank', 'government', 'central_bank', 'rest_of_world'];
 
 const FILL = { chalk: 'f-hatch', olive: 'f-olive', ochre: 'f-ochre', cobalt: 'f-cobalt' };
 

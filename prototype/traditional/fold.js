@@ -1,13 +1,16 @@
-// The one 3D mode (docs/redesign.md): the page you are reading folds into a ribbon
-// in space, and as each figure reaches the reading line, the axis it holds fixed
-// rises out of the paper in place. Fold it back and you are on the same page.
+// The one 3D mode (docs/redesign.md, docs/world.md): the page you are reading
+// folds into a ribbon in space, and as each figure reaches the reading line, the
+// axis it holds fixed rises out of the paper in place. On a page with a world,
+// that space is the archive building: the page runs through its rooms, and each
+// figure rises in the room it belongs to. Fold it back and you are on the same page.
 //
-// The renderer, ribbon and capture are in gpu.js; everything a figure
-// raises comes from a construct registry in figure-local coordinates:
-// (a, b) in the plot box, h in plot widths.
+// The renderer, ribbon and capture are in gpu.js, the building in world.js;
+// everything a figure raises comes from a construct registry in figure-local
+// coordinates: (a, b) in the plot box, h in plot widths.
 
 import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
 import { loadAssets } from './maquettes.js';
+import { ROOMS, FH, placeOf, roomGeometry, routeAt } from './world.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -32,6 +35,19 @@ export const COL = {
   chalk: [0.86, 0.91, 0.96],
   white: [1, 1, 1],
 };
+const PAPER_RGB = [0.933, 0.949, 0.918];
+// the sheet's thickness, world units
+const PAPER = 0.01;
+// a stage title is the printed heading raised off the page in this many layers
+const TITLE_LAYERS = 14;
+const TITLE_DEPTH = 0.022;
+// the ruler counts reading time: words at WPM a minute, and FIG_MIN per figure
+const WPM = 220;
+const FIG_MIN = 0.5;
+// dragging turns the view about the reading point, within these angles
+// (radians); scrolling brings it back at BACK per second
+const ORBIT = { az: 1.05, lo: -0.17, hi: 0.87, back: 6, key: 0.08 };
+const SVGNS = 'http://www.w3.org/2000/svg';
 const PLASTER = [0.95, 0.945, 0.92, 1];
 const SHADE = [0.7, 0.73, 0.72, 1];
 const MATTE = [0.04, 1, 0, 0];
@@ -41,7 +57,51 @@ const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 const scl = (a, k) => [a[0] * k, a[1] * k, a[2] * k];
 const unit = (a) => scl(a, 1 / (Math.hypot(a[0], a[1], a[2]) || 1));
 
-export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, onChange }) {
+// CSS matrix3d that lays a w × h element onto the screen quad p0..p3
+// (top left, top right, bottom right, bottom left)
+function quadMatrix(w, h, [p0, p1, p2, p3]) {
+  const dx1 = p1[0] - p2[0];
+  const dx2 = p3[0] - p2[0];
+  const dy1 = p1[1] - p2[1];
+  const dy2 = p3[1] - p2[1];
+  const sx = p0[0] - p1[0] + p2[0] - p3[0];
+  const sy = p0[1] - p1[1] + p2[1] - p3[1];
+  const den = dx1 * dy2 - dx2 * dy1;
+  const g = (sx * dy2 - dx2 * sy) / den;
+  const k = (dx1 * sy - sx * dy1) / den;
+  const a = p1[0] - p0[0] + g * p1[0];
+  const b = p3[0] - p0[0] + k * p3[0];
+  const d = p1[1] - p0[1] + g * p1[1];
+  const e = p3[1] - p0[1] + k * p3[1];
+  return `matrix3d(${[a / w, d / w, 0, g / w, b / h, e / h, 0, k / h, 0, 0, 1, 0, p0[0], p0[1], 0, 1].map((v) => v.toFixed(6)).join(',')})`;
+}
+
+// Reading time down the sheet: [page y, minutes so far] after every text block
+// and figure.
+function readingTimes(sheet) {
+  const marks = [];
+  let t = 0;
+  const skip = (n) => (n.nodeType === 1 && n.matches('svg, .fig-art, .zones') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
+  const walk = document.createTreeWalker(sheet, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, { acceptNode: skip });
+  for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+    if (n.nodeType === 1) {
+      if (n.matches('figure[data-fig]')) {
+        t += FIG_MIN;
+        marks.push([n.getBoundingClientRect().bottom + scrollY, t]);
+      }
+      continue;
+    }
+    const words = n.textContent.split(/\s+/).filter(Boolean).length;
+    if (!words) continue;
+    t += words / WPM;
+    marks.push([n.parentElement.getBoundingClientRect().bottom + scrollY, t]);
+  }
+  marks.sort((a, b) => a[0] - b[0]);
+  for (let i = 1; i < marks.length; i++) marks[i][1] = Math.max(marks[i][1], marks[i - 1][1]);
+  return marks;
+}
+
+export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, onChange }) {
   if (!htmlInCanvasSupport()) return { supported: false, reason: 'This browser cannot draw HTML into WebGPU textures yet (HTML-in-Canvas).' };
   const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
   if (!adapter) return { supported: false, reason: 'No WebGPU adapter is available.' };
@@ -52,7 +112,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   gctx.configure({ device, format, alphaMode: 'premultiplied' });
   const G = makeGpu(device, format);
 
-  const st = { t: 0, target: 0, captured: false, busy: false, running: false, tiles: [], scene: null, sheetBox: null, last: 0, time: 0, mouse: [0, 0] };
+  const st = { t: 0, target: 0, captured: false, busy: false, running: false, tiles: [], scene: null, sheetBox: null, last: 0, time: 0, mouse: [0, 0], orbit: [0, 0], drag: null, returning: false };
 
   // ---- capture: the sheet, cloned into the canvas and copied in tiles ----
   let pending = null;
@@ -145,32 +205,11 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   function buildScene() {
     G.freeScene();
     labelsRoot.replaceChildren();
-    const sc = { objs: [], labels: [], agents: [] };
+    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], world: null };
     const sb = st.sheetBox;
     const H = sb[3] - sb[1];
     const bOf = (s) => 1 - (s - sb[1]) / H;
     const always = { center: null };
-
-    // ribbon edges, ticks every 250 px, a faint grid off the page
-    const edge = [];
-    const tick = [];
-    const step = 40 / H;
-    for (let b = 0; b < 1; b += step) edge.push([[0, b, 0], [0, Math.min(1, b + step), 0]], [[1, b, 0], [1, Math.min(1, b + step), 0]]);
-    for (let s = 0; s < H; s += 250) {
-      const b = bOf(sb[1] + s);
-      const long = s % 1000 === 0 ? 0.03 : 0.014;
-      tick.push([[-long, b, 0], [0, b, 0]], [[1, b, 0], [1 + long, b, 0]]);
-    }
-    const grid = [];
-    const gstep = 80 / H;
-    for (let i = 1; i <= 10; i++) for (const a of [-0.1 * i, 1 + 0.1 * i]) for (let b = 0; b < 1; b += gstep) grid.push([[a, b, 0], [a, Math.min(1, b + gstep), 0]]);
-    for (let s = 0; s < H; s += 400) {
-      const b = bOf(sb[1] + s);
-      grid.push([[-1.0, b, 0], [-0.02, b, 0]], [[1.02, b, 0], [2.0, b, 0]]);
-    }
-    sc.objs.push({ o: G.lines(grid, sb, COL.chalk, 1, 0.12), group: always, kind: 'grid' });
-    sc.objs.push({ o: G.lines(edge, sb, COL.chalk, 1.4, 0.75), group: always, kind: 'edge' });
-    sc.objs.push({ o: G.lines(tick, sb, COL.chalk, 1.2, 0.6), group: always, kind: 'edge' });
 
     // a label with an href is a door: it can be followed from the folded page
     const label = (html, cls, local, box, group, href = null) => {
@@ -180,7 +219,53 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (href) el.href = href;
       labelsRoot.appendChild(el);
       sc.labels.push({ el, local, box, group, link: Boolean(href) });
+      return sc.labels[sc.labels.length - 1];
     };
+
+    // the sheet: its edges and its thickness, and, without a world to stand
+    // in, a faint drafting grid off the page
+    const edge = [];
+    const side = [];
+    const step = 40 / H;
+    const th = -PAPER / ((sb[2] - sb[0]) * PX);
+    for (let b = 0; b < 1; b += step) {
+      const b2 = Math.min(1, b + step);
+      edge.push([[0, b, 0], [0, b2, 0]], [[1, b, 0], [1, b2, 0]]);
+      for (const a of [0, 1]) side.push(quadVerts([[a, b, 0], [a, b2, 0], [a, b2, th], [a, b, th]]));
+    }
+    const sideV = new Float32Array(side.reduce((n, q) => n + q.length, 0));
+    side.reduce((off, q) => { sideV.set(q, off); return off + q.length; }, 0);
+    sc.objs.push({ o: G.mesh(sideV, sb, PAPER_RGB, 4.5, 0), group: always, kind: 'edge' });
+    sc.objs.push({ o: G.lines(edge, sb, COL.chalk, 1.4, 0.75), group: always, kind: 'edge' });
+    if (!world) {
+      const grid = [];
+      const gstep = 80 / H;
+      for (let i = 1; i <= 10; i++) for (const a of [-0.1 * i, 1 + 0.1 * i]) for (let b = 0; b < 1; b += gstep) grid.push([[a, b, 0], [a, Math.min(1, b + gstep), 0]]);
+      for (let s = 0; s < H; s += 400) {
+        const b = bOf(sb[1] + s);
+        grid.push([[-1.0, b, 0], [-0.02, b, 0]], [[1.02, b, 0], [2.0, b, 0]]);
+      }
+      sc.objs.push({ o: G.lines(grid, sb, COL.chalk, 1, 0.12), group: always, kind: 'grid' });
+    }
+
+    // the ruler down the left edge counts reading time: a tick a minute, a
+    // number every five
+    const marks = readingTimes(sheet);
+    const tick = [];
+    for (let m = 1, i = 0; i < marks.length; m++) {
+      while (i < marks.length && marks[i][1] < m) i++;
+      if (i >= marks.length) break;
+      const b = bOf(marks[i][0]);
+      const long = m % 5 === 0;
+      tick.push([[long ? -0.03 : -0.014, b, 0], [-0.004, b, 0]]);
+      if (long) label(`${m}<i> min</i>`, 'ruler', [-0.036, b, 0], sb, { center: marks[i][0] }).ruler = true;
+    }
+    sc.objs.push({ o: G.lines(tick, sb, COL.chalk, 1.2, 0.7), group: always, kind: 'edge' });
+
+    // leader lines from the margin callouts to the axis each figure raises
+    const leaders = document.createElementNS(SVGNS, 'svg');
+    leaders.setAttribute('class', 'leaders');
+    labelsRoot.appendChild(leaders);
 
     // stage titles stand in the margin beside their headings
     for (const stg of sheet.querySelectorAll('.stage[data-no]')) {
@@ -188,9 +273,21 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const r = h2.getBoundingClientRect();
       const box = [r.left + scrollX, r.top + scrollY, r.right + scrollX, r.bottom + scrollY];
       const no = h2.querySelector('.no')?.textContent ?? '';
-      label(`<span>${no}</span>${h2.textContent.replace(no, '').trim()}`, 'chapter', [-0.17, 0.5, 0.01], box, { center: box[1] });
-      sc.labels[sc.labels.length - 1].chapter = true;
+      label(`<span>${no}</span>${h2.textContent.replace(no, '').trim()}`, 'chapter', [-0.17, 0.5, 0.01], box, { center: box[1] }).chapter = true;
+      // the printed heading, raised off the page as extruded type
+      const layers = [];
+      for (let i = 0; i < TITLE_LAYERS; i++) {
+        const el = document.createElement('h2');
+        el.className = `xl title${i === TITLE_LAYERS - 1 ? ' top' : i === 0 ? ' base' : ''}`;
+        el.innerHTML = h2.innerHTML;
+        const cs = getComputedStyle(h2);
+        Object.assign(el.style, { width: `${r.width}px`, height: `${r.height}px`, font: cs.font, letterSpacing: cs.letterSpacing, padding: cs.padding, margin: '0' });
+        labelsRoot.appendChild(el);
+        layers.push(el);
+      }
+      sc.titles.push({ box, layers, w: r.width, h: r.height, center: (box[1] + box[3]) / 2 });
     }
+    const stops = [];
 
     // figures raise their held-fixed axis over their plot box; other marked
     // elements (data-fold) raise theirs over their own box
@@ -245,6 +342,57 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       for (const e of X.eqs ?? []) label(e.html, 'xeq', L(e.at), box, group);
       for (const t of X.tags ?? []) label(t.text, `tag ${t.c ?? ''}${t.href ? ' door' : ''}`, L(t.at), box, group, t.href);
       for (const a of X.agents ?? []) sc.agents.push({ name: a.asset, local: L(a.at), box, group, scale: a.scale ?? 0.05, ry: a.ry ?? 0 });
+      // a dimension line along the raised axis, with its name and range
+      for (const dm of X.dims ?? []) {
+        const p = L(dm.from);
+        const q = L(dm.to);
+        const t = 0.012;
+        const segs = [[p, q], [[p[0] - t, p[1], p[2]], [p[0] + t, p[1], p[2]]], [[q[0] - t, q[1], q[2]], [q[0] + t, q[1], q[2]]]];
+        sc.objs.push({ o: G.lines(segs, box, COL.chalk, 1.3, 0.95), group, kind: 'fig' });
+        label(dm.text, 'dim', [q[0] + 0.02, q[1], (p[2] + q[2]) / 2], box, group);
+      }
+      // the margin callout: the figure's number and what it holds fixed
+      const no = fig.querySelector('.fig-no');
+      if (no) {
+        const el = document.createElement('div');
+        el.className = 'xl callout';
+        const b = document.createElement('b');
+        b.textContent = no.textContent;
+        el.append(b);
+        const held = fig.querySelector('.held');
+        if (held) {
+          const s = document.createElement('span');
+          const i = document.createElement('i');
+          i.textContent = 'Held fixed';
+          s.append(i, ` ${held.textContent.replace(/^\s*Held fixed\s*/, '')}`);
+          el.append(s);
+        }
+        labelsRoot.appendChild(el);
+        const line = document.createElementNS(SVGNS, 'line');
+        leaders.appendChild(line);
+        const dm = X.dims?.[0];
+        const target = dm ? L(dm.from.map((v, k) => (v + dm.to[k]) / 2)) : [0.5, 0.5, 0];
+        sc.callouts.push({ el, line, group, box, target, x: sb[2] + 36 });
+      }
+      if (world?.[id]) stops.push({ c: group.center, p: placeOf(world[id]) });
+    }
+
+    // the building: every room's edges and floor plate, and its sign
+    if (world) {
+      stops.sort((a, b) => a.c - b.c);
+      const rooms = ROOMS.map((r) => {
+        const g = roomGeometry(r);
+        const lines = G.lines(g.edges, [0, 0, 0, 0], COL[r.c], 1.5, 1, false, 0);
+        const grid = G.lines(g.grid, [0, 0, 0, 0], COL[r.c], 1, 1, false, 0);
+        const plate = G.mesh(quadVerts(g.plate), [0, 0, 0, 0], COL[r.c], 1.1, 0);
+        plate.space = 0;
+        const sign = document.createElement('div');
+        sign.className = 'xl room';
+        sign.innerHTML = `<span>${r.layer}</span>${r.name}`;
+        labelsRoot.appendChild(sign);
+        return { r, lines, grid, plate, sign, at: g.sign, hang: g.hang };
+      });
+      sc.world = { stops, rooms };
     }
     return sc;
   }
@@ -256,6 +404,11 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     st.time += dt;
     st.t = clamp(st.t + (Math.sign(st.target - st.t) * dt) / DURATION, 0, 1);
     const e = ease(st.t);
+    if (st.returning && !st.drag) {
+      const k = REDUCED ? 1 : 1 - Math.exp(-dt * ORBIT.back);
+      st.orbit = st.orbit.map((v) => (Math.abs(v * (1 - k)) < 1e-3 ? 0 : v * (1 - k)));
+      if (!st.orbit[0] && !st.orbit[1]) st.returning = false;
+    }
     if (st.t === 0 && st.target === 0) {
       st.running = false;
       document.body.classList.remove('unfolded');
@@ -273,10 +426,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const T = CAM;
     const fov = (lerp(0.5, T.fov, e) * Math.PI) / 180;
     const hO = lerp(H * 0.5 * PX, T.h, e);
-    const el = lerp(0, T.el, e) + st.mouse[1] * 0.04 * e;
-    const az = st.mouse[0] * 0.1 * e;
+    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1]) * e, 0, 1.35);
+    const az = (st.mouse[0] * 0.1 + st.orbit[0]) * e;
     const target = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
-    const dist = hO / Math.tan(fov / 2);
+    // a turned view also steps back, so the room and its neighbours come into sight
+    const turned = Math.min(1, Math.hypot(st.orbit[0] / ORBIT.az, st.orbit[1] / ORBIT.hi));
+    const dist = (hO / Math.tan(fov / 2)) * (1 + 1.4 * turned * e);
     const eye = [target[0] + dist * Math.sin(az) * Math.cos(el), target[1] + dist * Math.sin(el), target[2] + dist * Math.cos(az) * Math.cos(el)];
     const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 6), dist + 40), lookAt(eye, target, [0, 1, 0])));
 
@@ -321,7 +476,73 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const sbx = st.sheetBox;
     const under = [];
     const over = [];
+    // the building moves so that the room of the figure being read surrounds
+    // the reading point
+    if (sc.world) {
+      const R = routeAt(sc.world.stops, P.focus, ease);
+      const O = [((sbx[0] + sbx[2]) / 2 - W / 2) * PX - R.at[0], -R.at[1], -R.at[2]];
+      // signs show for the rooms being read; once the view is turned, also for
+      // their neighbours on the same floor
+      const floor = R.at[1] / FH;
+      for (const w of sc.world.rooms) {
+        const k = R.weights.get(w.r.name) ?? 0;
+        w.lines.box = [...O, 0];
+        w.grid.box = [...O, 0];
+        w.plate.box = [...O, 0];
+        w.lines.opacity = appear * (0.18 + 0.72 * k);
+        w.grid.opacity = appear * (0.05 + 0.3 * k);
+        w.plate.opacity = appear * (0.35 + 0.65 * k);
+        under.push(w.plate, w.grid, w.lines);
+        const below = w.r.floor < floor - 0.5;
+        const at = add(below ? w.hang : w.at, O);
+        const level = k > 0.02 || (turned > 0.15 && Math.abs(w.r.floor - floor) < 0.5);
+        const pr = level && Math.hypot(at[0], at[1], at[2]) < 6 ? project(vp, at, W, H) : null;
+        const o = appear * (0.4 + 0.6 * k);
+        if (!pr || o < 0.02 || pr[0] < -200 || pr[0] > W + 200 || pr[1] < -60 || pr[1] > H + 60) {
+          w.sign.style.opacity = '0';
+          continue;
+        }
+        w.sign.style.opacity = String(o);
+        w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.6, 1.1).toFixed(3)}) translate(-100%, ${below ? '0' : '-100%'})`;
+      }
+    }
     for (const it of sc.objs) (it.kind === 'grid' || it.kind === 'edge' ? under : over).push(it.o);
+
+    // margin callouts, with a leader to the raised axis
+    for (const C of sc.callouts) {
+      const r = grow(C.group);
+      const o = appear * near(C.group) * smooth(0.5, 0.9, r);
+      const a = o > 0.02 ? project(vp, toWorld([0, 0, 0], [C.x, C.box[1], C.x, C.box[1]], P), W, H) : null;
+      const b = a ? project(vp, toWorld(C.target, C.box, P, ease(r) * LIFT), W, H) : null;
+      if (!a || !b) {
+        C.el.style.opacity = '0';
+        C.line.style.opacity = '0';
+        continue;
+      }
+      C.el.style.opacity = String(o);
+      C.el.style.transform = `translate(${a[0].toFixed(1)}px, ${a[1].toFixed(1)}px) scale(${clamp(1.6 / a[2], 0.6, 0.95).toFixed(3)}) translate(0, -50%)`;
+      C.line.setAttribute('x1', a[0].toFixed(1));
+      C.line.setAttribute('y1', a[1].toFixed(1));
+      C.line.setAttribute('x2', b[0].toFixed(1));
+      C.line.setAttribute('y2', b[1].toFixed(1));
+      C.line.style.opacity = String(o * 0.8);
+    }
+
+    // stage titles rise as extruded type while their heading is near the reading line
+    for (const T2 of sc.titles) {
+      const r = smooth(T2.center - 1400, T2.center - 400, P.focus) * (1 - smooth(T2.center + 250, T2.center + 700, P.focus));
+      const o = appear * r;
+      const depth = (TITLE_DEPTH * ease(r)) / ((T2.box[2] - T2.box[0]) * PX);
+      T2.layers.forEach((el2, i) => {
+        const q = o > 0.02 ? [[0, 1], [1, 1], [1, 0], [0, 0]].map(([a, b]) => project(vp, toWorld([a, b, (depth * i) / (T2.layers.length - 1)], T2.box, P), W, H)) : [null];
+        if (q.some((p) => !p)) {
+          el2.style.opacity = '0';
+          return;
+        }
+        el2.style.opacity = String(o);
+        el2.style.transform = quadMatrix(T2.w, T2.h, q);
+      });
+    }
     G.render({
       ctx: gctx,
       cam: { vp, eye, W: W * dpr, H: H * dpr, focus: P.focus, docW: W, t: e, time: st.time },
@@ -336,9 +557,9 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     });
 
     for (const L of sc.labels) {
-      const r = L.chapter ? 1 : grow(L.group);
+      const r = L.chapter || L.ruler ? 1 : grow(L.group);
       const pr = project(vp, toWorld(L.local, L.box, P, ease(r) * LIFT), W, H);
-      const o = appear * near(L.group) * (L.chapter ? 1 : smooth(0.55, 1, r));
+      const o = appear * near(L.group) * (L.chapter || L.ruler ? 1 : smooth(0.55, 1, r));
       if (!pr || o < 0.02 || pr[0] < -300 || pr[0] > W + 300 || pr[1] < -100 || pr[1] > H + 100) {
         L.el.style.opacity = '0';
         if (L.link) L.el.style.pointerEvents = 'none';
@@ -347,7 +568,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const sz = L.chapter ? clamp(2.3 / pr[2], 0.42, 1.25) : L.link ? clamp(1.5 / pr[2], 0.72, 0.95) : clamp(1.5 / pr[2], 0.4, 0.85);
       L.el.style.opacity = String(o);
       if (L.link) L.el.style.pointerEvents = o > 0.5 ? 'auto' : 'none';
-      const shift = L.chapter ? '-100%, -50%' : '0, -100%';
+      const shift = L.chapter || L.ruler ? '-100%, -50%' : '0, -100%';
       L.el.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${sz.toFixed(3)}) translate(${shift})`;
     }
     requestAnimationFrame(frame);
@@ -362,6 +583,38 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   addEventListener('mousemove', (ev) => {
     st.mouse = [(ev.clientX / innerWidth) * 2 - 1, (ev.clientY / innerHeight) * 2 - 1];
   });
+  // turning the view: drag anywhere on the space, or Alt and the arrow keys;
+  // scrolling on brings the view back to the reading point
+  const turnable = () => st.target === 1 && st.t > 0.98;
+  const turn = (az, el) => {
+    st.orbit = [clamp(az, -ORBIT.az, ORBIT.az), clamp(el, ORBIT.lo, ORBIT.hi)];
+    st.returning = false;
+  };
+  addEventListener('pointerdown', (ev) => {
+    if (!turnable() || ev.button !== 0 || ev.target.closest('a, button, input, nav, .titleblock')) return;
+    st.drag = { x: ev.clientX, y: ev.clientY, orbit: [...st.orbit] };
+    document.body.classList.add('turning');
+  });
+  addEventListener('pointermove', (ev) => {
+    if (st.drag) turn(st.drag.orbit[0] - (ev.clientX - st.drag.x) * 0.003, st.drag.orbit[1] + (ev.clientY - st.drag.y) * 0.0025);
+  });
+  const release = () => {
+    st.drag = null;
+    document.body.classList.remove('turning');
+  };
+  addEventListener('pointerup', release);
+  addEventListener('pointercancel', release);
+  addEventListener('keydown', (ev) => {
+    const d = { ArrowLeft: [1, 0], ArrowRight: [-1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[ev.key];
+    if (!d || !ev.altKey || !turnable()) return;
+    ev.preventDefault();
+    turn(st.orbit[0] + d[0] * ORBIT.key, st.orbit[1] + d[1] * ORBIT.key);
+  });
+  const back = () => {
+    if (!st.drag && (st.orbit[0] || st.orbit[1])) st.returning = true;
+  };
+  addEventListener('wheel', back, { passive: true });
+  addEventListener('scroll', back, { passive: true });
   // the layout changes with the window: capture again next time
   addEventListener('resize', () => {
     st.captured = false;
