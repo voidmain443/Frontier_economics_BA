@@ -2,7 +2,9 @@
 // p2-models.js; data.state holds the reader's settings for the live figures.
 
 import { plot } from './figures.js';
-import { SW, SW_PS, smallWorld, smallWorldCurve, distances, chainAndCore, chainLayout, coreLayout, preferential, LEVELS, beauty, contagion, fifths, io, rounds, excessScarf, excessOne, tatonnement, onSimplex, SIMPLEX, SCARF_P0 } from './p2-models.js';
+import { SW, SW_PS, smallWorld, smallWorldCurve, distances, chainAndCore, chainLayout, coreLayout, preferential, LEVELS, beauty, contagion, fifths, io, rounds, excessScarf, excessOne, tatonnement, onSimplex, SIMPLEX, SCARF_P0, METHODS, PUBLISHED, ARGUMENTS, NEEDS, PROJECTS } from './p2-models.js';
+import { LAYERS } from './p3-figs.js';
+import { CELLS } from './wheel.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const sv = (tag, attrs, parent) => {
@@ -314,6 +316,91 @@ export const FIGS = {
     p.note(0.08, 0.5, 'one representative consumer:', { cls: 'cb' });
     p.note(0.08, 0.5, 'straight to the centre', { dy: 16, cls: 'cb' });
   },
+  // what the top journals published, by method, 1963–2011
+  '2.11'(art) {
+    const p = P(art, { w: 760, h: 420, x: [1955, 2030], y: [0, 100], yl: '% of articles', zero: false, alt: 'Stacked bars for 1963 to 2011: pure theory falls from about half of all articles to a fifth; empirical work on the authors’ own data rises from 9 to 34 percent, and experiments from none to 8 percent.' });
+    for (const r of PUBLISHED) {
+      let y = 0;
+      for (const m of METHODS) {
+        const v = r[m.key];
+        if (v > 0) p.area([[r.y - 3, y], [r.y + 3, y], [r.y + 3, y + v], [r.y - 3, y + v]], '').style.fill = FILLS[m.c];
+        y += v;
+      }
+      p.pathPts([[r.y - 3, 0], [r.y + 3, 0], [r.y + 3, y], [r.y - 3, y], [r.y - 3, 0]], 'k thin');
+      p.label(r.y, 0, String(r.y), { anchor: 'middle', dy: 18, roman: true, cls: 'tick' });
+    }
+    // the legend, beside the last bar, each name at its band
+    let y = 0;
+    const last = PUBLISHED.at(-1);
+    for (const m of METHODS) {
+      const v = last[m.key];
+      p.area([[2016, y + v / 2 - 1.6], [2018, y + v / 2 - 1.6], [2018, y + v / 2 + 1.6], [2016, y + v / 2 + 1.6]], '').style.fill = FILLS[m.c];
+      p.note(2019, y + v / 2, m.name, { dy: 4 });
+      y += v;
+    }
+    p.note(1963, 50.7, '50.7', { anchor: 'middle', dy: -4, cls: 'halo' });
+    p.note(2011, 19.1, '19.1', { anchor: 'middle', dy: -4, cls: 'halo' });
+    ticks(p, { y: [0, 25, 50, 75, 100] });
+  },
+
+  // the old arguments, each as a state of the plan
+  '2.12'(art) {
+    const W = 940;
+    const H = 500;
+    const p = P(art, { w: W, h: H, x: [0, W], y: [H, 0], axes: false, pad: { l: 0, r: 0, t: 0, b: 0 }, alt: 'Eight small plans of the wheel, one for each argument about what economics is, from Menger and Schmoller in 1883 to the crisis of 2008, each showing which cells it moves, holds or leaves out and which it puts first.' });
+    ARGUMENTS.forEach((A, i) => {
+      const x0 = 14 + (i % 4) * 232;
+      const y0 = 10 + Math.floor(i / 4) * 250;
+      p.label(x0, y0 + 16, A.year, { roman: true, cls: 'room small' });
+      p.label(x0, y0 + 34, A.who, { roman: true, cls: 'room' });
+      p.label(x0, y0 + 52, A.short, { cls: 'note' });
+      miniPlan(p, x0, y0 + 66, A.state);
+    });
+    const ly = H - 14;
+    [['moving', FILLS.ochre, ''], ['put first', FILLS.ochreDeep, ''], ['held', null, 'hatch'], ['left out', null, 'out']].forEach(([t, f, k], j) => {
+      const x = 14 + j * 150;
+      const q = [[x, ly - 12], [x + 22, ly - 12], [x + 22, ly], [x, ly]];
+      if (f) p.area(q, '').style.fill = f;
+      if (k === 'hatch') p.area(q, '').style.fill = hatchOf(p.svg);
+      p.pathPts([...q, q[0]], k === 'out' ? 'k thin dash faint' : 'k thin');
+      p.note(x + 30, ly - 2, t);
+    });
+    p.note(620, ly - 2, 'rows, top to bottom: agents, markets, rules, methods');
+  },
+
+  // ten projects and the needs this part finds
+  '2.13'(art) {
+    const W = 940;
+    const H = 470;
+    const p = P(art, { w: W, h: H, x: [0, W], y: [H, 0], axes: false, pad: { l: 0, r: 0, t: 0, b: 0 }, alt: 'Ten projects that rebuild the teaching of economics as rows, and eight needs found in this part as columns. Every need but the last is met by at least one project; the last, a map of what each model holds, by none.' });
+    const x0 = 268;
+    const cw = 80;
+    const top = 120;
+    const rh = 32;
+    NEEDS.forEach((n, j) => {
+      const x = x0 + j * cw + cw / 2;
+      if (j === NEEDS.length - 1) p.area([[x - cw / 2 + 4, top - 6], [x + cw / 2 - 4, top - 6], [x + cw / 2 - 4, top + PROJECTS.length * rh], [x - cw / 2 + 4, top + PROJECTS.length * rh]], 'f-ochre');
+      const t = p.label(x - 6, top - 14, n, { roman: true, cls: 'note col' });
+      t.setAttribute('transform', `rotate(-32 ${p.X(x - 6).toFixed(1)} ${p.Y(top - 14).toFixed(1)})`);
+    });
+    PROJECTS.forEach((pr, i) => {
+      const y = top + i * rh + rh / 2;
+      p.line(10, y + rh / 2, x0 + NEEDS.length * cw, y + rh / 2, 'guide');
+      const t = p.label(12, y, pr.name, { dy: 5, roman: true, cls: 'room small' });
+      const a = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+      a.setAttribute('href', pr.href);
+      a.setAttribute('class', 'room-door');
+      t.parentNode.insertBefore(a, t);
+      a.appendChild(t);
+      if (pr.when) p.label(x0 - 12, y, pr.when, { anchor: 'end', dy: 5, cls: 'note' });
+      NEEDS.forEach((_, j) => {
+        const x = x0 + j * cw + cw / 2;
+        if (pr.needs.includes(j)) p.dot(x, y, 'k', 6);
+        else if (j === NEEDS.length - 1) p.ring(x, y, 'k dash', 6);
+      });
+    });
+    p.label(x0 + (NEEDS.length - 0.5) * cw, top + PROJECTS.length * rh + 24, 'none yet', { anchor: 'middle', roman: true, cls: 'note' });
+  },
 };
 
 export { SW_PS };
@@ -337,3 +424,48 @@ export const FINDINGS = [
   { y: 1998, who: 'Watts, Strogatz', what: 'small worlds', a: 'A2', part1: 'none', beat: 3 },
   { y: 2001, who: 'Axtell', what: 'Zipf’s law for firms', a: 'A1', part1: 'none', beat: 1 },
 ];
+
+// the fills of the methods and the small plans
+const FILLS = { chalk: 'rgba(31, 35, 30, 0.5)', violet: 'rgba(120, 90, 170, 0.55)', cobalt: 'rgba(42, 85, 160, 0.55)', ochre: 'rgba(168, 118, 28, 0.32)', ochreDeep: 'rgba(168, 118, 28, 0.75)', madder: 'rgba(176, 59, 59, 0.6)', olive: 'rgba(88, 118, 32, 0.45)' };
+let hatchN = 0;
+function hatchOf(svg) {
+  const id = `p2-held-${hatchN++}`;
+  const pat = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
+  Object.entries({ id, patternUnits: 'userSpaceOnUse', width: 5, height: 5, patternTransform: 'rotate(45)' }).forEach(([k, v]) => pat.setAttribute(k, v));
+  const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  Object.entries({ x1: 0, y1: 0, x2: 0, y2: 5, stroke: '#1f231e', 'stroke-width': 1, opacity: 0.6 }).forEach(([k, v]) => ln.setAttribute(k, v));
+  pat.appendChild(ln);
+  svg.querySelector('defs').appendChild(pat);
+  return `url(#${id})`;
+}
+// A small plan of the wheel (Figure 3.1's rings, agents on top) in a state:
+// moving cells filled, those put first filled deeper, held cells hatched,
+// cells left out dashed; dots of equal or unequal size for alike or unlike
+// agents, and a tie between households and firms when the state ties them
+function miniPlan(p, x0, y0, st) {
+  const names = CELLS.map((c) => c.name);
+  const moving = st.moving ? new Set(st.moving) : st.movingOf ? new Set(st.movingOf(names)) : null;
+  const held = new Map(st.stopped ?? []);
+  const lit = new Set(st.lit ?? []);
+  const hatch = hatchOf(p.svg);
+  const cw = 32;
+  const ch = 22;
+  const at = {};
+  [3, 2, 1, 0].forEach((L, r) => LAYERS[L].rooms.forEach(([name], i) => {
+    const x = x0 + i * cw;
+    const y = y0 + r * ch;
+    at[name] = [x + cw / 2, y + ch / 2];
+    const q = [[x + 1, y + 1], [x + cw - 1, y + 1], [x + cw - 1, y + ch - 1], [x + 1, y + ch - 1]];
+    const out = moving && !moving.has(name) && !held.has(name);
+    if (held.has(name)) p.area(q, '').style.fill = hatch;
+    else if (!out) p.area(q, '').style.fill = lit.has(name) ? FILLS.ochreDeep : FILLS.ochre;
+    p.pathPts([...q, q[0]], out ? 'k thin dash faint' : 'k thin');
+  }));
+  for (const name of ['Households', 'Firms']) {
+    const [cx, cy] = at[name];
+    [-8, 0, 8].forEach((dx, k) => p.dot(cx + dx, cy, 'k', st.unlike ? [1.4, 2.6, 4.2][k] : st.alike ? 2.4 : 2));
+  }
+  if (st.tied === true || (Array.isArray(st.tied) && st.tied.includes('households'))) p.line(at.Households[0] - 8, at.Households[1], at.Firms[0] + 8, at.Firms[1], 'md');
+  // what a held cell is held at, under the plan
+  [...held].filter(([, v]) => v).forEach(([name, v], k) => p.label(x0, y0 + 4 * ch + 14 + 14 * k, `${name}: ${v}`, { cls: 'note small' }));
+}

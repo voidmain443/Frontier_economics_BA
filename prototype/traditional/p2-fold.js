@@ -2,7 +2,7 @@
 // the flat drawing of what replaces it. Same conventions as p1-fold.js: data
 // units of the anchor drawing, plus a height h in plot widths.
 
-import { SW, smallWorld, distances, chainAndCore, chainLayout, coreLayout, cutPairs, preferential, LEVELS, beauty, contagion, fifths, io, rounds, excessScarf, excessOne, tatonnement, onSimplex, SCARF_P0 } from './p2-models.js';
+import { SW, smallWorld, distances, chainAndCore, chainLayout, coreLayout, cutPairs, preferential, LEVELS, beauty, contagion, fifths, io, rounds, excessScarf, excessOne, tatonnement, onSimplex, SCARF_P0, METHODS, PUBLISHED, ARGUMENTS, PROJECTS } from './p2-models.js';
 import { ringPos, FINDINGS } from './p2-figs.js';
 import { CELLS } from './wheel.js';
 import { MEASURED } from './ontology.js';
@@ -382,47 +382,76 @@ export const CONSTRUCTS = {
       return X;
     },
   },
-  // the one-curve explanation of 2022, and the economy it held still, on the wheel
+  // the price of oil in won, as height: what a one-curve answer flattens;
+  // then the one-curve answer and the economy of 2022, on the wheel
   '2.1': {
     dom: { x: [2020, 2025], y: [-1, 7] },
-    build() {
+    build(data) {
       const X = blank();
-      X.tags.push({ text: 'the rise a shifted curve is asked to explain', at: [2022.5, 6.33, 0], c: 'madder', show: [0, 1] });
+      const S = Object.fromEntries((data['rates-2022']?.series ?? []).map((x) => [x.key, Object.fromEntries(x.points)]));
+      const yr = (m) => Number(m.slice(0, 4)) + (Number(m.slice(5, 7)) - 1) / 12;
+      const months = Object.keys(S.kr_cpi ?? {}).filter((m) => m >= '2020-01' && m <= '2024-12' && S.brent?.[m] && S.krwusd?.[m]);
+      const won = (m) => S.brent[m] * S.krwusd[m];
+      const base = won('2021-01');
+      const k = 0.07;
+      const pts = months.map((m) => [yr(m), S.kr_cpi[m], (k * won(m)) / base]);
+      X.lines.push({ pts, c: 'madder', w: 2.4, show: [1], rise: 1 });
+      X.segs.push({ segs: pts.filter((_, i) => i % 3 === 0).map((q) => [[q[0], q[1], 0], q]), c: 'madder', w: 0.8, o: 0.45, show: [1], rise: 1 });
+      const top = pts.reduce((a2, q) => (q[2] > a2[2] ? q : a2), pts[0]);
+      X.tags.push({ text: `oil in won, ${((top[2] / k) * 100).toFixed(0)} (Jan 2021 = 100)`, at: top, c: 'ochre', show: [1, 2] });
+      X.dims.push({ from: [2025, -1, 0], to: [2025, -1, top[2]], text: 'Brent × won per dollar', ...UP });
       const oneCurve = { moving: new Set(['Goods', 'Equilibrium']), stopped: new Map([['Households', ''], ['Firms', '']]) };
-      X.model = (b) => [
+      X.model = (b2) => [
+        null,
         null,
         oneCurve,
         { lit: ['Other countries', 'Foreign exchange', 'Central banks', 'Goods'], tied: ['firms'], unlike: true, measured: 'Consumer prices <b>+6.3%</b><br><i>July 2022, a year earlier</i>' },
         { moving: oneCurve.moving, stopped: new Map([['Households', 'unlike households'], ['Firms', 'supply chains'], ['Other countries', 'oil $18 → $123'], ['Foreign exchange', '₩1,097 → ₩1,427 per $'], ['Central banks', 'base rate 0.5% → 3.5%']]) },
-      ][Math.min(b, 3)];
+      ][Math.min(b2, 4)];
       X.story = [
         { say: 'Korea, 2020–2024. Consumer prices rose 6.3 percent in the year to July 2022, the fastest since 1998, and the base rate followed, from 0.5 to 3.5 percent.' },
+        { say: 'Raise the inflation line by what a barrel of oil cost in won: the dollar price times the exchange rate. The path climbs to more than twice its 2021 height. The flat line on the page is its shadow, and a one-curve answer reads only the shadow.', cam: { az: -0.5, el: 0.15, zoom: 0.85, at: [2022.5, 3, 0.08] }, dur: 1.8 },
         { say: 'The usual explanation names one shift: demand recovered, so the demand curve moved out. On the wheel that answer is one market moving, the households and firms behind its curves held, and the rest left out.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
         { say: 'The economy that produced the rise moved all at once: oil from abroad, the exchange rate, the central bank, and firms tied to their suppliers.', beside: true, dur: 1.6 },
-        { say: 'Back to one curve, with what it held written on the cells it held: oil from 18 to 123 dollars a barrel, the won from 1,097 to 1,427 per dollar, the base rate from 0.5 to 3.5 percent. These are the values that moved most.', beside: true, dur: 1.4 },
+        { say: 'Back to one curve, with what it held written on the cells it held. These are the values that moved most.', beside: true, dur: 1.4 },
       ];
       return X;
     },
   },
 
-  // the findings the textbook set aside, and the wheel they would change
+  // the assumption each finding breaks, as height: the timeline folds into
+  // the rows of Part 3's Figure 3.4; then the findings on the wheel
   '2.2': {
-    dom: { x: [1872, 2012], y: [0, 1.1] },
+    dom: { x: [1872, 2012], y: [0, 1.12] },
     build() {
       const X = blank();
-      for (const f of FINDINGS) X.points.push({ at: [f.y, 0.14, 0.05], c: f.part1 === 'none' ? 'madder' : 'chalk', size: 9, show: [f.beat], rise: f.beat });
+      const LEVEL = { A1: 1, A2: 2, A3: 3, A4: 4, A6: 5, A7: 6 };
+      const NAME = { A1: 'a representative agent', A2: 'no connections', A3: 'price-taking', A4: 'full information', A6: 'consistent choice', A7: 'equilibrium at once' };
+      const k = 0.03;
+      for (const f of FINDINGS) {
+        const h = LEVEL[f.a] * k;
+        X.points.push({ at: [f.y, 0.14, h], c: f.part1 === 'none' ? 'madder' : 'chalk', size: 10, show: [1], rise: 1 });
+        X.segs.push({ segs: [[[f.y, 0.14, 0], [f.y, 0.14, h]]], c: f.part1 === 'none' ? 'madder' : 'chalk', w: 1, o: 0.6, show: [1], rise: 1 });
+      }
+      const rows = [];
+      for (const [a2, L] of Object.entries(LEVEL)) rows.push([[1880, 0.14, L * k], [2010, 0.14, L * k]]);
+      X.segs.push({ segs: rows, c: 'chalk', w: 0.8, o: 0.3, dash: true, show: [1], rise: 1 });
+      for (const [a2, L] of Object.entries(LEVEL)) X.tags.push({ text: `${a2} ${NAME[a2]}`, at: [2010, 0.14, L * k], c: a2 === 'A1' || a2 === 'A2' ? 'madder' : '', show: [1, 3] });
+      X.dims.push({ from: [1876, 0.14, 0], to: [1876, 0.14, 6 * k], text: 'the assumption it breaks', ...UP });
       X.model = (b) => [
+        null,
         null,
         { unlike: true, lit: ['Households', 'Firms'] },
         { unlike: true, lit: ['Strategy', 'Households', 'Equilibrium'] },
         { unlike: true, tied: ['households'], lit: ['Households'] },
         { alike: true, lit: ['Optimization', 'Equilibrium'] },
         { unlike: true, tied: true },
-      ][Math.min(b, 5)];
+      ][Math.min(b, 6)];
       X.story = [
         { say: 'Above, the years in which the textbook’s parts were built. Below, findings about what those parts leave out. Most were known while the textbook was being written.' },
-        { say: 'Pareto (1896): incomes follow a power law. Gibrat (1931): firms grow in proportion to their size. Zipf (1949): city sizes fall with rank like a power. No typical size describes them; on the wheel, the households and firms take unequal sizes.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
-        { say: 'Keynes (1936), von Neumann and Morgenstern (1944), Nash (1950), Simon (1955): people reason about one another, and only so far. Scarf (1960): prices need not settle. Of these, games and hidden quality entered the core.', beside: true, dur: 1.4 },
+        { say: 'Raise each finding to the assumption it breaks. The rows are the rows of Part 3’s table of assumptions. Two rows hold only red marks, findings Part 1 never takes in: a representative agent, and no connections.', cam: { az: -0.45, el: 0.16, zoom: 0.85, at: [1950, 0.3, 0.1] }, dur: 1.8 },
+        { say: 'Pareto (1896): incomes follow a power law. Gibrat (1931): firms grow in proportion to their size. Zipf (1949): city sizes fall with rank like a power. On the wheel, households and firms take unequal sizes.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
+        { say: 'Keynes (1936), von Neumann and Morgenstern (1944), Nash (1950), Simon (1955): people reason about one another, and only so far. Scarf (1960): prices need not settle. Games and hidden quality entered the core.', beside: true, dur: 1.4 },
         { say: 'Milgram (1967) and Granovetter (1973): people reach particular others, through a few steps and weak ties. The households are tied.', beside: true, dur: 1.4 },
         { say: 'For its readers, the textbook settled on what a student can solve by hand on one page: every agent of a kind the same size, anyone trading with anyone. On the wheel, what was found goes out again.', beside: true, dur: 1.6 },
         { say: 'This part puts it back, one assumption at a time.', beside: true, dur: 1.4 },
@@ -460,46 +489,96 @@ export const CONSTRUCTS = {
     },
   },
 
-  // the old arguments, each as a state of the wheel
+  // what economists publish, by method: the stack comes apart into rows,
+  // each method a row of columns as tall as its share
   '2.11': {
-    dom: { x: [0, 1], y: [0, 1] },
-    whole: true,
-    callout: false,
+    dom: { x: [1955, 2030], y: [0, 100] },
     build() {
       const X = blank();
-      const but = (out) => new Set(CELLS.map((c) => c.name).filter((n) => !out.includes(n)));
-      // (each position drawn on its own: the ties this part has made are set
-      // aside unless the argument is about them)
-      X.model = (b) => [
-        null,
-        { tied: false, lit: ['Optimization', 'Equilibrium', 'History', 'Property', 'Policy rules'] },
-        { tied: false, lit: ['Optimization'] },
-        { tied: false, moving: new Set(['Goods', 'Money', 'Households', 'Firms', 'Governments', 'Equilibrium']), stopped: new Map([['Labor', 'the money wage, given']]) },
-        { unlike: true, tied: false, lit: ['Goods', 'Households', 'Firms'] },
-        { alike: true, unlike: false, tied: false, measured: 'Predictions <b>tested</b><br><i>the assumptions, not</i>' },
-        { tied: false, lit: ['Households', 'Optimization', 'Policy rules', 'Central banks'] },
-        { unlike: true, tied: false, lit: ['Households', 'Firms'] },
-        { moving: but(['Banks']), tied: ['households', 'firms'] },
-        { tied: true, lit: ['Banks'] },
-      ][Math.min(b, 9)];
+      const k = 0.0042;
+      METHODS.forEach((m, j) => {
+        const cols = PUBLISHED.map((r) => ({ x0: r.y - 3, x1: r.y + 3, y0: 4 + j * 19, y1: 4 + j * 19 + 12, h: r[m.key] * k })).filter((c) => c.h > 0);
+        const { mesh, segs } = columns(cols, m.c === 'chalk' ? 'white' : m.c, 0.45);
+        X.meshes.push({ ...mesh, show: [1], rise: 1 });
+        X.segs.push({ ...segs, show: [1], rise: 1 });
+        X.tags.push({ text: m.name, at: [2016, 10 + j * 19, 0], c: m.c === 'chalk' ? '' : m.c, show: [1] });
+      });
+      X.tags.push({ text: 'theory: 50.7% → 19.1%', at: [1963, 10, 50.7 * k], show: [2] }, { text: 'own data 8.7% → 34.0%, experiments 0 → 8.2%', at: [2011, 67, 34 * k], c: 'ochre', show: [3] });
+      X.dims.push({ from: [2026, 0, 0], to: [2026, 0, 57.6 * k], text: 'share of articles, 0 … 58%', ...UP });
+      X.model = (b) => (b >= 4 ? { unlike: true, measured: 'Empirical articles <b>72%</b><br><i>top three journals, 2011</i>', lit: ['Measurement', 'Households', 'Firms'] } : null);
       X.story = [
-        { say: 'The arguments about what economics is, read as arguments about what a model should move and what it may hold still.' },
-        { say: '1883. Carl Menger: economics deduces general laws from choice. Gustav Schmoller: it studies the history and institutions of particular economies. The hub, or the rules and history.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.4 },
-        { say: '1890 and 1932. Marshall’s economics is the study of mankind in the ordinary business of life: the whole wheel. Robbins’s is behaviour as a relationship between ends and scarce means: one tool at its hub.', beside: true, dur: 1.4 },
-        { say: '1936. Keynes: employment is set by total spending, which can stay too low. He takes the money wage as given, and cutting it need not restore employment. The labour market is held; goods and money move.', beside: true, dur: 1.4 },
-        { say: '1945. Hayek: knowledge is dispersed among people who differ, prices carry it, and no planner can gather it. Unlike households and firms, joined by a market.', beside: true, dur: 1.4 },
-        { say: '1953. Friedman: a theory’s assumptions need not be realistic if its predictions are right. The classical wheel, every agent alike, judged only against the data.', beside: true, dur: 1.4 },
-        { say: '1976. Lucas: the rules that describe behaviour change when policy changes, so models must start from choices. Households choosing, under the central bank’s rules.', beside: true, dur: 1.4 },
-        { say: '1992. Kirman: whom does the representative individual represent? Unlike people can add up to a total that no one of them would choose.', beside: true, dur: 1.4 },
-        { say: '2008. The benchmark model behind much central-bank analysis, Smets and Wouters (2007), had no banks, and models that added credit did not tie banks to one another.', beside: true, dur: 1.4 },
-        { say: 'The crisis ran through both. Each argument proposes a different state of the same wheel.', beside: true, dur: 1.4 },
+        { say: 'Every full-length article in three top journals, one year in each decade, by method (Hamermesh 2013). On the page the methods are stacked, so only the bottom band can be followed.' },
+        { say: 'Take the stack apart. Each method stands in its own row, and each column is as tall as that method’s share of the year.', cam: { az: -0.5, el: 0.18, zoom: 0.85, at: [1987, 45, 0.08] }, dur: 1.8 },
+        { say: 'Theory was half of all articles in 1963 and more in 1983. By 2011 it was a fifth.', dur: 1.2 },
+        { say: 'Empirical work on data the authors collected themselves rose from 9 to 34 percent, and experiments from none to 8. In 2011 nearly three articles in four were empirical, and four in five had more than one author.', dur: 1.4 },
+        { say: 'On the wheel the measurement cell lights, and what it measures now is households and firms that are unlike one another.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
       return X;
     },
   },
 
-  // the five tasks, as operations on the wheel
+  // the old arguments, each as a state of the wheel
   '2.12': {
+    dom: { x: [0, 1], y: [0, 1] },
+    callout: false,
+    build() {
+      const X = blank();
+      const names = CELLS.map((c) => c.name);
+      const stateOfArg = (A) => {
+        const st = { ...A.state };
+        if (st.moving) st.moving = new Set(st.moving);
+        if (st.movingOf) st.moving = new Set(st.movingOf(names));
+        delete st.movingOf;
+        if (st.stopped) st.stopped = new Map(st.stopped);
+        return st;
+      };
+      X.model = (b) => (b >= 1 && b <= ARGUMENTS.length ? stateOfArg(ARGUMENTS[b - 1]) : b > ARGUMENTS.length ? { tied: true, lit: ['Banks'] } : null);
+      const say = {
+        1883: '1883. Menger: economics deduces general laws from choice. Schmoller: it studies the history and institutions of particular economies. The tools at the hub, or the rules and history.',
+        '1890, 1932': '1890 and 1932. Marshall’s economics is the study of mankind in the ordinary business of life: the whole wheel. Robbins’s is behaviour as a relationship between ends and scarce means: one tool at the hub.',
+        1936: '1936. Keynes: employment is set by total spending, which can stay too low. He takes the money wage as given, and cutting it need not restore employment. The labour market is held; goods and money move.',
+        1945: '1945. Hayek: knowledge is dispersed among people who differ, prices carry it, and no planner can gather it. Unlike households and firms, joined by a market.',
+        1953: '1953. Friedman: a theory’s assumptions need not be realistic if its predictions are right. The classical wheel, every agent alike, judged only by measurement.',
+        1976: '1976. Lucas: the rules that describe behaviour change when policy changes, so models must start from choices. Households choosing, under the central bank’s rules.',
+        1992: '1992. Kirman: whom does the representative individual represent? Unlike people can add up to a total that none of them would choose.',
+        2008: '2008. The benchmark model behind much central-bank analysis, Smets and Wouters (2007), had no banks, and models that added credit did not tie banks to one another.',
+      };
+      X.story = [
+        { say: 'Eight arguments about what economics is and how it should model, each drawn on the page as a small plan of the wheel.' },
+        ...ARGUMENTS.map((A, i) => ({ say: say[A.year], beside: true, dur: 1.4, ...(i === 0 ? { cam: { az: 0, el: 0, zoom: 1, at: null } } : {}) })),
+        { say: 'The crisis ran through banks tied to one another. Each argument proposes a different state of the same wheel.', beside: true, dur: 1.4 },
+      ];
+      return X;
+    },
+  },
+
+  // the projects, each lighting what it adds to the wheel
+  '2.13': {
+    dom: { x: [0, 1], y: [0, 1] },
+    callout: false,
+    build() {
+      const X = blank();
+      const groups = [
+        { names: ['Post-Crash Economics Society', 'ISIPE open letter'], say: 'Students first. After 2008 the Post-Crash Economics Society in Manchester, and then student groups in thirty countries, asked for real problems, history, money and banking, and more than one school.' },
+        { names: ['CORE, The Economy'], say: 'Teachers built CORE: each unit starts from a problem, inequality first, with data, strategic interaction and power from the first week.' },
+        { names: ['Rebuilding Macroeconomic Theory'], say: 'Macroeconomists asked for four changes to the benchmark model: banks and finance, limits on rational expectations, unlike agents, and better foundations.' },
+        { names: ['Opportunity Insights course', 'Causal Inference: The Mixtape'], say: 'Others start from data: an introductory course built on records of millions of people, and a textbook of research designs.' },
+        { names: ['QuantEcon', 'Complexity Explorer', 'The Evolution of Trust', 'Exploring Economics'], say: 'Others make the models run as code, simulate agents in networks, let readers play the games, and set the schools side by side.' },
+      ];
+      const lit = (g) => [...new Set(PROJECTS.filter((pr) => g.names.includes(pr.name)).flatMap((pr) => pr.lit))];
+      X.model = (b) => (b >= 1 && b <= groups.length ? { lit: lit(groups[b - 1]) } : b > groups.length ? { moving: new Set(['Goods', 'Equilibrium']), stopped: new Map([['Households', ''], ['Firms', ''], ['Labor', 'income I = 1']]) } : null);
+      X.story = [
+        { say: 'Ten projects that rebuild the teaching of economics, against the needs this part has found. Each mark is what a project sets out to add.' },
+        ...groups.map((g, i) => ({ say: g.say, beside: true, dur: 1.4, ...(i === 0 ? { cam: { az: 0, el: 0, zoom: 1, at: null } } : {}) })),
+        { say: 'Every need is met somewhere, and one is met nowhere: a common map on which any model, classical or modern, shows what it moves, what it holds still and what it leaves out. Part 3 draws that map.', beside: true, dur: 1.6 },
+      ];
+      return X;
+    },
+  },
+
+  // the five tasks, as operations on the wheel; then the whole of Part 2's
+  // change, and the step to Part 3
+  '2.14': {
     dom: { x: [0, 1], y: [0, 1] },
     whole: true,
     callout: false,
@@ -513,8 +592,10 @@ export const CONSTRUCTS = {
         { measured: MEASURED, lit: ['Measurement'] },
         { lit: ['Computation'] },
         { lit: ['History'] },
-        null,
-      ][Math.min(b, 6)];
+        { alike: true, unlike: false, tied: false, moving: new Set(all.filter((n) => n !== 'Networks' && n !== 'Computation')) },
+        { unlike: true, tied: true },
+        { moving: new Set(['Households', 'Optimization']), stopped: new Map([['Goods', 'the price of x'], ['Labor', 'income I']]) },
+      ][Math.min(b, 8)];
       X.story = [
         { say: 'Five tasks recur in everything above. Each is an operation on the wheel.' },
         { say: 'Say what is held. Every model holds something still; name it and its value, as Part 1 named each figure’s hidden axis.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.4 },
@@ -522,7 +603,9 @@ export const CONSTRUCTS = {
         { say: 'Measure with a design. A pattern in data is not a relationship until the design separates cause from coincidence.', beside: true, dur: 1.4 },
         { say: 'Compute when the page cannot solve. Unlike, connected agents are solved by simulation, and the simulation is part of the argument.', beside: true, dur: 1.4 },
         { say: 'Keep history. The networks, the distributions and the rules change, and a model fits a period that should be stated.', beside: true, dur: 1.4 },
-        { say: 'Part 3 builds its archive on these five: every model in it says what it moves, what it holds, what it leaves out and what it assumes.' },
+        { say: 'Part 1’s wheel, as it left it: every agent of a kind alike, nobody tied to anybody, two cells empty.', beside: true, dur: 1.6 },
+        { say: 'Part 2’s wheel: the same cells, every one built, its agents unlike and tied. Neither replaces the other; each is a state of one wheel.', beside: true, dur: 1.8 },
+        { say: 'Part 3 writes every model this way: what it moves, what it holds and at what value, what it leaves out. Here, Figure 2.2 of Part 1.', beside: true, dur: 1.6 },
       ];
       return X;
     },

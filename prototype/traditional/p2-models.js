@@ -297,3 +297,63 @@ export function onSimplex(p) {
   return [q[1] + q[2] / 2, q[2] * SIMPLEX.h];
 }
 export const SCARF_P0 = [0.9, 0.35, 0.3];
+
+// ---------- 2.11 what economists publish (Hamermesh 2013) ----------
+
+// Full-length articles in the American Economic Review, the Journal of
+// Political Economy and the Quarterly Journal of Economics, one year in each
+// decade, by method, percent (Hamermesh 2013, NBER w18635, Table 4); and the
+// share with more than one author (Table 2).
+export const METHODS = [
+  { key: 'theory', name: 'theory', c: 'chalk' },
+  { key: 'sim', name: 'theory with simulation', c: 'violet' },
+  { key: 'borrowed', name: 'empirical, borrowed data', c: 'cobalt' },
+  { key: 'own', name: 'empirical, own data', c: 'ochre' },
+  { key: 'exp', name: 'experiment', c: 'madder' },
+];
+export const PUBLISHED = [
+  { y: 1963, theory: 50.7, sim: 1.5, borrowed: 39.1, own: 8.7, exp: 0, coauthored: 16.3 },
+  { y: 1973, theory: 54.6, sim: 4.2, borrowed: 37.0, own: 4.2, exp: 0, coauthored: 28.6 },
+  { y: 1983, theory: 57.6, sim: 4.0, borrowed: 35.2, own: 2.4, exp: 0.8, coauthored: 45.6 },
+  { y: 1993, theory: 32.4, sim: 7.3, borrowed: 47.8, own: 8.8, exp: 3.7, coauthored: 55.1 },
+  { y: 2003, theory: 28.9, sim: 11.1, borrowed: 38.5, own: 17.8, exp: 3.7, coauthored: 74.1 },
+  { y: 2011, theory: 19.1, sim: 8.8, borrowed: 29.9, own: 34.0, exp: 8.2, coauthored: 79.6 },
+];
+
+// ---------- 2.12 the old arguments, as states of the wheel ----------
+
+// Each argument as the state of the wheel it proposes (ontology.js): what
+// moves, what is held (and at what), what is lit; whether agents are alike
+// or unlike, tied or not. Cells left out of a state that names its moving
+// cells are out.
+const ALL_BUT = (names) => (all) => all.filter((n) => !names.includes(n));
+export const ARGUMENTS = [
+  { year: '1883', who: 'Menger, Schmoller', short: 'laws from choice, or history', state: { tied: false, lit: ['Optimization', 'Equilibrium', 'History', 'Property', 'Policy rules'] } },
+  { year: '1890, 1932', who: 'Marshall, Robbins', short: 'the business of life, or scarce means', state: { tied: false, lit: ['Optimization'] } },
+  { year: '1936', who: 'Keynes', short: 'spending sets employment', state: { tied: false, moving: ['Goods', 'Money', 'Households', 'Firms', 'Governments', 'Equilibrium'], stopped: [['Labor', 'the money wage, given']] } },
+  { year: '1945', who: 'Hayek', short: 'knowledge dispersed, prices carry it', state: { unlike: true, tied: false, lit: ['Goods', 'Households', 'Firms'] } },
+  { year: '1953', who: 'Friedman', short: 'judge by predictions', state: { alike: true, unlike: false, tied: false, lit: ['Measurement'] } },
+  { year: '1976', who: 'Lucas', short: 'start from choices', state: { tied: false, lit: ['Households', 'Optimization', 'Policy rules', 'Central banks'] } },
+  { year: '1992', who: 'Kirman', short: 'whom does one agent represent?', state: { unlike: true, tied: false, lit: ['Households', 'Firms'] } },
+  { year: '2008', who: 'after the crisis', short: 'no banks in the benchmark', state: { movingOf: ALL_BUT(['Banks']), tied: ['households', 'firms'] } },
+];
+
+// ---------- 2.13 those who asked before ----------
+
+// What each project sets out to add, by its own description, against the
+// needs this part finds. The last need is the archive's (Part 3).
+export const NEEDS = [
+  'problems first', 'data and design', 'unlike agents', 'networks, finance, crises', 'behaviour and strategy', 'computation', 'history and schools', 'a map of what each model holds',
+];
+export const PROJECTS = [
+  { name: 'Post-Crash Economics Society', when: '2014 report', href: 'https://post-crasheconomics.com/', needs: [0, 3, 6], lit: ['History', 'Banks'] },
+  { name: 'ISIPE open letter', when: '2014', href: 'https://www.isipe.net/', needs: [0, 6], lit: ['History'] },
+  { name: 'CORE, The Economy', when: 'from 2013', href: 'https://www.core-econ.org/', needs: [0, 1, 2, 3, 4], lit: ['Households', 'Labor', 'Goods'] },
+  { name: 'Rebuilding Macroeconomic Theory', when: '2018', href: 'https://academic.oup.com/oxrep/issue/34/1-2', needs: [2, 3, 4], lit: ['Banks', 'Central banks', 'Households'] },
+  { name: 'Opportunity Insights course', when: '2019', href: 'https://opportunityinsights.org/course/', needs: [0, 1, 2], lit: ['Measurement', 'Households'] },
+  { name: 'QuantEcon', when: '', href: 'https://quantecon.org/', needs: [2, 3, 5], lit: ['Computation'] },
+  { name: 'Complexity Explorer', when: '', href: 'https://www.complexityexplorer.org/', needs: [2, 3, 5], lit: ['Computation', 'Networks'] },
+  { name: 'Causal Inference: The Mixtape', when: '', href: 'https://mixtape.scunning.com/', needs: [1], lit: ['Measurement'] },
+  { name: 'Exploring Economics', when: '', href: 'https://www.exploring-economics.org/', needs: [6], lit: ['History'] },
+  { name: 'The Evolution of Trust', when: '', href: 'https://ncase.me/trust/', needs: [4], lit: ['Strategy'] },
+];

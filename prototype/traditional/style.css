@@ -871,6 +871,7 @@ details.units td { font-size: 14.5px; }
 .tasks li { margin: 0.45em 0; line-height: 1.5; }
 .tasks li::marker { font: 600 18px var(--draft); }
 .tasks b { font: 600 17px var(--draft); margin-right: 0.3em; }
+.stage h4.sub { font: 600 20px/1.2 var(--draft); margin: 1.6em 0 0.4em; max-width: 760px; }
 /* dense figures (plans and tables of the wheel) keep a legible width on a
    narrow screen and scroll sideways instead */
 @media (max-width: 760px) {

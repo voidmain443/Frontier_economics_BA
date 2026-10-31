@@ -36,10 +36,12 @@ export const PLACE_P1 = {
 
 // Part 2: each figure is read in the cell of the Part 1 figure it starts from;
 // the chains of 2.7, which start from 2.6, are read in Networks, the
-// timeline and the old arguments in History, the five tasks in Computation.
+// timeline, the old arguments and the projects in History, what is published
+// in Measurement, the five tasks in Computation.
 export const PLACE_P2 = {
   '2.1': 'Goods', '2.2': 'History', '2.3': 'Firms', '2.4': 'Households', '2.5': 'Strategy', '2.6': 'Goods',
-  '2.7': 'Networks', '2.8': 'Firms', '2.9': 'Banks', '2.10': 'Equilibrium', '2.11': 'History', '2.12': 'Computation',
+  '2.7': 'Networks', '2.8': 'Firms', '2.9': 'Banks', '2.10': 'Equilibrium', '2.11': 'Measurement', '2.12': 'History',
+  '2.13': 'History', '2.14': 'Computation',
 };
 
 const inner = (ring) => HUB + ring * RING;
