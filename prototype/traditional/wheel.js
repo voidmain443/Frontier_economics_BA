@@ -266,9 +266,10 @@ export function circulation(groups, seed = 11) {
     live.push({ a, v, b, t: 0, money: f.money, lift: f.money ? 0.09 + 0.05 * rand() : 0.04 + 0.03 * rand() });
   }
   return {
-    step(dt, k = 1) {
+    // k speeds every route up; open(f) is the share of a route still working
+    step(dt, k = 1, open = () => 1) {
       FLOWS.forEach((f, i) => {
-        due[i] += f.rate * k * dt;
+        due[i] += f.rate * k * open(f) * dt;
         while (due[i] >= 1) {
           due[i] -= 1;
           start(f);

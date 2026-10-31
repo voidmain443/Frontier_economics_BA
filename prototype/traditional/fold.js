@@ -443,6 +443,10 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const groups = population();
       const point = (pts, c, size, glow, max) => Object.assign(G.points(pts, Z, COL[c], size, 1, glow, max), { space: 0, persp: PERSP });
       const dots = groups.map((g) => point(g.pts, g.c, g.size, 0.4));
+      // the wheel's banks are the banks of Part 2's ring: a failed one turns red
+      const bankAt = groups.findIndex((g) => g.name === 'banks');
+      const failed = point([], 'madder', groups[bankAt].size, 0.6, groups[bankAt].pts.length);
+      dots.push(failed);
       const flow = circulation(groups);
       const parcels = [point([], 'ochre', 3.4, 1, 1200), point([], 'white', 3.4, 0.8, 1200)];
       const trails = [G.lines([], Z, COL.ochre, 1.6, 0.8, false, 0, 1200), G.lines([], Z, COL.white, 1.4, 0.6, false, 0, 1200)];
@@ -452,7 +456,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         return r ? (top ? r.top : (r.top + r.bottom) / 2) + scrollY : null;
       };
       sc.whole = whole ? { from: pos(whole.from, true), to: pos(whole.to, false) } : null;
-      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still };
+      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still, groups, bankAt, failed };
     }
 
     // Part 3: the routes through the whole wheel, each in its own colour, with
@@ -856,8 +860,16 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       under.push(Wd.grid, Wd.ring);
       // the people, and the parcels in flight between them; they circulate
       // faster while the whole wheel is in view
+      // a bank that has fallen in the folded figure has failed on the wheel too:
+      // the saving, lending and reserves that ran through it stop
+      const banks = Wd.groups[Wd.bankAt].pts;
+      const fallen = sc.crowds.find((C) => C.asset === 'bank' && C.shown);
+      const down = banks.map((_, i) => Boolean(fallen?.items[i]?.fall && fallen.items[i].start != null && st.time >= fallen.items[i].start));
+      Wd.dots[Wd.bankAt].set(banks.filter((_, i) => !down[i]));
+      Wd.failed.set(banks.filter((_, i) => down[i]));
+      const working = 1 - down.filter(Boolean).length / banks.length;
       if (!REDUCED) {
-        Wd.flow.step(dt, 1 + 1.5 * climax);
+        Wd.flow.step(dt, 1 + 1.5 * climax, (f) => (f.from === 'banks' || f.to === 'banks' ? working : 1));
         const pp = Wd.flow.points();
         Wd.parcels[0].set(pp.money.pts);
         Wd.parcels[1].set(pp.goods.pts);
