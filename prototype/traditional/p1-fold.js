@@ -3,7 +3,7 @@
 // ranges as p1-figs.js) plus a height h in plot widths. Seen from straight above,
 // every construct lands on the flat drawing: the figure is its shadow.
 
-import { doubleAuction, efficiency } from './market.js';
+import { doubleAuction, efficiency, rng } from './market.js';
 
 const range = (a, b, n) => Array.from({ length: n + 1 }, (_, i) => a + ((b - a) * i) / n);
 const line = (pts, c = 'white', w = 2, o = {}) => ({ pts, c, w, ...o });
@@ -175,6 +175,194 @@ function horizonStory(eps, hs) {
   };
 }
 
+// ---------- engines for stages 2 to 5 (docs/engine.md) ----------
+
+// An engine that runs a process once its figure has risen, holds the end, and
+// runs it again from a new start: draw(t, n) gives the process t seconds into
+// its nth run. With reduced motion it shows the end of the first run.
+function replaying(span, hold, sets, draw) {
+  const st = { t: 0, n: 0 };
+  return {
+    ...sets,
+    step(dt, { grow, reduced }) {
+      if (grow < 0.02) {
+        st.t = 0;
+        st.n = 0;
+        return null;
+      }
+      if (grow > 0.7 && !reduced) st.t += dt;
+      if (st.t > span + hold) {
+        st.t = 0;
+        st.n++;
+      }
+      return draw(reduced ? span : st.t, st.n);
+    },
+  };
+}
+const sm = (t) => e01(cl01(t));
+
+// 2.1: twelve households on the same budget fence, each starting somewhere on
+// it and moving the way its utility rises. Along x + y = 12 the slope of u² is
+// 2(6 − x), so each closes the gap to x = 6 at a rate proportional to it, and
+// every one ends on the top of the hill the fence allows.
+function climbEngine(k) {
+  const u = (x) => Math.sqrt(Math.max(0, x * (12 - x)));
+  return replaying(4.5, 2.5, { dots: [{ c: 'cobaltInk', size: 7, o: 1, max: 12 }], segs: [{ c: 'cobaltInk', w: 1.4, o: 0.45, max: 200 }] }, (t, n) => {
+    const rand = rng(31 + n);
+    const dots = [];
+    const segs = [];
+    for (let i = 0; i < 12; i++) {
+      const x0 = 0.4 + 11.2 * rand();
+      const x = 6 + (x0 - 6) * Math.exp(-1.2 * t);
+      for (let j = 0; j < 12; j++) {
+        const a = x0 + ((x - x0) * j) / 12;
+        const b = x0 + ((x - x0) * (j + 1)) / 12;
+        segs.push([[a, 12 - a, k * u(a), j / 12], [b, 12 - b, k * u(b), (j + 1) / 12]]);
+      }
+      dots.push([x, 12 - x, k * u(x), 1]);
+    }
+    return { dots: [dots], segs: [segs] };
+  });
+}
+
+// 3.2: firms enter one at a time while price is above the minimum of cost; the
+// market moves to the next supply curve, each a slice higher, and the price
+// falls toward 2. Each new firm drops in beside the others.
+function entryEngine(path, hN) {
+  const STEP = 1.3;
+  return replaying(STEP * 4 + 0.6, 2.5, { dots: [{ c: 'white', size: 11, o: 1, max: 1 }, { c: 'olive', size: 9, o: 1, max: 8 }], segs: [{ c: 'white', w: 2.4, o: 0.9, max: 8 }] }, (t) => {
+    const i = Math.min(3, Math.floor(t / STEP));
+    const f = sm((t - i * STEP) / 0.6);
+    const A = path[i];
+    const B = path[Math.min(4, i + 1)];
+    const at = t >= STEP * 4 ? path[4] : A.map((v, k) => v + (B[k] - v) * f);
+    const N = 3 + i + (f > 0.5 && t < STEP * 4 + 0.6 ? 1 : 0);
+    const firms = [];
+    for (let j = 0; j < N; j++) {
+      const late = j >= 3 + i && f < 1 ? 0.06 * (1 - f * f) : 0;
+      firms.push([4 + 5 * j, 5.6, at[2] + late, 1]);
+    }
+    const trail = [];
+    for (let j = 0; j < i; j++) trail.push([path[j], path[j + 1]]);
+    if (t < STEP * 4) trail.push([A, at]);
+    return { dots: [[[...at, 1]], firms], segs: [trail] };
+  });
+}
+
+// 4.1: the two firms take turns, each choosing the output that maximises its
+// own profit with the other's held fixed. A turn climbs that firm's profit hill
+// to its ridge (its best response); turn by turn they close in on the Nash point.
+function cournotEngine(k) {
+  const pi = [(a, b) => Math.max(0, (10 - a - b) * a), (a, b) => Math.max(0, (10 - a - b) * b)];
+  const TURN = 0.8;
+  const TURNS = 8;
+  return replaying(TURN * TURNS, 2.5, {
+    dots: [{ c: 'white', size: 10, o: 1, max: 1 }],
+    segs: [{ c: 'cobalt', w: 2.2, o: 1, max: 120 }, { c: 'madder', w: 2.2, o: 1, max: 120 }],
+  }, (t, n) => {
+    const rand = rng(53 + n);
+    let a = 0.4 + 2 * rand();
+    let b = 6 + 3.5 * rand();
+    if (n % 2) [a, b] = [b, a];
+    const segs = [[], []];
+    let h = k * pi[0](a, b);
+    for (let m = 0; m < TURNS; m++) {
+      const f = sm((t - m * TURN) / TURN);
+      if (f <= 0) break;
+      const w = m % 2;
+      const from = w ? b : a;
+      const best = ((10 - (w ? a : b)) / 2) * f + from * (1 - f);
+      for (let j = 0; j < 10; j++) {
+        const q0 = from + ((best - from) * j) / 10;
+        const q1 = from + ((best - from) * (j + 1)) / 10;
+        const P = w ? [a, q0] : [q0, b];
+        const Q = w ? [a, q1] : [q1, b];
+        segs[w].push([[...P, k * pi[w](...P)], [...Q, k * pi[w](...Q)]]);
+      }
+      if (w) b = best;
+      else a = best;
+      h = k * pi[w](a, b);
+    }
+    return { dots: [[[a, b, h, 1]]], segs };
+  });
+}
+
+// 5.1: barter in the box. From each endowment the two households swap in the
+// direction that raises both utilities, the sum of their unit gradients; the
+// swapping stops where the gradients point opposite ways, on the contract curve
+// x = y. Every path ends on it, each at a different split.
+function barterEngine() {
+  const paths = (n) => {
+    const rand = rng(71 + n);
+    const starts = [[8, 2], ...Array.from({ length: 4 }, () => { const x = 1 + 8 * rand(); return [x, Math.max(0.5, Math.min(9.5, x + (rand() < 0.5 ? -1 : 1) * (2 + 4 * rand())))]; })];
+    return starts.map(([x0, y0]) => {
+      let x = x0;
+      let y = y0;
+      const pts = [[x, y]];
+      for (let i = 0; i < 2000; i++) {
+        const nA = Math.hypot(y, x) || 1;
+        const nB = Math.hypot(10 - y, 10 - x) || 1;
+        const dx = y / nA - (10 - y) / nB;
+        const dy = x / nA - (10 - x) / nB;
+        if (Math.hypot(dx, dy) < 0.0005) break;
+        x += 0.03 * dx;
+        y += 0.03 * dy;
+        if (i % 6 === 5) pts.push([x, y]);
+      }
+      return pts;
+    });
+  };
+  let cache = null;
+  return replaying(3.6, 2.6, { dots: [{ c: 'white', size: 9, o: 1, max: 5 }, { c: 'ochreInk', size: 6, o: 1, max: 5 }], segs: [{ c: 'white', w: 1.8, o: 0.9, max: 1200 }] }, (t, n) => {
+    if (cache?.n !== n) cache = { n, P: paths(n) };
+    const dots = [];
+    const starts = [];
+    const segs = [];
+    for (const pts of cache.P) {
+      const m = Math.max(1, Math.round(pts.length * sm(t / 3.6)));
+      for (let i = 1; i < m; i++) segs.push([[...pts[i - 1], 0.01], [...pts[i], 0.01]]);
+      starts.push([...pts[0], 0.01, 1]);
+      dots.push([...pts[m - 1], 0.01, 1]);
+    }
+    return { dots: [dots, starts], segs: [segs] };
+  });
+}
+
+// 5.3: Akerlof's market unravels. Buyers pay what the average car on offer is
+// worth to them, p/2 + 3; owners of better cars than that take them off the
+// market and they drop back to the ground; the price falls again, 10, 8, 7,
+// 6.5 … toward 6.
+function lemonsEngine(k) {
+  const ROUND = 1.2;
+  const ROUNDS = 6;
+  const theta = Array.from({ length: 100 }, (_, i) => (i + 0.5) / 10);
+  return replaying(ROUND * ROUNDS, 2.5, {
+    dots: [{ c: 'olive', size: 5.5, o: 1, max: 100 }, { c: 'madder', size: 5, o: 0.6, max: 100 }],
+    segs: [{ c: 'ochre', w: 2, o: 1, max: 8 }],
+  }, (t) => {
+    const r = Math.min(ROUNDS, Math.floor(t / ROUND));
+    const f = sm((t - r * ROUND) / 0.6);
+    const price = (j) => 6 + 4 / 2 ** j;
+    const p = r >= ROUNDS ? price(ROUNDS) : price(r) + (price(r + 1) - price(r)) * (r < ROUNDS ? f : 0);
+    const on = [];
+    const off = [];
+    theta.forEach((th, i) => {
+      // a car leaves in the round its quality first exceeds the price
+      let left = -1;
+      for (let j = 0; j <= r; j++) if (th >= price(j)) { left = j; break; }
+      const pt = [i + 0.5, th, th * k, 1];
+      if (left < 0 || (left === r && th < p)) on.push(pt);
+      else {
+        const d = left === r ? f : 1;
+        off.push([pt[0], pt[1], pt[2] * (1 - d * d), 1]);
+      }
+    });
+    const h = p * k;
+    const box = [[0, 0, h], [100, 0, h], [100, 14, h], [0, 14, h]];
+    return { dots: [on, off], segs: [box.map((q, i) => [q, box[(i + 1) % 4]])] };
+  });
+}
+
 export const CONSTRUCTS = {
   // ===== Stage 1
   '1.1': {
@@ -300,6 +488,7 @@ export const CONSTRUCTS = {
       X.tags.push({ text: 'utility', at: [14, 14, 14 * k] }, { text: 'the budget, a fence', at: [1, 11, 0.04], c: 'madder' });
       X.eqs.push({ html: '∇u = λ∇g', at: [7.5, 7.5, 6 * k + 0.03] });
       X.dims.push({ from: [14, 0, 0], to: [14, 0, 6 * k], text: 'u = 6 at the best bundle' });
+      X.engine = climbEngine(k);
       return X;
     },
   },
@@ -389,6 +578,7 @@ export const CONSTRUCTS = {
       for (const p of path) X.points.push({ at: p });
       X.tags.push({ text: 'firms enter', at: path[4] });
       X.dims.push({ from: [60, 0, 0], to: [60, 0, hN(7)], text: 'N = 3 … 7 firms' });
+      X.engine = entryEngine(path, hN);
       return X;
     },
   },
@@ -410,6 +600,7 @@ export const CONSTRUCTS = {
       X.agents.push({ asset: 'firm', at: [8.5, 0.6, 0], scale: 0.06 }, { asset: 'firm', at: [0.6, 8.5, 0], scale: 0.06, ry: Math.PI / 2 });
       X.tags.push({ text: 'firm 1’s ridge', at: [5, 0, k * 25], c: 'cobalt' }, { text: 'firm 2’s ridge', at: [0, 5, k * 25], c: 'madder' }, { text: 'profit', at: [10 / 3, 10 / 3, k * (100 / 9) + 0.04] });
       X.dims.push({ from: [10 / 3, 10 / 3, 0], to: [10 / 3, 10 / 3, k * (100 / 9)], text: 'π = 11.1 each at the Nash point' });
+      X.engine = cournotEngine(k);
       return X;
     },
   },
@@ -449,6 +640,8 @@ export const CONSTRUCTS = {
       X.agents.push({ asset: 'household', at: [0.6, 0.6, 0], scale: 0.07 }, { asset: 'household', at: [9.4, 9.4, 0], scale: 0.07, ry: Math.PI });
       X.tags.push({ text: 'both tops on one fence', at: [5, 5, 5 * k + 0.02] }, { text: 'A’s hill', at: [10, 10, k * 10], c: 'cobalt' }, { text: 'B’s hill', at: [0, 0, k * 10], c: 'madder' });
       X.dims.push({ from: [5, 5, 0], to: [5, 5, 5 * k], text: 'u = 5 for each at the equilibrium' });
+      X.tags.push({ text: 'barter stops on x = y', at: [8, 8, 0.01] });
+      X.engine = barterEngine();
       return X;
     },
   },
@@ -486,6 +679,7 @@ export const CONSTRUCTS = {
       X.quads.push(flat(0, 0, 100, 14, 6 * k, 'ochre', 0.05));
       X.tags.push({ text: 'quality θ: the buyer cannot see this axis', at: [0, 13, 0.27] }, { text: 'p = 6: cars below trade', at: [30, 3, 6 * k], c: 'ochre' }, { text: 'the best stay home', at: [90, 9, 10 * k], c: 'madder' });
       X.dims.push({ from: [100, 0, 0], to: [100, 0, 10 * k], text: 'quality θ = 0 … 10' });
+      X.engine = lemonsEngine(k);
       return X;
     },
   },

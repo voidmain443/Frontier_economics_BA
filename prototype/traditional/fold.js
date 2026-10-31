@@ -1,16 +1,17 @@
-// The one 3D mode (docs/redesign.md, docs/world.md): the page you are reading
+// The one 3D mode (docs/redesign.md, docs/engine.md): the page you are reading
 // folds into a ribbon in space, and as each figure reaches the reading line, the
 // axis it holds fixed rises out of the paper in place. On a page with a world,
-// that space is the archive building: the page runs through its rooms, and each
-// figure rises in the room it belongs to. Fold it back and you are on the same page.
+// the page lies on the economy's engine, Knight's wheel of wealth: its people,
+// its cells and what circulates between them, and the wheel turns so that each
+// figure is read over its own cell. Fold it back and you are on the same page.
 //
-// The renderer, ribbon and capture are in gpu.js, the building in world.js;
+// The renderer, ribbon and capture are in gpu.js, the wheel in wheel.js;
 // everything a figure raises comes from a construct registry in figure-local
 // coordinates: (a, b) in the plot box, h in plot widths.
 
 import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
 import { loadAssets } from './maquettes.js';
-import { ROOMS, RW, RD, FH, OUTSIDE, placeOf, roomGeometry, routeAt, routeOf, crowdSpots } from './world.js';
+import { CELLS, RIM, placeOf, polar, cellCentre, wheelAt, poseFor, toWorldW, wheelGeometry, signSpots, routeOf, population, circulation, crowdSpots } from './wheel.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -59,6 +60,12 @@ const FALL = 0.5;
 const PLASTER = [0.95, 0.945, 0.92, 1];
 const SHADE = [0.7, 0.73, 0.72, 1];
 const MATTE = [0.04, 1, 0, 0];
+// the place being read is brought under this point, just behind the reading
+// line on the floor under the page, with the wheel's hub off to the back right
+const READ_Z = -0.15;
+const PSI = (140 * Math.PI) / 180;
+// world points are drawn at their nominal size from this distance
+const PERSP = 2.6;
 // a figure with a story holds the reading line while the reader scrolls
 // through its beats, BEAT px of scroll a beat; a beat's change plays in time,
 // over its dur seconds (0.9 by default), so a fast scroll still shows it
@@ -120,11 +127,14 @@ function readingTimes(sheet) {
 // that beat begins). The reading line stops at the figure for the length of
 // its story, the camera moves to each beat's view and a caption says it.
 //
+// whole: { from, to } (selectors). From the first to the second the view steps
+// back until the whole wheel is seen (Part 1, stage 6).
+//
 // archive (Part 3): { figure, end, routes: [{ name, places, c }] }. From that
 // figure to the end element the view steps back to the whole building, which
 // stands beside the page, with the routes drawn through it; its rooms' names
 // are doors.
-export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, archive = null, onChange }) {
+export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, whole = null, archive = null, onChange }) {
   if (!htmlInCanvasSupport()) return { supported: false, reason: 'This browser cannot draw HTML into WebGPU textures yet (HTML-in-Canvas).' };
   const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
   if (!adapter) return { supported: false, reason: 'No WebGPU adapter is available.' };
@@ -141,7 +151,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   if (archive) {
     doorsRoot = document.createElement('nav');
     doorsRoot.id = 'expo-doors';
-    doorsRoot.setAttribute('aria-label', 'Rooms of the archive');
+    doorsRoot.setAttribute('aria-label', 'Cells of the archive');
     document.body.appendChild(doorsRoot);
   }
   const st = { t: 0, target: 0, captured: false, busy: false, running: false, tiles: [], scene: null, sheetBox: null, last: 0, time: 0, mouse: [0, 0], orbit: [0, 0], drag: null, returning: false, focus: null, spacer: null };
@@ -406,45 +416,62 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (made && world?.[made.id]) stops.push({ c: made.group.center, p: placeOf(world[made.id]) });
     }
 
-    // the building: every room's edges and floor plate, and its sign
+    // the world: the wheel's rings and cells with their signs, the people on
+    // its rim, and the parcels that circulate between them
     if (world) {
       stops.sort((a, b) => a.c - b.c);
-      const rooms = ROOMS.map((r) => {
-        const g = roomGeometry(r);
-        const lines = G.lines(g.edges, [0, 0, 0, 0], COL[r.c], 1.5, 1, false, 0);
-        const grid = G.lines(g.grid, [0, 0, 0, 0], COL[r.c], 1, 1, false, 0);
-        const plate = G.mesh(quadVerts(g.plate), [0, 0, 0, 0], COL[r.c], 1.1, 0);
+      const Z = [0, 0, 0, 0];
+      const geo = wheelGeometry();
+      const ring = G.lines(geo.ringLines, Z, COL.chalk, 1.3, 1, false, 0);
+      const grid = G.lines(geo.grid, Z, COL.chalk, 1, 1, false, 0);
+      const cells = geo.plates.map(({ cell, quads }) => {
+        const parts = quads.map((q) => quadVerts(q));
+        const v = new Float32Array(parts.reduce((n, a) => n + a.length, 0));
+        parts.reduce((off, a) => { v.set(a, off); return off + a.length; }, 0);
+        const plate = G.mesh(v, Z, COL[cell.c], 1.1, 0);
         plate.space = 0;
         const sign = document.createElement(archive ? 'a' : 'div');
         sign.className = archive ? 'xl room door' : 'xl room';
-        sign.innerHTML = `<span>${r.layer}</span>${r.name}`;
+        sign.innerHTML = `<span>${cell.layer}</span>${cell.name}`;
         if (archive) {
-          sign.href = r.href;
+          sign.href = cell.href;
           sign.tabIndex = -1;
           doorsRoot.appendChild(sign);
         } else labelsRoot.appendChild(sign);
-        return { r, lines, grid, plate, sign, at: g.sign, hang: g.hang, atL: g.signL, hangL: g.hangL };
+        return { cell, plate, sign, spots: signSpots(cell) };
       });
-      sc.world = { stops, rooms };
+      const groups = population();
+      const point = (pts, c, size, glow, max) => Object.assign(G.points(pts, Z, COL[c], size, 1, glow, max), { space: 0, persp: PERSP });
+      const dots = groups.map((g) => point(g.pts, g.c, g.size, 0.4));
+      const flow = circulation(groups);
+      const parcels = [point([], 'ochre', 3.4, 1, 1200), point([], 'white', 3.4, 0.8, 1200)];
+      const trails = [G.lines([], Z, COL.ochre, 1.6, 0.8, false, 0, 1200), G.lines([], Z, COL.white, 1.4, 0.6, false, 0, 1200)];
+      const still = REDUCED ? Object.values(flow.lines()).map((segs, i) => G.lines(segs, Z, i ? COL.white : COL.ochre, 1.4, 0.6, false, 0)) : [];
+      const pos = (sel, top) => {
+        const r = sheet.querySelector(sel)?.getBoundingClientRect();
+        return r ? (top ? r.top : (r.top + r.bottom) / 2) + scrollY : null;
+      };
+      sc.whole = whole ? { from: pos(whole.from, true), to: pos(whole.to, false) } : null;
+      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still };
     }
 
-    // Part 3: the routes through the whole building, each in its own colour,
-    // with its name where it starts
+    // Part 3: the routes through the whole wheel, each in its own colour, with
+    // its name where it starts
     if (archive && world) {
       const fig = sheet.querySelector(`figure[data-fig="${archive.figure}"]`)?.getBoundingClientRect();
       const end = sheet.querySelector(archive.end)?.getBoundingClientRect();
       const paths = sheet.querySelector('.paths')?.getBoundingClientRect();
       const routes = archive.routes.map((rt, i) => {
-        const pts = routeOf(rt.places, 0.22 + 0.11 * i);
+        const { pts, stops: at } = routeOf(rt.places, 0.12 + 0.07 * i);
         const segs = pts.slice(1).map((q, k) => [pts[k], q]);
         const lines = G.lines(segs, [0, 0, 0, 0], COL[rt.c], 3, 1, false, 0);
-        const dots = G.points(pts.map((p) => [...p, 0.9]), [0, 0, 0, 0], COL[rt.c], 7, 1, 0.6);
+        const dots = G.points(at.map((p) => [...p, 0.9]), [0, 0, 0, 0], COL[rt.c], 7, 1, 0.6);
         dots.space = 0;
         const el = document.createElement('div');
         el.className = `xl route ${rt.c}`;
         el.textContent = rt.name;
         labelsRoot.appendChild(el);
-        return { ...rt, lines, dots, el, start: pts[0], rooms: new Set(rt.places.flat()), classical: i === 0 };
+        return { ...rt, lines, dots, el, start: pts[0], cells: new Set(rt.places.flat()), classical: i === 0 };
       });
       sc.archive = {
         c: fig ? (fig.top + fig.bottom) / 2 + scrollY : 0,
@@ -578,9 +605,10 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       sc.leaders.appendChild(line);
       sc.callouts.push({ el, line, group, box, target, x: sc.sb[2] + 36, fid: id });
     }
-    // a crowd on the floor of the figure's room
+    // a crowd on the wheel's floor beside the page, in the figure's cell
     if (X.crowd && world?.[id]) {
-      const room = placeOf(world[id]).rooms[0];
+      const place = placeOf(world[id]);
+      const room = place.cells[0];
       const spots = crowdSpots(X.crowd.items);
       const before = keep?.crowd;
       const items = X.crowd.items.map((it, i) => {
@@ -588,7 +616,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const start = !before?.shown ? null : was && was.fall === it.fall ? was.start : st.time + (it.fall ? (it.round ?? 0) * TOPPLE : 0);
         return { ...it, at: spots[i], tilt: was?.tilt ?? 0, start };
       });
-      sc.crowds.push({ fid: id, room, group, asset: X.crowd.asset, items, shown: Boolean(before?.shown) });
+      sc.crowds.push({ fid: id, room, place, group, asset: X.crowd.asset, items, shown: Boolean(before?.shown) });
     }
     return { id, group };
   }
@@ -693,37 +721,41 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const beatOf = new Map(sc.stories.map((S) => [S.fid, S.shown]));
     const SV = SC ? storyView(SC, P, ease(grow(SC.group)) * LIFT) : null;
     sw *= e;
-    // where the building stands; a long move between rooms steps the camera back.
-    // With reduced motion the building does not move: it fades out and back in
-    // at the next room.
-    const R = sc.world ? routeAt(sc.world.stops, P.focus, REDUCED ? (u) => (u < 0.5 ? 0 : 1) : ease) : null;
-    // the building's offset: building coordinates + O = world. In Part 3 the
-    // building stands beside the page, and from the plan on the view steps
-    // back until it is seen whole (climax).
+    // where the wheel stands: turned, and its hub moved, so that the place being
+    // read lies under the reading point; a long move steps the camera back.
+    // With reduced motion the wheel does not move: it fades out and back in at
+    // the next place.
+    const R = sc.world?.stops.length ? wheelAt(sc.world.stops, P.focus, REDUCED ? (u) => (u < 0.5 ? 0 : 1) : ease) : null;
     const pageX = st.sheetBox ? ((st.sheetBox[0] + st.sheetBox[2]) / 2 - W / 2) * PX : 0;
     const A = sc.archive;
-    let O = R ? [pageX - R.at[0], -R.at[1], -R.at[2]] : null;
-    if (A) O = [pageX + OUTSIDE.x, 0, OUTSIDE.z - RD / 2];
-    const climax = A ? ease(smooth(A.c - 1400, A.c - 250, P.focus) * (1 - smooth(A.end + 150, A.end + 1100, P.focus))) : 0;
+    let pose = R ? poseFor(R.r, R.a, [pageX, -0.004, READ_Z], PSI) : null;
+    // Part 3: the wheel lies beside the page, and from the plan on the view
+    // steps back until it is seen whole (climax); in Part 1 the same happens
+    // as stage 6 opens, over the wheel the page lies on
+    if (A) pose = { phi: 0.35, C: [pageX + 1.1 + RIM, -0.004, -0.8] };
+    const Wh = sc.whole;
+    const climax = A
+      ? ease(smooth(A.c - 1400, A.c - 250, P.focus) * (1 - smooth(A.end + 150, A.end + 1100, P.focus)))
+      : Wh?.from != null && Wh.to != null ? ease(smooth(Wh.from - 1000, Wh.from - 150, P.focus) * (1 - smooth(Wh.to - 900, Wh.to - 350, P.focus))) : 0;
     const travel = REDUCED ? 0 : Math.min(1, (R?.travel ?? 0) / 8);
 
     // the flat view of the sheet, dollied back into a raised, tilted one
     const T = CAM;
     const fov = (lerp(0.5, T.fov, e) * Math.PI) / 180;
     const hO = lerp(H * 0.5 * PX, T.h, e);
-    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + 0.2 * climax) * e + (SV ? sw * SV.el : 0), 0, 1.35);
+    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + (A ? 0.45 : 0.6) * climax) * e + (SV ? sw * SV.el : 0), 0, 1.35);
     const az = (st.mouse[0] * 0.1 + st.orbit[0] - 0.5 * climax) * e + (SV ? sw * SV.az : 0);
     const near0 = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
-    // the whole view looks between the page and the building's middle, so that
-    // the plan on the page and the building it describes are seen together
-    const whole = O ? [O[0] + 1.7 * RW, O[1] + 1.2 * FH, O[2] + 1.3] : near0;
-    let target = near0.map((v, k) => lerp(v, whole[k], climax * e));
+    // the whole view looks at the hub; in Part 3, between the page and the hub,
+    // so that the plan on the page and the wheel it describes are seen together
+    const hubAt = pose ? (A ? [lerp(pageX, pose.C[0], 0.6), 0.2, lerp(0, pose.C[2], 0.6)] : [pose.C[0], 0.2, pose.C[2]]) : near0;
+    let target = near0.map((v, k) => lerp(v, hubAt[k], climax * e));
     if (SV) target = target.map((v, k) => lerp(v, SV.at[k], sw));
     // a turned view also steps back, so the room and its neighbours come into sight
     const turned = Math.min(1, Math.hypot(st.orbit[0] / ORBIT.az, st.orbit[1] / ORBIT.hi));
-    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + 5.6 * climax * e) * (SV ? lerp(1, SV.zoom, sw) : 1);
+    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + (A ? 5.6 : 3.2) * climax * e) * (SV ? lerp(1, SV.zoom, sw) : 1);
     const eye = [target[0] + dist * Math.sin(az) * Math.cos(el), target[1] + dist * Math.sin(el), target[2] + dist * Math.cos(az) * Math.cos(el)];
-    const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 6), dist + 40), lookAt(eye, target, [0, 1, 0])));
+    const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 9), dist + 40), lookAt(eye, target, [0, 1, 0])));
 
     for (const it of sc.objs) {
       let o = 1;
@@ -775,8 +807,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         C.shown = true;
         for (const it of C.items) it.start = st.time + 0.4 + (it.round ?? 0) * TOPPLE;
       }
-      if (g < 0.03 || !O) continue;
-      const base = [O[0] + (C.room.col + 0.5) * RW, O[1] + C.room.floor * FH, O[2]];
+      if (g < 0.03 || !pose) continue;
+      const base = toWorldW(polar(C.place.r, C.place.a), pose);
       for (const it of C.items) {
         if (it.fall && it.start != null && st.time >= it.start) {
           const p = REDUCED ? 1 : Math.min(1, (st.time - it.start) / FALL);
@@ -788,12 +820,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         putAgent(C.asset, F, (it.lift ?? 0) + 0.2 * it.s * Math.abs(Math.sin(it.tilt)), it.s, it.ry ?? 0, g, it.tilt);
       }
     }
-    // Part 3: each agent stands in its room on the top floor
-    if (A && O && climax > 0.03) {
-      for (const r of ROOMS) {
-        if (!r.asset) continue;
-        const F = { o: [O[0] + (r.col + 0.5) * RW, O[1] + r.floor * FH, O[2]], X: [1, 0, 0], N: [0, 1, 0], D: [0, 0, 1] };
-        putAgent(r.asset, F, 0, 0.34, 0, climax * appear);
+    // Part 3: each agent stands in its cell on the rim
+    if (A && pose && climax > 0.03) {
+      for (const c of CELLS) {
+        if (!c.asset) continue;
+        const F = { o: toWorldW(cellCentre(c), pose), X: [1, 0, 0], N: [0, 1, 0], D: [0, 0, 1] };
+        putAgent(c.asset, F, 0, 0.3, 0, climax * appear);
       }
     }
     const solids = allSolids();
@@ -808,37 +840,52 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const sbx = st.sheetBox;
     const under = [];
     const over = [];
-    // the building moves so that the room of the figure being read surrounds
-    // the reading point
-    // Part 3: the rooms on a shown route are lit; the three paths come in as
+    // Part 3: the cells on a shown route are lit; the three paths come in as
     // their section approaches
     const routeOn = (rt) => climax * (rt.classical ? 1 : smooth(A.paths - 1600, A.paths - 400, P.focus));
-    const weights = R ? R.weights : new Map();
-    if (A) for (const rt of A.routes) for (const n of rt.rooms) weights.set(n, Math.max(weights.get(n) ?? 0, 0.7 * routeOn(rt)));
-    if (sc.world && O) {
-      // signs show for the rooms being read; once the view is turned, also for
-      // their neighbours on the same floor
-      const floor = R ? R.at[1] / FH : 0;
-      const pageHalf = ((sbx[2] - sbx[0]) / 2) * PX + 0.05;
-      const shown = R && REDUCED ? 1 - Math.sin(Math.PI * R.s) : 1;
-      for (const w of sc.world.rooms) {
-        const k = weights.get(w.r.name) ?? 0;
-        w.lines.box = [...O, 0];
-        w.grid.box = [...O, 0];
-        w.plate.box = [...O, 0];
-        w.lines.opacity = shown * appear * (0.18 + 0.72 * k);
-        w.grid.opacity = shown * appear * (0.05 + 0.3 * k);
-        w.plate.opacity = shown * appear * (0.35 + 0.65 * k);
-        under.push(w.plate, w.grid, w.lines);
-        const below = w.r.floor < floor - 0.5;
-        // a sign the page would cover moves to the room's other back corner
-        let at = add(below ? w.hang : w.at, O);
-        const left = Math.abs(at[0] - pageX) < pageHalf;
-        if (left) at = add(below ? w.hangL : w.atL, O);
-        w.sign.classList.toggle('left', left);
-        const level = A ? climax > 0.3 : k > 0.02 || (turned > 0.15 && Math.abs(w.r.floor - floor) < 0.5);
-        const pr = level && (A || Math.hypot(at[0], at[1], at[2]) < 6) ? project(vp, at, W, H) : null;
-        const o = shown * appear * (A ? climax * (0.7 + 0.3 * k) : 0.4 + 0.6 * k);
+    const weights = R ? new Map(R.weights) : new Map();
+    if (A) for (const rt of A.routes) for (const n of rt.cells) weights.set(n, Math.max(weights.get(n) ?? 0, 0.7 * routeOn(rt)));
+    if (sc.world && pose) {
+      const Wd = sc.world;
+      const box = [...pose.C, pose.phi];
+      const shown = appear * (R && REDUCED ? 1 - Math.sin(Math.PI * R.s) : 1);
+      Wd.ring.box = box;
+      Wd.grid.box = box;
+      Wd.ring.opacity = shown * (0.3 + 0.35 * climax);
+      Wd.grid.opacity = shown * 0.08;
+      under.push(Wd.grid, Wd.ring);
+      // the people, and the parcels in flight between them; they circulate
+      // faster while the whole wheel is in view
+      if (!REDUCED) {
+        Wd.flow.step(dt, 1 + 1.5 * climax);
+        const pp = Wd.flow.points();
+        Wd.parcels[0].set(pp.money.pts);
+        Wd.parcels[1].set(pp.goods.pts);
+        Wd.trails[0].set(pp.money.trail);
+        Wd.trails[1].set(pp.goods.trail);
+      }
+      for (const d of [...Wd.dots, ...Wd.parcels, ...Wd.trails, ...Wd.still]) {
+        d.box = box;
+        // seen whole, the dots keep more of their size
+        d.persp = PERSP * (1 + 3 * climax);
+        d.opacity = shown * d.baseOpacity * (0.75 + 0.25 * climax);
+        under.push(d);
+      }
+      // a cell's sign shows while it is read, and every sign once the whole
+      // wheel is in view; it stands where the page leaves it clear
+      // the page's edges on screen at the reading line
+      const pageHalf = ((sbx[2] - sbx[0]) / 2) * PX;
+      const edgeL = project(vp, [pageX - pageHalf, 0, 0], W, H);
+      const edgeR = project(vp, [pageX + pageHalf, 0, 0], W, H);
+      const clear = (q) => q && (A || !edgeL || !edgeR || q[0] < edgeL[0] - 24 || q[0] > edgeR[0] + 24);
+      for (const w of Wd.cells) {
+        const k = weights.get(w.cell.name) ?? 0;
+        w.plate.box = box;
+        w.plate.opacity = shown * (0.22 + 0.78 * k);
+        under.push(w.plate);
+        const level = climax > 0.3 || k > 0.02;
+        const pr = level ? w.spots.map((p) => project(vp, toWorldW(p, pose), W, H)).find(clear) ?? null : null;
+        const o = shown * (A ? climax * (0.7 + 0.3 * k) : Math.max(k, climax * 0.8));
         const door = Boolean(A) && o > 0.5;
         w.sign.tabIndex = door ? 0 : -1;
         w.sign.style.pointerEvents = door ? 'auto' : 'none';
@@ -847,18 +894,18 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
           continue;
         }
         w.sign.style.opacity = String(o);
-        w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.6, 1.1).toFixed(3)}) translate(${left ? '0' : '-100%'}, ${below ? '0' : '-100%'})`;
+        w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.55, 1.05).toFixed(3)}) translate(-50%, -50%)`;
       }
     }
-    if (A && O) {
+    if (A && pose) {
       for (const rt of A.routes) {
         const o = appear * routeOn(rt);
-        rt.lines.box = [...O, 0];
-        rt.dots.box = [...O, 0];
+        rt.lines.box = [...pose.C, pose.phi];
+        rt.dots.box = [...pose.C, pose.phi];
         rt.lines.opacity = o;
         rt.dots.opacity = o;
         over.push(rt.lines, rt.dots);
-        const pr = o > 0.02 ? project(vp, add(rt.start, O), W, H) : null;
+        const pr = o > 0.02 ? project(vp, toWorldW(rt.start, pose), W, H) : null;
         rt.el.style.opacity = pr ? String(o) : '0';
         if (pr) rt.el.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) translate(-50%, -140%)`;
       }
@@ -912,7 +959,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       light: { VP: lightVP, dir: [-Nl[0], -Nl[1], -Nl[2]], shadow: shadowK, catchRect: [sbx[0] - 1000, P.focus - 1300, sbx[2] + 1000, P.focus + 1700], catchStrength: shadowK * 0.55 },
       over,
       under,
-      bloom: 0,
+      bloom: 0.5 * climax,
     });
 
     for (const L of sc.labels) {
@@ -1051,7 +1098,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     },
     get open() { return st.target === 1; },
     // the reading line on the page while folded, which stories hold still
-    get focus() { return st.focus; },
+    get focus() { return st.target === 1 || st.t > 0 ? mapScroll(st.scene, scrollY + innerHeight / 2).focus : null; },
     get busy() { return st.busy; },
   };
 }

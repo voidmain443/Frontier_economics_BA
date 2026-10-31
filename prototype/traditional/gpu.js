@@ -246,7 +246,7 @@ export function makeGpu(device, format) {
       if (n) device.queue.writeBuffer(this.sbuf, 0, a);
     }
     upload(dpr) {
-      device.queue.writeBuffer(this.ubuf, 0, new Float32Array([...this.box, ...this.color, this.hs ?? 1, this.opacity, this.size * dpr, this.space, this.glow]));
+      device.queue.writeBuffer(this.ubuf, 0, new Float32Array([...this.box, ...this.color, this.space ? this.hs ?? 1 : this.persp ?? 0, this.opacity, this.size * dpr, this.space, this.glow]));
     }
     destroy() { drop(this.sbuf, this.ubuf); }
     draw(pass) {

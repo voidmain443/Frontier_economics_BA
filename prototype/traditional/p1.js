@@ -5,13 +5,15 @@ import { FIGS } from './p1-figs.js';
 import { CONSTRUCTS } from './p1-fold.js';
 import { regressionData } from './figures.js';
 import { setupPage } from './page.js';
+import { PLACE_P1 } from './wheel.js';
 
 await setupPage({
   figs: FIGS,
   constructs: CONSTRUCTS,
-  // no building: the space is the economy's own engine, which each figure
-  // cuts through (docs/engine.md)
-  world: null,
+  // the cell of the wheel each figure is read over (docs/engine.md); the whole
+  // wheel comes into view as stage 6 opens
+  world: PLACE_P1,
+  whole: { from: '#s6', to: '#f6-1' },
   files: ['korea-growth', 'us-phillips', 'korea-1997', 'crisis-2008', 'maddison'],
   data: { reg: regressionData().pts },
   // distinct agents on the page by the end of each stage

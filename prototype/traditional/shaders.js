@@ -65,7 +65,12 @@ fn ribbonNormal(spx: f32) -> vec3f {
 // space 1: figure-local (a, b in the plot box, h in plot widths).
 // hs scales heights, so a construct can grow out of the page.
 fn toWorld(p: vec3f, box: vec4f, space: f32, hs: f32) -> vec3f {
-  if (space < 0.5) { return p + box.xyz; }
+  // space 0: world coordinates, turned by box.w about y and moved by box.xyz
+  if (space < 0.5) {
+    let c = cos(box.w);
+    let s = sin(box.w);
+    return vec3f(p.x * c - p.z * s, p.y, p.x * s + p.z * c) + box.xyz;
+  }
   let xp = mix(box.x, box.z, p.x);
   let sp = mix(box.w, box.y, p.y);
   return ribbonPos(xp, sp) + ribbonNormal(sp) * (p.z * hs * (box.z - box.x) * cam.px);
@@ -213,7 +218,10 @@ struct VO { @builtin(position) pos: vec4f, @location(0) uv: vec2f, @location(1) 
   let c = cam.viewProj * vec4f(toWorld(d.xyz, pu.box, pu.p.z, pu.color.a), 1.0);
   var cs = array<vec2f, 6>(vec2f(-1.0, -1.0), vec2f(1.0, -1.0), vec2f(1.0, 1.0), vec2f(-1.0, -1.0), vec2f(1.0, 1.0), vec2f(-1.0, 1.0));
   let q = cs[vi % 6u];
-  let r = pu.p.y * max(d.w, 0.0001) * 0.5;
+  var r = pu.p.y * max(d.w, 0.0001) * 0.5;
+  // in world space a point can keep a size in the world: pu.color.a is the
+  // distance at which it is drawn at its nominal size
+  if (pu.p.z < 0.5 && pu.color.a > 0.0) { r = clamp(r * pu.color.a / c.w, 0.6, r * 3.0); }
   let ext = r * (1.0 + pu.p.w * 3.0) + 1.0;
   var o: VO;
   o.pos = c + vec4f(q * ext / (cam.viewport * 0.5) * c.w, 0.0, 0.0);

@@ -5,9 +5,10 @@ import { plot } from './figures.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
-// The order of rooms on each floor is the building's plan (docs/world.md): a
-// figure that spans two rooms rises where they meet, so rooms that share a
-// figure stand next to each other or one above the other.
+// The order of rooms on each layer is the wheel's plan (wheel.js,
+// docs/engine.md): a layer is a ring and its rooms are the ring's cells, so a
+// figure that spans two cells is read where they meet, next to each other on a
+// ring or one outside the other.
 export const LAYERS = [
   { name: 'Methods', c: 'chalk', rooms: [
     ['Optimization', 'course.html?c=math'], ['Equilibrium', 'course.html?c=micro'], ['Strategy', 'course.html?c=games'],
@@ -28,7 +29,7 @@ const FILL = { chalk: 'f-hatch', olive: 'f-olive', ochre: 'f-ochre', cobalt: 'f-
 
 export const FIGS = {
   '3.1'(art) {
-    const p = plot(art, { w: 940, h: 470, x: [-1.5, 6], y: [0, 4], axes: false, pad: { l: 10, r: 10, t: 14, b: 14 }, alt: 'The archive as a plan: four layers, methods at the bottom and agents at the top, six rooms each; every room links to a course.' });
+    const p = plot(art, { w: 940, h: 470, x: [-1.5, 6], y: [0, 4], axes: false, pad: { l: 10, r: 10, t: 14, b: 14 }, alt: 'The archive as a plan: four layers, methods at the bottom and agents at the top, six cells each, the wheel laid flat; every cell links to a course.' });
     LAYERS.forEach((layer, L) => {
       p.line(-1.5, L, 6, L, 'k thin');
       p.label(-1.45, L + 0.5, layer.name, { dy: 6, roman: true, cls: 'step' });

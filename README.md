@@ -19,7 +19,7 @@
 | [docs/part1-manuscript.md](docs/part1-manuscript.md) | 1부 원고와 검토 기록 |
 | [docs/decisions.md](docs/decisions.md) | 결정 기록 (2026-10-29 grill 세션) |
 | [docs/world.md](docs/world.md) | 2차 grill: 하나의 세계(건물), 배치표, W0~W4의 기록 |
-| [docs/engine.md](docs/engine.md) | 다음 단계(3차 grill): 경제의 엔진, 페이지는 엔진의 단면, E1~E6 |
+| [docs/engine.md](docs/engine.md) | 3차 grill: 경제의 엔진, 페이지는 엔진의 단면, 이야기 방식, 부의 바퀴, E1~E6 |
 | [docs/phase4-test.md](docs/phase4-test.md) | 4단계 확인: 전공자 관찰 절차, 질문지, 정답·판정 기준, 관찰지 |
 | [docs/reference/shopify-editions-fall26.md](docs/reference/shopify-editions-fall26.md) | 레퍼런스 사이트 분석 (영상 + 번들) |
 
@@ -36,7 +36,7 @@ M0 착수 전. 핵심 경험을 검증한 프로토타입 둘이 있다.
 | `index.html` | 세 부분 소개 + 17개 과목 교재로 가는 문 |
 | `classical.html` | **1부, 고전 교재**: 주체와 시장이 하나씩 더해지는 8단계와 그림 30개. 그림마다 '고정된 것'과 그 축을 따라간 설명이 있다. 표제란의 **Fold the page into space**가 유일한 3D 모드다(`fold.js`). 페이지 전체가 리본으로 접히고, 그림이 읽는 줄에 오면 그 그림이 고정해 둔 축(`p1-fold.js`)이 제자리에서 솟는다. Esc나 같은 버튼으로 같은 자리의 평면으로 돌아온다. |
 | `beyond.html` | **2부, 평면 밖으로**: 1부 맺음말의 가정을 하나씩 푸는 다섯 절이다(누가 누구와 거래하나, 사슬, 대표 기업은 없다, 실제 사람의 게임, 은행 간 전염). 절마다 1부의 출발 그림과 'Held fixed'가 있고, 세 그림은 독자가 설정을 바꿀 수 있다. 접으면 고전 그림에 없는 차원이 솟는다(`p2-figs.js`, `p2-fold.js`, `p2-models.js`). 끝에 교재 프로젝트를 둔다. |
-| `archive.html` | **3부, 새 아카이브**: 제안 글, 아카이브 평면도(방법·제도·시장·주체 네 층, 방 24개, 각 방은 과목으로 가는 링크), 고전과 현대를 잇는 가정 표, 세 갈래 길, 교재 목록. 접으면 카메라가 물러나 평면도 옆에 선 건물 전체가 보이고, 1부의 고전 경로와 세 갈래 길이 그 위에 그려진다. 방 이름은 키보드로도 고를 수 있는 문이다(`p3-figs.js`, `world.js`). |
+| `archive.html` | **3부, 새 아카이브**: 제안 글, 아카이브 평면도(방법·제도·시장·주체 네 층, 방 24개, 각 방은 과목으로 가는 링크), 고전과 현대를 잇는 가정 표, 세 갈래 길, 교재 목록. 접으면 카메라가 물러나 평면도 옆에 놓인 '부의 바퀴' 전체가 보이고, 1부의 고전 경로와 세 갈래 길이 그 위에 그려진다. 칸 이름은 키보드로도 고를 수 있는 문이다(`p3-figs.js`, `wheel.js`). |
 | `course.html?c=<id>` | 과목별 교재: 주차 사다리, 1·2부에서 이 과목이 나오는 곳, 다른 과목과 만나는 교차점, 다음에 읽을 것(실라버스, 교재) |
 
 ### 프로토타입 ②: `prototype/traditional/` (최신)
@@ -54,7 +54,7 @@ M0 착수 전. 핵심 경험을 검증한 프로토타입 둘이 있다.
 |---|---|
 | `page.js` | 세 부분 공통: 그림 그리기, 식 번호, 표제란, 접힘 버튼 연결 |
 | `fold.js` | 접힘 하나: 캡처, 카메라, 그림별 구조의 솟음과 내려앉음, 라벨과 문 |
-| `world.js` | 접힌 공간의 건물: 방 24개, 1·2부의 배치표, 페이지가 지나는 길, 군중이 설 자리 (`docs/world.md`). 1부는 쓰지 않는다 |
+| `wheel.js` | 접힌 공간의 세계, 나이트의 '부의 바퀴': 칸 24개, 1·2부의 배치표, 사람과 순환, 3부의 길, 군중이 설 자리 (`docs/engine.md`) |
 | `market.js` | 경제의 엔진의 시장: 제로 지능 제약 거래자의 이중경매(Gode and Sunder 1993)와 효율 계산 (`docs/engine.md`) |
 | `gpu.js`, `shaders.js` | WebGPU 렌더러와 WGSL, 리본 좌표(`toWorld`), html-in-canvas 복사 |
 | `maquettes.js`, `geo3d.js` | Blender 주체 모형(GLB) 로더 |

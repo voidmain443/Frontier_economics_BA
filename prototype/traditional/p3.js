@@ -1,11 +1,11 @@
-// Part 3: a new archive. The plan is in p3-figs.js. Folded, the building it
-// describes stands beside the page, seen whole, with the routes through it
-// (world.js, docs/world.md).
+// Part 3: a new archive. The plan is in p3-figs.js. Folded, the wheel it
+// unrolls lies beside the page, seen whole, with the routes through it
+// (wheel.js, docs/engine.md).
 
 import { FIGS } from './p3-figs.js';
 import { COURSES } from './curriculum.js';
 import { setupPage } from './page.js';
-import { PLACE_P1, placeOfLink } from './world.js';
+import { PLACE_P1, placeOfLink } from './wheel.js';
 
 // the textbooks, with the question each answers
 const host = document.querySelector('#course-index');
@@ -22,7 +22,7 @@ for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']
   host.append(h, ul);
 }
 
-// the routes drawn through the building: the classical sequence of Part 1, figure
+// the routes drawn through the wheel: the classical sequence of Part 1, figure
 // by figure, and the three paths of section 4, from their links
 const byNumber = (a, b) => { const [x1, y1] = a.split('.').map(Number); const [x2, y2] = b.split('.').map(Number); return x1 - x2 || y1 - y2; };
 const routes = [
