@@ -16,12 +16,12 @@ export const RELATIONS = [
 // and Part 2 sections, by figure. touched: relaxed in passing, as a
 // consequence of another.
 export const ASSUMPTIONS = [
-  { id: 'A1', name: 'A representative agent', says: 'one agent stands for all of its kind; only the total matters', made: { 3: '3.2', 6: '6.2' }, relaxed: {}, touched: { 8: '8.10' }, p2: ['2.3', '2.4'] },
-  { id: 'A2', name: 'No connections', says: 'anyone can trade with anyone', made: { 1: '1.1' }, relaxed: {}, p2: ['2.1', '2.2', '2.5'] },
+  { id: 'A1', name: 'A representative agent', says: 'one agent stands for all of its kind; only the total matters', made: { 3: '3.2', 6: '6.2' }, relaxed: {}, touched: { 8: '8.10' }, p2: ['2.1', '2.2', '2.3'] },
+  { id: 'A2', name: 'No connections', says: 'anyone can trade with anyone', made: { 1: '1.1' }, relaxed: {}, p2: ['2.4', '2.5', '2.6', '2.7'] },
   { id: 'A3', name: 'Price-taking', says: 'nobody can move the price', made: { 1: '1.1', 3: '3.2' }, relaxed: { 4: '4.1', 8: '8.7' } },
   { id: 'A4', name: 'Full information', says: 'everyone knows the same things', made: { 1: '1.1' }, relaxed: { 5: '5.3', 8: '8.3' } },
   { id: 'A5', name: 'Complete markets', says: 'everything has a market', made: { 5: '5.1' }, relaxed: { 5: '5.2', 8: '8.6' } },
-  { id: 'A6', name: 'Consistent choice', says: 'a plan made today is kept tomorrow', made: { 2: '2.1' }, relaxed: { 8: '8.9' }, p2: ['2.4'] },
+  { id: 'A6', name: 'Consistent choice', says: 'a plan made today is kept tomorrow', made: { 2: '2.1' }, relaxed: { 8: '8.9' }, p2: ['2.3'] },
   { id: 'A7', name: 'Equilibrium at once', says: 'markets clear without delay', made: { 5: '5.1' }, relaxed: { 6: '6.3' } },
   { id: 'A8', name: 'Data show relationships', says: 'a pattern in the data is the relationship', made: { 7: '7.1' }, relaxed: { 7: '7.2' } },
 ];
@@ -65,11 +65,13 @@ export const MODELS = [
 ].map((m) => ({ ...m, part: 1, href: `classical.html#f${m.id.replace('.', '-')}` }));
 
 export const MODELS_P2 = [
-  M('2.1', 'Who trades with whom', ['Goods', 'Networks'], [[null, 'the share of ties rewired']], 'relax', 'no connections (A2)', 'Computation'),
-  M('2.2', 'Chains, not cores', ['Networks'], [[null, 'the average number of ties']], 'relax', 'no connections (A2)', 'Computation'),
-  M('2.3', 'No representative firm', ['Firms'], [[null, 'firm sizes, drawn not assumed']], 'relax', 'a representative agent (A1)', 'Computation'),
-  M('2.4', 'Games real people play', ['Strategy'], [[null, 'the mix of reasoning levels']], 'relax', 'a representative agent (A1), consistent choice (A6)', 'Measurement'),
-  M('2.5', 'Contagion between banks', ['Banks', 'Networks'], [[null, 'who owes whom']], 'relax', 'no connections (A2)', 'Computation'),
+  M('2.1', 'No representative firm', ['Firms'], [[null, 'firm sizes, drawn not assumed']], 'relax', 'a representative agent (A1)', 'Computation'),
+  M('2.2', 'Unlike households', ['Households'], [[null, 'income, by fifths of households']], 'relax', 'a representative agent (A1)', 'Measurement'),
+  M('2.3', 'Games real people play', ['Strategy'], [[null, 'the mix of reasoning levels']], 'relax', 'a representative agent (A1), consistent choice (A6)', 'Measurement'),
+  M('2.4', 'Who trades with whom', ['Goods', 'Networks'], [[null, 'the share of ties rewired']], 'relax', 'no connections (A2)', 'Computation'),
+  M('2.5', 'Chains, not cores', ['Networks'], [[null, 'the average number of ties']], 'relax', 'no connections (A2)', 'Computation'),
+  M('2.6', 'Connected firms', ['Firms', 'Goods'], [[null, 'the sector whose demand changes']], 'relax', 'no connections (A2)', 'Measurement'),
+  M('2.7', 'Contagion between banks', ['Banks', 'Networks'], [[null, 'who owes whom']], 'relax', 'no connections (A2)', 'Computation'),
 ].map((m) => ({ ...m, part: 2, href: `beyond.html#f${m.id.replace('.', '-')}` }));
 
 // The wheel's state for a model: { moving, stopped: Map(cell → value) }, its

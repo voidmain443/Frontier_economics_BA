@@ -2,7 +2,7 @@
 // the flat drawing of what replaces it. Same conventions as p1-fold.js: data
 // units of the anchor drawing, plus a height h in plot widths.
 
-import { SW, smallWorld, distances, chainAndCore, chainLayout, coreLayout, cutPairs, preferential, LEVELS, beauty, contagion } from './p2-models.js';
+import { SW, smallWorld, distances, chainAndCore, chainLayout, coreLayout, cutPairs, preferential, LEVELS, beauty, contagion, fifths, io, rounds } from './p2-models.js';
 import { ringPos } from './p2-figs.js';
 
 // dims: a dimension line along the raised axis. crowd: { asset, items }, the
@@ -32,7 +32,7 @@ function fromBeat(from, sets, draw) {
   };
 }
 
-// 2.1: a letter passed from friend to friend along a shortest path, as in
+// 2.4: a letter passed from friend to friend along a shortest path, as in
 // Milgram's study, one hop every HOP seconds; each hop climbs one step
 function letterEngine(path, at) {
   const HOP = 0.55;
@@ -60,7 +60,7 @@ function letterEngine(path, at) {
   });
 }
 
-// 2.2: the tallest tie of the chain breaks; its two ends pull apart, and the
+// 2.5: the tallest tie of the chain breaks; its two ends pull apart, and the
 // students on each side of it take their own colour
 function breakEngine(pos, edges, cut) {
   const e = cut.indexOf(Math.max(...cut));
@@ -100,7 +100,7 @@ function columns(list, c, alpha) {
 
 export const CONSTRUCTS = {
   // who is how many steps from you
-  '2.1': {
+  '2.4': {
     dom: { x: [-1.2, 1.2], y: [-1.2, 1.2] },
     build(data) {
       const X = blank();
@@ -127,13 +127,15 @@ export const CONSTRUCTS = {
         { say: 'Raise each person by the number of steps it takes to reach them from you. On a plain ring the far side would stand 14 steps high.', cam: { az: -0.5, el: 0.14, zoom: 0.85, at: [0, 0, 0.12] }, dur: 1.6 },
         { say: `Send a letter to the farthest person, from friend to friend, as Milgram’s senders did. With these shortcuts it arrives in ${d[far]} steps.`, cam: { az: -0.3, el: 0.22, zoom: 0.8, at: [0, 0, 0.12] }, dur: 1.4 },
         { say: 'Granovetter (1973) found that people often hear of jobs through acquaintances rather than close friends: the weak ties are the shortcuts. Rewire more with the slider in the margin, and distance collapses long before neighbours stop knowing one another.', cam: { az: -0.6, el: 0.12, zoom: 0.9, at: [0, 0, 0.1] } },
+        { say: 'On the wheel, households now buy from and work for the few firms they are tied to, and what they send one another travels along those ties instead of through the market.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
+      X.model = (b) => (b >= 4 ? { tied: ['households'] } : null);
       return X;
     },
   },
 
   // what breaks if this tie breaks
-  '2.2': {
+  '2.5': {
     dom: { x: [0, 2.2], y: [0, 1] },
     build() {
       const X = blank();
@@ -168,7 +170,7 @@ export const CONSTRUCTS = {
   },
 
   // the size of every firm, as a skyline over the plan; the mean, as a plane through it
-  '2.3': {
+  '2.1': {
     dom: { x: [0, 20], y: [0, 20] },
     build() {
       const X = blank();
@@ -202,7 +204,7 @@ export const CONSTRUCTS = {
   },
 
   // reasoning level, as height: a staircase down to zero that few people climb
-  '2.4': {
+  '2.3': {
     dom: (data) => ({ x: [0, 100], y: [0, Math.max(...data.state.mix, 1) + 1] }),
     build(data) {
       const X = blank();
@@ -238,7 +240,7 @@ export const CONSTRUCTS = {
   },
 
   // the round in which each bank fails, as height
-  '2.5': {
+  '2.7': {
     dom: { x: [0, 2.2], y: [0, 1] },
     build(data) {
       const X = blank();
@@ -279,7 +281,101 @@ export const CONSTRUCTS = {
         { say: 'Ten banks with a buffer of 1 each. A failed bank passes its loss beyond the buffer, in equal parts, to the banks it owes: on the left only the next one, on the right all the others.' },
         { say: 'Raise each bank to the round in which it fails. The ones that survive stay on the page.', cam: { az: -0.5, el: 0.14, zoom: 0.85, at: [1.1, 0.5, 0.12] }, dur: 1.6 },
         { say: `A loss of ${s} at the first bank. On the ring ${banksOf(ring.n)}${ring.n > 1 ? `, one after another, to round ${ring.end}` : ''}; in the dense network ${dense.n === 1 ? 'only the first fails' : `${dense.n} banks fail, all by round ${dense.end}`}. Beside the page they fall in their rounds.`, cam: { az: -0.3, el: 0.3, zoom: 1.4, at: [1.1, 0.5, 0.05] }, dur: 1.4 },
-        { say: 'They are the wheel’s ten banks. Each that fails turns red there too, and the saving and lending that ran through it stop. Raise the loss above 10 with the slider, and the dense network falls all at once, in round 2.', cam: { az: -0.25, el: 0.4, zoom: 2.2, at: null }, dur: 1.6 },
+        { say: 'They are the wheel’s ten banks, each now tied to the bank it owes and to the firms it lends to. Each that fails turns red there too, and the saving and lending that ran through it stop. Raise the loss above 10 with the slider, and the dense network falls all at once, in round 2.', cam: { az: -0.25, el: 0.4, zoom: 2.2, at: null }, dur: 1.6 },
+      ];
+      X.model = (b) => (b >= 3 ? { tied: ['banks'] } : null);
+      return X;
+    },
+  },
+  // each fifth of households, by its share of all income and of all spending
+  '2.2': {
+    dom: { x: [0, 10], y: [0, 6] },
+    build(data) {
+      const X = blank();
+      const F = fifths(data['korea-households']);
+      const k = 0.5;
+      const pct = (v) => `${Math.round(100 * v)}%`;
+      const inc = [];
+      const spend = [];
+      for (const r of F.rows) {
+        inc.push({ x0: r.y - 0.3, x1: r.y, y0: r.c - 0.12, y1: r.c + 0.12, h: r.ys * k });
+        spend.push({ x0: r.y, x1: r.y + 0.3, y0: r.c - 0.12, y1: r.c + 0.12, h: r.cs * k });
+      }
+      const a = columns(inc, 'cobalt', 0.35);
+      const b = columns(spend, 'ochre', 0.35);
+      X.meshes.push({ ...a.mesh, ...UP });
+      X.segs.push({ ...a.segs, ...UP });
+      X.meshes.push({ ...b.mesh, show: [2], rise: 2 });
+      X.segs.push({ ...b.segs, show: [2], rise: 2 });
+      const [bot, , , , top] = F.rows;
+      X.tags.push(
+        { text: `top fifth: ${pct(top.ys)} of all income`, at: [top.y - 0.15, top.c, top.ys * k], c: 'cobalt', ...UP },
+        { text: `bottom fifth: ${pct(bot.ys)} of all income`, at: [bot.y - 0.15, bot.c, bot.ys * k], c: 'cobalt', ...UP },
+        { text: `${pct(top.cs)} of all spending`, at: [top.y + 0.15, top.c, top.cs * k], c: 'ochre', show: [2] },
+        { text: `${pct(bot.cs)} of all spending`, at: [bot.y + 0.15, bot.c, bot.cs * k], c: 'ochre', show: [2] },
+      );
+      X.dims.push({ from: [10, 0, 0], to: [10, 0, top.ys * k], text: `share of all income 0 … ${pct(top.ys)}`, ...UP });
+      // on the wheel, the households take their sizes by income, fifth by fifth
+      X.model = (b2) => (b2 >= 3 ? { unlike: true } : null);
+      X.story = [
+        { say: `Korean households in ${F.year}, in five fifths by income: what each spends a month against what it has to spend. The line through the average is the representative household, which spends ${pct(F.all.apc)} of whatever it has.` },
+        { say: `Raise each fifth by its share of all disposable income. The top fifth has ${pct(top.ys)} of it; the bottom fifth, ${pct(bot.ys)}.`, cam: { az: -0.5, el: 0.16, zoom: 0.85, at: [5, 3, 0.08] }, dur: 1.6 },
+        { say: `Beside each, its share of all spending. The bottom fifth does ${pct(bot.cs)} of the spending with ${pct(bot.ys)} of the income, the top fifth ${pct(top.cs)} with ${pct(top.ys)}. A won given to one does not do what a won given to the other does.`, cam: { az: -0.3, el: 0.22, zoom: 0.85, at: [5, 3, 0.08] }, dur: 1.4 },
+        { say: 'On the wheel the households take their sizes by income, each dot in its fifth, the area in proportion to that fifth’s income. The representative household drew them all alike.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
+      ];
+      return X;
+    },
+  },
+
+  // the output a won of final demand draws from each sector, round by round
+  '2.6': {
+    dom: { x: [-2.2, 2.2], y: [-2.2, 2.2] },
+    build(data) {
+      const X = blank();
+      const m = io(data['korea-io']);
+      const j = data.state.sector;
+      const R = rounds(m, j);
+      const pos = ringPos(m.n);
+      const k = 0.2;
+      const w = 0.07;
+      // each sector a column on the circle, in stacked rounds: the won itself,
+      // its suppliers, theirs, and the rest; each round comes in at its beat
+      const layers = [['r0', 'madder', 1], ['r1', 'ochre', 2], ['r2', 'olive', 3], ['rest', 'cobalt', 4]];
+      const stack = { r0: 0, r1: 0, r2: 0, rest: 0 };
+      for (const [key, c, beat] of layers) {
+        const quads = [];
+        const segs = [];
+        R.forEach((v, i) => {
+          const z0 = (v.r0 * (key !== 'r0') + v.r1 * (key === 'r2' || key === 'rest') + v.r2 * (key === 'rest')) * k;
+          const z1 = z0 + v[key] * k;
+          if (v[key] < 2e-3) return;
+          const [x, y] = pos[i];
+          const q = (z) => [[x - w, y - w, z], [x + w, y - w, z], [x + w, y + w, z], [x - w, y + w, z]];
+          quads.push(q(z1), [[x - w, y - w, z0], [x + w, y - w, z0], [x + w, y - w, z1], [x - w, y - w, z1]], [[x + w, y - w, z0], [x + w, y + w, z0], [x + w, y + w, z1], [x + w, y - w, z1]]);
+          segs.push([[x - w, y - w, z1], [x + w, y - w, z1]], [[x + w, y - w, z1], [x + w, y + w, z1]]);
+          stack[key] += v[key];
+        });
+        X.meshes.push({ quads, c, alpha: 0.4, show: [beat], rise: beat });
+        X.segs.push({ segs, c, w: 1, o: 0.8, show: [beat], rise: beat });
+      }
+      // the ties into the chosen sector, from its suppliers, on the page
+      const ties = [];
+      for (let i = 0; i < m.n; i++) if (i !== j && m.A[i][j] >= 0.02) ties.push([[...pos[i], 0.002], [...pos[j], 0.002]]);
+      X.segs.push({ segs: ties, c: 'ochre', w: 1.4, o: 0.8, show: [2] });
+      const name = m.names[j];
+      const total = R.reduce((a, v) => a + v.total, 0);
+      const first = R.filter((v) => v.i !== j).sort((a, b) => b.r1 - a.r1).slice(0, 3).map((v) => m.names[v.i]);
+      const [x, y] = pos[j];
+      X.tags.push({ text: `${name}: one won of final demand`, at: [x, y, k], c: 'madder', show: [1] }, { text: `in all: ${total.toFixed(2)} won`, at: [x, y, R[j].total * k], c: 'cobalt', show: [4] });
+      X.dims.push({ from: [1.6, -1.6, 0], to: [1.6, -1.6, R[j].total * k], text: `output drawn, won 0 … ${R[j].total.toFixed(2)}`, ...UP });
+      X.model = (b) => (b >= 5 ? { tied: ['firms'] } : null);
+      X.story = [
+        { say: `Korea’s 33 sectors in ${m.year}, each on a circle, with a line from a supplier to each sector that buys at least 5 percent of its output from it. Choose a sector in the margin; here it is ${name}.` },
+        { say: `Add one won of final demand for ${name}. Without ties, as the firm of Figure 3.1 has none, that is all: one sector rises by one won.`, cam: { az: -0.45, el: 0.18, zoom: 0.85, at: [0, 0, 0.06] }, dur: 1.4 },
+        { say: `To make it, ${name} buys from its suppliers: ${stack.r1.toFixed(2)} won in the first round, most from ${first.join(', ')}.`, dur: 1.4 },
+        { say: `The suppliers buy from theirs: ${stack.r2.toFixed(2)} won more in the second round.`, dur: 1.2 },
+        { say: `And so on, round after round, until one won of final demand has drawn ${total.toFixed(2)} won of output in all. This is the column of the Leontief inverse.`, dur: 1.4 },
+        { say: 'On the wheel, the firms are tied to the firms they buy from. A shock to a firm that supplies many travels along the ties and does not average out (Acemoglu et al. 2012).', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
       return X;
     },

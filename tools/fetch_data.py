@@ -749,6 +749,78 @@ def build_maddison(log):
             "series": out}
 
 
+def kosis2(org, tbl, itm, obj1, obj2, prd, start, end):
+    """Rows of a KOSIS table with two classifications, as returned."""
+    t = ("https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey={KOSIS_KEY}"
+         "&orgId=%s&tblId=%s&itmId=%s&objL1=%s&objL2=%s&objL3=&objL4=&objL5=&objL6=&objL7=&objL8="
+         "&prdSe=%s&startPrdDe=%s&endPrdDe=%s&format=json&jsonVD=Y") % (org, tbl, itm, obj1, obj2, prd, start, end)
+    d = http_get(t)
+    if not isinstance(d, list):
+        raise FetchError("KOSIS %s: %s" % (tbl, redact(json.dumps(d, ensure_ascii=False)[:200])))
+    return d, t
+
+
+KOSIS_SRC = "KOSIS OpenAPI (Statistics Korea)"
+HH_TBL = "DT_1L9U103"
+QUINTILES = ("Q1", "Q2", "Q3", "Q4", "Q5", "Q0")
+
+
+def build_korea_households(log):
+    """Household Income and Expenditure Survey: disposable income and consumption by income quintile,
+    for the last year with all four quarters (monthly averages per household)."""
+    year = None
+    got = {}
+    for item in ("Y1", "F"):
+        rows, t = kosis2("101", HH_TBL, "T110", "ALL", item, "Q", "%d01" % (TODAY.year - 2), "%d04" % TODAY.year)
+        for r in rows:
+            got.setdefault(item, {}).setdefault(r["C1"], {})[r["PRD_DE"]] = float(r["DT"])
+    years = sorted({q[:4] for c in got["Y1"].values() for q in c})
+    year = max(y for y in years if all(len([q for q in got[i]["Q0"] if q.startswith(y)]) == 4 for i in ("Y1", "F")))
+    mean = lambda item, c: sum(v for q, v in got[item][c].items() if q.startswith(year)) / 4.0
+    names = {"Q1": "bottom fifth", "Q2": "second fifth", "Q3": "middle fifth", "Q4": "fourth fifth", "Q5": "top fifth", "Q0": "all households"}
+    url = doc_url(kosis_template("101", HH_TBL, "T110", "ALL", "Q", "{START}", "{END}").replace("objL2=", "objL2={ITEM}"))
+    codes = "orgId 101, tblId %s (소득5분위별 가구당 가계수지, 전국 1인이상), itmId T110 전체가구, objL1 월소득 5분위 Q1..Q5, Q0 전체 평균, objL2 %%s, prdSe Q" % HH_TBL
+    out = []
+    for key, item, label in (("disp_income", "Y1", "Disposable income per household"), ("consumption", "F", "Consumption spending per household")):
+        out.append(series(key, "%s, by income quintile (%s)" % (label, year), "thousand KRW per month", "A",
+                          [(names[c], mean(item, c) / 1000.0) for c in QUINTILES], 1,
+                          "%s, table %s, item %s" % (KOSIS_SRC, HH_TBL, item), KOSIS_SRC + ", orgId 101",
+                          codes % ("Y1 처분가능소득" if item == "Y1" else "F 소비지출"), url,
+                          "mean of the four quarters of %s (each a monthly average per household), KRW / 1000; points keyed by quintile, not time" % year))
+    return {"id": "korea-households", "title": "Korean households by income quintile: disposable income and consumption (Household Income and Expenditure Survey)", "year": year, "series": out}
+
+
+IO_TBL = "DT_271Y112"
+IO_ITEM = "13103852764999"
+
+
+def build_korea_io(log):
+    """Bank of Korea input-output table, 33 sectors: the Leontief inverse (output induced in each supplying
+    sector per won of final demand for each sector), for the latest year."""
+    rows, t = kosis2("301", IO_TBL, IO_ITEM, "ALL", "ALL", "Y", str(TODAY.year - 4), str(TODAY.year))
+    year = max(r["PRD_DE"] for r in rows)
+    code = lambda s: s.split(".")[-1]
+    sectors, seen, L = [], set(), {}
+    for r in rows:
+        if r["PRD_DE"] != year:
+            continue
+        j, i = code(r["C1"]), code(r["C2"])
+        if j[0].isalpha() and j not in seen:
+            seen.add(j)
+            sectors.append({"code": j, "ko": r["C1_NM"], "en": r.get("C1_NM_ENG") or ""})
+        if j[0].isalpha() and i[0].isalpha():
+            L[(i, j)] = float(r["DT"])
+    order = [s["code"] for s in sectors]
+    if len(order) != 33 or len(L) != 33 * 33:
+        raise FetchError("input-output %s: expected 33 sectors, got %d (%d cells)" % (year, len(order), len(L)))
+    out = [series("leontief", "Leontief inverse, %s (domestic, producer prices, 33 sectors)" % year, "won per won of final demand", "A",
+                  [("%s>%s" % (i, j), L[(i, j)]) for j in order for i in order], 5,
+                  "Bank of Korea input-output tables via %s, table %s" % (KOSIS_SRC, IO_TBL), KOSIS_SRC + ", orgId 301 (Bank of Korea)",
+                  "orgId 301, tblId %s (투입산출표 생산유발계수표, 생산자가격, 대분류), itmId %s, objL1 수요상품별 (column), objL2 투입상품별 (row), prdSe Y" % (IO_TBL, IO_ITEM),
+                  doc_url(t), "as published; point 'i>j' is the output of sector i induced by one won of final demand for sector j; points keyed by cell, not time")]
+    return {"id": "korea-io", "title": "Korea's input-output table: how a won of final demand travels through 33 sectors (Bank of Korea)", "year": year, "sectors": sectors, "series": out}
+
+
 BUILDERS = [
     ("korea-growth", build_korea_growth),
     ("us-phillips", build_us_phillips),
@@ -758,6 +830,8 @@ BUILDERS = [
     ("rates-2022", build_rates_2022),
     ("dart-firms", build_dart),
     ("maddison", build_maddison),
+    ("korea-households", build_korea_households),
+    ("korea-io", build_korea_io),
 ]
 
 

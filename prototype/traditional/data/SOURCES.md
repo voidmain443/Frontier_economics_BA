@@ -763,3 +763,41 @@ The long run: income and population since 1250 (Maddison Project 2023). Retrieve
 - Coverage: 1 to 2022 (208 points)
 - Transformation: as published; years with no estimate omitted
 - Retrieved: 2026-10-30
+
+## korea-households.json
+
+Korean households by income quintile: disposable income and consumption (Household Income and Expenditure Survey). Retrieved 2026-10-31.
+
+### `disp_income` - Disposable income per household, by income quintile (2025)
+
+- Provider: KOSIS OpenAPI (Statistics Korea), orgId 101
+- Codes: orgId 101, tblId DT_1L9U103 (소득5분위별 가구당 가계수지, 전국 1인이상), itmId T110 전체가구, objL1 월소득 5분위 Q1..Q5, Q0 전체 평균, objL2 Y1 처분가능소득, prdSe Q
+- URL: `https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey={KEY}&orgId=101&tblId=DT_1L9U103&itmId=T110&objL1=ALL&objL2={ITEM}&objL3=&objL4=&objL5=&objL6=&objL7=&objL8=&prdSe=Q&startPrdDe={START}&endPrdDe={END}&format=json&jsonVD=Y`
+- Unit / frequency: thousand KRW per month / A
+- Coverage: bottom fifth to all households (6 points)
+- Transformation: mean of the four quarters of 2025 (each a monthly average per household), KRW / 1000; points keyed by quintile, not time
+- Retrieved: 2026-10-31
+
+### `consumption` - Consumption spending per household, by income quintile (2025)
+
+- Provider: KOSIS OpenAPI (Statistics Korea), orgId 101
+- Codes: orgId 101, tblId DT_1L9U103 (소득5분위별 가구당 가계수지, 전국 1인이상), itmId T110 전체가구, objL1 월소득 5분위 Q1..Q5, Q0 전체 평균, objL2 F 소비지출, prdSe Q
+- URL: `https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey={KEY}&orgId=101&tblId=DT_1L9U103&itmId=T110&objL1=ALL&objL2={ITEM}&objL3=&objL4=&objL5=&objL6=&objL7=&objL8=&prdSe=Q&startPrdDe={START}&endPrdDe={END}&format=json&jsonVD=Y`
+- Unit / frequency: thousand KRW per month / A
+- Coverage: bottom fifth to all households (6 points)
+- Transformation: mean of the four quarters of 2025 (each a monthly average per household), KRW / 1000; points keyed by quintile, not time
+- Retrieved: 2026-10-31
+
+## korea-io.json
+
+Korea's input-output table: how a won of final demand travels through 33 sectors (Bank of Korea). Retrieved 2026-10-31.
+
+### `leontief` - Leontief inverse, 2024 (domestic, producer prices, 33 sectors)
+
+- Provider: KOSIS OpenAPI (Statistics Korea), orgId 301 (Bank of Korea)
+- Codes: orgId 301, tblId DT_271Y112 (투입산출표 생산유발계수표, 생산자가격, 대분류), itmId 13103852764999, objL1 수요상품별 (column), objL2 투입상품별 (row), prdSe Y
+- URL: `https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey={KEY}&orgId=301&tblId=DT_271Y112&itmId=13103852764999&objL1=ALL&objL2=ALL&objL3=&objL4=&objL5=&objL6=&objL7=&objL8=&prdSe=Y&startPrdDe=2022&endPrdDe=2026&format=json&jsonVD=Y`
+- Unit / frequency: won per won of final demand / A
+- Coverage: A>A to T>T (1089 points)
+- Transformation: as published; point 'i>j' is the output of sector i induced by one won of final demand for sector j; points keyed by cell, not time
+- Retrieved: 2026-10-31

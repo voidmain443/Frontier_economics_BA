@@ -493,7 +493,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const flow = circulation(groups);
       // ties between particular agents, drawn when a model has them
       const tie = ties(groups);
-      const tieLines = Object.assign(G.lines(tie.segs, Z, COL.chalk, 1, 0.5, false, 0), { space: 0 });
+      const tieLines = Object.fromEntries(Object.entries(tie.segs).map(([kind, segs]) => [kind, Object.assign(G.lines(segs, Z, COL.chalk, 1, 0.5, false, 0), { space: 0 })]));
       // what the wheel produces, beside the hub, when a model measures it
       const measured = Object.assign(document.createElement('div'), { className: 'xl tag measured' });
       labelsRoot.appendChild(measured);
@@ -505,7 +505,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         return r ? (top ? r.top : (r.top + r.bottom) / 2) + scrollY : null;
       };
       sc.whole = whole ? { from: pos(whole.from, true), to: pos(whole.to, false) } : null;
-      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still, groups, failed, goneKey: '', tie, tieLines, measured, look: { alike: 0, unlike: 0, tied: 0, measured: 0 } };
+      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still, groups, failed, goneKey: '', tie, tieLines, measured, look: { alike: 0, unlike: 0, measured: 0, households: 0, firms: 0, banks: 0 } };
     }
 
     // Part 3: the routes through the whole wheel, each in its own colour, with
@@ -812,7 +812,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       }
     }
     const state = MS ? MS.fn(Math.round(beatOf.get(MS.fid) ?? 1e9)) : null;
-    const modeOf = (n) => (!state || state.moving.has(n) ? 'm' : state.stopped.has(n) ? 's' : 'o');
+    // (a state without moving cells changes only how the agents are drawn)
+    const modeOf = (n) => (!state?.moving || state.moving.has(n) ? 'm' : state.stopped?.has(n) ? 's' : 'o');
     const SV = SC ? storyView(SC, P, ease(grow(SC.group)) * LIFT) : null;
     sw *= e;
     // where the wheel stands: turned, and its hub moved, so that the place being
@@ -835,8 +836,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // the wheel out from under the page to lie beside it, as in Part 3, so
     // that the cell being built is not under the paper
     const BESIDE = [pageX + 1.1 + RIM, -0.004, -0.8];
-    const beside = A ? 1 : SC?.build && pose ? ease(sw) : 0;
-    if (SC?.build) climax = Math.max(climax, ease(sw));
+    // (so does a figure's beat marked beside: true, which shows the wheel)
+    const nb = SC ? SC.beats.length : 0;
+    const flag = (i) => (SC?.build || SC?.beats[clamp(i, 0, nb - 1)]?.beside ? 1 : 0);
+    const out = SC ? lerp(flag(Math.floor(SC.shown)), flag(Math.ceil(SC.shown)), ease(SC.shown - Math.floor(SC.shown))) : 0;
+    const beside = A ? 1 : pose ? ease(sw) * out : 0;
+    climax = Math.max(climax, beside);
     if (!A && beside > 0) pose = { phi: pose.phi, C: pose.C.map((v, k) => lerp(v, BESIDE[k], beside)) };
     // while the wheel is built, the figures on the page step back
     const quiet = 1 - 0.85 * (!A && SC?.build ? ease(sw) : 0);
@@ -1002,7 +1007,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       M2.s += ((md === 's' ? 1 : 0) - M2.s) * ek;
       M2.o += ((md === 'o' ? 1 : 0) - M2.o) * ek;
       M2.l += ((state?.lit?.includes(n) ? 1 : 0) - M2.l) * ek;
-      if (state) weights.set(n, Math.max(weights.get(n) ?? 0, 0.45 * M2.m, M2.l));
+      if (state?.moving) weights.set(n, Math.max(weights.get(n) ?? 0, 0.45 * M2.m, M2.l));
     }
     if (sc.world && pose) {
       const Wd = sc.world;
@@ -1038,7 +1043,10 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       // (households too by income), tied to particular others; and whether it
       // measures what the wheel produces
       const LK = Wd.look;
-      for (const k of ['alike', 'unlike', 'tied', 'measured']) LK[k] += ((state?.[k] ? 1 : 0) - LK[k]) * ek;
+      for (const k of ['alike', 'unlike', 'measured']) LK[k] += ((state?.[k] ? 1 : 0) - LK[k]) * ek;
+      // tied: true ties every kind of agent; a list ties only those kinds
+      const tiedOf = (kind) => state?.tied === true || (Array.isArray(state?.tied) && state.tied.includes(kind));
+      for (const k of ['households', 'firms', 'banks']) LK[k] += ((tiedOf(k) ? 1 : 0) - LK[k]) * ek;
       const sizeKey = `${LK.alike.toFixed(2)} ${LK.unlike.toFixed(2)}`;
       if (sizeKey !== Wd.sizeKey) {
         Wd.sizeKey = sizeKey;
@@ -1064,7 +1072,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         return ends.includes('o') ? 'o' : modeOf(f.via) === 's' ? 's' : 'm';
       };
       if (!REDUCED) {
-        Wd.flow.step(dt, { gone, built: (f) => bw(flowW, f.name) > 0.5 && routeMode(f) !== 'o', has: (g) => bw(groupW, g) > 0.5, given: (f) => !sc.built || sc.built.flows.get(f.name)?.length === 0, frozen: (f) => routeMode(f) === 's', links: state?.tied ? Wd.tie.adj : null });
+        Wd.flow.step(dt, { gone, built: (f) => bw(flowW, f.name) > 0.5 && routeMode(f) !== 'o', has: (g) => bw(groupW, g) > 0.5, given: (f) => !sc.built || sc.built.flows.get(f.name)?.length === 0, frozen: (f) => routeMode(f) === 's', links: tiedOf('households') ? Wd.tie.adj : null });
         const pp = Wd.flow.points();
         Wd.parcels[0].set(pp.money.pts);
         Wd.parcels[1].set(pp.goods.pts);
@@ -1092,11 +1100,13 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         under.push(d);
       }
       // ties, drawn on as a model ties the agents
-      Wd.tieLines.box = box;
-      Wd.tieLines.total ??= Wd.tieLines.count;
-      Wd.tieLines.count = Math.ceil(Wd.tieLines.total * LK.tied);
-      Wd.tieLines.opacity = shown * 0.3 * Math.min(1, LK.tied * 2);
-      under.push(Wd.tieLines);
+      for (const [kind, T] of Object.entries(Wd.tieLines)) {
+        T.box = box;
+        T.total ??= T.count;
+        T.count = Math.ceil(T.total * LK[kind]);
+        T.opacity = shown * 0.3 * Math.min(1, LK[kind] * 2);
+        under.push(T);
+      }
       // a cell's sign shows while it is read, and every sign once the whole
       // wheel is in view; it stands where the page leaves it clear
       // the page's edges on screen at the reading line
@@ -1115,7 +1125,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         w.hatch.box = box;
         w.hatch.opacity = shown * made * md.s * 0.5;
         under.push(w.plate, w.hatch);
-        const value = state?.stopped.get(w.cell.name);
+        const value = state?.stopped?.get(w.cell.name);
         if (value && w.held.dataset.v !== value) {
           w.held.dataset.v = value;
           w.held.innerHTML = `<i>held</i> ${value}`;

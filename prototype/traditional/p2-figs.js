@@ -2,7 +2,7 @@
 // p2-models.js; data.state holds the reader's settings for the live figures.
 
 import { plot } from './figures.js';
-import { SW, SW_PS, smallWorld, smallWorldCurve, distances, chainAndCore, chainLayout, coreLayout, preferential, LEVELS, beauty, contagion } from './p2-models.js';
+import { SW, SW_PS, smallWorld, smallWorldCurve, distances, chainAndCore, chainLayout, coreLayout, preferential, LEVELS, beauty, contagion, fifths, io, rounds } from './p2-models.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const sv = (tag, attrs, parent) => {
@@ -39,7 +39,7 @@ function ticks(p, { x = [], y = [], fx = String, fy = String }) {
 export const ringPos = (n) => Array.from({ length: n }, (_, i) => { const a = Math.PI / 2 - (2 * Math.PI * i) / n; return [Math.cos(a), Math.sin(a)]; });
 
 export const FIGS = {
-  '2.1'(art, data) {
+  '2.4'(art, data) {
     const p0 = data.state.p;
     const [l, r] = panels(art, 'two');
     const g = smallWorld(SW.n, SW.k, p0);
@@ -63,7 +63,7 @@ export const FIGS = {
     ticks(q, { x: [-3, -2, -1, 0], y: [0, 0.5, 1], fx: (v) => String(10 ** v), fy: (v) => v.toFixed(1) });
   },
 
-  '2.2'(art) {
+  '2.5'(art) {
     const { chain, core } = chainAndCore();
     const cp = chainLayout();
     const kp = coreLayout().map(([x, y]) => [x + 1.2, y]);
@@ -76,7 +76,7 @@ export const FIGS = {
     p.note(1.7, 0, 'a core: 31 ties', { anchor: 'middle', dy: 18 });
   },
 
-  '2.3'(art) {
+  '2.1'(art) {
     const { deg, order, mean } = preferential();
     const [l, r] = panels(art, 'two');
     const p = P(l, { ...H2, h: 440, x: [0, 20], y: [0, 20], axes: false, pad: { l: 20, r: 20, t: 20, b: 20 }, alt: 'Four hundred firms on a plan, shaded by size: a few dark, most pale.' });
@@ -97,7 +97,7 @@ export const FIGS = {
     ticks(q, { x: [0, 1, 2, Math.log10(400)], y: [0, 1, Math.log10(50)], fx: (v) => String(Math.round(10 ** v)), fy: (v) => String(Math.round(10 ** v)) });
   },
 
-  '2.4'(art, data) {
+  '2.3'(art, data) {
     const mix = data.state.mix;
     const { avg, target } = beauty(mix);
     const top = Math.max(...mix, 1) + 1;
@@ -118,7 +118,7 @@ export const FIGS = {
     ticks(p, { x: [0, 22, 33, 50, 100] });
   },
 
-  '2.5'(art, data) {
+  '2.7'(art, data) {
     const s = data.state.shock;
     const ring = contagion(s, false);
     const full = contagion(s, true);
@@ -139,6 +139,70 @@ export const FIGS = {
     const n2 = full.filter(Boolean).length;
     p.note(0.5, 0, `each owes the next: ${n1} of 10 fail`, { anchor: 'middle', dy: 22 });
     p.note(1.7, 0, `each owes all the others: ${n2} of 10 fail`, { anchor: 'middle', dy: 22 });
+  },
+  // Korean households by fifths of income: spending against disposable income
+  '2.2'(art, data) {
+    const F = fifths(data['korea-households']);
+    const p = P(art, { w: 760, h: 440, x: [0, 10], y: [0, 7.2], yl: 'spending', pad: { b: 62 }, alt: 'Five points for the five fifths of Korean households by income, spending against disposable income. The bottom fifth spends more than its income; the top fifth spends about half. A line through the average household from the origin passes through none of them.' });
+    p.line(0, 0, 7, 7, 'k thin dash');
+    p.note(5, 5, 'spending = income', { dx: -10, dy: -4, anchor: 'end' });
+    const k = F.all.apc;
+    p.line(0, 0, 10, 10 * k, 'oc');
+    p.note(10, 10 * k, `the representative household: ${Math.round(100 * k)}% of any income`, { anchor: 'end', dy: -10, cls: 'oc halo' });
+    p.ring(F.all.y, F.all.c, 'oc', 5);
+    for (const r of F.rows) {
+      p.dot(r.y, r.c, 'cb', 6);
+      const top = r.name === 'top fifth';
+      p.note(r.y, r.c, `${r.name}: ${Math.round(100 * r.apc)}%`, { dx: top ? -10 : -12, dy: top ? 20 : -8, anchor: 'end', cls: 'cb halo' });
+    }
+    p.note(10, 0, 'disposable income, million won a month', { anchor: 'end', dy: 44 });
+    ticks(p, { x: [2, 4, 6, 8, 10], y: [2, 4, 6] });
+  },
+
+  // Korea's sectors, who supplies whom, and where a won of demand goes
+  '2.6'(art, data) {
+    const m = io(data['korea-io']);
+    const j = data.state.sector;
+    const [l, r] = panels(art, 'two');
+    const pos = ringPos(m.n);
+    const p = P(l, { ...H2, h: 440, x: [-2.2, 2.2], y: [-2.2, 2.2], axes: false, pad: { l: 10, r: 10, t: 10, b: 10 }, alt: `Korea’s 33 sectors on a circle, with lines from suppliers to the sectors that buy at least 5 percent of their output from them; ${m.names[j]} is marked.` });
+    for (let i = 0; i < m.n; i++) for (let b = 0; b < m.n; b++) {
+      if (i === b || m.A[i][b] < 0.05) continue;
+      p.line(...pos[i], ...pos[b], b === j ? 'oc' : 'k thin faint');
+    }
+    const R = rounds(m, j);
+    for (let i = 0; i < m.n; i++) {
+      p.dot(...pos[i], i === j ? 'md' : 'cb', i === j ? 6 : 2.4 + 9 * Math.sqrt(R[i].total - R[i].r0) );
+      // names stand along their radius, reading outward
+      const [x, y] = pos[i];
+      const right = x >= -1e-6;
+      const t = p.note(1.08 * x, 1.08 * y, m.names[i], { anchor: right ? 'start' : 'end', dy: 4, cls: `small${i === j ? ' md' : ''}` });
+      const deg = (-Math.atan2(y, x) * 180) / Math.PI + (right ? 0 : 180);
+      t.setAttribute('transform', `rotate(${deg.toFixed(1)} ${p.X(1.08 * x).toFixed(1)} ${p.Y(1.08 * y).toFixed(1)})`);
+    }
+    const top = [...R].sort((a, b) => b.total - a.total).slice(0, 10);
+    const max = top[0].total;
+    const total = R.reduce((a, v) => a + v.total, 0);
+    const q = P(r, { ...H2, h: 440, x: [-1.15, max * 1.05], y: [0, 11], axes: false, pad: { l: 10, r: 14, t: 24, b: 30 }, alt: `The output one won of final demand for ${m.names[j]} draws from the ten sectors it draws most from, in rounds; ${total.toFixed(2)} won in all.` });
+    const cls = [['rgba(176, 59, 59, 0.55)', 'the won itself'], ['rgba(168, 118, 28, 0.6)', 'its suppliers'], ['rgba(88, 118, 32, 0.55)', 'theirs'], ['rgba(42, 85, 160, 0.5)', 'further rounds']];
+    top.forEach((v, k) => {
+      const y = 10 - k;
+      let x = 0;
+      [v.r0, v.r1, v.r2, v.rest].forEach((w, t) => {
+        if (w > 1e-4) q.area([[x, y - 0.32], [x + w, y - 0.32], [x + w, y + 0.32], [x, y + 0.32]], '').style.fill = cls[t][0];
+        x += w;
+      });
+      q.pathPts([[0, y - 0.32], [x, y - 0.32], [x, y + 0.32], [0, y + 0.32]], 'k thin');
+      q.note(-0.05, y, m.names[v.i], { anchor: 'end', dy: 4, cls: v.i === j ? 'md' : '' });
+      q.note(x, y, v.total.toFixed(2), { dx: 5, dy: 4 });
+    });
+    q.line(0, 0.4, 0, 10.5, 'k thin');
+    cls.forEach(([c, name], t) => {
+      const x0 = -1.1 + t * ((max * 1.05 + 1.1) / 4);
+      q.area([[x0, 0.05], [x0 + 0.07, 0.05], [x0 + 0.07, 0.35], [x0, 0.35]], '').style.fill = c;
+      q.note(x0 + 0.1, 0.2, name, { dy: 4 });
+    });
+    q.note(max * 1.05, 11, `in all, across 33 sectors: ${total.toFixed(2)} won`, { anchor: 'end', dy: -2 });
   },
 };
 

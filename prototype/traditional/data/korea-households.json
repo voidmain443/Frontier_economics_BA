@@ -1,0 +1,4 @@
+{"id":"korea-households","title":"Korean households by income quintile: disposable income and consumption (Household Income and Expenditure Survey)","year":"2025","retrieved":"2026-10-31","series":[
+{"key":"disp_income","label":"Disposable income per household, by income quintile (2025)","unit":"thousand KRW per month","freq":"A","source":"KOSIS OpenAPI (Statistics Korea), table DT_1L9U103, item Y1","points":[["bottom fifth",1031.4],["second fifth",2427.9],["middle fifth",3612.8],["fourth fifth",5184.1],["top fifth",8967.1],["all households",4245.6]]},
+{"key":"consumption","label":"Consumption spending per household, by income quintile (2025)","unit":"thousand KRW per month","freq":"A","source":"KOSIS OpenAPI (Statistics Korea), table DT_1L9U103, item F","points":[["bottom fifth",1378],["second fifth",1935.1],["middle fifth",2658],["fourth fifth",3641.4],["top fifth",5057.9],["all households",2934.5]]}
+]}

@@ -174,7 +174,7 @@ export function beauty(mix) {
   return { total, avg, target: (2 / 3) * avg };
 }
 
-// ---------- 2.5 contagion between banks (after Acemoglu, Ozdaglar and Tahbaz-Salehi 2015) ----------
+// ---------- 2.7 contagion between banks (after Acemoglu, Ozdaglar and Tahbaz-Salehi 2015) ----------
 
 // bank 0 loses `shock`; a failed bank passes its loss beyond its buffer equally to the banks it owes.
 // Rounds are simultaneous, so each bank's round of failure is well defined.
@@ -194,4 +194,66 @@ export function contagion(shock, complete, n = 10, buffer = 1) {
     }
   }
   return round;
+}
+
+// ---------- 2.2 unlike households (KOSIS, data/korea-households.json) ----------
+
+// the five fifths and all households: disposable income and consumption
+// spending a month per household, in million won; shares of the total
+export function fifths(doc) {
+  const get = (key) => Object.fromEntries(doc.series.find((x) => x.key === key).points);
+  const y = get('disp_income');
+  const c = get('consumption');
+  const names = ['bottom fifth', 'second fifth', 'middle fifth', 'fourth fifth', 'top fifth'];
+  const rows = names.map((name) => ({ name, y: y[name] / 1000, c: c[name] / 1000 }));
+  const Y = rows.reduce((a, r) => a + r.y, 0);
+  const C = rows.reduce((a, r) => a + r.c, 0);
+  for (const r of rows) Object.assign(r, { apc: r.c / r.y, ys: r.y / Y, cs: r.c / C });
+  const all = { y: y['all households'] / 1000, c: c['all households'] / 1000 };
+  return { rows, all: { ...all, apc: all.c / all.y }, year: doc.year };
+}
+
+// ---------- 2.6 connected firms (Bank of Korea, data/korea-io.json) ----------
+
+export const SECTOR_NAMES = {
+  A: 'farming and fishing', B: 'mining', C01: 'food', C02: 'textiles', C03: 'wood and paper', C04: 'petroleum',
+  C05: 'chemicals', C06: 'non-metallic minerals', C07: 'basic metals', C08: 'fabricated metal', C09: 'electronics',
+  C10: 'electrical equipment', C11: 'machinery', C12: 'transport equipment', C13: 'other manufacturing', C14: 'repair',
+  D: 'power and gas', E: 'water and waste', F: 'construction', G: 'trade', H: 'transport', I: 'restaurants and hotels',
+  J: 'communications', K: 'finance', L: 'real estate', M: 'professional services', N: 'business support',
+  O: 'public administration', P: 'education', Q: 'health', R: 'arts and leisure', S: 'other services', T: 'other',
+};
+
+// The table gives the Leontief inverse L = (I − A)⁻¹; the input coefficients
+// are A = I − L⁻¹. For one won of final demand for sector j, the output it
+// draws from each sector, by round: the won itself, A (its suppliers), A²
+// (theirs), and the rest, which sum to L's column j.
+let IO = null;
+export function io(doc) {
+  if (IO?.doc === doc) return IO;
+  const codes = doc.sectors.map((x) => x.code);
+  const n = codes.length;
+  const cell = Object.fromEntries(doc.series[0].points);
+  const L = codes.map((i) => codes.map((j) => cell[`${i}>${j}`]));
+  // Gauss–Jordan inverse of L
+  const a = L.map((row, i) => [...row, ...codes.map((_, k) => (i === k ? 1 : 0))]);
+  for (let c = 0; c < n; c++) {
+    let p = c;
+    for (let r = c + 1; r < n; r++) if (Math.abs(a[r][c]) > Math.abs(a[p][c])) p = r;
+    [a[c], a[p]] = [a[p], a[c]];
+    const pv = a[c][c];
+    a[c] = a[c].map((v) => v / pv);
+    for (let r = 0; r < n; r++) if (r !== c && a[r][c]) { const f = a[r][c]; a[r] = a[r].map((v, k) => v - f * a[c][k]); }
+  }
+  const A = codes.map((_, i) => codes.map((__, j) => Math.max(0, (i === j ? 1 : 0) - a[i][n + j])));
+  IO = { doc, codes, n, L, A, names: codes.map((c) => SECTOR_NAMES[c] ?? c), year: doc.year };
+  return IO;
+}
+export function rounds(m, j) {
+  const r1 = m.A.map((row) => row[j]);
+  const r2 = m.A.map((row) => row.reduce((s, v, k) => s + v * m.A[k][j], 0));
+  return m.L.map((row, i) => {
+    const r0 = i === j ? 1 : 0;
+    return { i, r0, r1: r1[i], r2: r2[i], rest: Math.max(0, row[j] - r0 - r1[i] - r2[i]), total: row[j] };
+  });
 }

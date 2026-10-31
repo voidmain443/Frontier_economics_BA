@@ -26,64 +26,37 @@
   <header class="opening">
     <h1>Unlike and connected</h1>
     <p class="lede"><a href="classical.html#s9">Part 1</a> ended with an assumption that unfolding its figures does not remove: every agent of a type is alike, and nobody is connected to anybody in particular. Much of what economists now study lives inside that assumption: who is connected to whom, how unequal sizes are, how far people reason, and how a failure travels. This part draws agents who are unlike one another and connected to particular others.</p>
+    <p>Part 1 relaxes six of the eight assumptions its figures make, one stage at a time (<a href="archive.html#a4">Part 3, section 4</a>). It never relaxes these two head-on, and this part relaxes nothing else. Its first half takes away the representative agent: sections 1 to 3 draw firms, households and players who are unlike one another. Its second half takes away the assumption of no connections: sections 4 to 7 draw people, firms and banks tied to particular others.</p>
     <p>This part keeps Part 1’s grammar. Each section starts from one of Part 1’s figures and names what that figure holds fixed. It then draws what replaces the assumption. The last section is about the projects now rebuilding the textbook around these ideas.</p>
-    <p class="needs-fold" hidden>Fold the page with the control in the corner. It lies on the wheel Part 1 built, and each drawing raises, step by step, the dimension the classical figure does not have. Where a section touches the wheel, the wheel changes too: its largest firm stops in section 3, and its banks fail in section 5.</p>
-    <ol class="contents" aria-label="Sections">
-      <li><a href="#b1"><span>1</span>Who trades with whom</a></li>
-      <li><a href="#b2"><span>2</span>Chains, not cores</a></li>
-      <li><a href="#b3"><span>3</span>No representative firm</a></li>
-      <li><a href="#b4"><span>4</span>Games real people play</a></li>
-      <li><a href="#b5"><span>5</span>Contagion between banks</a></li>
-      <li><a href="#b6"><span>6</span>Projects rebuilding the textbook</a></li>
+    <p class="needs-fold" hidden>Fold the page with the control in the corner. It lies on the wheel Part 1 built, and each drawing raises, step by step, the dimension the classical figure does not have. Where a section touches the wheel, the wheel changes too. Its largest firm stops in section 1, and its households take their sizes by income in section 2. Its firms are tied to their suppliers in section 6, and its banks fail in section 7.</p>
+    <p class="contents-half">Unlike: one agent does not stand for all of its kind</p>
+    <ol class="contents" aria-label="Sections 1 to 3: unlike">
+      <li><a href="#b1"><span>1</span>No representative firm</a></li>
+      <li><a href="#b2"><span>2</span>Unlike households</a></li>
+      <li><a href="#b3"><span>3</span>Games real people play</a></li>
+    </ol>
+    <p class="contents-half">Connected: agents reach particular others</p>
+    <ol class="contents" aria-label="Sections 4 to 7: connected">
+      <li><a href="#b4"><span>4</span>Who trades with whom</a></li>
+      <li><a href="#b5"><span>5</span>Chains, not cores</a></li>
+      <li><a href="#b6"><span>6</span>Connected firms</a></li>
+      <li><a href="#b7"><span>7</span>Contagion between banks</a></li>
+    </ol>
+    <ol class="contents" aria-label="Section 8">
+      <li><a href="#b8"><span>8</span>Projects rebuilding the textbook</a></li>
     </ol>
   </header>
 
   <!-- ============================================================ 1 -->
-  <section class="stage" id="b1" data-no="1" data-name="Who trades with whom">
-    <h2><span class="no">1</span>Who trades with whom</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 1">1</span>Relaxes: anyone can trade with anyone.</p></div>
+  <section class="stage" id="b1" data-no="1" data-name="No representative firm">
+    <h2><span class="no">1</span>No representative firm</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 1">1</span>Relaxes: one firm stands for all.</p></div>
 
-    <p>The market of <a href="classical.html#f1-2">Figure 1.2</a> has no geography. Every buyer can reach every seller, so the distance between any two people is one step. Real exchange runs through acquaintances, suppliers and neighbours, and the question becomes how far apart people are.</p>
-    <p>In 1967 Stanley Milgram asked people in Nebraska and Kansas to pass a letter, through people they knew by first name, to a stranger in Massachusetts. The letters that arrived took about six steps. In 1998 Duncan Watts and Steven Strogatz showed why this is unsurprising. Start with a ring in which each person knows only the nearest neighbours: distances are long, and friends of friends know each other. Then rewire a small share of ties at random. Average distance collapses long before local clustering does.</p>
+    <p>The firms of <a href="classical.html#s3">Stage 3</a> are identical, so one firm can stand for the industry. Vilfredo Pareto noticed in the 1890s that the number of people with income above <i>x</i> falls roughly like a power of <i>x</i>. The same shape describes city sizes (Zipf’s law) and the sizes of American firms (Axtell 2001). When newcomers prefer to link to those already well connected (Barabási and Albert 1999), the result is a power law too, if a less steep one: a few giants and a long tail of everyone else.</p>
 
     <figure class="fig" data-fig="2.1" id="f2-1">
       <div class="fig-art"></div>
-      <div class="fig-ctl"><label>Share of ties rewired <input id="ctl-p" type="range" min="0" max="0.2" step="0.005" value="0.05"></label><output id="out-p">0.05</output></div>
-      <figcaption><span class="fig-no">Figure 2.1</span>Eighty people on a ring, each tied to the six nearest; red ties have been rewired into shortcuts. Right: average distance and clustering relative to the ring, as more ties are rewired (averaged over three networks).</figcaption>
-      <p class="held"><span>Held fixed</span>in Figure 1.2, who can reach whom: everyone, in one step.</p>
-    </figure>
-    <aside class="note later"><b>Starts from</b> <a href="classical.html#f1-2">Figure 1.2</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
-    <p>Folded, each person rises by the number of steps it takes to reach them from you. On the plain ring the far side stands fourteen steps high. Eight shortcuts pull the whole ring down to eight. Mark Granovetter (1973) found that people often hear about jobs through acquaintances rather than close friends: the weak ties are the shortcuts.</p>
-    <p class="aha">A few shortcuts make a large world small. Distance collapses long before neighbours stop knowing one another, which is why jobs, prices and panics travel faster than any local picture suggests.</p>
-  </section>
-
-  <!-- ============================================================ 2 -->
-  <section class="stage" id="b2" data-no="2" data-name="Chains, not cores">
-    <h2><span class="no">2</span>Chains, not cores</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 2">2</span>Relaxes: an average describes the network.</p></div>
-
-    <p>Peter Bearman, James Moody and Katherine Stovel (2004) mapped the romantic relationships among the students of one American high school over eighteen months. Models of how infections spread through such networks had assumed a dense core of very active people. Instead, about half of the students who had been in a relationship were linked in one long, sparse structure with short branches, close to a spanning tree. In such a structure there are few redundant paths: breaking one tie can split it, and one new tie can join two distant parts.</p>
-
-    <figure class="fig" data-fig="2.2" id="f2-2">
-      <div class="fig-art"></div>
-      <figcaption><span class="fig-no">Figure 2.2</span>A schematic, not the study’s data: twenty-four students linked as a chain with short branches, and the same number linked around a core.</figcaption>
-      <p class="held"><span>Held fixed</span>by an average, how many partners each student has: about two in the chain, two and a half in the core.</p>
-    </figure>
-    <aside class="note later"><b>Starts from</b> <a href="#f2-1">Figure 2.1</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
-    <p>Folded, every tie raises a wall as tall as the number of pairs of students who would be cut off from each other if it broke. In the chain the middle ties stand 144 pairs high; in the core no tie stands higher than 23, and those only where one student hangs off the edge.</p>
-    <p class="aha">Two networks with similar averages can differ completely in what one broken tie does. The structure, not the count, decides what can travel through a network and what can be cut.</p>
-  </section>
-
-  <!-- ============================================================ 3 -->
-  <section class="stage" id="b3" data-no="3" data-name="No representative firm">
-    <h2><span class="no">3</span>No representative firm</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 3">3</span>Relaxes: one firm stands for all.</p></div>
-
-    <p>The firms of <a href="classical.html#s3">Stage 3</a> are identical, so one firm can stand for the industry, and the households of <a href="classical.html#s6">Stage 6</a> are added up into one. Vilfredo Pareto noticed in the 1890s that the number of people with income above <i>x</i> falls roughly like a power of <i>x</i>. The same shape describes city sizes (Zipf’s law) and the sizes of American firms (Axtell 2001). When newcomers prefer to link to those already well connected (Barabási and Albert 1999), the result is a power law too, if a less steep one: a few giants and a long tail of everyone else.</p>
-
-    <figure class="fig" data-fig="2.3" id="f2-3">
-      <div class="fig-art"></div>
-      <figcaption><span class="fig-no">Figure 2.3</span>Four hundred firms grown by preferential attachment, standing in for firm sizes; Axtell (2001) finds a power law in U.S. Census data too, steeper than this one (Zipf’s law). Left: the firms on a plan, darker for larger. Right: size against rank on log scales, close to a straight line among the larger firms, with the mean.</figcaption>
+      <figcaption><span class="fig-no">Figure 2.1</span>Four hundred firms grown by preferential attachment, standing in for firm sizes; Axtell (2001) finds a power law in U.S. Census data too, steeper than this one (Zipf’s law). Left: the firms on a plan, darker for larger. Right: size against rank on log scales, close to a straight line among the larger firms, with the mean.</figcaption>
       <p class="held"><span>Held fixed</span>in Stage 3, size: every firm alike.</p>
     </figure>
     <aside class="note later"><b>Starts from</b> <a href="classical.html#f3-2">Figure 3.2</a>. <b>Taught in</b> <a href="https://quantecon.org/">QuantEcon</a>, <a href="https://www.complexityexplorer.org/">Complexity Explorer</a>.</aside>
@@ -91,14 +64,31 @@
     <p class="aha">When sizes follow a power law there is no typical firm. The mean is a plane that runs through no actual firm, and a few giants can move the whole economy.</p>
   </section>
 
-  <!-- ============================================================ 4 -->
-  <section class="stage" id="b4" data-no="4" data-name="Games real people play">
-    <h2><span class="no">4</span>Games real people play</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 4">4</span>Relaxes: every player reasons all the way.</p></div>
+  <!-- ============================================================ 2 -->
+  <section class="stage" id="b2" data-no="2" data-name="Unlike households">
+    <h2><span class="no">2</span>Unlike households</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 2">2</span>Relaxes: one household stands for all.</p></div>
+
+    <p>The households of <a href="classical.html#s6">Stage 6</a> are added up into one. Its consumption function in <a href="classical.html#f6-2">Figure 6.2</a> says how total spending moves with total income. That is enough as long as every household spends the same share of an extra won, because then it does not matter who receives the won. W. M. Gorman (1953) set out the condition under which households can be added up this way. Korean households do not meet it. In 2025 the bottom fifth of households by income spent 134 percent of their disposable income, drawing on savings and on help from others, while the top fifth spent 56 percent.</p>
+
+    <figure class="fig" data-fig="2.2" id="f2-2">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.2</span>Korean households in 2025, in five fifths by income: consumption spending against disposable income, a month per household (KOSIS, Household Income and Expenditure Survey; the four quarters averaged). Dashed: spending equal to income. The line from the origin through the average household is the representative household, which spends 69 percent of whatever it has.</figcaption>
+      <p class="held"><span>Held fixed</span>in Figure 6.2, the household: one, spending the same share of every won.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f6-2">Figure 6.2</a>. <b>Taught in</b> <a href="https://quantecon.org/">QuantEcon</a>, on heterogeneous agents.</aside>
+    <p>Folded, each fifth rises by its share of all disposable income, and beside it stands its share of all spending. The top fifth has 42 percent of the income and does 34 percent of the spending. The bottom fifth has 5 percent of the income and does 9 percent of the spending. The survey measures what each fifth spends of what it has, not what it would spend of an extra won. Studies that ask that second question find the same order. Tullio Jappelli and Luigi Pistaferri (2014) asked Italian households how much of an unexpected transfer they would spend, and those with little cash on hand said they would spend much more of it. Greg Kaplan, Giovanni Violante and Justin Weidner (2014) estimate that about a third of American households live hand to mouth. In the models of Kaplan, Benjamin Moll and Violante (2018), where such households are common, a cut in the interest rate raises spending less through each household’s choice between now and later and more through the income it brings.</p>
+    <p class="aha">A household that stands for all spends 69 percent of every won, and no fifth of Korean households does. Who receives a won decides what it does to total spending.</p>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="stage" id="b3" data-no="3" data-name="Games real people play">
+    <h2><span class="no">3</span>Games real people play</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 3">3</span>Relaxes: every player reasons all the way.</p></div>
 
     <p>The equilibria of <a href="classical.html#s4">Stage 4</a> assume that each player knows the others will reason as far as logic goes. Keynes (1936) compared investing to a newspaper beauty contest in which you win by picking the face others will pick. In the experimental version everyone chooses a number from 0 to 100, and the winner is closest to two-thirds of the average. The only Nash equilibrium is 0. In Rosemarie Nagel’s (1995) experiments, first-round guesses averaged 36.7: most players reason one or two steps and stop. When others reason only a little, guessing 0 loses.</p>
 
-    <figure class="fig" data-fig="2.4" id="f2-4">
+    <figure class="fig" data-fig="2.3" id="f2-3">
       <div class="fig-art"></div>
       <div class="fig-ctl grid">
         <label>level 0 <input data-mix="0" type="range" min="0" max="10" value="3"></label>
@@ -107,7 +97,7 @@
         <label>level 3 <input data-mix="3" type="range" min="0" max="10" value="1"></label>
         <label>Nash <input data-mix="4" type="range" min="0" max="10" value="1"></label>
       </div>
-      <figcaption><span class="fig-no">Figure 2.4</span>How many players reason zero, one, two or three steps, or all the way to equilibrium. A level-0 player guesses 50; each level guesses two-thirds of the level below. The winning number moves with the mix.</figcaption>
+      <figcaption><span class="fig-no">Figure 2.3</span>How many players reason zero, one, two or three steps, or all the way to equilibrium. A level-0 player guesses 50; each level guesses two-thirds of the level below. The winning number moves with the mix.</figcaption>
       <p class="held"><span>Held fixed</span>in Stage 4, how far players reason: all the way.</p>
     </figure>
     <aside class="note later"><b>Starts from</b> <a href="classical.html#f4-2">Figure 4.2</a>. <b>Taught in</b> <a href="https://ncase.me/trust/">The Evolution of Trust</a>; <a href="classical.html#c8-9">behavioral economics</a>.</aside>
@@ -115,17 +105,71 @@
     <p class="aha">Equilibrium is the top of a staircase of reasoning. Most people climb one or two steps, so the best guess depends on how far the others climb, not on how far logic goes.</p>
   </section>
 
-  <!-- ============================================================ 5 -->
-  <section class="stage" id="b5" data-no="5" data-name="Contagion between banks">
-    <h2><span class="no">5</span>Contagion between banks</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 5">5</span>Relaxes: a bank stands alone.</p></div>
+  <!-- ============================================================ 4 -->
+  <section class="stage" id="b4" data-no="4" data-name="Who trades with whom">
+    <h2><span class="no">4</span>Who trades with whom</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 4">4</span>Relaxes: anyone can trade with anyone.</p></div>
 
-    <p>The bank of <a href="classical.html#f8-3">Figure 8.3</a> fails or survives on its own depositors. In 2008 losses at a few institutions spread through the claims banks held on one another. Daron Acemoglu, Asuman Ozdaglar and Alireza Tahbaz-Salehi (2015) showed that a densely connected system spreads a small loss thin and absorbs it, while a ring passes it from bank to bank and loses several. A loss larger than the system’s combined buffers is carried to every bank, in the dense system and on the ring alike. Against losses that large, the safer system is made of clusters joined by few ties, which keep the loss inside one cluster.</p>
+    <p>The market of <a href="classical.html#f1-2">Figure 1.2</a> has no geography. Every buyer can reach every seller, so the distance between any two people is one step. Real exchange runs through acquaintances, suppliers and neighbours, and the question becomes how far apart people are.</p>
+    <p>In 1967 Stanley Milgram asked people in Nebraska and Kansas to pass a letter, through people they knew by first name, to a stranger in Massachusetts. The letters that arrived took about six steps. In 1998 Duncan Watts and Steven Strogatz showed why this is unsurprising. Start with a ring in which each person knows only the nearest neighbours: distances are long, and friends of friends know each other. Then rewire a small share of ties at random. Average distance collapses long before local clustering does.</p>
+
+    <figure class="fig" data-fig="2.4" id="f2-4">
+      <div class="fig-art"></div>
+      <div class="fig-ctl"><label>Share of ties rewired <input id="ctl-p" type="range" min="0" max="0.2" step="0.005" value="0.05"></label><output id="out-p">0.05</output></div>
+      <figcaption><span class="fig-no">Figure 2.4</span>Eighty people on a ring, each tied to the six nearest; red ties have been rewired into shortcuts. Right: average distance and clustering relative to the ring, as more ties are rewired (averaged over three networks).</figcaption>
+      <p class="held"><span>Held fixed</span>in Figure 1.2, who can reach whom: everyone, in one step.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f1-2">Figure 1.2</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
+    <p>Folded, each person rises by the number of steps it takes to reach them from you. On the plain ring the far side stands fourteen steps high. Eight shortcuts pull the whole ring down to eight. Mark Granovetter (1973) found that people often hear about jobs through acquaintances rather than close friends: the weak ties are the shortcuts.</p>
+    <p class="aha">A few shortcuts make a large world small. Distance collapses long before neighbours stop knowing one another, which is why jobs, prices and panics travel faster than any local picture suggests.</p>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="stage" id="b5" data-no="5" data-name="Chains, not cores">
+    <h2><span class="no">5</span>Chains, not cores</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 5">5</span>Relaxes: an average describes the network.</p></div>
+
+    <p>Peter Bearman, James Moody and Katherine Stovel (2004) mapped the romantic relationships among the students of one American high school over eighteen months. Models of how infections spread through such networks had assumed a dense core of very active people. Instead, about half of the students who had been in a relationship were linked in one long, sparse structure with short branches, close to a spanning tree. In such a structure there are few redundant paths: breaking one tie can split it, and one new tie can join two distant parts.</p>
 
     <figure class="fig" data-fig="2.5" id="f2-5">
       <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 2.5</span>A schematic, not the study’s data: twenty-four students linked as a chain with short branches, and the same number linked around a core.</figcaption>
+      <p class="held"><span>Held fixed</span>by an average, how many partners each student has: about two in the chain, two and a half in the core.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="#f2-4">Figure 2.4</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
+    <p>Folded, every tie raises a wall as tall as the number of pairs of students who would be cut off from each other if it broke. In the chain the middle ties stand 144 pairs high; in the core no tie stands higher than 23, and those only where one student hangs off the edge.</p>
+    <p class="aha">Two networks with similar averages can differ completely in what one broken tie does. The structure, not the count, decides what can travel through a network and what can be cut.</p>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="stage" id="b6" data-no="6" data-name="Connected firms">
+    <h2><span class="no">6</span>Connected firms</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 6">6</span>Relaxes: a firm buys only labor and capital.</p></div>
+
+    <p>The firm of <a href="classical.html#f3-1">Figure 3.1</a> turns labor and capital into output. Real firms also buy from one another: steel and tires for a car, power and freight for nearly everything. Wassily Leontief published the first table of these purchases, for the United States, in 1936, and the Bank of Korea publishes one for Korea every year. Its 2024 table has 33 sectors. Each entry of the table’s Leontief inverse says how much output one won of final demand for one sector draws from another, counting the suppliers’ suppliers.</p>
+
+    <figure class="fig" data-fig="2.6" id="f2-6">
+      <div class="fig-art"></div>
+      <div class="fig-ctl"><label>Final demand for <input id="ctl-sector" type="range" min="0" max="32" step="1" value="13"></label><output id="out-sector">transport equipment</output></div>
+      <figcaption><span class="fig-no">Figure 2.6</span>Korea’s 33 sectors in 2024 (Bank of Korea input–output table, domestic, producer prices). Left: each sector on a circle, with a line from a supplier to a buyer wherever the buyer spends at least 5 percent of its output on the supplier’s goods. Right: the output that one won of final demand for the chosen sector draws from each sector, the largest ten, in rounds: the sector itself, its suppliers, their suppliers, and the rest.</figcaption>
+      <p class="held"><span>Held fixed</span>in Figure 3.1, what a firm buys from other firms: nothing.</p>
+    </figure>
+    <aside class="note later"><b>Starts from</b> <a href="classical.html#f3-1">Figure 3.1</a>. <b>Taught in</b> <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>; <a href="course.html?c=io">industrial organization</a>.</aside>
+    <p>Folded, each sector rises by the output that the chosen won draws from it, round by round. Without ties only the sector itself would rise, by one won. One won of final demand for transport equipment draws 2.36 won of output in all. The largest part of the first round, 0.24 won, goes to other makers of transport equipment, the parts makers. Basic metals, electrical equipment, chemicals and fabricated metal get about 0.05 won each. Daron Acemoglu, Vasco Carvalho, Asuman Ozdaglar and Alireza Tahbaz-Salehi (2012) showed that when a few sectors supply many others, shocks to those sectors do not average out across the economy, as section 1’s giant firms do not. Daron Acemoglu, Ufuk Akcigit and William Kerr (2016) found in American data that changes in demand travel up the chains, to suppliers, and changes in productivity travel down them, to customers.</p>
+    <p class="aha">A firm’s output is other firms’ input. A won of demand for one sector reaches the sectors that supply it, and a shock to a sector that supplies many does not stay where it began.</p>
+  </section>
+
+  <!-- ============================================================ 7 -->
+  <section class="stage" id="b7" data-no="7" data-name="Contagion between banks">
+    <h2><span class="no">7</span>Contagion between banks</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 7">7</span>Relaxes: a bank stands alone.</p></div>
+
+    <p>The bank of <a href="classical.html#f8-3">Figure 8.3</a> fails or survives on its own depositors. In 2008 losses at a few institutions spread through the claims banks held on one another. Daron Acemoglu, Asuman Ozdaglar and Alireza Tahbaz-Salehi (2015) showed that a densely connected system spreads a small loss thin and absorbs it, while a ring passes it from bank to bank and loses several. A loss larger than the system’s combined buffers is carried to every bank, in the dense system and on the ring alike. Against losses that large, the safer system is made of clusters joined by few ties, which keep the loss inside one cluster.</p>
+
+    <figure class="fig" data-fig="2.7" id="f2-7">
+      <div class="fig-art"></div>
       <div class="fig-ctl"><label>Loss at the first bank <input id="ctl-shock" type="range" min="0.5" max="12" step="0.5" value="4"></label><output id="out-shock">4</output></div>
-      <figcaption><span class="fig-no">Figure 2.5</span>Ten banks with a buffer of 1 each. A failed bank passes its loss beyond the buffer, in equal parts, to the banks it owes. Left: each owes only the next. Right: each owes all the others. Numbers: the round in which a bank fails.</figcaption>
+      <figcaption><span class="fig-no">Figure 2.7</span>Ten banks with a buffer of 1 each. A failed bank passes its loss beyond the buffer, in equal parts, to the banks it owes. Left: each owes only the next. Right: each owes all the others. Numbers: the round in which a bank fails.</figcaption>
       <p class="held"><span>Held fixed</span>in Figure 8.3, who owes whom: nobody; the bank stands alone.</p>
     </figure>
     <aside class="note later"><b>Starts from</b> <a href="classical.html#f8-3">Figure 8.3</a>. <b>Taught in</b> <a href="classical.html#c8-3">money and banking</a>; <a href="https://web.stanford.edu/~jacksonm/">Jackson, Social and Economic Networks</a>.</aside>
@@ -133,10 +177,10 @@
     <p class="aha">The dense web that spreads a small loss thin carries a large one to everyone, all at once. Whether density protects depends on the size of the shock, not on the network alone.</p>
   </section>
 
-  <!-- ============================================================ 6 -->
-  <section class="stage" id="b6" data-no="6" data-name="Projects rebuilding the textbook">
-    <h2><span class="no">6</span>Projects rebuilding the textbook</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 6">6</span>Each project relaxes one of the textbook’s simplifications, for teaching.</p></div>
+  <!-- ============================================================ 8 -->
+  <section class="stage" id="b8" data-no="8" data-name="Projects rebuilding the textbook">
+    <h2><span class="no">8</span>Projects rebuilding the textbook</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 8">8</span>Each project relaxes one of the textbook’s simplifications, for teaching.</p></div>
 
     <p>None of these projects throws the classical sequence away. Each takes it off the flat page in its own direction, and together they cover the assumptions this part has relaxed.</p>
 

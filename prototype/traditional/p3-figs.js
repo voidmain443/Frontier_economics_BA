@@ -19,7 +19,7 @@ export const LAYERS = [
     ['Measurement', 'course.html?c=metrics'], ['Computation', 'https://quantecon.org/'], ['History', 'course.html?c=history']] },
   { name: 'Institutions', c: 'olive', rooms: [
     ['Property', 'course.html?c=development'], ['Taxes', 'course.html?c=public'], ['Contracts', 'course.html?c=micro'],
-    ['Regulation', 'course.html?c=io'], ['Policy rules', 'course.html?c=macro'], ['Networks', 'beyond.html#b1']] },
+    ['Regulation', 'course.html?c=io'], ['Policy rules', 'course.html?c=macro'], ['Networks', 'beyond.html#b4']] },
   { name: 'Markets', c: 'ochre', rooms: [
     ['Capital', 'course.html?c=finance'], ['Goods', 'course.html?c=principles'], ['Money', 'course.html?c=banking'],
     ['Labor', 'course.html?c=labor'], ['Foreign exchange', 'course.html?c=intlfin'], ['Land and air', 'course.html?c=environmental']] },
@@ -127,7 +127,7 @@ export const FIGS = {
         });
       }
       (A.p2 ?? []).forEach((fig, j) => {
-        const x = p2x + 22 + j * 48;
+        const x = p2x + 18 + j * 40;
         mark(p, x, y + rh / 2, 'p2');
         p.label(x + 10, y + rh / 2 + 4.5, fig, { roman: true, cls: 'note md' });
       });

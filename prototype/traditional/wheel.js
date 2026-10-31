@@ -35,8 +35,8 @@ export const PLACE_P1 = {
 };
 
 // Part 2: each section opens in the cell of the Part 1 figure it starts from;
-// the chains of 2.2, which start from 2.1, are read in Networks.
-export const PLACE_P2 = { '2.1': 'Goods', '2.2': 'Networks', '2.3': 'Firms', '2.4': 'Strategy', '2.5': 'Banks' };
+// the chains of 2.5, which start from 2.4, are read in Networks.
+export const PLACE_P2 = { '2.1': 'Firms', '2.2': 'Households', '2.3': 'Strategy', '2.4': 'Goods', '2.5': 'Networks', '2.6': 'Firms', '2.7': 'Banks' };
 
 const inner = (ring) => HUB + ring * RING;
 const mid = (c) => inner(c.ring) + RING / 2;
@@ -61,7 +61,7 @@ export function placeOf(place) {
 
 // The place a link on the site points to: a Part 1 figure or field course
 // (classical.html#f6-1, #c8-10), a Part 1 stage (#s5: its first figure), or a
-// Part 2 section (beyond.html#b3).
+// Part 2 section (beyond.html#b1).
 export function placeOfLink(href) {
   const m = href.match(/(classical|beyond)\.html#([a-z])(\d+)-?(\d+)?/);
   if (!m) return null;
@@ -212,6 +212,9 @@ export function hatchOf(c, step = 0.12) {
 // data/korea-growth.json), one dot for every 10,000. Firms: sizes follow Zipf's
 // law, as US firm sizes do (Axtell 2001). The other counts are illustrative.
 export const PER_DOT = 10000;
+// disposable income per household a month, by fifth, thousand won (KOSIS,
+// Household Income and Expenditure Survey, 2025: data/korea-households.json)
+export const QUINTILE_INCOME = [1031.4, 2427.9, 3612.8, 5184.1, 8967.1];
 const PEOPLE = Math.round(51.685e6 / PER_DOT);
 const WORKERS = Math.round(28.769e6 / PER_DOT);
 const FIRMS = 600;
@@ -254,7 +257,8 @@ export function population() {
   for (let k = 0; k < 3; k++) [A[k], B[k]] = [B[k], A[k]];
   // the sizes a model may draw them at (ontology.js): alike, each at its
   // group's mean, as a representative agent stands for all; or unlike,
-  // households too, by income (illustrative: a lognormal spread, σ = 0.6)
+  // households too, each in a fifth by income, its area in proportion to
+  // that fifth's disposable income (Korea 2025, data/korea-households.json)
   for (const x of [people, firms]) {
     x.base = x.pts.map((p) => p[3]);
     const mean = x.base.reduce((a, v) => a + v, 0) / x.base.length;
@@ -262,10 +266,8 @@ export function population() {
     x.unlike = x.base;
   }
   const spread = rng(19);
-  people.unlike = people.pts.map(() => {
-    const z = Math.sqrt(-2 * Math.log(1 - spread())) * Math.cos(2 * Math.PI * spread());
-    return Math.min(3.2, Math.max(0.45, 0.85 * Math.exp(0.6 * z)));
-  });
+  const avg = QUINTILE_INCOME.reduce((a, v) => a + v, 0) / 5;
+  people.unlike = people.pts.map((_, i) => Math.sqrt(QUINTILE_INCOME[i % 5] / avg) * (0.9 + 0.2 * spread()));
   return [
     people,
     firms,
@@ -281,7 +283,8 @@ export function population() {
 // each buy from and work for two firms, picked by size; each of the 80
 // largest firms buys from two larger ones; each bank owes the next and lends
 // to three firms. adj['people>firms'] lists, for each tied agent, those it is
-// tied to; segs draws every tie.
+// tied to; segs draws the ties of each kind: households to firms, firms to
+// firms, and banks.
 export function ties(groups, seed = 5) {
   const rand = rng(seed);
   const G = Object.fromEntries(groups.map((x) => [x.name, x]));
@@ -295,14 +298,15 @@ export function ties(groups, seed = 5) {
     return lo;
   };
   const adj = {};
-  const segs = [];
+  const segs = { households: [], firms: [], banks: [] };
   const tie = (a, i, b, j) => {
     for (const [x, k, y, l] of [[a, i, b, j], [b, j, a, i]]) {
       const m = (adj[`${x}>${y}`] ??= new Map());
       if (!m.has(k)) m.set(k, []);
       m.get(k).push(l);
     }
-    segs.push([G[a].pts[i].slice(0, 3), G[b].pts[j].slice(0, 3)]);
+    const kind = a === 'people' ? 'households' : a === 'banks' ? 'banks' : 'firms';
+    segs[kind].push([G[a].pts[i].slice(0, 3), G[b].pts[j].slice(0, 3)]);
   };
   for (let i = 0; i < 160; i++) for (let k = 0; k < 2; k++) tie('people', i, 'firms', firm());
   for (let j = 1; j < 80; j++) for (let k = 0; k < 2; k++) tie('firms', j, 'firms', Math.floor(rand() * j));
@@ -391,19 +395,21 @@ export const BUILD_P1 = {
   ],
 };
 
-// Part 2 starts from the wheel Part 1 built; it adds the two cells left empty
+// Part 2 starts from the wheel Part 1 built; it adds the two cells left empty.
+// Its two halves each open with a story: the agents unlike one another
+// (section 1) and connected to particular others (section 4).
 export const BUILD_P2 = {
   base: { ...ALL, cells: ALL.cells.filter((n) => n !== 'Networks' && n !== 'Computation') },
   stories: [
     { at: '#b1 h2', beats: [
       { say: 'This is the wheel Part 1 built. In it every household of a kind is alike, one firm stands for all, and nobody is tied to anybody in particular.' },
-      { say: 'Each section of this part undoes one piece of that, on the same wheel.', cam: { el: 0.12 } },
+      { say: 'The first half of this part undoes the first of these. One firm does not stand for all firms, one household for all households, or one way of reasoning for every player.', cam: { el: 0.12 } },
     ] },
-    { at: '#b2 h2', beats: [
-      { say: 'Networks: who can reach whom.' },
-      { say: 'Part 1 had no cell for it. It joins the rules.', add: { cells: ['Networks'] } },
+    { at: '#b4 h2', beats: [
+      { say: 'The second half undoes the other: who can reach whom.' },
+      { say: 'Part 1 had no cell for it. Networks joins the rules.', add: { cells: ['Networks'] } },
     ] },
-    { at: '#b6 h2', beats: [
+    { at: '#b8 h2', beats: [
       { say: 'The projects that rebuild the textbook.' },
       { say: 'Several make the models run as code: computation, the last cell, at the hub.', add: { cells: ['Computation'] } },
     ] },
