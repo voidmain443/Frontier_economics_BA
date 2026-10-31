@@ -166,7 +166,9 @@ export const CONSTRUCTS = {
         { say: 'Raise every tie as a wall, as tall as the number of pairs of students who would be cut off from each other if it broke.', cam: { az: -0.5, el: 0.14, zoom: 0.85, at: [1.1, 0.5, 0.1] }, dur: 1.6 },
         { say: 'Break the tallest tie in the chain. The students on either side can no longer reach each other: 144 pairs are cut apart by one tie.', cam: { az: -0.35, el: 0.2, zoom: 0.7, at: [0.5, 0.5, 0.08] }, dur: 1.2 },
         { say: 'In the core no tie stands higher than 23, and those only where one student hangs off the edge. Two networks with similar averages differ completely in what one broken tie does.', cam: { az: 0.45, el: 0.16, zoom: 0.7, at: [1.7, 0.5, 0.05] } },
+        { say: 'On the wheel, the networks cell lights over households tied to particular firms. Whether one broken tie cuts the economy apart depends on the shape of these ties, not on how many there are.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
+      X.model = (b) => (b >= 4 ? { tied: ['households'], lit: ['Networks', 'Households'] } : null);
       return X;
     },
   },
@@ -193,13 +195,16 @@ export const CONSTRUCTS = {
       const sizes = [...deg].sort((a, b) => a - b);
       X.crowd = { asset: 'firm_crowd', items: sizes.map((v, i) => ({ s: 0.024 + 0.05 * Math.sqrt((v - sizes[0]) / (max - sizes[0])), ry: jitter(i) * 0.5 })) };
       // on the wheel, the largest of its firms stops as the last beat begins
-      X.wheel = (b) => (b >= 2.5 ? { firms: [0] } : {});
+      X.wheel = (b) => (b >= 3.5 ? { firms: [0] } : {});
+      // on the wheel: first as the representative firm draws them, then as they are
+      X.model = (b) => (b === 3 ? { alike: true, unlike: false } : null);
       X.wheelTag = 'the largest firm, stopped: a seventh of the flow';
       X.story = [
         { say: 'Four hundred firms grown by preferential attachment, darker for larger: newcomers link to those already well connected.' },
         { say: 'Raise every firm as tall as it is large. A few giants stand over a long tail.', cam: { az: -0.5, el: 0.16, zoom: 0.85, at: [10, 10, 0.06] }, dur: 1.6 },
         { say: `The mean is a plane at height ${mean.toFixed(1)}, and it runs through no actual firm: ${below} percent stand below it, and the largest is about ${(max / mean).toFixed(1)} times the mean.`, cam: { az: -0.65, el: 0.1, zoom: 0.85, at: [10, 10, 0.06] } },
-        { say: 'The wheel’s 600 firms have sizes of the same kind, by Zipf’s law, and goods, work and pay reach each in proportion to its size. Stop the largest, and a seventh of all that flow stops with it: shocks to giants do not average out (Gabaix 2011).', cam: { az: -0.35, el: 0.22, zoom: 1.7, at: null }, dur: 1.6 },
+        { say: 'On the wheel, drawn as Stage 3’s representative firm draws them: all 600 firms the same size, each the mean.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
+        { say: 'As they are, by Zipf’s law, with goods, work and pay reaching each in proportion to its size. Stop the largest, and a seventh of all that flow stops with it: shocks to giants do not average out (Gabaix 2011).', beside: true, dur: 1.6 },
       ];
       return X;
     },
@@ -236,7 +241,9 @@ export const CONSTRUCTS = {
         { say: 'Raise each level of reasoning as height. Level 0 guesses 50, on the page.', cam: { az: 0.5, el: 0.14, zoom: 0.85, at: [40, 1, 0.15] }, dur: 1.4 },
         { say: 'Each step up guesses a third lower, and the steps lead down to 0, the only Nash equilibrium, at the top. The guesses trace a staircase, and the bars show how few players climb it.', dur: 2.2 },
         { say: `In Rosemarie Nagel’s experiments first guesses averaged 36.7: most players reason one or two steps and stop. With this mix the winning number is ${target.toFixed(1)}${target >= 1 ? ', and a guess of 0 loses' : ''}. Change the mix in the margin.`, cam: { az: 0.3, el: 0.3, zoom: 0.85, at: [35, 1, 0.1] } },
+        { say: 'On the wheel, strategy lights at the hub, over players who differ in how far they reason. Stage 4’s two firms both reasoned all the way.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
+      X.model = (b) => (b >= 4 ? { unlike: true, lit: ['Strategy', 'Households', 'Firms'] } : null);
       return X;
     },
   },
