@@ -3,6 +3,8 @@
 // ranges as p1-figs.js) plus a height h in plot widths. Seen from straight above,
 // every construct lands on the flat drawing: the figure is its shadow.
 
+import { doubleAuction } from './market.js';
+
 const range = (a, b, n) => Array.from({ length: n + 1 }, (_, i) => a + ((b - a) * i) / n);
 const line = (pts, c = 'white', w = 2, o = {}) => ({ pts, c, w, ...o });
 const fnLine = (f, a, b, c, w, o, n = 90) => line(range(a, b, n).map(f), c, w, o);
@@ -23,6 +25,146 @@ const clipY = (pts, y0, y1) => pts.map((p) => (p[1] >= y0 - 1e-9 && p[1] <= y1 +
 const blank = () => ({ surfaces: [], quads: [], lines: [], points: [], tags: [], eqs: [], agents: [], dims: [] });
 const series = (data, file, key) => Object.fromEntries(data?.[file]?.series.find((s) => s.key === key)?.points ?? []);
 
+// Figure 1.1 as an engine (docs/engine.md): 120 buyers and 120 sellers trade in
+// a double auction, quoting at random but never at a loss (market.js). A buyer
+// stands at (rank, value) and a seller at (rank, cost), so together they are
+// the two curves. A trader lights up once it has traded, and each trade leaves
+// its price at (trades so far, price): over a trading day the prices close in
+// on E. Then incomes rise, and the same people move up the income axis, the
+// buyers' values with them, and trade another day at the next slice.
+const RHO = 12;
+const TRADE = 0.08;
+const HOLD = 1.8;
+const MOVE = 1.6;
+function marketEngine(incomes, hI) {
+  const q = Array.from({ length: 10 * RHO }, (_, i) => (i + 0.5) / RHO);
+  const costs = q.map((x) => 1 + x);
+  const st = { n: 0, t: 0, cycle: 0, trades: null, found: [] };
+  const day = (I, seed) => doubleAuction({ values: q.map((x) => 10 * I - x), costs, top: 15, seed }).run();
+  const open = () => day(incomes[st.n], 17 + 101 * st.cycle + 7 * st.n);
+  // where a day's trading ended: its quantity, and the price of its last trades
+  const end = (trades, I) => {
+    const tail = trades.slice(-6);
+    return [trades.length / RHO, tail.reduce((a, t) => a + t.p, 0) / tail.length, hI(I)];
+  };
+  const reset = () => Object.assign(st, { n: 0, t: 0, cycle: 0, trades: null, found: [] });
+  return {
+    dots: [
+      { c: 'cobalt', size: 4.2, o: 0.7, max: 200 },
+      { c: 'madder', size: 4.2, o: 0.7, max: 200 },
+      { c: 'cobalt', size: 6, o: 1, max: 200 },
+      { c: 'madder', size: 6, o: 1, max: 200 },
+      { c: 'ochre', size: 4.6, o: 1, max: 200 },
+      { c: 'white', size: 8, o: 1, max: 8 },
+    ],
+    segs: [{ c: 'white', w: 1.2, o: 0.9, max: 64 }],
+    step(dt, { grow, reduced }) {
+      if (grow < 0.02) {
+        reset();
+        return null;
+      }
+      const out = { dots: [[], [], [], [], [], []], segs: [[]] };
+      if (reduced) {
+        // no motion: the first day as it ended, and where every day ends
+        st.trades ??= day(incomes[0], 17);
+        if (!st.found.length) st.found = incomes.map((I, n) => end(day(I, 17 + 7 * n), I));
+      }
+      st.trades ??= open();
+      // the market opens once the figure has risen
+      if (grow > 0.7 && !reduced) st.t += dt;
+      const span = st.trades.length * TRADE;
+      let I = incomes[st.n];
+      let shown = reduced ? st.trades.length : Math.max(0, Math.min(st.trades.length, Math.floor(st.t / TRADE)));
+      let fade = 1;
+      if (!reduced && st.t > span + HOLD) {
+        // the day is over: incomes move to the next slice (or back to the first)
+        if (st.found.length === st.n) st.found.push(end(st.trades, I));
+        const u = Math.min(1, (st.t - span - HOLD) / MOVE);
+        const next = (st.n + 1) % incomes.length;
+        const e = u * u * (3 - 2 * u);
+        I = incomes[st.n] + (incomes[next] - incomes[st.n]) * e;
+        fade = 1 - u;
+        if (!next) for (const f of st.found) f[3] = 1 - u;
+        if (u >= 1) {
+          if (!next) Object.assign(st, { cycle: st.cycle + 1, found: [] });
+          Object.assign(st, { n: next, t: 0 });
+          st.trades = open();
+          I = incomes[next];
+          shown = 0;
+          fade = 1;
+        }
+      }
+      const h = hI(I);
+      const bought = new Set();
+      const sold = new Set();
+      if (fade === 1) {
+        for (let k = 0; k < shown; k++) {
+          const t = st.trades[k];
+          bought.add(t.i);
+          sold.add(t.j);
+          const m = [(k + 0.5) / RHO, t.p, h, 1];
+          out.dots[4].push(m);
+          // a trade just made: buyer and seller meet at its price
+          const age = st.t - k * TRADE;
+          if (!reduced && age < 0.6) {
+            const a = 1 - age / 0.6;
+            out.segs[0].push([[q[t.i], 10 * I - q[t.i], h, a], [m[0], m[1], h, a]], [[m[0], m[1], h, a], [q[t.j], costs[t.j], h, a]]);
+          }
+        }
+      } else {
+        // the last day's prices shrink away while the people move
+        for (let k = 0; k < st.trades.length; k++) out.dots[4].push([(k + 0.5) / RHO, st.trades[k].p, hI(incomes[st.n]), fade]);
+      }
+      q.forEach((x, i) => {
+        const v = 10 * I - x;
+        if (v > 0 && v <= 15) out.dots[bought.has(i) ? 2 : 0].push([x, v, h, 1]);
+        out.dots[sold.has(i) ? 3 : 1].push([x, costs[i], h, 1]);
+      });
+      for (const f of st.found) out.dots[5].push([f[0], f[1], f[2], f[3] ?? 1]);
+      return out;
+    },
+  };
+}
+
+// Figure 1.3 as an engine: 108 buyers through today's point (5, 5), carried up
+// the time axis. At each horizon a buyer stands at (rank, value); the values
+// draw in toward 5 as the horizon lengthens, so the line they make turns flat.
+// After the 10 percent rise only buyers who value the good at 5.5 or more still
+// buy (lit), and the revenue box, 5.5 times their number, shrinks.
+const RHO3 = 12;
+const RUN3 = 5;
+function horizonEngine(eps, hs) {
+  const q = Array.from({ length: 9 * RHO3 }, (_, i) => (i + 0.5) / RHO3);
+  const st = { t: 0 };
+  return {
+    dots: [
+      { c: 'cobalt', size: 4.2, o: 0.7, max: 120 },
+      { c: 'cobalt', size: 6, o: 1, max: 120 },
+    ],
+    segs: [{ c: 'ochre', w: 2, o: 1, max: 4 }],
+    step(dt, { grow, reduced }) {
+      if (grow < 0.02) {
+        st.t = 0;
+        return null;
+      }
+      if (grow > 0.7) st.t += dt;
+      const u = reduced ? 1 : Math.min(1, st.t / RUN3);
+      const s = u * u * (3 - 2 * u);
+      const e = eps(s);
+      const h = hs(s);
+      const out = { dots: [[], []], segs: [[]] };
+      for (const x of q) {
+        const v = 5 - (x - 5) / e;
+        if (v < 0 || v > 12) continue;
+        out.dots[v >= 5.5 ? 1 : 0].push([x, v, h, 1]);
+      }
+      const Q = 5 - 0.5 * e;
+      out.segs[0].push([[0, 5.5, h], [Q, 5.5, h]], [[Q, 5.5, h], [Q, 0, h]]);
+      return out;
+    },
+  };
+}
+
 export const CONSTRUCTS = {
   // ===== Stage 1
   '1.1': {
@@ -30,16 +172,16 @@ export const CONSTRUCTS = {
     build() {
       const X = blank();
       const hI = (I) => (I - 1) * 0.6;
-      X.surfaces.push({ param: (q, I) => [q, 10 * I - q, hI(I)], u: [0, 10], v: [1, 1.4], c: 'cobalt', alpha: 0.22, freq: 0 });
-      X.surfaces.push({ param: (q, I) => [q, 1 + q, hI(I)], u: [0, 10], v: [1, 1.4], c: 'madder', alpha: 0.12, freq: 0, n: 12 });
-      for (const I of [1.1, 1.2, 1.3, 1.4]) X.lines.push(fnLine((q) => [q, 10 * I - q, hI(I)], 0, 10, 'cobalt', I === 1.2 ? 2.6 : 1.2, { o: I === 1.2 ? 1 : 0.6 }, 20));
-      X.lines.push(fnLine((I) => [(10 * I - 1) / 2, (10 * I + 1) / 2, hI(I)], 1, 1.4, 'white', 3, {}, 20));
-      X.points.push({ at: [4.5, 5.5, 0] }, { at: [5.5, 6.5, hI(1.2)], c: 'cobalt' }, { at: [6.5, 7.5, hI(1.4)] });
+      X.surfaces.push({ param: (q, I) => [q, 10 * I - q, hI(I)], u: [0, 10], v: [1, 1.4], c: 'cobalt', alpha: 0.1, freq: 0 });
+      X.surfaces.push({ param: (q, I) => [q, 1 + q, hI(I)], u: [0, 10], v: [1, 1.4], c: 'madder', alpha: 0.06, freq: 0, n: 12 });
+      X.lines.push(fnLine((I) => [(10 * I - 1) / 2, (10 * I + 1) / 2, hI(I)], 1, 1.4, 'white', 2.4, { o: 0.8 }, 20));
       X.lines.push(post(10, 0, hI(1.4)));
       for (const I of [1.1, 1.2, 1.3, 1.4]) X.lines.push(line([[10, 0, hI(I)], [10.3, 0, hI(I)]], 'chalk', 1.2));
-      X.tags.push({ text: 'income I', at: [10, 0, hI(1.4) + 0.02] }, { text: 'D′, I = 1.2', at: [0.4, 11.6, hI(1.2)], c: 'cobalt' }, { text: 'equilibria', at: [6.5, 7.5, hI(1.4)] }, { text: 'supply does not move', at: [9.6, 10.6, hI(1.4)], c: 'madder' });
-      X.eqs.push({ html: 'Q = 10I − P', at: [0.5, 14, hI(1.4)] });
+      X.tags.push({ text: 'income I', at: [10, 0, hI(1.4) + 0.02] }, { text: 'D′, I = 1.2', at: [0.4, 11.6, hI(1.2)], c: 'cobalt' }, { text: 'supply does not move', at: [9.6, 10.6, hI(1.4)], c: 'madder' },
+        { text: 'trade prices, in order', at: [0.2, 9.2, 0], c: 'ochre' });
+      X.eqs.push({ html: 'bid &lt; value, ask &gt; cost', at: [0.5, 14, hI(1.4)] });
       X.dims.push({ from: [10, 0, 0], to: [10, 0, hI(1.4)], text: 'I = 1 … 1.4' });
+      X.engine = marketEngine([1, 1.2, 1.4], hI);
       return X;
     },
   },
@@ -72,14 +214,15 @@ export const CONSTRUCTS = {
       const eps = (s) => 0.2 + 1.3 * s;
       const hs = (s) => 0.24 * s;
       const span = (s) => [Math.max(1.5, 5 - 4.5 * eps(s)), Math.min(8.5, 5 + 4 * eps(s))];
-      X.surfaces.push({ param: (q, s) => [q, 5 - (q - 5) / eps(s), hs(s)], u: span, v: [0, 1], c: 'cobalt', alpha: 0.2, freq: 0 });
-      X.lines.push(fnLine((q) => [q, 5 - (q - 5) / eps(1), hs(1)], ...span(1), 'white', 2.6, {}, 20));
+      X.surfaces.push({ param: (q, s) => [q, 5 - (q - 5) / eps(s), hs(s)], u: span, v: [0, 1], c: 'cobalt', alpha: 0.12, freq: 0 });
       X.lines.push(post(5, 5, hs(1), 'white', { dash: false, o: 0.9 }));
       X.lines.push(fnLine((s) => [5 * (1 - 0.1 * eps(s)), 5.5, hs(s)], 0, 1, 'ochre', 2.2, {}, 30));
-      X.quads.push(flat(0, 0, 4.25, 5.5, hs(1), 'ochre', 0.1, { w: 1.4 }));
+      X.quads.push(flat(0, 0, 4.25, 5.5, hs(1), 'ochre', 0.06, { w: 1, o: 0.5 }));
       X.points.push({ at: [4.9, 5.5, 0], c: 'ochre' }, { at: [4.25, 5.5, hs(1)], c: 'ochre' });
-      X.tags.push({ text: 'five years: R = 23.4', at: [4.25, 5.5, hs(1)], c: 'ochre' }, { text: 'time to adjust', at: [8.5, 5 - 3.5 / eps(1), hs(1)] });
+      X.tags.push({ text: 'five years: R = 23.4', at: [4.25, 5.5, hs(1)], c: 'ochre' }, { text: 'time to adjust', at: [8.5, 5 - 3.5 / eps(1), hs(1)] },
+        { text: 'still buying at 5.5', at: [1.2, 9.5, 0], c: 'cobalt' });
       X.dims.push({ from: [12, 0, 0], to: [12, 0, hs(1)], text: 'first month … five years' });
+      X.engine = horizonEngine(eps, hs);
       return X;
     },
   },

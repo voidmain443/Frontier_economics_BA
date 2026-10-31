@@ -220,6 +220,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     sc.labels = sc.labels.filter((L) => L.fid !== fid);
     sc.agents = sc.agents.filter((a) => a.fid !== fid);
     sc.crowds = sc.crowds.filter((c) => c.fid !== fid);
+    sc.engines = sc.engines.filter((e) => e.fid !== fid);
     buildFigure(sc, fig, keep);
   }
   const queued = new Set();
@@ -290,7 +291,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     G.freeScene();
     labelsRoot.replaceChildren();
     doorsRoot?.replaceChildren();
-    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], world: null };
+    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], engines: [], world: null };
     const sb = st.sheetBox;
     const H = sb[3] - sb[1];
     const bOf = (s) => 1 - (s - sb[1]) / H;
@@ -498,6 +499,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       obj(G.lines(segs, box, COL.chalk, 1.3, 0.95));
       label(dm.text, 'dim', [q[0] + 0.02, q[1], q[2]], box, group);
     }
+    // an engine: agents whose state the construct steps each frame
+    // (docs/engine.md); its dots and segments are redrawn every frame
+    if (X.engine) {
+      const E = X.engine;
+      const dots = E.dots.map((d) => { const o = G.points([], box, COL[d.c], d.size ?? 4, d.o ?? 1, d.glow ?? 0, d.max); obj(o); return o; });
+      const segs = (E.segs ?? []).map((d) => { const o = G.lines([], box, COL[d.c], d.w ?? 1, d.o ?? 1, false, 1, d.max); obj(o); return o; });
+      sc.engines.push({ fid: id, group, E, dots, segs, L });
+    }
     // the margin callout: the figure's number and what it holds fixed, and the
     // figure's controls, so that it can be changed while the page is folded
     const dm0 = X.dims?.[0];
@@ -636,6 +645,15 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const bw = (a.box[2] - a.box[0]) * PX;
         putAgent(a.name, pageFrame(x, s, P), a.local[2] * bw * ease(grow(a.group)) * LIFT, a.scale * bw, a.ry, gr);
       }
+    }
+    // engines run while their figure stands
+    for (const N of sc.engines) {
+      const r = grow(N.group) * appear;
+      const out = N.E.step(dt, { grow: r, reduced: REDUCED });
+      if (!out) continue;
+      const map = (p) => { const q = N.L(p); return [q[0], q[1], q[2], p[3] ?? 1]; };
+      out.dots?.forEach((pts, k) => N.dots[k]?.set(pts.map(map)));
+      out.segs?.forEach((segs, k) => N.segs[k]?.set(segs.map(([p, q]) => [map(p), map(q)])));
     }
     // crowds stand on the floor of their room while their figure is read; a
     // failed bank topples, later the later the round in which it failed

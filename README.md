@@ -18,7 +18,8 @@
 | [docs/redesign.md](docs/redesign.md) | 재설계 기준(2026-10-30): 한 번의 접힘, 숨은 차원, 1부 8단계 |
 | [docs/part1-manuscript.md](docs/part1-manuscript.md) | 1부 원고와 검토 기록 |
 | [docs/decisions.md](docs/decisions.md) | 결정 기록 (2026-10-29 grill 세션) |
-| [docs/world.md](docs/world.md) | 다음 단계(2차 grill): 하나의 세계, 배치표 초안, W0~W5 |
+| [docs/world.md](docs/world.md) | 2차 grill: 하나의 세계(건물), 배치표, W0~W4의 기록 |
+| [docs/engine.md](docs/engine.md) | 다음 단계(3차 grill): 경제의 엔진, 페이지는 엔진의 단면, E1~E6 |
 | [docs/phase4-test.md](docs/phase4-test.md) | 4단계 확인: 전공자 관찰 절차, 질문지, 정답·판정 기준, 관찰지 |
 | [docs/reference/shopify-editions-fall26.md](docs/reference/shopify-editions-fall26.md) | 레퍼런스 사이트 분석 (영상 + 번들) |
 
@@ -53,7 +54,8 @@ M0 착수 전. 핵심 경험을 검증한 프로토타입 둘이 있다.
 |---|---|
 | `page.js` | 세 부분 공통: 그림 그리기, 식 번호, 표제란, 접힘 버튼 연결 |
 | `fold.js` | 접힘 하나: 캡처, 카메라, 그림별 구조의 솟음과 내려앉음, 라벨과 문 |
-| `world.js` | 접힌 공간의 건물: 방 24개, 1·2부의 배치표, 페이지가 지나는 길, 군중이 설 자리 (`docs/world.md`) |
+| `world.js` | 접힌 공간의 건물: 방 24개, 1·2부의 배치표, 페이지가 지나는 길, 군중이 설 자리 (`docs/world.md`). 1부는 쓰지 않는다 |
+| `market.js` | 경제의 엔진의 시장: 제로 지능 제약 거래자의 이중경매(Gode and Sunder 1993)와 효율 계산 (`docs/engine.md`) |
 | `gpu.js`, `shaders.js` | WebGPU 렌더러와 WGSL, 리본 좌표(`toWorld`), html-in-canvas 복사 |
 | `maquettes.js`, `geo3d.js` | Blender 주체 모형(GLB) 로더 |
 | `figures.js` | SVG `plot()`과 그림 7.1의 회귀 데이터 |
