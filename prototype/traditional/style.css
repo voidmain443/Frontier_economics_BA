@@ -843,4 +843,8 @@ body:not(.unfolded) .story { display: none; }
 .story .beats li.now { background: #ffd27a; }
 @keyframes say-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .story .say.in { animation: none; } }
-@media (max-width: 640px) { .story { bottom: 16px; padding: 12px 14px 10px; } .story .say { font-size: 16px; } }
+/* the caption keeps clear of the title block: beside it where the window is
+   too narrow to centre it, and at the top once the block spans the bottom */
+@media (max-width: 1320px) { .story { left: 20px; transform: none; width: min(600px, calc(100vw - 390px)); } }
+@media (max-width: 760px) { .story { top: 12px; bottom: auto; left: 12px; width: calc(100vw - 24px); } }
+@media (max-width: 640px) { .story { padding: 12px 14px 10px; } .story .say { font-size: 16px; } }

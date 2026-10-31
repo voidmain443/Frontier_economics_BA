@@ -216,9 +216,17 @@ export function population() {
   const people = g('people', 'Households', 'cobalt', 2.2, PEOPLE);
   // the employed are the first WORKERS of them; they send work to firms
   people.workers = WORKERS;
+  // firms by rank, the largest first: their sizes, and so their shares of what
+  // flows to and from firms, follow Zipf's law, a share proportional to 1/rank
+  const firms = g('firms', 'Firms', 'madder', 2.4, FIRMS, (i) => 0.8 + 3.2 / Math.sqrt(i + 1));
+  firms.weights = firms.pts.map((_, i) => 1 / (i + 1));
+  // the largest stands where it is in sight beside the page when the Firms
+  // cell is read (figures 3.1 and Part 2's 2.3, which stops it)
+  const [A, B] = [firms.pts[0], firms.pts[66]];
+  for (let k = 0; k < 3; k++) [A[k], B[k]] = [B[k], A[k]];
   return [
     people,
-    g('firms', 'Firms', 'madder', 2.4, FIRMS, (i) => 0.8 + 3.2 / Math.sqrt(i + 1)),
+    firms,
     g('banks', 'Banks', 'ochre', 7, BANKS),
     g('central bank', 'Central banks', 'white', 12, 1),
     g('other countries', 'Other countries', 'chalk', 6, 9),
@@ -253,10 +261,26 @@ export function circulation(groups, seed = 11) {
   const G = Object.fromEntries(groups.map((x) => [x.name, x]));
   const live = [];
   const due = FLOWS.map(() => rand());
+  // an agent is picked in proportion to its weight (a firm, to its size), and
+  // never while it is out
+  let out = {};
+  const cum = Object.fromEntries(groups.map((x) => {
+    const c = [];
+    x.pts.reduce((s, _, i) => (c[i] = s + (x.weights?.[i] ?? 1)), 0);
+    return [x.name, c];
+  }));
   const pick = (grp, f) => {
     if (!grp) return null;
+    const c = cum[grp.name];
     const n = f.workers && grp.workers ? grp.workers : grp.pts.length;
-    return grp.pts[Math.floor(rand() * n)];
+    for (let tries = 0; tries < 8; tries++) {
+      const u = rand() * c[n - 1];
+      let lo = 0;
+      let hi = n - 1;
+      while (lo < hi) { const m = (lo + hi) >> 1; if (c[m] < u) lo = m + 1; else hi = m; }
+      if (!out[grp.name]?.has(lo)) return grp.pts[lo];
+    }
+    return null;
   };
   function start(f) {
     const a = pick(G[f.from], f);
@@ -265,11 +289,24 @@ export function circulation(groups, seed = 11) {
     if (!a || !b) return;
     live.push({ a, v, b, t: 0, money: f.money, lift: f.money ? 0.09 + 0.05 * rand() : 0.04 + 0.03 * rand() });
   }
+  // the share of a group's weight still working
+  const share = (name) => {
+    const x = G[name];
+    if (!x || !out[name]?.size) return 1;
+    const c = cum[name];
+    let lost = 0;
+    for (const i of out[name]) lost += x.weights?.[i] ?? 1;
+    return 1 - lost / c[c.length - 1];
+  };
   return {
-    // k speeds every route up; open(f) is the share of a route still working
-    step(dt, k = 1, open = () => 1) {
+    share,
+    // k speeds every route up; gone: { group: Set of agents that are out },
+    // whose share of each route stops with them
+    step(dt, k = 1, gone = {}) {
+      out = gone;
       FLOWS.forEach((f, i) => {
-        due[i] += f.rate * k * open(f) * dt;
+        const open = share(f.from) * (f.to ? share(f.to) : 1);
+        due[i] += f.rate * k * open * dt;
         while (due[i] >= 1) {
           due[i] -= 1;
           start(f);
