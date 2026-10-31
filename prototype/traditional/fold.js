@@ -11,7 +11,7 @@
 
 import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
 import { loadAssets } from './maquettes.js';
-import { CELLS, RIM, FLOWS, placeOf, polar, cellCentre, wheelAt, poseFor, toWorldW, wheelGeometry, signSpots, routeOf, population, circulation, crowdSpots } from './wheel.js';
+import { RIM, FLOWS, placeOf, polar, cellCentre, wheelAt, poseFor, toWorldW, wheelGeometry, signSpots, routeOf, hatchOf, population, ties, circulation, crowdSpots } from './wheel.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -35,6 +35,7 @@ export const COL = {
   ochre: [1.0, 0.82, 0.42],
   chalk: [0.86, 0.91, 0.96],
   white: [1, 1, 1],
+  violet: [0.8, 0.66, 1.0],
   // printing inks, for agents seen against the paper
   cobaltInk: [0.16, 0.33, 0.63],
   madderInk: [0.69, 0.23, 0.23],
@@ -263,6 +264,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     sc.engines = sc.engines.filter((e) => e.fid !== fid);
     sc.stories = sc.stories.filter((e) => e.fid !== fid);
     sc.wheels = sc.wheels.filter((e) => e.fid !== fid);
+    sc.models = sc.models.filter((e) => e.fid !== fid);
     buildFigure(sc, fig, keep);
   }
   const queued = new Set();
@@ -333,7 +335,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     G.freeScene();
     labelsRoot.replaceChildren();
     doorsRoot?.replaceChildren();
-    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], engines: [], stories: [], wheels: [], world: null };
+    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], engines: [], stories: [], wheels: [], models: [], world: null };
     const sb = st.sheetBox;
     const H = sb[3] - sb[1];
     const bOf = (s) => 1 - (s - sb[1]) / H;
@@ -476,7 +478,11 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
           sign.tabIndex = -1;
           doorsRoot.appendChild(sign);
         } else labelsRoot.appendChild(sign);
-        return { cell, plate, sign, spots: signSpots(cell) };
+        // held still by a model: hatched, with the value it is held at
+        const hatch = Object.assign(G.lines(hatchOf(cell), Z, COL.chalk, 1.1, 0.75, false, 0), { space: 0 });
+        const held = Object.assign(document.createElement('div'), { className: 'xl tag held' });
+        labelsRoot.appendChild(held);
+        return { cell, plate, sign, spots: signSpots(cell), hatch, held, mode: { m: 1, s: 0, o: 0, l: 0 } };
       });
       const groups = population();
       const point = (pts, c, size, glow, max) => Object.assign(G.points(pts, Z, COL[c], size, 1, glow, max), { space: 0, persp: PERSP });
@@ -485,6 +491,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const failed = point([], 'madder', 1, 0.6, 64);
       dots.push(failed);
       const flow = circulation(groups);
+      // ties between particular agents, drawn when a model has them
+      const tie = ties(groups);
+      const tieLines = Object.assign(G.lines(tie.segs, Z, COL.chalk, 1, 0.5, false, 0), { space: 0 });
+      // what the wheel produces, beside the hub, when a model measures it
+      const measured = Object.assign(document.createElement('div'), { className: 'xl tag measured' });
+      labelsRoot.appendChild(measured);
       const parcels = [point([], 'ochre', 3.4, 1, 1200), point([], 'white', 3.4, 0.8, 1200)];
       const trails = [G.lines([], Z, COL.ochre, 1.6, 0.8, false, 0, 1200), G.lines([], Z, COL.white, 1.4, 0.6, false, 0, 1200)];
       const still = REDUCED ? flow.lines().map(({ f, segs }) => Object.assign(G.lines(segs, Z, f.money ? COL.ochre : COL.white, 1.4, 0.6, false, 0), { route: f.name })) : [];
@@ -493,7 +505,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         return r ? (top ? r.top : (r.top + r.bottom) / 2) + scrollY : null;
       };
       sc.whole = whole ? { from: pos(whole.from, true), to: pos(whole.to, false) } : null;
-      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still, groups, failed, goneKey: '' };
+      sc.world = { stops, ring, grid, cells, dots, flow, parcels, trails, still, groups, failed, goneKey: '', tie, tieLines, measured, look: { alike: 0, unlike: 0, tied: 0, measured: 0 } };
     }
 
     // Part 3: the routes through the whole wheel, each in its own colour, with
@@ -501,24 +513,21 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     if (archive && world) {
       const fig = sheet.querySelector(`figure[data-fig="${archive.figure}"]`)?.getBoundingClientRect();
       const end = sheet.querySelector(archive.end)?.getBoundingClientRect();
-      const paths = sheet.querySelector('.paths')?.getBoundingClientRect();
       const routes = archive.routes.map((rt, i) => {
-        const { pts, stops: at } = routeOf(rt.places, 0.12 + 0.07 * i);
+        const { pts, stops, at } = routeOf(rt.places, 0.12 + 0.07 * i);
         const segs = pts.slice(1).map((q, k) => [pts[k], q]);
         const lines = G.lines(segs, [0, 0, 0, 0], COL[rt.c], 3, 1, false, 0);
-        const dots = G.points(at.map((p) => [...p, 0.9]), [0, 0, 0, 0], COL[rt.c], 7, 1, 0.6);
+        const dots = G.points(stops.map((p) => [...p, 0.9]), [0, 0, 0, 0], COL[rt.c], 7, 1, 0.6);
         dots.space = 0;
         const el = document.createElement('div');
         el.className = `xl route ${rt.c}`;
         el.textContent = rt.name;
         labelsRoot.appendChild(el);
-        return { ...rt, lines, dots, el, start: pts[0], cells: new Set(rt.places.flat()), classical: i === 0 };
+        return { ...rt, lines, dots, el, start: pts[0], stops, at, reached: stops.length, cells: new Set(rt.places.flat()) };
       });
       sc.archive = {
-        fid: archive.figure,
         c: fig ? (fig.top + fig.bottom) / 2 + scrollY : 0,
         end: end ? end.bottom + scrollY : 0,
-        paths: paths ? paths.top + scrollY : 0,
         routes,
       };
     }
@@ -662,6 +671,9 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (tag) labelsRoot.appendChild(tag);
       sc.wheels.push({ fid: id, group, fn: X.wheel, tag });
     }
+    // a figure may put the wheel in a model's state (ontology.js): X.model(beat)
+    // gives { moving: Set, stopped: Map(cell → value), lit, size, tied, measured }
+    if (X.model) sc.models.push({ fid: id, group, fn: X.model });
     // a crowd on the wheel's floor beside the page, in the figure's cell
     if (X.crowd && world?.[id]) {
       const place = placeOf(world[id]);
@@ -787,6 +799,20 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const groupW = builtOf('groups');
     const flowW = builtOf('flows');
     const bw = (m, n) => (m ? m.get(n) ?? 0 : 1);
+    // a model's state of the wheel (ontology.js): the figure nearest the
+    // reading line that has one gives it at its beat; without one, all of the
+    // wheel moves. Each cell eases toward moving (m), held (s) or left out (o).
+    let MS = null;
+    let mk = 0.5;
+    for (const N of sc.models) {
+      const g = grow(N.group);
+      if (g > mk) {
+        mk = g;
+        MS = N;
+      }
+    }
+    const state = MS ? MS.fn(Math.round(beatOf.get(MS.fid) ?? 1e9)) : null;
+    const modeOf = (n) => (!state || state.moving.has(n) ? 'm' : state.stopped.has(n) ? 's' : 'o');
     const SV = SC ? storyView(SC, P, ease(grow(SC.group)) * LIFT) : null;
     sw *= e;
     // where the wheel stands: turned, and its hub moved, so that the place being
@@ -918,12 +944,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         putAgent(C.asset, F, (it.lift ?? 0) + 0.2 * it.s * Math.abs(Math.sin(it.tilt)), it.s, it.ry ?? 0, g, it.tilt);
       }
     }
-    // Part 3: each agent stands in its cell on the rim
+    // Part 3: each agent stands in its cell on the rim, unless a model leaves
+    // the cell out
     if (A && pose && climax > 0.03) {
-      for (const c of CELLS) {
+      for (const w of sc.world?.cells ?? []) {
+        const c = w.cell;
         if (!c.asset) continue;
         const F = { o: toWorldW(cellCentre(c), pose), X: [1, 0, 0], N: [0, 1, 0], D: [0, 0, 1] };
-        putAgent(c.asset, F, 0, 0.3, 0, climax * appear * bw(cellW, c.name));
+        putAgent(c.asset, F, 0, 0.3, 0, climax * appear * bw(cellW, c.name) * (w.mode.m + w.mode.s));
       }
     }
     const solids = allSolids();
@@ -938,14 +966,44 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const sbx = st.sheetBox;
     const under = [];
     const over = [];
-    // Part 3: the cells on a shown route are lit; the three paths come in as
-    // their section approaches
-    // in its story, a route comes in at its beat (show) or is drawn on (draw),
-    // and each ring is lit while its beat is told
-    const b3 = A ? beatOf.get(A.fid) ?? 1e9 : 0;
-    const routeOn = (rt) => climax * (rt.classical ? 1 : Math.max(smooth(A.paths - 1600, A.paths - 400, P.focus), rt.show ? vis(rt.show, b3) : 0));
+    // Part 3: a route belongs to a figure's story, and shows while that figure
+    // stands: it comes in at its beat (show), is drawn on at a beat (draw), or
+    // is drawn on stop by stop, upto[beat] stops by each beat
+    const storyOf = new Map(sc.stories.map((S) => [S.fid, S]));
+    const routeOn = (rt) => {
+      const S = storyOf.get(rt.fid);
+      const b = S?.shown ?? 1e9;
+      // (a route steps back while others are drawn: dim, [from, to] beats)
+      return climax * (S ? grow(S.group) : 0) * (rt.show ? vis(rt.show, b) : 1) * (rt.dim ? 1 - 0.7 * vis(rt.dim, b) : 1);
+    };
+    const drawnOf = (rt) => {
+      const b = storyOf.get(rt.fid)?.shown ?? 1e9;
+      if (rt.upto) {
+        const i = clamp(Math.floor(b), 0, rt.upto.length - 1);
+        const f = ease(clamp(b - i, 0, 1));
+        const k = lerp(rt.upto[i], rt.upto[Math.min(i + 1, rt.upto.length - 1)], f);
+        const lo = Math.floor(k);
+        const at = rt.at[Math.min(lo, rt.at.length - 1)];
+        const next = rt.at[Math.min(lo + 1, rt.at.length - 1)];
+        return (at + (next - at) * (k - lo)) / Math.max(1, rt.at[rt.at.length - 1]);
+      }
+      return rt.draw != null ? ease(clamp(b - (rt.draw - 1), 0, 1)) : 1;
+    };
     const weights = R ? new Map(R.weights) : new Map();
-    if (A) for (const rt of A.routes) for (const n of rt.cells) weights.set(n, Math.max(weights.get(n) ?? 0, 0.7 * routeOn(rt) * (rt.draw != null ? clamp(b3 - (rt.draw - 1), 0, 1) : 1)));
+    if (A) for (const rt of A.routes) if (!rt.upto) for (const n of rt.cells) weights.set(n, Math.max(weights.get(n) ?? 0, 0.7 * routeOn(rt) * drawnOf(rt)));
+    // the cells of a model: those it moves are lit a little, those it names
+    // (lit) fully
+    const ek = REDUCED ? 1 : 1 - Math.exp(-dt * 4);
+    if (sc.world) for (const w of sc.world.cells) {
+      const n = w.cell.name;
+      const md = modeOf(n);
+      const M2 = w.mode;
+      M2.m += ((md === 'm' ? 1 : 0) - M2.m) * ek;
+      M2.s += ((md === 's' ? 1 : 0) - M2.s) * ek;
+      M2.o += ((md === 'o' ? 1 : 0) - M2.o) * ek;
+      M2.l += ((state?.lit?.includes(n) ? 1 : 0) - M2.l) * ek;
+      if (state) weights.set(n, Math.max(weights.get(n) ?? 0, 0.45 * M2.m, M2.l));
+    }
     if (sc.world && pose) {
       const Wd = sc.world;
       const box = [...pose.C, pose.phi];
@@ -976,6 +1034,17 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         N.tag.style.opacity = pr ? String(shown) : '0';
         if (pr) N.tag.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(1.5 / pr[2], 0.5, 0.85).toFixed(3)}) translate(0, -140%)`;
       }
+      // how the model draws the agents: alike (one stands for all), unlike
+      // (households too by income), tied to particular others; and whether it
+      // measures what the wheel produces
+      const LK = Wd.look;
+      for (const k of ['alike', 'unlike', 'tied', 'measured']) LK[k] += ((state?.[k] ? 1 : 0) - LK[k]) * ek;
+      const sizeKey = `${LK.alike.toFixed(2)} ${LK.unlike.toFixed(2)}`;
+      if (sizeKey !== Wd.sizeKey) {
+        Wd.sizeKey = sizeKey;
+        Wd.goneKey = null;
+        for (const g of Wd.groups) if (g.base) g.pts.forEach((p, i) => { p[3] = g.base[i] + LK.alike * (g.alike[i] - g.base[i]) + LK.unlike * (g.unlike[i] - g.base[i]); });
+      }
       const key = Object.entries(gone).map(([g, set]) => `${g}:${[...set]}`).join(' ');
       if (key !== Wd.goneKey) {
         Wd.goneKey = key;
@@ -987,8 +1056,15 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         });
         Wd.failed.set(failed);
       }
+      // a route is left out with its market or either end, and held still
+      // with its market
+      const cellOfGroup = new Map(Wd.groups.map((g) => [g.name, g.cell.name]));
+      const routeMode = (f) => {
+        const ends = [f.via, cellOfGroup.get(f.from), f.to && cellOfGroup.get(f.to)].filter(Boolean).map(modeOf);
+        return ends.includes('o') ? 'o' : modeOf(f.via) === 's' ? 's' : 'm';
+      };
       if (!REDUCED) {
-        Wd.flow.step(dt, { gone, built: (f) => bw(flowW, f.name) > 0.5, has: (g) => bw(groupW, g) > 0.5, given: (f) => !sc.built || sc.built.flows.get(f.name)?.length === 0 });
+        Wd.flow.step(dt, { gone, built: (f) => bw(flowW, f.name) > 0.5 && routeMode(f) !== 'o', has: (g) => bw(groupW, g) > 0.5, given: (f) => !sc.built || sc.built.flows.get(f.name)?.length === 0, frozen: (f) => routeMode(f) === 's', links: state?.tied ? Wd.tie.adj : null });
         const pp = Wd.flow.points();
         Wd.parcels[0].set(pp.money.pts);
         Wd.parcels[1].set(pp.goods.pts);
@@ -996,15 +1072,31 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         Wd.trails[1].set(pp.goods.trail);
       }
       const groupOf = new Map(Wd.groups.map((g, k) => [Wd.dots[k], g.name]));
+      const modeAt = new Map(Wd.cells.map((w) => [w.cell.name, w.mode]));
+      const flowOf = new Map(FLOWS.map((f) => [f.name, f]));
       for (const d of [...Wd.dots, ...Wd.parcels, ...Wd.trails, ...Wd.still]) {
         d.box = box;
         // seen whole, the dots keep more of their size
         d.persp = PERSP * (1 + 3 * climax);
-        // a group's dots come in as it is built, a still route as it is
-        const b = groupOf.has(d) ? bw(groupW, groupOf.get(d)) : d.route ? bw(flowW, d.route) : 1;
+        // a group's dots come in as it is built, a still route as it is; a
+        // model leaves out the agents of a cell it leaves out
+        let b = 1;
+        if (groupOf.has(d)) {
+          const md = modeAt.get(cellOfGroup.get(groupOf.get(d)));
+          b = bw(groupW, groupOf.get(d)) * (md.m + 0.8 * md.s);
+        } else if (d.route) {
+          const rm = routeMode(flowOf.get(d.route));
+          b = bw(flowW, d.route) * (rm === 'm' ? 1 : rm === 's' ? 0.45 : 0);
+        }
         d.opacity = shown * d.baseOpacity * (0.75 + 0.25 * climax) * b;
         under.push(d);
       }
+      // ties, drawn on as a model ties the agents
+      Wd.tieLines.box = box;
+      Wd.tieLines.total ??= Wd.tieLines.count;
+      Wd.tieLines.count = Math.ceil(Wd.tieLines.total * LK.tied);
+      Wd.tieLines.opacity = shown * 0.3 * Math.min(1, LK.tied * 2);
+      under.push(Wd.tieLines);
       // a cell's sign shows while it is read, and every sign once the whole
       // wheel is in view; it stands where the page leaves it clear
       // the page's edges on screen at the reading line
@@ -1016,11 +1108,25 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const k = weights.get(w.cell.name) ?? 0;
         w.plate.box = box;
         const made = bw(cellW, w.cell.name);
-        w.plate.opacity = shown * (0.22 + 0.78 * k) * made;
-        under.push(w.plate);
+        // a model's cell: moving, held (a fainter plate, hatched, its value
+        // beside it), or left out (the outline alone)
+        const md = w.mode;
+        w.plate.opacity = shown * (0.22 + 0.78 * k) * made * (md.m + 0.45 * md.s);
+        w.hatch.box = box;
+        w.hatch.opacity = shown * made * md.s * 0.5;
+        under.push(w.plate, w.hatch);
+        const value = state?.stopped.get(w.cell.name);
+        if (value && w.held.dataset.v !== value) {
+          w.held.dataset.v = value;
+          w.held.innerHTML = `<i>held</i> ${value}`;
+        }
+        const ho = w.held.dataset.v ? shown * made * md.s * (value === '' ? 0 : 1) : 0;
+        const hp = ho > 0.02 ? project(vp, toWorldW(cellCentre(w.cell, 0.02), pose), W, H) : null;
+        w.held.style.opacity = hp ? String(ho) : '0';
+        if (hp) w.held.style.transform = `translate(${hp[0].toFixed(1)}px, ${hp[1].toFixed(1)}px) scale(${clamp(5 / hp[2], 0.85, 1.1).toFixed(3)}) translate(-50%, -50%)`;
         const level = climax > 0.3 || k > 0.02;
         const pr = level ? w.spots.map((p) => project(vp, toWorldW(p, pose), W, H)).find(clear) ?? null : null;
-        const o = shown * made * (A ? climax * (0.7 + 0.3 * k) : Math.max(k, climax * 0.8));
+        const o = shown * made * (A ? climax * (0.7 + 0.3 * k) : Math.max(k, climax * 0.8)) * (md.m + md.s + 0.3 * md.o);
         const door = Boolean(A) && o > 0.5;
         w.sign.tabIndex = door ? 0 : -1;
         w.sign.style.pointerEvents = door ? 'auto' : 'none';
@@ -1032,17 +1138,33 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         w.sign.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(3.2 / pr[2], 0.55, 1.05).toFixed(3)}) translate(-50%, -50%)`;
       }
     }
+    if (sc.world && pose) {
+      const Wd = sc.world;
+      const o = appear * Wd.look.measured;
+      if (state?.measured && Wd.measured.dataset.v !== state.measured) {
+        Wd.measured.dataset.v = state.measured;
+        Wd.measured.innerHTML = state.measured;
+      }
+      const pr = o > 0.02 ? project(vp, toWorldW([0, 0.05, 0], pose), W, H) : null;
+      Wd.measured.style.opacity = pr ? String(o) : '0';
+      if (pr) Wd.measured.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${clamp(5 / pr[2], 0.9, 1.15).toFixed(3)}) translate(-50%, -50%)`;
+    }
     if (A && pose) {
       for (const rt of A.routes) {
         const o = appear * routeOn(rt);
         rt.lines.box = [...pose.C, pose.phi];
         rt.dots.box = [...pose.C, pose.phi];
-        // a route drawn on in the story: its stops come in once it is drawn
-        const drawn = rt.draw != null ? ease(clamp(b3 - (rt.draw - 1), 0, 1)) : 1;
+        // a route drawn on in the story: its stops come in as it reaches them
+        const drawn = drawnOf(rt);
         rt.lines.total ??= rt.lines.count;
         rt.lines.count = Math.ceil(rt.lines.total * drawn);
         rt.lines.opacity = o;
-        rt.dots.opacity = o * clamp((drawn - 0.85) / 0.15, 0, 1);
+        const reached = rt.at.filter((k) => k <= Math.round(drawn * rt.at[rt.at.length - 1])).length;
+        if (reached !== rt.reached) {
+          rt.reached = reached;
+          rt.dots.set(rt.stops.slice(0, reached).map((p) => [...p, 0.9]));
+        }
+        rt.dots.opacity = o;
         over.push(rt.lines, rt.dots);
         const pr = o > 0.02 ? project(vp, toWorldW(rt.start, pose), W, H) : null;
         rt.el.style.opacity = pr ? String(o * clamp(drawn * 3, 0, 1)) : '0';

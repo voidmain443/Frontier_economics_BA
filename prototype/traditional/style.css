@@ -380,6 +380,13 @@ body:not(.unfolded) #expo-labels { display: none; }
 .xl.tag.madder { color: #ff9c9c; }
 .xl.tag.olive { color: #bfe07a; }
 .xl.tag.ochre { color: #ffd27a; }
+/* a model's state of the wheel (ontology.js): the value a held cell is held
+   at, and what the wheel produces, measured, beside the hub */
+.xl.tag.held { font: italic 16px/1.2 var(--serif); border-left-style: dashed; background: rgba(8, 26, 46, 0.7); }
+.xl.tag.held i { font: 500 12px/1 var(--draft); font-style: normal; letter-spacing: 0.04em; opacity: 0.75; margin-right: 0.35em; }
+.xl.tag.measured { font: 500 15px/1.35 var(--draft); color: #ffd27a; text-align: left; }
+.xl.tag.measured b { font-weight: 600; font-size: 1.25em; color: #fff; }
+.xl.tag.measured i { font: italic 13px var(--serif); color: var(--chalk); opacity: 0.8; }
 .xl.agent {
   font: 600 17px/1 var(--draft);
   color: #fff;
@@ -809,9 +816,46 @@ body:not(.unfolded) #expo-doors { display: none; }
 .xl.route.ochre { color: #ffd27a; }
 .xl.route.cobalt { color: #8fb6ff; }
 .xl.route.olive { color: #bfe07a; }
+.xl.route.madder { color: #ff9c9c; }
+.xl.route.violet { color: #cfa8ff; }
+.xl.route.chalk { color: var(--chalk); }
+
+/* Part 3: the relations, a unit card, the rules, every unit */
+.relations td:first-child { font: 600 16px var(--draft); text-align: left; width: 6em; }
+.relations td:nth-child(2) { font-weight: 400; }
+.relations td:last-child { font-style: normal; }
+.unit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; border: 1.5px solid var(--ink); background: var(--sheet); }
+.unit > div { padding: 10px 14px 12px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.unit > div:nth-child(3n) { border-right: 0; }
+.unit > div:nth-last-child(-n + 3) { border-bottom: 0; }
+.unit dt { font: 600 15px var(--draft); color: var(--ink-2); margin-bottom: 4px; }
+.unit dd { margin: 0; line-height: 1.45; }
+@media (max-width: 760px) {
+  .unit { grid-template-columns: 1fr; }
+  .unit > div, .unit > div:nth-child(3n) { border-right: 0; border-bottom: 1px solid var(--ink); }
+  .unit > div:last-child { border-bottom: 0; }
+}
+.rules { max-width: 700px; }
+.rules li { margin: 0.35em 0; line-height: 1.5; }
+details.units { margin: 1.4em 0; max-width: 940px; }
+details.units summary { cursor: pointer; font: 600 17px var(--draft); }
+details.units .partslist { margin-top: 0.8em; }
+details.units td:first-child { font: 400 15px var(--serif); text-align: left; width: auto; }
+details.units td:nth-child(2) { font-weight: 400; }
+details.units td { font-size: 14.5px; }
+.paths-fig .paths { margin-bottom: 0.4em; }
 
 /* Part 3: the plan of the archive */
 .plot .lb.room { font: 500 17px var(--draft); fill: var(--ink); }
+/* Part 3's plans in a model's state (p3-figs.js) */
+.plot .lb.room.out { fill: var(--ink-2); opacity: 0.6; }
+.plot .lb.room.small { font-size: 14.5px; }
+.plot .lb.note.held { fill: var(--ink); font-size: 13px; }
+.plot .lb.note.col { font: 500 13px var(--draft); font-style: normal; fill: var(--ink); }
+.plot .ln.faint { opacity: 0.45; }
+.plot .ring.k { stroke: var(--ink); }
+.plot .ring.dash { stroke-dasharray: 3 3; }
+.p3 .plot .lb.room, .plot .lb.note.held { paint-order: stroke; stroke: var(--sheet); stroke-width: 4px; stroke-linejoin: round; }
 .plot a.room-door:hover .lb.room, .plot a.room-door:focus .lb.room { fill: var(--cobalt); text-decoration: underline; }
 .p3 .paths { max-width: 760px; }
 

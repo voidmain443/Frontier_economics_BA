@@ -157,10 +157,12 @@ export function signSpots(c) {
 // A route through the wheel, in wheel coordinates: from cell to cell it first
 // moves along the radius of the cell it leaves to the next ring, then along that
 // ring's arc, so that it reads as stairs and corridors. lift keeps routes apart.
-// pts is the line; stops are the places it visits.
+// pts is the line; stops are the places it visits, and at the index in pts at
+// which it reaches each.
 export function routeOf(places, lift = 0.1) {
   const pts = [];
   const stops = [];
+  const at = [];
   let last = null;
   for (const place of places) {
     const p = placeOf(place);
@@ -172,9 +174,35 @@ export function routeOf(places, lift = 0.1) {
       for (let k = 1; k <= n; k++) pts.push(polar(p.r, last.a + (da * k) / n, lift));
     } else pts.push(polar(p.r, p.a, lift));
     stops.push(polar(p.r, p.a, lift));
+    at.push(pts.length - 1);
     last = p;
   }
-  return { pts, stops };
+  return { pts, stops, at };
+}
+
+// A cell's hatching, for a model that holds it still (ontology.js): strokes
+// across its floor at 45 degrees, as a drawing hatches a section
+export function hatchOf(c, step = 0.12) {
+  const r0 = inner(c.ring) + 0.05;
+  const r1 = inner(c.ring) + RING - 0.05;
+  const a0 = c.sector * SECTOR + 0.02;
+  const rm = (r0 + r1) / 2;
+  // in (radius, arc length at the middle radius); a stroke climbs one for one
+  const L = (SECTOR - 0.04) * rm;
+  const d = r1 - r0;
+  const segs = [];
+  for (let s = -d + step / 2; s < L; s += step) {
+    const u0 = Math.max(0, -s / d);
+    const u1 = Math.min(1, (L - s) / d);
+    let prev = null;
+    for (let k = 0; k <= 6; k++) {
+      const u = u0 + ((u1 - u0) * k) / 6;
+      const q = polar(r0 + d * u, a0 + (s + d * u) / rm, 0.004);
+      if (prev) segs.push([prev, q]);
+      prev = q;
+    }
+  }
+  return segs;
 }
 
 // ---------- population ----------
@@ -224,6 +252,20 @@ export function population() {
   // cell is read (figures 3.1 and Part 2's 2.3, which stops it)
   const [A, B] = [firms.pts[0], firms.pts[66]];
   for (let k = 0; k < 3; k++) [A[k], B[k]] = [B[k], A[k]];
+  // the sizes a model may draw them at (ontology.js): alike, each at its
+  // group's mean, as a representative agent stands for all; or unlike,
+  // households too, by income (illustrative: a lognormal spread, σ = 0.6)
+  for (const x of [people, firms]) {
+    x.base = x.pts.map((p) => p[3]);
+    const mean = x.base.reduce((a, v) => a + v, 0) / x.base.length;
+    x.alike = x.base.map(() => mean);
+    x.unlike = x.base;
+  }
+  const spread = rng(19);
+  people.unlike = people.pts.map(() => {
+    const z = Math.sqrt(-2 * Math.log(1 - spread())) * Math.cos(2 * Math.PI * spread());
+    return Math.min(3.2, Math.max(0.45, 0.85 * Math.exp(0.6 * z)));
+  });
   return [
     people,
     firms,
@@ -232,6 +274,43 @@ export function population() {
     g('other countries', 'Other countries', 'chalk', 6, 9),
     g('governments', 'Governments', 'olive', 12, 1),
   ];
+}
+
+// Ties between particular agents, for a model that drops the assumption that
+// anyone trades with anyone (ontology.js, A2). Illustrative: 160 households
+// each buy from and work for two firms, picked by size; each of the 80
+// largest firms buys from two larger ones; each bank owes the next and lends
+// to three firms. adj['people>firms'] lists, for each tied agent, those it is
+// tied to; segs draws every tie.
+export function ties(groups, seed = 5) {
+  const rand = rng(seed);
+  const G = Object.fromEntries(groups.map((x) => [x.name, x]));
+  const cumF = [];
+  G.firms.weights.reduce((a, w, i) => (cumF[i] = a + w), 0);
+  const firm = () => {
+    const u = rand() * cumF[cumF.length - 1];
+    let lo = 0;
+    let hi = cumF.length - 1;
+    while (lo < hi) { const m = (lo + hi) >> 1; if (cumF[m] < u) lo = m + 1; else hi = m; }
+    return lo;
+  };
+  const adj = {};
+  const segs = [];
+  const tie = (a, i, b, j) => {
+    for (const [x, k, y, l] of [[a, i, b, j], [b, j, a, i]]) {
+      const m = (adj[`${x}>${y}`] ??= new Map());
+      if (!m.has(k)) m.set(k, []);
+      m.get(k).push(l);
+    }
+    segs.push([G[a].pts[i].slice(0, 3), G[b].pts[j].slice(0, 3)]);
+  };
+  for (let i = 0; i < 160; i++) for (let k = 0; k < 2; k++) tie('people', i, 'firms', firm());
+  for (let j = 1; j < 80; j++) for (let k = 0; k < 2; k++) tie('firms', j, 'firms', Math.floor(rand() * j));
+  for (let b = 0; b < BANKS; b++) {
+    tie('banks', b, 'banks', (b + 1) % BANKS);
+    for (let k = 0; k < 3; k++) tie('banks', b, 'firms', firm());
+  }
+  return { adj, segs };
 }
 
 // What the agents send one another, by route: from a group, through a cell, to
@@ -331,14 +410,16 @@ export const BUILD_P2 = {
   ],
 };
 
-// Part 3: the plan's story builds the wheel ring by ring, from the rim in
+// Part 3: the plan's story builds the wheel ring by ring, from the rim in to
+// the methods at the hub
 const ringCells = (...rings) => CELLS.filter((c) => rings.includes(c.ring)).map((c) => c.name);
 const viaRings = (...rings) => FLOWS.filter((f) => rings.includes(BY[f.via].ring)).map((f) => f.name);
 export const BUILD_P3 = {
   events: [
     { fid: '3.1', beat: 1, add: { cells: ringCells(3), groups: ALL.groups } },
     { fid: '3.1', beat: 2, add: { cells: ringCells(2), flows: viaRings(2) } },
-    { fid: '3.1', beat: 3, add: { cells: ringCells(0, 1), flows: viaRings(0, 1) } },
+    { fid: '3.1', beat: 3, add: { cells: ringCells(1), flows: viaRings(1) } },
+    { fid: '3.1', beat: 4, add: { cells: ringCells(0) } },
   ],
 };
 
@@ -353,6 +434,7 @@ export function circulation(groups, seed = 11) {
   // its flow
   const on = FLOWS.map(() => false);
   const hold = FLOWS.map(() => 0);
+  const still = FLOWS.map(() => false);
   // an agent is picked in proportion to its weight (a firm, to its size), and
   // never while it is out
   let out = {};
@@ -374,13 +456,28 @@ export function circulation(groups, seed = 11) {
     }
     return null;
   };
-  // a route whose receiving group is not built yet ends in its cell
-  function start(f, has, lead = false) {
+  // a route whose receiving group is not built yet ends in its cell. With
+  // ties, a parcel goes from a tied agent straight to one it is tied to.
+  let tied = null;
+  function start(f, has, lead = false, i = FLOWS.indexOf(f)) {
+    const T = tied?.[`${f.from}>${f.to}`];
+    if (T && has(f.to)) {
+      const keys = [...T.keys()];
+      const k = keys[Math.floor(rand() * keys.length)];
+      const nb = T.get(k);
+      const l = nb[Math.floor(rand() * nb.length)];
+      if (out[f.from]?.has(k) || out[f.to]?.has(l)) return;
+      const a = G[f.from].pts[k];
+      const b = G[f.to].pts[l];
+      const v = [(a[0] + b[0]) / 2, 0, (a[2] + b[2]) / 2];
+      live.push({ a, v, b, t: 0, fi: i, lead, money: f.money, lift: lead ? 0.16 : 0.05 + 0.03 * rand() });
+      return;
+    }
     const a = pick(G[f.from], f);
     const v = inCell(BY[f.via], rand, 0.15);
     const b = f.to && has(f.to) ? pick(G[f.to], f) : inCell(BY[f.via], rand, 0.1);
     if (!a || !b) return;
-    live.push({ a, v, b, t: 0, lead, money: f.money, lift: lead ? 0.16 : f.money ? 0.09 + 0.05 * rand() : 0.04 + 0.03 * rand() });
+    live.push({ a, v, b, t: 0, fi: i, lead, money: f.money, lift: lead ? 0.16 : f.money ? 0.09 + 0.05 * rand() : 0.04 + 0.03 * rand() });
   }
   // the share of a group's weight still working
   const share = (name) => {
@@ -396,12 +493,17 @@ export function circulation(groups, seed = 11) {
     // gone: { group: Set of agents that are out }, whose share of each route
     // stops with them; built(f): whether a route is built; has(group):
     // whether a group is; given(f): a route built from the start, which needs
-    // no parcel to introduce it
-    step(dt, { gone = {}, built = () => true, has = () => true, given = () => false } = {}) {
+    // no parcel to introduce it. A model (ontology.js) may hold a route still,
+    // frozen(f): its parcels stop where they are, and none set out; and it may
+    // tie agents to particular others (ties, above).
+    step(dt, { gone = {}, built = () => true, has = () => true, given = () => false, frozen = () => false, links = null } = {}) {
       out = gone;
+      tied = links;
       FLOWS.forEach((f, i) => {
         if (!built(f)) {
+          if (on[i]) for (let k = live.length - 1; k >= 0; k--) if (live[k].fi === i) live.splice(k, 1);
           on[i] = false;
+          still[i] = false;
           return;
         }
         if (!on[i]) {
@@ -411,6 +513,17 @@ export function circulation(groups, seed = 11) {
             start(f, has, true);
           }
         }
+        // a route held still shows parcels stopped on it, a few at least
+        const fz = frozen(f);
+        if (fz && !still[i]) {
+          const n = live.filter((p) => p.fi === i).length;
+          for (let k = n; k < 5; k++) {
+            start(f, has);
+            if (live[live.length - 1]?.fi === i) live[live.length - 1].t = 0.1 + 0.8 * rand();
+          }
+        }
+        still[i] = fz;
+        if (fz) return;
         if (hold[i] > 0) {
           hold[i] -= dt;
           return;
@@ -422,7 +535,7 @@ export function circulation(groups, seed = 11) {
           start(f, has);
         }
       });
-      for (const p of live) p.t += dt / TRIP;
+      for (const p of live) if (!still[p.fi]) p.t += dt / TRIP;
       for (let i = live.length - 1; i >= 0; i--) if (live[i].t >= 1) live.splice(i, 1);
     },
     // where each parcel is, and a short trail behind it that shows which way
