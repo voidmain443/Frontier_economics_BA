@@ -814,3 +814,33 @@ body:not(.unfolded) #expo-doors { display: none; }
 .plot .lb.room { font: 500 17px var(--draft); fill: var(--ink); }
 .plot a.room-door:hover .lb.room, .plot a.room-door:focus .lb.room { fill: var(--cobalt); text-decoration: underline; }
 .p3 .paths { max-width: 760px; }
+
+/* ---------- the caption of a story told in the folded space ---------- */
+
+.story {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 35;
+  width: min(600px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  padding: 14px 20px 12px;
+  background: rgba(10, 34, 60, 0.9);
+  border-top: 2px solid #ffd27a;
+  color: var(--chalk);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+body:not(.unfolded) .story { display: none; }
+.story.on { opacity: 1; }
+.story .say { margin: 0; font: 19px/1.45 var(--serif); }
+.story .say.in { animation: say-in 0.5s ease-out; }
+.story .say i { font-style: italic; }
+.story .beats { display: flex; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.story .beats li { width: 18px; height: 3px; background: rgba(220, 231, 243, 0.25); }
+.story .beats li.done { background: rgba(255, 210, 122, 0.55); }
+.story .beats li.now { background: #ffd27a; }
+@keyframes say-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .story .say.in { animation: none; } }
+@media (max-width: 640px) { .story { bottom: 16px; padding: 12px 14px 10px; } .story .say { font-size: 16px; } }

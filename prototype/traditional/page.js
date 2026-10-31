@@ -71,9 +71,12 @@ export async function setupPage({ figs, constructs, world = null, archive = null
     ].sort((a, b) => a.y - b.y);
   }
   let last = '';
+  // the fold, once it has started (below)
+  let fold = null;
   function update() {
     if (!tb.sheet) return;
-    const line = scrollY + innerHeight * 0.55;
+    // while folded, a story can hold the reading line still as the page scrolls
+    const line = fold?.focus != null ? fold.focus + innerHeight * 0.05 : scrollY + innerHeight * 0.55;
     let stage = null;
     let nf = 0;
     let ne = 0;
@@ -107,7 +110,6 @@ export async function setupPage({ figs, constructs, world = null, archive = null
   // the one 3D mode: fold the whole page
   const btn = $('#unfold');
   const status = $('#tb-status');
-  let fold = null;
   const setLabel = (on) => {
     btn.textContent = on ? 'Lay the page flat' : 'Fold the page into space';
     btn.setAttribute('aria-pressed', String(on));

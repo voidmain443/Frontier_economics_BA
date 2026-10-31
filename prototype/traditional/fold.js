@@ -34,6 +34,10 @@ export const COL = {
   ochre: [1.0, 0.82, 0.42],
   chalk: [0.86, 0.91, 0.96],
   white: [1, 1, 1],
+  // printing inks, for agents seen against the paper
+  cobaltInk: [0.16, 0.33, 0.63],
+  madderInk: [0.69, 0.23, 0.23],
+  ochreInk: [0.72, 0.48, 0.08],
 };
 const PAPER_RGB = [0.933, 0.949, 0.918];
 // the sheet's thickness, world units
@@ -55,6 +59,11 @@ const FALL = 0.5;
 const PLASTER = [0.95, 0.945, 0.92, 1];
 const SHADE = [0.7, 0.73, 0.72, 1];
 const MATTE = [0.04, 1, 0, 0];
+// a figure with a story holds the reading line while the reader scrolls
+// through its beats, BEAT px of scroll a beat; a beat's change plays in time,
+// over its dur seconds (0.9 by default), so a fast scroll still shows it
+const BEAT = 420;
+const BEAT_DUR = 0.9;
 
 const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -105,6 +114,12 @@ function readingTimes(sheet) {
   return marks;
 }
 
+// A construct may tell a story (docs/engine.md): X.story is a list of beats,
+// { say, cam: { az, el, zoom, at }, dur }, and any of its items may carry
+// show: [from, to] (the beats it stands in) or draw: beat (a line drawn on as
+// that beat begins). The reading line stops at the figure for the length of
+// its story, the camera moves to each beat's view and a caption says it.
+//
 // archive (Part 3): { figure, end, routes: [{ name, places, c }] }. From that
 // figure to the end element the view steps back to the whole building, which
 // stands beside the page, with the routes drawn through it; its rooms' names
@@ -129,7 +144,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     doorsRoot.setAttribute('aria-label', 'Rooms of the archive');
     document.body.appendChild(doorsRoot);
   }
-  const st = { t: 0, target: 0, captured: false, busy: false, running: false, tiles: [], scene: null, sheetBox: null, last: 0, time: 0, mouse: [0, 0], orbit: [0, 0], drag: null, returning: false };
+  const st = { t: 0, target: 0, captured: false, busy: false, running: false, tiles: [], scene: null, sheetBox: null, last: 0, time: 0, mouse: [0, 0], orbit: [0, 0], drag: null, returning: false, focus: null, spacer: null };
+
+  // the caption of the story being told, and a dot for each of its beats
+  const caption = document.createElement('aside');
+  caption.className = 'story';
+  caption.setAttribute('aria-live', 'polite');
+  caption.innerHTML = '<p class="say"></p><ol class="beats" aria-hidden="true"></ol>';
+  document.body.appendChild(caption);
 
   // ---- capture: the sheet, cloned into the canvas and copied in tiles ----
   let pending = null;
@@ -213,7 +235,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   function rebuildFigure(fig) {
     const sc = st.scene;
     const fid = fig.dataset.fold ?? fig.dataset.fig;
-    const keep = { callout: sc.callouts.find((c) => c.fid === fid), crowd: sc.crowds.find((c) => c.fid === fid) };
+    const keep = { callout: sc.callouts.find((c) => c.fid === fid), crowd: sc.crowds.find((c) => c.fid === fid), story: sc.stories.find((c) => c.fid === fid) };
     for (const it of sc.objs) if (it.fid === fid) it.o.destroy();
     for (const L of sc.labels) if (L.fid === fid) L.el.remove();
     sc.objs = sc.objs.filter((it) => it.fid !== fid);
@@ -221,6 +243,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     sc.agents = sc.agents.filter((a) => a.fid !== fid);
     sc.crowds = sc.crowds.filter((c) => c.fid !== fid);
     sc.engines = sc.engines.filter((e) => e.fid !== fid);
+    sc.stories = sc.stories.filter((e) => e.fid !== fid);
     buildFigure(sc, fig, keep);
   }
   const queued = new Set();
@@ -291,7 +314,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     G.freeScene();
     labelsRoot.replaceChildren();
     doorsRoot?.replaceChildren();
-    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], engines: [], world: null };
+    const sc = { objs: [], labels: [], agents: [], callouts: [], titles: [], crowds: [], engines: [], stories: [], world: null };
     const sb = st.sheetBox;
     const H = sb[3] - sb[1];
     const bOf = (s) => 1 - (s - sb[1]) / H;
@@ -448,8 +471,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const dom = typeof spec.dom === 'function' ? spec.dom(data) : spec.dom;
     const L = ([x, y, h]) => [(x - dom.x[0]) / (dom.x[1] - dom.x[0]), (y - dom.y[0]) / (dom.y[1] - dom.y[0]), h];
     const group = { center: (box[1] + box[3]) / 2 };
-    const obj = (o) => sc.objs.push({ o, group, kind: 'fig', fid: id });
-    const label = (...a) => Object.assign(sc.label(...a), { fid: id });
+    const obj = (o, it) => sc.objs.push({ o, group, kind: 'fig', fid: id, show: it?.show, draw: it?.draw });
+    const label = (it, ...a) => Object.assign(sc.label(...a), { fid: id, show: it?.show });
     let X;
     try {
       X = spec.build(data);
@@ -459,12 +482,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     }
     for (const s of X.surfaces ?? []) {
       const v = surfaceVerts(s, L, s.n ?? 46);
-      if (v.length) obj(G.mesh(v, box, COL[s.c], Math.min(0.95, (s.alpha ?? 0.3) * SURF), s.freq ?? 0));
+      if (v.length) obj(G.mesh(v, box, COL[s.c], Math.min(0.95, (s.alpha ?? 0.3) * SURF), s.freq ?? 0), s);
     }
     for (const q of X.quads ?? []) {
       const pts = q.q.map(L);
-      if (q.fill !== false) obj(G.mesh(quadVerts(pts), box, COL[q.c], Math.min(0.95, (q.alpha ?? 0.25) * SURF), 0));
-      if (q.edge !== false) obj(G.lines(pts.map((p, i) => [p, pts[(i + 1) % pts.length]]), box, COL[q.c], q.w ?? 1.2, q.o ?? 0.85));
+      if (q.fill !== false) obj(G.mesh(quadVerts(pts), box, COL[q.c], Math.min(0.95, (q.alpha ?? 0.25) * SURF), 0), q);
+      if (q.edge !== false) obj(G.lines(pts.map((p, i) => [p, pts[(i + 1) % pts.length]]), box, COL[q.c], q.w ?? 1.2, q.o ?? 0.85), q);
     }
     // batches: many quads in one mesh, many segments in one set of lines
     for (const m of X.meshes ?? []) {
@@ -472,32 +495,32 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const v = new Float32Array(parts.reduce((n, a) => n + a.length, 0));
       let off = 0;
       for (const a of parts) { v.set(a, off); off += a.length; }
-      if (v.length) obj(G.mesh(v, box, COL[m.c], Math.min(0.95, (m.alpha ?? 0.3) * SURF), 0));
+      if (v.length) obj(G.mesh(v, box, COL[m.c], Math.min(0.95, (m.alpha ?? 0.3) * SURF), 0), m);
     }
     for (const s of X.segs ?? []) {
       const segs = s.segs.map(([p, q]) => [L(p), L(q)]).filter(([p, q]) => p.every(Number.isFinite) && q.every(Number.isFinite));
-      if (segs.length) obj(G.lines(segs, box, COL[s.c ?? 'white'], s.w ?? 1.2, s.o ?? 1, Boolean(s.dash)));
+      if (segs.length) obj(G.lines(segs, box, COL[s.c ?? 'white'], s.w ?? 1.2, s.o ?? 1, Boolean(s.dash)), s);
     }
     for (const c of X.lines ?? []) {
       const pts = c.pts.map(L);
       const segs = [];
       for (let i = 1; i < pts.length; i++) if (pts[i - 1].every(Number.isFinite) && pts[i].every(Number.isFinite)) segs.push([pts[i - 1], pts[i]]);
-      if (segs.length) obj(G.lines(segs, box, COL[c.c ?? 'white'], c.w ?? 2, c.o ?? 1, Boolean(c.dash)));
+      if (segs.length) obj(G.lines(segs, box, COL[c.c ?? 'white'], c.w ?? 2, c.o ?? 1, Boolean(c.dash)), c);
     }
     const byColor = {};
-    for (const p of X.points ?? []) (byColor[p.c ?? 'white'] ??= []).push([...L(p.at), (p.size ?? 8) / 8]);
-    for (const c in byColor) obj(G.points(byColor[c], box, COL[c], 8, 1, 1));
-    for (const e of X.eqs ?? []) label(e.html, 'xeq', L(e.at), box, group);
-    for (const t of X.tags ?? []) label(t.text, `tag ${t.c ?? ''}${t.href ? ' door' : ''}`, L(t.at), box, group, t.href);
-    for (const a of X.agents ?? []) sc.agents.push({ name: a.asset, local: L(a.at), box, group, scale: a.scale ?? 0.05, ry: a.ry ?? 0, fid: id });
+    for (const p of X.points ?? []) (byColor[`${p.c ?? 'white'} ${p.show ?? ''}`] ??= { c: p.c ?? 'white', show: p.show, pts: [] }).pts.push([...L(p.at), (p.size ?? 8) / 8]);
+    for (const k in byColor) obj(G.points(byColor[k].pts, box, COL[byColor[k].c], 8, 1, 1), byColor[k]);
+    for (const e of X.eqs ?? []) label(e, e.html, 'xeq', L(e.at), box, group);
+    for (const t of X.tags ?? []) label(t, t.text, `tag ${t.c ?? ''}${t.href ? ' door' : ''}`, L(t.at), box, group, t.href);
+    for (const a of X.agents ?? []) sc.agents.push({ name: a.asset, local: L(a.at), box, group, scale: a.scale ?? 0.05, ry: a.ry ?? 0, fid: id, show: a.show });
     // a dimension line along the raised axis, its name and range at the top end
     for (const dm of X.dims ?? []) {
       const p = L(dm.from);
       const q = L(dm.to);
       const t = 0.012;
       const segs = [[p, q], [[p[0] - t, p[1], p[2]], [p[0] + t, p[1], p[2]]], [[q[0] - t, q[1], q[2]], [q[0] + t, q[1], q[2]]]];
-      obj(G.lines(segs, box, COL.chalk, 1.3, 0.95));
-      label(dm.text, 'dim', [q[0] + 0.02, q[1], q[2]], box, group);
+      obj(G.lines(segs, box, COL.chalk, 1.3, 0.95), dm);
+      label(dm, dm.text, 'dim', [q[0] + 0.02, q[1], q[2]], box, group);
     }
     // an engine: agents whose state the construct steps each frame
     // (docs/engine.md); its dots and segments are redrawn every frame
@@ -506,6 +529,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const dots = E.dots.map((d) => { const o = G.points([], box, COL[d.c], d.size ?? 4, d.o ?? 1, d.glow ?? 0, d.max); obj(o); return o; });
       const segs = (E.segs ?? []).map((d) => { const o = G.lines([], box, COL[d.c], d.w ?? 1, d.o ?? 1, false, 1, d.max); obj(o); return o; });
       sc.engines.push({ fid: id, group, E, dots, segs, L });
+    }
+    // a story: the view of each beat, each beat inheriting what it leaves out
+    if (X.story?.length) {
+      let cam = { az: 0, el: 0, zoom: 1, at: null };
+      const cams = X.story.map((b) => (cam = { ...cam, ...(b.cam ?? {}) }));
+      const was = keep?.story;
+      sc.stories.push({ fid: id, group, box, L, beats: X.story, cams, c: group.center, len: X.story.length * BEAT, shown: was?.shown ?? 0, target: was?.target ?? 0 });
+      sc.stories.sort((a, b) => a.c - b.c);
     }
     // the margin callout: the figure's number and what it holds fixed, and the
     // figure's controls, so that it can be changed while the page is folded
@@ -562,6 +593,40 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     return { id, group };
   }
 
+  // ---- stories ----
+  // The reading line for a scroll position: inside a story's stretch of scroll
+  // it stays at the figure, and p counts the beats scrolled through.
+  function mapScroll(sc, r) {
+    let off = 0;
+    for (const S of sc?.stories ?? []) {
+      if (r < S.c + off) break;
+      if (r < S.c + off + S.len) return { focus: S.c, story: S, p: (r - S.c - off) / BEAT };
+      off += S.len;
+    }
+    return { focus: r - off, story: null, p: 0 };
+  }
+  // the folded scroll position's reading line for a flat one
+  function unmapScroll(sc, focus) {
+    let off = 0;
+    for (const S of sc?.stories ?? []) if (S.c < focus) off += S.len;
+    return focus + off;
+  }
+  // a beat item's visibility: it comes in as beat show[0] begins and goes as
+  // beat show[1] begins
+  const vis = (show, b) => (!show ? 1 : clamp(b - (show[0] - 1), 0, 1) * (show[1] == null ? 1 : 1 - clamp(b - (show[1] - 1), 0, 1)));
+  // the view a story asks for between its two nearest beats
+  function storyView(S, P, hs) {
+    const n = S.cams.length;
+    const i = clamp(Math.floor(S.shown), 0, n - 1);
+    const f = ease(clamp(S.shown - i, 0, 1));
+    const a = S.cams[i];
+    const b = S.cams[Math.min(i + 1, n - 1)];
+    const at = (c) => (c.at ? toWorld(S.L(c.at), S.box, P, hs) : [CAM.tx, CAM.ty, CAM.tz]);
+    const pa = at(a);
+    const pb = at(b);
+    return { az: lerp(a.az, b.az, f), el: lerp(a.el, b.el, f), zoom: lerp(a.zoom, b.zoom, f), at: pa.map((v, k) => lerp(v, pb[k], f)) };
+  }
+
   // ---- frame ----
   function frame(now) {
     const dt = clamp((now - st.last) / 1000, 0, 0.05);
@@ -575,6 +640,14 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (!st.orbit[0] && !st.orbit[1]) st.returning = false;
     }
     if (st.t === 0 && st.target === 0) {
+      // back to the flat page, at the same reading line
+      if (st.spacer?.isConnected) {
+        const f = mapScroll(st.scene, scrollY + innerHeight / 2).focus;
+        st.spacer.remove();
+        scrollTo({ top: f - innerHeight / 2, behavior: 'instant' });
+      }
+      st.focus = null;
+      caption.classList.remove('on');
       st.running = false;
       document.body.classList.remove('unfolded');
       clear();
@@ -585,8 +658,41 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const H = innerHeight;
     const dpr = Math.min(devicePixelRatio || 1, 2);
     G.resize(canvas, Math.round(W * dpr), Math.round(H * dpr));
-    const P = { focus: scrollY + H / 2, docW: W, t: e };
     const sc = st.scene;
+    // the reading line, less the scroll that stories have held it for
+    const M = mapScroll(sc, scrollY + H / 2);
+    st.focus = M.focus;
+    const P = { focus: M.focus, docW: W, t: e };
+    const appear = smooth(0.6, 1, e);
+    const near = (g) => (g.center == null ? 1 : 1 - smooth(2600, 5200, Math.abs(g.center - P.focus)));
+    // a figure's axis rises as it comes up to the reading line and settles back
+    // into the paper once it has been read, so one construct stands at a time
+    const grow = (g) => (g.center == null ? 1 : smooth(g.center - 1150, g.center - 250, P.focus) * (1 - smooth(g.center + 450, g.center + 1250, P.focus)));
+
+    // each story moves toward the beat the scroll asks for, one beat at a time;
+    // the one nearest the reading line takes the camera and the caption
+    let SC = null;
+    let sw = 0;
+    for (const S of sc.stories) {
+      const n = S.beats.length;
+      S.target = S === M.story ? clamp(Math.floor(M.p), 0, n - 1) : M.focus >= S.c ? n - 1 : 0;
+      if (grow(S.group) < 0.02 || REDUCED) S.shown = S.target;
+      const dir = Math.sign(S.target - S.shown);
+      if (dir) {
+        const j = dir > 0 ? Math.floor(S.shown + 1e-6) + 1 : Math.ceil(S.shown - 1e-6);
+        S.shown += (dir * dt) / ((S.beats[j]?.dur ?? BEAT_DUR) * (dir > 0 ? 1 : 0.5));
+        if ((S.target - S.shown) * dir < 0) S.shown = S.target;
+      }
+      const d = M.focus - S.c;
+      const k = d < 0 ? smooth(-700, 0, d) : 1 - smooth(0, 700, d);
+      if (k > sw) {
+        sw = k;
+        SC = S;
+      }
+    }
+    const beatOf = new Map(sc.stories.map((S) => [S.fid, S.shown]));
+    const SV = SC ? storyView(SC, P, ease(grow(SC.group)) * LIFT) : null;
+    sw *= e;
     // where the building stands; a long move between rooms steps the camera back.
     // With reduced motion the building does not move: it fades out and back in
     // at the next room.
@@ -605,24 +711,20 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const T = CAM;
     const fov = (lerp(0.5, T.fov, e) * Math.PI) / 180;
     const hO = lerp(H * 0.5 * PX, T.h, e);
-    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + 0.2 * climax) * e, 0, 1.35);
-    const az = (st.mouse[0] * 0.1 + st.orbit[0] - 0.5 * climax) * e;
+    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + 0.2 * climax) * e + (SV ? sw * SV.el : 0), 0, 1.35);
+    const az = (st.mouse[0] * 0.1 + st.orbit[0] - 0.5 * climax) * e + (SV ? sw * SV.az : 0);
     const near0 = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
     // the whole view looks between the page and the building's middle, so that
     // the plan on the page and the building it describes are seen together
     const whole = O ? [O[0] + 1.7 * RW, O[1] + 1.2 * FH, O[2] + 1.3] : near0;
-    const target = near0.map((v, k) => lerp(v, whole[k], climax * e));
+    let target = near0.map((v, k) => lerp(v, whole[k], climax * e));
+    if (SV) target = target.map((v, k) => lerp(v, SV.at[k], sw));
     // a turned view also steps back, so the room and its neighbours come into sight
     const turned = Math.min(1, Math.hypot(st.orbit[0] / ORBIT.az, st.orbit[1] / ORBIT.hi));
-    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + 5.6 * climax * e);
+    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + 5.6 * climax * e) * (SV ? lerp(1, SV.zoom, sw) : 1);
     const eye = [target[0] + dist * Math.sin(az) * Math.cos(el), target[1] + dist * Math.sin(el), target[2] + dist * Math.cos(az) * Math.cos(el)];
     const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 6), dist + 40), lookAt(eye, target, [0, 1, 0])));
 
-    const appear = smooth(0.6, 1, e);
-    const near = (g) => (g.center == null ? 1 : 1 - smooth(2600, 5200, Math.abs(g.center - P.focus)));
-    // a figure's axis rises as it comes up to the reading line and settles back
-    // into the paper once it has been read, so one construct stands at a time
-    const grow = (g) => (g.center == null ? 1 : smooth(g.center - 1150, g.center - 250, P.focus) * (1 - smooth(g.center + 450, g.center + 1250, P.focus)));
     for (const it of sc.objs) {
       let o = 1;
       if (it.kind === 'grid' || it.kind === 'edge') o = smooth(0.15, 0.9, e);
@@ -630,6 +732,15 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const r = grow(it.group);
         o = appear * near(it.group) * Math.min(1, r * 1.6);
         it.o.hs = ease(r) * LIFT;
+        if (it.show || it.draw != null) {
+          const b = beatOf.get(it.fid) ?? 1e9;
+          o *= vis(it.show, b);
+          // a line drawn on from its start as its beat begins
+          if (it.draw != null) {
+            it.o.total ??= it.o.count;
+            it.o.count = Math.ceil(it.o.total * ease(clamp(b - (it.draw - 1), 0, 1)));
+          }
+        }
       }
       it.o.opacity = o * it.o.baseOpacity;
     }
@@ -639,7 +750,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     if (appear > 0.02) {
       for (const a of sc.agents) {
         if (Math.abs(a.group.center - P.focus) > 2400) continue;
-        const gr = ease(grow(a.group)) * appear;
+        const gr = ease(grow(a.group)) * appear * vis(a.show, beatOf.get(a.fid) ?? 1e9);
         const x = lerp(a.box[0], a.box[2], a.local[0]);
         const s = lerp(a.box[3], a.box[1], a.local[1]);
         const bw = (a.box[2] - a.box[0]) * PX;
@@ -649,7 +760,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // engines run while their figure stands
     for (const N of sc.engines) {
       const r = grow(N.group) * appear;
-      const out = N.E.step(dt, { grow: r, reduced: REDUCED });
+      const out = N.E.step(dt, { grow: r, reduced: REDUCED, beat: beatOf.get(N.fid) });
       if (!out) continue;
       const map = (p) => { const q = N.L(p); return [q[0], q[1], q[2], p[3] ?? 1]; };
       out.dots?.forEach((pts, k) => N.dots[k]?.set(pts.map(map)));
@@ -807,7 +918,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     for (const L of sc.labels) {
       const r = L.chapter || L.ruler ? 1 : grow(L.group);
       const pr = project(vp, toWorld(L.local, L.box, P, ease(r) * LIFT), W, H);
-      const o = appear * near(L.group) * (L.chapter || L.ruler ? 1 : smooth(0.55, 1, r));
+      const o = appear * near(L.group) * (L.chapter || L.ruler ? 1 : smooth(0.55, 1, r)) * vis(L.show, beatOf.get(L.fid) ?? 1e9);
       if (!pr || o < 0.02 || pr[0] < -300 || pr[0] > W + 300 || pr[1] < -100 || pr[1] > H + 100) {
         L.el.style.opacity = '0';
         if (L.link) L.el.style.pointerEvents = 'none';
@@ -818,6 +929,23 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (L.link) L.el.style.pointerEvents = o > 0.5 ? 'auto' : 'none';
       const shift = L.chapter || L.ruler ? '-100%, -50%' : '0, -100%';
       L.el.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) scale(${sz.toFixed(3)}) translate(${shift})`;
+    }
+
+    // the caption says the beat the reader has scrolled to
+    const told = SC && sw > 0.6 && appear > 0.5;
+    caption.classList.toggle('on', Boolean(told));
+    if (told && caption.dataset.key !== `${SC.fid}:${SC.target}`) {
+      caption.dataset.key = `${SC.fid}:${SC.target}`;
+      const say = caption.querySelector('.say');
+      say.innerHTML = SC.beats[SC.target].say;
+      say.classList.remove('in');
+      void say.offsetWidth;
+      say.classList.add('in');
+      caption.querySelector('.beats').replaceChildren(...SC.beats.map((_, i) => {
+        const li = document.createElement('li');
+        if (i <= SC.target) li.className = i === SC.target ? 'now' : 'done';
+        return li;
+      }));
     }
     requestAnimationFrame(frame);
   }
@@ -881,6 +1009,16 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         st.scene = buildScene();
       }
       await loadAgents();
+      // the scroll the stories hold the reading line for is added below the
+      // page, and the scroll position moves so that the reading line stays put
+      const total = st.scene.stories.reduce((n, S) => n + S.len, 0);
+      if (total) {
+        const r = scrollY + innerHeight / 2;
+        st.spacer ??= Object.assign(document.createElement('div'), { className: 'story-spacer' });
+        st.spacer.style.height = `${total}px`;
+        document.body.appendChild(st.spacer);
+        scrollTo({ top: unmapScroll(st.scene, r) - innerHeight / 2, behavior: 'instant' });
+      }
       st.target = 1;
       document.body.classList.add('unfolded');
       onChange?.(true);
@@ -912,6 +1050,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       else st.captured = false;
     },
     get open() { return st.target === 1; },
+    // the reading line on the page while folded, which stories hold still
+    get focus() { return st.focus; },
     get busy() { return st.busy; },
   };
 }
