@@ -13,6 +13,7 @@
 |---|---|
 | [docs/vision.md](docs/vision.md) | 무엇을, 왜: 서사, 커리큘럼 3층 구조, 챕터 틀, 쇼케이스 2개 |
 | [docs/ontology.md](docs/ontology.md) | 개념 그래프 스키마와 렌즈 |
+| [docs/part3-ontology.md](docs/part3-ontology.md) | 3부의 온톨로지: 모형은 바퀴의 상태(움직임, 멈춤, 빠짐), 가정 여덟, 관계 다섯, 교재의 짜임 (검토 중) |
 | [docs/architecture.md](docs/architecture.md) | 기술 스택과 WebGPU 엔진 설계 |
 | [docs/roadmap.md](docs/roadmap.md) | 단계별 마일스톤과 완료 조건 |
 | [docs/redesign.md](docs/redesign.md) | 재설계 기준(2026-10-30): 한 번의 접힘, 숨은 차원, 1부 8단계 |
