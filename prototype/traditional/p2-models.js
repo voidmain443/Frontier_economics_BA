@@ -174,7 +174,7 @@ export function beauty(mix) {
   return { total, avg, target: (2 / 3) * avg };
 }
 
-// ---------- 2.7 contagion between banks (after Acemoglu, Ozdaglar and Tahbaz-Salehi 2015) ----------
+// ---------- 2.9 contagion between banks (after Acemoglu, Ozdaglar and Tahbaz-Salehi 2015) ----------
 
 // bank 0 loses `shock`; a failed bank passes its loss beyond its buffer equally to the banks it owes.
 // Rounds are simultaneous, so each bank's round of failure is well defined.
@@ -196,7 +196,7 @@ export function contagion(shock, complete, n = 10, buffer = 1) {
   return round;
 }
 
-// ---------- 2.2 unlike households (KOSIS, data/korea-households.json) ----------
+// ---------- 2.4 unlike households (KOSIS, data/korea-households.json) ----------
 
 // the five fifths and all households: disposable income and consumption
 // spending a month per household, in million won; shares of the total
@@ -213,7 +213,7 @@ export function fifths(doc) {
   return { rows, all: { ...all, apc: all.c / all.y }, year: doc.year };
 }
 
-// ---------- 2.6 connected firms (Bank of Korea, data/korea-io.json) ----------
+// ---------- 2.8 connected firms (Bank of Korea, data/korea-io.json) ----------
 
 export const SECTOR_NAMES = {
   A: 'farming and fishing', B: 'mining', C01: 'food', C02: 'textiles', C03: 'wood and paper', C04: 'petroleum',
@@ -257,3 +257,43 @@ export function rounds(m, j) {
     return { i, r0, r1: r1[i], r2: r2[i], rest: Math.max(0, row[j] - r0 - r1[i] - r2[i]), total: row[j] };
   });
 }
+
+// ---------- 2.10 prices that never settle (Scarf 1960) ----------
+
+// Three people each own one unit of one good. In Scarf's economy person i
+// wants goods i and i + 1 in fixed proportion, so spends income p_i on equal
+// amounts of both; with one representative consumer (Cobb–Douglas, equal
+// shares) the same endowments give demand Σp / 3p_j for each good. Prices
+// adjust in proportion to excess demand, dp/dt = z(p) (tâtonnement), which
+// keeps Σp² fixed; Scarf's path also keeps p₁p₂p₃ fixed, so it is a closed
+// loop around the equilibrium (1, 1, 1)/√3·r, and never reaches it.
+export function excessScarf(p) {
+  return p.map((pj, j) => pj / (pj + p[(j + 1) % 3]) + p[(j + 2) % 3] / (p[(j + 2) % 3] + pj) - 1);
+}
+export function excessOne(p) {
+  const s = p[0] + p[1] + p[2];
+  return p.map((pj) => s / (3 * pj) - 1);
+}
+// the path from p0 for time T, every dt, with fourth-order Runge–Kutta
+export function tatonnement(z, p0, T, dt = 0.02) {
+  const out = [{ t: 0, p: p0 }];
+  let p = p0;
+  const add = (a, b, h) => a.map((v, i) => v + h * b[i]);
+  for (let t = dt; t <= T + 1e-9; t += dt) {
+    const k1 = z(p);
+    const k2 = z(add(p, k1, dt / 2));
+    const k3 = z(add(p, k2, dt / 2));
+    const k4 = z(add(p, k3, dt));
+    p = p.map((v, i) => v + (dt / 6) * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]));
+    out.push({ t, p });
+  }
+  return out;
+}
+// relative prices on the triangle: each corner is one good at its dearest
+export const SIMPLEX = { h: Math.sqrt(3) / 2 };
+export function onSimplex(p) {
+  const s = p[0] + p[1] + p[2];
+  const q = p.map((v) => v / s);
+  return [q[1] + q[2] / 2, q[2] * SIMPLEX.h];
+}
+export const SCARF_P0 = [0.9, 0.35, 0.3];

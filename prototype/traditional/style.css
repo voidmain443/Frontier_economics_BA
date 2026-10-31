@@ -859,6 +859,18 @@ details.units td:first-child { font: 400 15px var(--serif); text-align: left; wi
 details.units td:nth-child(2) { font-weight: 400; }
 details.units td { font-size: 14.5px; }
 .paths-fig .paths { margin-bottom: 0.4em; }
+
+/* Part 2: the methods a model needs, the old arguments, the five tasks */
+.methods td:first-child, .debates td:nth-child(3) { font: 400 16px/1.4 var(--serif); text-align: left; width: auto; }
+.methods td:nth-child(2) { font-weight: 400; }
+.methods td:nth-child(3) { font: 500 15px var(--draft); white-space: nowrap; }
+.methods td:last-child { font-style: normal; white-space: nowrap; }
+.debates td:first-child { width: 5.5em; }
+.debates td:nth-child(2) { font-weight: 600; width: 11em; }
+.tasks { max-width: 760px; margin: 0; padding: 16px 20px 16px 2.4em; border: 1.5px solid var(--ink); background: var(--sheet); }
+.tasks li { margin: 0.45em 0; line-height: 1.5; }
+.tasks li::marker { font: 600 18px var(--draft); }
+.tasks b { font: 600 17px var(--draft); margin-right: 0.3em; }
 /* dense figures (plans and tables of the wheel) keep a legible width on a
    narrow screen and scroll sideways instead */
 @media (max-width: 760px) {

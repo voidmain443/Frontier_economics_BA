@@ -16,8 +16,9 @@ const page = await setupPage({
   // the wheel Part 1 built, and the two cells it left empty
   build: BUILD_P2,
   data: { state },
-  // Korean households by fifths of income (2.2); Korea's input-output table (2.6)
-  files: ['korea-households', 'korea-io'],
+  // Korea's 2022 prices and rates (2.1), households by fifths of income (2.4),
+  // and its input-output table (2.8)
+  files: ['korea-households', 'korea-io', 'rates-2022'],
   stages: 8,
   unit: 'Section',
   part: 'Part 2',
@@ -28,21 +29,21 @@ const $ = (s) => document.querySelector(s);
 $('#ctl-p').addEventListener('input', (ev) => {
   state.p = Number(ev.target.value);
   $('#out-p').textContent = state.p.toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
-  page.redraw('2.4');
+  page.redraw('2.6');
 });
 for (const input of document.querySelectorAll('[data-mix]')) {
   input.addEventListener('input', () => {
     state.mix[Number(input.dataset.mix)] = Number(input.value);
-    page.redraw('2.3');
+    page.redraw('2.5');
   });
 }
 $('#ctl-shock').addEventListener('input', (ev) => {
   state.shock = Number(ev.target.value);
   $('#out-shock').textContent = String(state.shock);
-  page.redraw('2.7');
+  page.redraw('2.9');
 });
 $('#ctl-sector').addEventListener('input', (ev) => {
   state.sector = Number(ev.target.value);
   $('#out-sector').textContent = SECTOR_NAMES[page.data['korea-io']?.sectors[state.sector]?.code] ?? '';
-  page.redraw('2.6');
+  page.redraw('2.8');
 });

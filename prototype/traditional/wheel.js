@@ -34,9 +34,13 @@ export const PLACE_P1 = {
   '8.6': 'Land and air', '8.7': ['Labor', 'Regulation'], '8.8': 'Regulation', '8.9': 'Households', '8.10': 'Property', '8.11': 'History',
 };
 
-// Part 2: each section opens in the cell of the Part 1 figure it starts from;
-// the chains of 2.5, which start from 2.4, are read in Networks.
-export const PLACE_P2 = { '2.1': 'Firms', '2.2': 'Households', '2.3': 'Strategy', '2.4': 'Goods', '2.5': 'Networks', '2.6': 'Firms', '2.7': 'Banks' };
+// Part 2: each figure is read in the cell of the Part 1 figure it starts from;
+// the chains of 2.7, which start from 2.6, are read in Networks, the
+// timeline and the old arguments in History, the five tasks in Computation.
+export const PLACE_P2 = {
+  '2.1': 'Goods', '2.2': 'History', '2.3': 'Firms', '2.4': 'Households', '2.5': 'Strategy', '2.6': 'Goods',
+  '2.7': 'Networks', '2.8': 'Firms', '2.9': 'Banks', '2.10': 'Equilibrium', '2.11': 'History', '2.12': 'Computation',
+};
 
 const inner = (ring) => HUB + ring * RING;
 const mid = (c) => inner(c.ring) + RING / 2;
@@ -61,12 +65,12 @@ export function placeOf(place) {
 
 // The place a link on the site points to: a Part 1 figure or field course
 // (classical.html#f6-1, #c8-10), a Part 1 stage (#s5: its first figure), or a
-// Part 2 section (beyond.html#b1).
+// Part 2 figure (beyond.html#f2-3).
 export function placeOfLink(href) {
   const m = href.match(/(classical|beyond)\.html#([a-z])(\d+)-?(\d+)?/);
   if (!m) return null;
   const [, page, kind, a, b] = m;
-  if (page === 'beyond') return PLACE_P2[`2.${a}`] ?? null;
+  if (page === 'beyond') return kind === 'f' ? PLACE_P2[`${a}.${b}`] ?? null : null;
   if (kind === 'f' || kind === 'c') return PLACE_P1[`${a}.${b}`] ?? null;
   if (kind === 's') return PLACE_P1[`${a}.1`] ?? null;
   return null;
@@ -410,24 +414,36 @@ export const BUILD_P1 = {
 // The whole wheel, built from the start (a course page)
 export const BUILD_ALL = { base: ALL };
 
-// Part 2 starts from the wheel Part 1 built; it adds the two cells left empty.
-// Its two halves each open with a story: the agents unlike one another
-// (section 1) and connected to particular others (section 4).
+// Part 2 starts from the wheel Part 1 built and turns it, section by section,
+// into the wheel of an economy of unlike, connected agents. Its stories at
+// headings build the two cells Part 1 left empty: networks as the agents are
+// tied (section 4), computation as the mathematics grows (section 5). Its
+// looks keep what each section changes: households unlike from Figure 2.4,
+// and households, firms and banks tied in turn from Figures 2.6, 2.8 and 2.9.
 export const BUILD_P2 = {
   base: { ...ALL, cells: ALL.cells.filter((n) => n !== 'Networks' && n !== 'Computation') },
   stories: [
     { at: '#b1 h2', beats: [
-      { say: 'This is the wheel Part 1 built. In it every household of a kind is alike, one firm stands for all, and nobody is tied to anybody in particular.' },
-      { say: 'The first half of this part undoes the first of these. One firm does not stand for all firms, one household for all households, or one way of reasoning for every player.', cam: { el: 0.12 } },
+      { say: 'This is the wheel Part 1 built. In it every agent of a kind is alike, and nobody is tied to anybody in particular.' },
+      { say: 'This part asks why that wheel is no longer enough, and changes it one section at a time. What changes stays changed.', cam: { el: 0.12 } },
+    ] },
+    { at: '#b3 h2', beats: [
+      { say: 'Unlike: one firm does not stand for all firms, one household for all households, or one way of reasoning for every player.' },
     ] },
     { at: '#b4 h2', beats: [
-      { say: 'The second half undoes the other: who can reach whom.' },
+      { say: 'Connected: who can reach whom.' },
       { say: 'Part 1 had no cell for it. Networks joins the rules.', add: { cells: ['Networks'] } },
     ] },
-    { at: '#b8 h2', beats: [
-      { say: 'The projects that rebuild the textbook.' },
-      { say: 'Several make the models run as code: computation, the last cell, at the hub.', add: { cells: ['Computation'] } },
+    { at: '#b5 h2', beats: [
+      { say: 'Unlike and connected agents are harder to solve.' },
+      { say: 'The last cell joins the methods at the hub: computation.', add: { cells: ['Computation'] } },
     ] },
+  ],
+  looks: [
+    { at: '#f2-4', state: { unlike: true } },
+    { at: '#f2-6', state: { unlike: true, tied: ['households'] } },
+    { at: '#f2-8', state: { unlike: true, tied: ['households', 'firms'] } },
+    { at: '#f2-9', state: { unlike: true, tied: true } },
   ],
 };
 

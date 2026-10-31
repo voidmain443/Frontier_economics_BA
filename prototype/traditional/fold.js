@@ -455,6 +455,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       sc.stories.sort((a, b) => a.c - b.c);
       sc.built = when;
     }
+    // how the wheel's agents look from a place on the page on (build.looks:
+    // [{ at, state }]): a part can make them unlike, or tie them, for good
+    sc.looks = (build?.looks ?? []).map((L) => {
+      const r = sheet.querySelector(L.at)?.getBoundingClientRect();
+      return r ? { y: r.top + scrollY, state: L.state } : null;
+    }).filter(Boolean).sort((a, b) => a.y - b.y);
 
     // the world: the wheel's rings and cells with their signs, the people on
     // its rim, and the parcels that circulate between them
@@ -811,7 +817,10 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         MS = N;
       }
     }
-    const state = MS ? MS.fn(Math.round(beatOf.get(MS.fid) ?? 1e9)) : null;
+    // (over the look the page has reached, if it has one)
+    const look = sc.looks.filter((L) => L.y <= P.focus).at(-1)?.state ?? null;
+    const own = MS ? MS.fn(Math.round(beatOf.get(MS.fid) ?? 1e9)) : null;
+    const state = look || own ? { ...look, ...own } : null;
     // (a state without moving cells changes only how the agents are drawn)
     const modeOf = (n) => (!state?.moving || state.moving.has(n) ? 'm' : state.stopped?.has(n) ? 's' : 'o');
     const SV = SC ? storyView(SC, P, ease(grow(SC.group)) * LIFT) : null;
@@ -1104,7 +1113,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         T.box = box;
         T.total ??= T.count;
         T.count = Math.ceil(T.total * LK[kind]);
-        T.opacity = shown * 0.3 * Math.min(1, LK[kind] * 2);
+        T.opacity = shown * 0.22 * Math.min(1, LK[kind] * 2);
         under.push(T);
       }
       // a cell's sign shows while it is read, and every sign once the whole
