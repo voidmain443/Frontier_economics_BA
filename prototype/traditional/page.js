@@ -153,6 +153,8 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
     }
   }
 
+  if (fold && new URLSearchParams(location.search).has('perf')) probe(fold);
+
   return {
     data,
     // redraw one figure after its controls change; while folded the fold shows
@@ -163,4 +165,56 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
       fold?.refresh(id);
     },
   };
+}
+
+// ?perf: frame times while the page is folded, shown in the title block, for
+// the check on the base machine (docs/phase4-test.md). ?perf=walk also scrolls
+// the folded page from top to bottom by itself, at &speed= px a second (420,
+// one story beat a second, by default), so that every machine is measured on
+// the same path. window.__perf holds the numbers.
+function probe(fold) {
+  const q = new URLSearchParams(location.search);
+  const walk = q.get('perf') === 'walk';
+  const speed = Number(q.get('speed')) || 420;
+  const out = document.createElement('p');
+  out.className = 'tb-perf';
+  out.setAttribute('aria-hidden', 'true');
+  document.querySelector('.titleblock')?.appendChild(out);
+  const times = [];
+  const stat = () => {
+    const t = [...times].sort((a, b) => a - b);
+    const at = (f) => t[Math.min(t.length - 1, Math.floor(f * t.length))] ?? 0;
+    return { frames: t.length, median: at(0.5), p95: at(0.95), p99: at(0.99), slowest: t.at(-1) ?? 0 };
+  };
+  let gpu = '';
+  navigator.gpu?.requestAdapter({ powerPreference: 'high-performance' }).then((a) => {
+    const i = a?.info;
+    gpu = i ? [i.vendor, i.architecture, i.description].filter(Boolean).join(' ') : '';
+  });
+  window.__perf = { times, stat, get gpu() { return gpu; } };
+  let last = 0;
+  let shown = 0;
+  let done = false;
+  let walked = 0;
+  const tick = (now) => {
+    if (fold.open && last) {
+      const dt = now - last;
+      if (dt < 1000) times.push(dt);
+      if (walk && !done) {
+        walked += (speed * Math.min(dt, 100)) / 1000;
+        const end = document.documentElement.scrollHeight - innerHeight;
+        scrollTo({ top: Math.min(end, walked), behavior: 'instant' });
+        if (walked >= end) done = true;
+      }
+    }
+    last = now;
+    if (now - shown > 1000 && times.length) {
+      shown = now;
+      const S = stat();
+      out.textContent = `${walk ? (done ? 'Walk done. ' : 'Walking. ') : ''}Frames ${S.frames}: median ${S.median.toFixed(1)} ms, 95% ${S.p95.toFixed(1)}, 99% ${S.p99.toFixed(1)}, slowest ${S.slowest.toFixed(1)}${gpu ? `. ${gpu}` : ''}`;
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  if (walk) out.textContent = 'Fold the page to start the walk.';
 }
