@@ -7,7 +7,7 @@
 import { FIGS } from './p3-figs.js';
 import { COURSES } from './curriculum.js';
 import { setupPage } from './page.js';
-import { PLACE_P1, BUILD_P3, placeOf, placeOfLink } from './wheel.js';
+import { PLACE_P1, BUILD_P3, placeOfLink, stopIndex } from './wheel.js';
 import { MODELS, MODELS_P2, RELATIONS, STAGES, stateOf, stageState, MEASURED } from './ontology.js';
 
 // the textbooks, with the question each answers
@@ -45,15 +45,8 @@ document.querySelector('#unit-table')?.appendChild(table);
 const byNumber = (a, b) => { const [x1, y1] = a.split('.').map(Number); const [x2, y2] = b.split('.').map(Number); return x1 - x2 || y1 - y2; };
 const figs = Object.keys(PLACE_P1).sort(byNumber);
 const classical = figs.map((k) => PLACE_P1[k]);
-// the stop each figure is read at (a figure in the same place as the one
-// before it shares its stop, as routeOf joins them), and the last stop of
-// each stage
-const stopOf = [];
-figs.forEach((k, i) => {
-  const p = placeOf(PLACE_P1[k]);
-  const q = i ? placeOf(PLACE_P1[figs[i - 1]]) : null;
-  stopOf.push(i === 0 ? 0 : stopOf[i - 1] + (q && Math.abs(p.r - q.r) < 1e-6 && Math.abs(p.a - q.a) < 1e-6 ? 0 : 1));
-});
+// the stop each figure is read at, and the last stop of each stage
+const stopOf = stopIndex(classical);
 const lastOfStage = (s) => stopOf[figs.findLastIndex((k) => Number(k.split('.')[0]) === s)];
 const upto = [0, ...STAGES.map((S) => lastOfStage(S.no)), stopOf.at(-1)];
 const paths = [...document.querySelectorAll('.paths section')];

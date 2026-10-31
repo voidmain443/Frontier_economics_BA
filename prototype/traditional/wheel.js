@@ -180,6 +180,18 @@ export function routeOf(places, lift = 0.1) {
   return { pts, stops, at };
 }
 
+// The stop each place of a route is read at: a place in the same spot as the
+// one before it shares its stop, as routeOf joins them.
+export function stopIndex(places) {
+  const out = [];
+  places.forEach((pl, i) => {
+    const p = placeOf(pl);
+    const q = i ? placeOf(places[i - 1]) : null;
+    out.push(i === 0 ? 0 : out[i - 1] + (Math.abs(p.r - q.r) < 1e-6 && Math.abs(wrap(p.a - q.a)) < 1e-6 ? 0 : 1));
+  });
+  return out;
+}
+
 // A cell's hatching, for a model that holds it still (ontology.js): strokes
 // across its floor at 45 degrees, as a drawing hatches a section
 export function hatchOf(c, step = 0.12) {
@@ -394,6 +406,9 @@ export const BUILD_P1 = {
     ] },
   ],
 };
+
+// The whole wheel, built from the start (a course page)
+export const BUILD_ALL = { base: ALL };
 
 // Part 2 starts from the wheel Part 1 built; it adds the two cells left empty.
 // Its two halves each open with a story: the agents unlike one another

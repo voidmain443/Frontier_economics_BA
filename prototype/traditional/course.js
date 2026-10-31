@@ -1,29 +1,15 @@
-// One textbook page per course: its question, its weeks, where it meets other
-// courses, where it appears in Parts 1 and 2, and what to read next.
+// One textbook page per course: its question, its path of units through the
+// wheel, its weeks, where it meets other courses, and what to read next. The
+// path comes from the ontology (ontology.js, COURSE_UNITS); folded, the wheel
+// lies beside the page and takes the state of each unit in turn (fold.js).
 
 import { COURSES, JUNCTIONS } from './curriculum.js';
 import { renderCurriculum } from './ladder.js';
-
-// where each course appears in Part 1 (classical.html) and Part 2 (beyond.html)
-const PLACES = {
-  principles: [['Stage 1: one market', 'classical.html#s1'], ['Figure 1.1: supply and demand, and the income it holds fixed', 'classical.html#f1-1'], ['Figure 1.2: surplus, and the trades a tax stops', 'classical.html#f1-2']],
-  math: [['Stage 2: the Lagrange condition', 'classical.html#s2'], ['Figure 2.1: the top of the hill along the fence', 'classical.html#f2-1'], ['Figure 3.1: the envelope theorem', 'classical.html#f3-1']],
-  micro: [['Stage 2: opening up the household', 'classical.html#s2'], ['Stage 3: opening up the firm', 'classical.html#s3'], ['Stage 5: all markets at once', 'classical.html#s5'], ['Figure 5.3: the market for lemons', 'classical.html#f5-3']],
-  games: [['Stage 4: a few firms', 'classical.html#s4'], ['Figure 4.2: a threat that would not be carried out', 'classical.html#f4-2'], ['Part 2: games real people play', 'beyond.html#b3']],
-  macro: [['Stage 6: time, money and government', 'classical.html#s6'], ['Figure 6.3: the Phillips curve and expectations', 'classical.html#f6-3'], ['Figure 6.4: the central bank chooses', 'classical.html#f6-4'], ['Part 2: unlike households', 'beyond.html#b2']],
-  metrics: [['Stage 7: measurement', 'classical.html#s7'], ['Figure 7.1: the scatter is a shadow', 'classical.html#f7-1'], ['Figure 7.2: a cloud of prices is not a demand curve', 'classical.html#f7-2']],
-  trade: [['8.1 International trade adds a second country', 'classical.html#c8-1']],
-  intlfin: [['8.2 International finance adds the exchange rate', 'classical.html#c8-2']],
-  banking: [['8.3 Money and banking adds the balance sheet', 'classical.html#c8-3'], ['Part 2: contagion between banks', 'beyond.html#b7']],
-  finance: [['8.4 Financial economics adds prices of risk', 'classical.html#c8-4']],
-  public: [['8.5 Public economics adds the state', 'classical.html#c8-5'], ['Figure 5.2: a good that everyone uses', 'classical.html#f5-2']],
-  environmental: [['8.6 Environmental economics adds the very long horizon', 'classical.html#c8-6']],
-  labor: [['8.7 Labor economics adds people as the commodity', 'classical.html#c8-7'], ['Part 2: who trades with whom', 'beyond.html#b4']],
-  io: [['8.8 Industrial organization adds strategy, in detail', 'classical.html#c8-8'], ['Part 2: no representative firm', 'beyond.html#b1'], ['Part 2: connected firms', 'beyond.html#b6']],
-  behavioral: [['8.9 Behavioral economics adds psychology to the household', 'classical.html#c8-9'], ['Part 2: games real people play', 'beyond.html#b3']],
-  development: [['8.10 Development economics adds institutions and missing markets', 'classical.html#c8-10']],
-  history: [['8.11 Economic history adds time beyond the model', 'classical.html#c8-11']],
-};
+import { plot } from './figures.js';
+import { LAYERS } from './p3-figs.js';
+import { COURSE_UNITS, RELATIONS, unitOf, unitName, stateOf } from './ontology.js';
+import { PLACE_P1, PLACE_P2, BUILD_ALL, stopIndex } from './wheel.js';
+import { setupPage } from './page.js';
 
 const $ = (s) => document.querySelector(s);
 const id = new URLSearchParams(location.search).get('c') ?? 'micro';
@@ -51,13 +37,26 @@ const READ = {
 };
 
 document.title = `${c.name} — Cross-Section`;
-const root = $('#course');
+const root = $('#sheet');
 const intro = c.side === 'field'
   ? `<p class="lede">${c.question}</p><p><b>Built from</b> ${c.from}${c.adds ? ` <b>It adds</b> ${c.adds}` : ''}</p>${c.source ? `<p class="field-src">Sequence after ${c.source}.</p>` : ''}`
   : '<p class="lede">A core course: every field course is assembled from its parts.</p>';
+// the course's units, and where each is read on the wheel
+const units = (COURSE_UNITS[c.id] ?? []).map((key) => ({ key, m: unitOf(key) })).filter((u) => u.m);
+const placeOfUnit = (u) => (u.m.part === 2 ? PLACE_P2[u.m.id] : PLACE_P1[u.m.id]);
+const relName = Object.fromEntries(RELATIONS.map((r) => [r.id, r.name]));
+const held = (m) => m.held.map(([, v]) => v).filter(Boolean).join('; ') || 'nothing named';
 root.innerHTML = `<header class="opening"><p class="kicker">${c.side === 'field' ? 'Field course' : 'Core course'}</p><h1>${c.name}</h1>${intro}</header>` +
+  `<section class="chapter" id="c-path"><h2>Its path through the wheel</h2>
+    <p>A course is a path of units, and each unit is one model: what it moves, what it holds still, and the one thing it changes (<a href="archive.html#a5">Part 3, section 5</a>). This course teaches ${units.length} of the units of Parts 1 and 2, in this order.</p>
+    <p class="needs-fold" hidden>Folded, the wheel lies beside the page, and the path is drawn through it unit by unit, each unit putting the wheel in its state.</p>
+    <figure class="fig wide dense" data-fig="route" id="c-route">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">The path</span>The plan of the wheel (<a href="archive.html#f3-1">Figure 3.1</a>), with the cell each unit is read in, numbered in the order the course teaches them.</figcaption>
+    </figure>
+    <ol class="units-path">${units.map((u) => `<li><a href="${u.m.href}"><b>${unitName(u.m)}</b> ${u.m.title}</a><span><i>Moves</i> ${u.m.moving.join(', ')}. <i>Holds</i> ${held(u.m)}. <i>${u.m.rel === 'start' ? 'Starts' : relName[u.m.rel]}</i> ${u.m.what}. <i>Method</i> ${u.m.method.toLowerCase()}.</span></li>`).join('')}</ol>
+  </section>` +
   `<section class="chapter"><h2>Week by week</h2><div data-ladder="${c.id}"></div></section>` +
-  '<section class="chapter" id="c-parts"><h2>In Parts 1 and 2</h2><ul class="course-links" id="c-places"></ul></section>' +
   '<section class="chapter" id="c-jx"><h2>Where it meets other courses</h2><ul class="course-links" id="c-junctions"></ul></section>' +
   '<section class="chapter" id="c-read"><h2>Read next</h2><ul class="course-links" id="c-reading"></ul></section>';
 renderCurriculum(root);
@@ -68,8 +67,6 @@ for (const a of root.querySelectorAll('.wk-links a[href^="#"]')) {
   const owner = ref.replace(/-\d+$/, '');
   if (owner !== c.id) a.href = `course.html?c=${owner}#${ref}`;
 }
-
-$('#c-places').innerHTML = (PLACES[c.id] ?? []).map(([title, href]) => `<li><a href="${href}"><b>${title}</b></a></li>`).join('');
 
 // junctions that pass through this course
 const jx = JUNCTIONS.filter((j) => j.links.some((l) => l.startsWith(`${c.id}-`)));
@@ -83,4 +80,66 @@ $('#c-junctions').innerHTML = jx.length
 
 $('#c-reading').innerHTML = (READ[c.id] ?? []).map(([t, href]) => (href ? `<li><a href="${href}"><b>${t}</b></a></li>` : `<li><b>${t}</b></li>`)).join('');
 
+// The path, flat: the plan of Figure 3.1 with each unit's cell numbered. A
+// unit read where two cells meet stands on their shared wall or arc.
+const places = units.map(placeOfUnit);
+const stops = stopIndex(places);
+const FILL = { chalk: 'f-hatch', olive: 'f-olive', ochre: 'f-ochre', cobalt: 'f-cobalt' };
+const cellAt = Object.fromEntries(LAYERS.flatMap((L, ring) => L.rooms.map(([name], i) => [name, { x: i + 0.5, y: ring + 0.5 }])));
+function drawPath(art) {
+  const p = plot(art, { w: 940, h: 420, x: [-1.5, 6], y: [0, 4], axes: false, pad: { l: 10, r: 10, t: 14, b: 14 }, alt: `The plan of the wheel with the ${units.length} units of ${c.name} numbered in order: ${units.map((u, i) => `${i + 1}, ${unitName(u.m)}`).join('; ')}.` });
+  const on = new Set(places.flat());
+  LAYERS.forEach((layer, L) => {
+    p.label(-1.45, L + 0.5, layer.name, { dy: 6, roman: true, cls: 'step' });
+    layer.rooms.forEach(([name], i) => {
+      const q = [[i + 0.06, L + 0.1], [i + 0.94, L + 0.1], [i + 0.94, L + 0.9], [i + 0.06, L + 0.9]];
+      if (on.has(name)) p.area(q, FILL[layer.c]);
+      p.pathPts([...q, q[0]], on.has(name) ? 'k thin' : 'k thin dash faint');
+      p.label(i + 0.5, L + 0.74, name, { anchor: 'middle', dy: 4, roman: true, cls: `room small${on.has(name) ? '' : ' out'}` });
+    });
+  });
+  const at = places.map((pl) => {
+    const cs = (Array.isArray(pl) ? pl : [pl]).map((n) => cellAt[n]);
+    return [cs.reduce((a, q) => a + q.x, 0) / cs.length, cs.reduce((a, q) => a + q.y, 0) / cs.length - 0.1];
+  });
+  p.pathPts(at, 'oc thick');
+  // one numbered mark per place; units read in the same place share it
+  const label = new Map();
+  at.forEach(([x, y], i) => {
+    const k = `${x.toFixed(3)} ${y.toFixed(3)}`;
+    label.set(k, { x, y, text: label.has(k) ? `${label.get(k).text}, ${i + 1}` : String(i + 1) });
+  });
+  for (const { x, y, text } of label.values()) {
+    p.ring(x, y, 'oc', 7 + 4 * text.length);
+    p.label(x, y, text, { anchor: 'middle', dy: 4.5, roman: true, cls: 'stop' });
+  }
+}
+
+// Folded: the story walks the path, one unit a beat, the wheel in each
+// unit's state, the route drawn on as far as the unit
+const verb = { open: 'opens', add: 'adds', relax: 'relaxes', measure: 'measures', return: 'returns' };
+const and = (xs) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}` : xs[0] ?? 'nothing named');
+const say = (u, i) => `${i + 1}. ${unitName(u.m)}, ${u.m.title}. It moves ${and(u.m.moving).toLowerCase()} and holds ${and(u.m.held.map(([, v]) => v).filter(Boolean))}. ${u.m.rel === 'start' ? 'It is where the core starts' : `It ${verb[u.m.rel]} ${u.m.what}`}, with ${u.m.method.toLowerCase()} at the hub.`;
+const constructs = units.length ? {
+  route: {
+    dom: { x: [0, 1], y: [0, 1] },
+    callout: false,
+    build: () => ({
+      story: [
+        { say: `${c.name} on the wheel: ${units.length} units, from ${unitName(units[0].m)} to ${unitName(units.at(-1).m)}, in the order the course teaches them.` },
+        ...units.map((u, i) => ({ say: say(u, i), dur: 1.2 })),
+        { say: 'The whole path. Each unit changed one thing, and the course is the sequence of those changes.' },
+      ],
+      model: (b) => (b >= 1 && b <= units.length ? stateOf(units[b - 1].m) : null),
+    }),
+  },
+} : {};
+const routes = units.length ? [{ name: c.name, places, c: 'ochre', fid: 'route', show: [1], upto: [0, ...stops, stops.at(-1)] }] : [];
+
+$('#tb-course').textContent = c.name;
+$('#tb-units').textContent = String(units.length);
+$('#tb-weeks').textContent = String(c.weeks.length);
+$('#tb-side').textContent = c.side === 'field' ? 'Field' : 'Core';
+if (!units.length) root.querySelector('#c-path')?.remove();
+await setupPage({ figs: { route: drawPath }, constructs, world: {}, archive: units.length ? { figure: 'route', end: '#c-path', routes } : null, build: BUILD_ALL, stages: 0, unit: 'Course', part: c.side === 'field' ? 'Field course' : 'Core course', name: c.name });
 if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'center' });

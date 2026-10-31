@@ -679,6 +679,15 @@ body.site-page .desk { padding-bottom: 96px; }
 .course-links a span { margin-left: 8px; font-style: italic; color: var(--ink-2); }
 
 .course-page .weeks { margin-top: 0.8em; }
+/* a course's path of units (course.js) */
+.units-path { max-width: 760px; margin: 1.2em 0 0; padding-left: 1.8em; }
+.units-path li { margin: 0 0 0.7em; line-height: 1.45; }
+.units-path li::marker { font: 600 17px var(--draft); color: var(--ochre); }
+.units-path a { color: var(--ink); }
+.units-path a b { font: 600 17px var(--draft); margin-right: 0.3em; }
+.units-path span { display: block; color: var(--ink-2); font-size: 0.95em; }
+.units-path span i { font-style: normal; font: 600 14px var(--draft); color: var(--ink); margin-right: 0.2em; }
+.plot .lb.stop { font: 600 15px var(--draft); fill: var(--ink); }
 
 /* ================================================================
    Part 1, flat (classical.html): eight stages, each a revision of one drawing.
@@ -848,6 +857,12 @@ details.units td:first-child { font: 400 15px var(--serif); text-align: left; wi
 details.units td:nth-child(2) { font-weight: 400; }
 details.units td { font-size: 14.5px; }
 .paths-fig .paths { margin-bottom: 0.4em; }
+/* dense figures (plans and tables of the wheel) keep a legible width on a
+   narrow screen and scroll sideways instead */
+@media (max-width: 760px) {
+  .fig.dense .fig-art { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .fig.dense .fig-art svg { min-width: 720px; }
+}
 
 /* Part 3: the plan of the archive */
 .plot .lb.room { font: 500 17px var(--draft); fill: var(--ink); }

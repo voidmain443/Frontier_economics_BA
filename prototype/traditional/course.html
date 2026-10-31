@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="site-page">
+<body class="site-page p1 course-body">
 <nav class="site" aria-label="Parts">
   <a class="site-home" href="index.html">Cross-Section</a>
   <a href="classical.html"><span>1</span>The classical textbook</a>
@@ -18,8 +18,24 @@
   <a href="archive.html"><span>3</span>A new archive</a>
 </nav>
 <div class="desk">
-<main id="course" class="sheet course-page"></main>
+<main id="sheet" class="sheet course-page"></main>
 </div>
+
+<aside class="titleblock" aria-label="Title block">
+  <div class="tb-row tb-title"><span class="tb-name">Cross-Section</span><span class="tb-sheet" id="tb-sheet">Course</span></div>
+  <div class="tb-row tb-sub" id="tb-course"></div>
+  <div class="tb-row tb-counts">
+    <div><span class="tb-k">Units</span><span class="tb-v" id="tb-units">0</span></div>
+    <div><span class="tb-k">Weeks</span><span class="tb-v" id="tb-weeks">0</span></div>
+    <div><span class="tb-k">Side</span><span class="tb-v" id="tb-side"></span></div>
+  </div>
+  <button class="tb-unfold" id="unfold" type="button" aria-pressed="false" hidden>Fold the page into space</button>
+  <p class="tb-status" id="tb-status" role="status"></p>
+</aside>
+
+<canvas id="stage" layoutsubtree aria-hidden="true"></canvas>
+<div id="expo-labels" aria-hidden="true"></div>
+
 <script type="module" src="course.js"></script>
 </body>
 </html>

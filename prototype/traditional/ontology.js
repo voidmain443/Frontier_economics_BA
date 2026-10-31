@@ -107,3 +107,31 @@ export const stageState = (s, extra = {}) => ({ moving: new Set(s.moving), stopp
 // What the wheel produces, measured (Stage 7): Korea in 2025, from Bank of
 // Korea ECOS and Statistics Korea (data/korea-growth.json)
 export const MEASURED = 'Output <b>2,326</b> trillion won<br>Employed <b>28.8</b> million<br><i>Korea, 2025 (real, 2020 prices)</i>';
+
+// A course is a path of units (docs/part3-ontology.md, 5.2): the units of
+// Parts 1 and 2 it teaches, in the order it teaches them. Part 2's units are
+// written 'p2:2.1'. The field courses start from the core units they build on
+// (Part 1's 'Builds on').
+export const COURSE_UNITS = {
+  principles: ['1.1', '1.3', '1.2', '3.2', '5.2', '6.1', '6.2'],
+  math: ['2.1', '2.2', '3.1', '5.1', '6.1'],
+  micro: ['2.1', '2.2', '2.3', '3.1', '3.2', '4.1', '5.1', '5.3'],
+  games: ['4.1', '4.2', '8.3', '8.8', 'p2:2.3'],
+  macro: ['6.1', '6.2', '6.3', '6.4', 'p2:2.2'],
+  metrics: ['7.1', '7.2'],
+  trade: ['5.1', '8.1'],
+  intlfin: ['2.3', '6.2', '8.2'],
+  banking: ['6.2', '6.4', '8.3', 'p2:2.7'],
+  finance: ['2.3', '8.4'],
+  public: ['1.2', '5.2', '8.5'],
+  environmental: ['5.2', '8.6'],
+  labor: ['2.2', '3.1', '6.3', '8.7', 'p2:2.4'],
+  io: ['3.2', '4.1', '4.2', '8.8', 'p2:2.1', 'p2:2.6'],
+  behavioral: ['2.3', '8.9', 'p2:2.3'],
+  development: ['5.3', '6.1', '8.10'],
+  history: ['6.1', '8.11'],
+};
+const UNITS = new Map([...MODELS.map((m) => [m.id, m]), ...MODELS_P2.map((m) => [`p2:${m.id}`, m])]);
+export const unitOf = (key) => UNITS.get(key);
+// a unit's name as the site writes it
+export const unitName = (m) => (m.part === 2 ? `Part 2, Figure ${m.id}` : `Figure ${m.id}`);
