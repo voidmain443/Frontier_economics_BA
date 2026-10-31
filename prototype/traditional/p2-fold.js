@@ -421,10 +421,10 @@ export const CONSTRUCTS = {
       ][Math.min(b, 5)];
       X.story = [
         { say: 'Above, the years in which the textbook’s parts were built. Below, findings about what those parts leave out. Most were known while the textbook was being written.' },
-        { say: 'Pareto (1896), Gibrat (1931) and Zipf (1949): incomes, firms and cities follow power laws, so no typical size describes them. On the wheel, the households and firms take unequal sizes.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
+        { say: 'Pareto (1896): incomes follow a power law. Gibrat (1931): firms grow in proportion to their size. Zipf (1949): city sizes fall with rank like a power. No typical size describes them; on the wheel, the households and firms take unequal sizes.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
         { say: 'Keynes (1936), von Neumann and Morgenstern (1944), Nash (1950), Simon (1955): people reason about one another, and only so far. Scarf (1960): prices need not settle. Of these, games and hidden quality entered the core.', beside: true, dur: 1.4 },
         { say: 'Milgram (1967) and Granovetter (1973): people reach particular others, through a few steps and weak ties. The households are tied.', beside: true, dur: 1.4 },
-        { say: 'The textbook settled on what could be solved by hand on one page: every agent of a kind the same size, anyone trading with anyone. On the wheel, what was found goes out again.', beside: true, dur: 1.6 },
+        { say: 'For its readers, the textbook settled on what a student can solve by hand on one page: every agent of a kind the same size, anyone trading with anyone. On the wheel, what was found goes out again.', beside: true, dur: 1.6 },
         { say: 'This part puts it back, one assumption at a time.', beside: true, dur: 1.4 },
       ];
       return X;
@@ -474,7 +474,7 @@ export const CONSTRUCTS = {
         null,
         { tied: false, lit: ['Optimization', 'Equilibrium', 'History', 'Property', 'Policy rules'] },
         { tied: false, lit: ['Optimization'] },
-        { tied: false, moving: new Set(['Goods', 'Money', 'Households', 'Firms', 'Governments', 'Equilibrium']), stopped: new Map([['Labor', 'money wages, slow to fall']]) },
+        { tied: false, moving: new Set(['Goods', 'Money', 'Households', 'Firms', 'Governments', 'Equilibrium']), stopped: new Map([['Labor', 'the money wage, given']]) },
         { unlike: true, tied: false, lit: ['Goods', 'Households', 'Firms'] },
         { alike: true, unlike: false, tied: false, measured: 'Predictions <b>tested</b><br><i>the assumptions, not</i>' },
         { tied: false, lit: ['Households', 'Optimization', 'Policy rules', 'Central banks'] },
@@ -486,12 +486,12 @@ export const CONSTRUCTS = {
         { say: 'The arguments about what economics is, read as arguments about what a model should move and what it may hold still.' },
         { say: '1883. Carl Menger: economics deduces general laws from choice. Gustav Schmoller: it studies the history and institutions of particular economies. The hub, or the rules and history.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.4 },
         { say: '1890 and 1932. Marshall’s economics is the study of mankind in the ordinary business of life: the whole wheel. Robbins’s is behaviour as a relationship between ends and scarce means: one tool at its hub.', beside: true, dur: 1.4 },
-        { say: '1936. Keynes: money wages are slow to fall, the labour market need not clear, and total spending can stay too low. The labour market is held; goods and money move.', beside: true, dur: 1.4 },
+        { say: '1936. Keynes: employment is set by total spending, which can stay too low. He takes the money wage as given, and cutting it need not restore employment. The labour market is held; goods and money move.', beside: true, dur: 1.4 },
         { say: '1945. Hayek: knowledge is dispersed among people who differ, prices carry it, and no planner can gather it. Unlike households and firms, joined by a market.', beside: true, dur: 1.4 },
         { say: '1953. Friedman: a theory’s assumptions need not be realistic if its predictions are right. The classical wheel, every agent alike, judged only against the data.', beside: true, dur: 1.4 },
         { say: '1976. Lucas: the rules that describe behaviour change when policy changes, so models must start from choices. Households choosing, under the central bank’s rules.', beside: true, dur: 1.4 },
         { say: '1992. Kirman: whom does the representative individual represent? Unlike people can add up to a total that no one of them would choose.', beside: true, dur: 1.4 },
-        { say: '2008. Many models used for policy had no banks, and none tied to one another.', beside: true, dur: 1.4 },
+        { say: '2008. The benchmark model behind much central-bank analysis, Smets and Wouters (2007), had no banks, and models that added credit did not tie banks to one another.', beside: true, dur: 1.4 },
         { say: 'The crisis ran through both. Each argument proposes a different state of the same wheel.', beside: true, dur: 1.4 },
       ];
       return X;
