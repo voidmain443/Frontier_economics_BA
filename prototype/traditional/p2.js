@@ -1,10 +1,10 @@
-// Part 2: beyond the flat page. Figures in p2-figs.js; what each raises when the
+// Part 2: unlike and connected. Figures in p2-figs.js; what each raises when the
 // page is folded, in p2-fold.js. Three figures follow the reader's settings.
 
 import { FIGS } from './p2-figs.js';
 import { CONSTRUCTS } from './p2-fold.js';
 import { setupPage } from './page.js';
-import { PLACE_P2 } from './wheel.js';
+import { PLACE_P2, BUILD_P2 } from './wheel.js';
 
 const state = { p: 0.05, mix: [3, 4, 2, 1, 1], shock: 4 };
 const page = await setupPage({
@@ -12,11 +12,13 @@ const page = await setupPage({
   constructs: CONSTRUCTS,
   // the cell of the wheel each section opens in (docs/engine.md)
   world: PLACE_P2,
+  // the wheel Part 1 built, and the two cells it left empty
+  build: BUILD_P2,
   data: { state },
   stages: 6,
   unit: 'Section',
   part: 'Part 2',
-  name: 'Beyond the flat page',
+  name: 'Unlike and connected',
 });
 
 const $ = (s) => document.querySelector(s);

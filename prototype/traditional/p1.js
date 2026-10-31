@@ -5,14 +5,16 @@ import { FIGS } from './p1-figs.js';
 import { CONSTRUCTS } from './p1-fold.js';
 import { regressionData } from './figures.js';
 import { setupPage } from './page.js';
-import { PLACE_P1 } from './wheel.js';
+import { PLACE_P1, BUILD_P1 } from './wheel.js';
 
 await setupPage({
   figs: FIGS,
   constructs: CONSTRUCTS,
-  // the cell of the wheel each figure is read over (docs/engine.md); the whole
-  // wheel comes into view as stage 6 opens
+  // the cell of the wheel each figure is read over (docs/engine.md); each
+  // stage's heading builds onto the wheel what the stage adds, and the whole
+  // wheel stays in view from stage 6's heading to its first figure
   world: PLACE_P1,
+  build: BUILD_P1,
   whole: { from: '#s6', to: '#f6-1' },
   files: ['korea-growth', 'us-phillips', 'korea-1997', 'crisis-2008', 'maddison'],
   data: { reg: regressionData().pts },

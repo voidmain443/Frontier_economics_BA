@@ -4,7 +4,7 @@
 
 const $ = (s) => document.querySelector(s);
 
-export async function setupPage({ figs, constructs, world = null, whole = null, archive = null, files = [], agents = {}, stages = 8, unit = 'Stage', part = 'Part 1', name = '', data: extra = {} }) {
+export async function setupPage({ figs, constructs, world = null, whole = null, archive = null, build = null, files = [], agents = {}, stages = 8, unit = 'Stage', part = 'Part 1', name = '', data: extra = {} }) {
   const sheet = $('#sheet');
   const data = { ...extra };
   await Promise.all(files.map(async (f) => {
@@ -117,7 +117,7 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
   if (btn) {
     try {
       const { createFold } = await import('./fold.js');
-      fold = await createFold({ canvas: $('#stage'), sheet, labelsRoot: $('#expo-labels'), constructs, data, world, whole, archive, onChange: setLabel });
+      fold = await createFold({ canvas: $('#stage'), sheet, labelsRoot: $('#expo-labels'), constructs, data, world, whole, archive, build, onChange: setLabel });
       if (!fold.supported) {
         status.textContent = `The fold needs WebGPU with HTML-in-Canvas. ${fold.reason} The flat page is complete on its own.`;
         fold = null;

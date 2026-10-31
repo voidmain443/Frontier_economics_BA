@@ -11,7 +11,7 @@
 
 import { makeGpu, toWorld, htmlInCanvasSupport, copyElement, PX } from './gpu.js';
 import { loadAssets } from './maquettes.js';
-import { CELLS, RIM, placeOf, polar, cellCentre, wheelAt, poseFor, toWorldW, wheelGeometry, signSpots, routeOf, population, circulation, crowdSpots } from './wheel.js';
+import { CELLS, RIM, FLOWS, placeOf, polar, cellCentre, wheelAt, poseFor, toWorldW, wheelGeometry, signSpots, routeOf, population, circulation, crowdSpots } from './wheel.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
 
@@ -134,10 +134,14 @@ function readingTimes(sheet) {
 // back until the whole wheel is seen (Part 1, stage 6).
 //
 // archive (Part 3): { figure, end, routes: [{ name, places, c }] }. From that
-// figure to the end element the view steps back to the whole building, which
-// stands beside the page, with the routes drawn through it; its rooms' names
+// figure to the end element the view steps back to the whole wheel, which
+// lies beside the page, with the routes drawn through it; its cells' names
 // are doors.
-export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, whole = null, archive = null, onChange }) {
+//
+// build (wheel.js): the order in which the wheel's cells, agents and routes
+// appear. Its stories are told at headings, with the view stepped back to the
+// whole wheel; what is not built yet is an outline, and carries nothing.
+export async function createFold({ canvas, sheet, labelsRoot, constructs, data = {}, world = null, whole = null, archive = null, build = null, onChange }) {
   if (!htmlInCanvasSupport()) return { supported: false, reason: 'This browser cannot draw HTML into WebGPU textures yet (HTML-in-Canvas).' };
   const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
   if (!adapter) return { supported: false, reason: 'No WebGPU adapter is available.' };
@@ -421,6 +425,35 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (made && world?.[made.id]) stops.push({ c: made.group.center, p: placeOf(world[made.id]) });
     }
 
+    // the build: its stories at their headings, and for each cell, group and
+    // route the beats that build it (none: built from the start)
+    sc.built = null;
+    if (build && world) {
+      const when = { cells: new Map(), groups: new Map(), flows: new Map() };
+      const at = (fid, beat, add) => {
+        for (const kind of ['cells', 'groups', 'flows']) for (const n of add?.[kind] ?? []) {
+          if (!when[kind].has(n)) when[kind].set(n, []);
+          when[kind].get(n).push({ fid, beat });
+        }
+      };
+      const base = build.base ?? {};
+      for (const kind of ['cells', 'groups', 'flows']) for (const n of base[kind] ?? []) when[kind].set(n, []);
+      (build.stories ?? []).forEach((B, i) => {
+        const el = sheet.querySelector(B.at);
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const fid = `build-${i}`;
+        let cam = { az: 0, el: 0, zoom: 1, at: null };
+        const cams = B.beats.map((b) => (cam = { ...cam, ...(b.cam ?? {}) }));
+        const was = st.scene?.stories?.find((S) => S.fid === fid);
+        sc.stories.push({ fid, build: true, group: { center: (r.top + r.bottom) / 2 + scrollY }, box: null, L: null, beats: B.beats, cams, c: (r.top + r.bottom) / 2 + scrollY, len: B.beats.length * BEAT, shown: was?.shown ?? 0, target: was?.target ?? 0 });
+        B.beats.forEach((b, k) => at(fid, k, b.add));
+      });
+      for (const E of build.events ?? []) at(E.fid, E.beat, E.add);
+      sc.stories.sort((a, b) => a.c - b.c);
+      sc.built = when;
+    }
+
     // the world: the wheel's rings and cells with their signs, the people on
     // its rim, and the parcels that circulate between them
     if (world) {
@@ -454,7 +487,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const flow = circulation(groups);
       const parcels = [point([], 'ochre', 3.4, 1, 1200), point([], 'white', 3.4, 0.8, 1200)];
       const trails = [G.lines([], Z, COL.ochre, 1.6, 0.8, false, 0, 1200), G.lines([], Z, COL.white, 1.4, 0.6, false, 0, 1200)];
-      const still = REDUCED ? Object.values(flow.lines()).map((segs, i) => G.lines(segs, Z, i ? COL.white : COL.ochre, 1.4, 0.6, false, 0)) : [];
+      const still = REDUCED ? flow.lines().map(({ f, segs }) => Object.assign(G.lines(segs, Z, f.money ? COL.ochre : COL.white, 1.4, 0.6, false, 0), { route: f.name })) : [];
       const pos = (sel, top) => {
         const r = sheet.querySelector(sel)?.getBoundingClientRect();
         return r ? (top ? r.top : (r.top + r.bottom) / 2) + scrollY : null;
@@ -483,7 +516,6 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       });
       sc.archive = {
         fid: archive.figure,
-        rings: archive.rings,
         c: fig ? (fig.top + fig.bottom) / 2 + scrollY : 0,
         end: end ? end.bottom + scrollY : 0,
         paths: paths ? paths.top + scrollY : 0,
@@ -744,6 +776,17 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       }
     }
     const beatOf = new Map(sc.stories.map((S) => [S.fid, S.shown]));
+    // how far each cell, group and route is built
+    const builtOf = (kind) => {
+      const m = new Map();
+      if (!sc.built) return null;
+      for (const [n, list] of sc.built[kind]) m.set(n, list.length ? Math.max(...list.map((w) => lifted(w.beat, beatOf.get(w.fid) ?? 1e9))) : 1);
+      return m;
+    };
+    const cellW = builtOf('cells');
+    const groupW = builtOf('groups');
+    const flowW = builtOf('flows');
+    const bw = (m, n) => (m ? m.get(n) ?? 0 : 1);
     const SV = SC ? storyView(SC, P, ease(grow(SC.group)) * LIFT) : null;
     sw *= e;
     // where the wheel stands: turned, and its hub moved, so that the place being
@@ -759,21 +802,31 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // as stage 6 opens, over the wheel the page lies on
     if (A) pose = { phi: 0.35, C: [pageX + 1.1 + RIM, -0.004, -0.8] };
     const Wh = sc.whole;
-    const climax = A
+    let climax = A
       ? ease(smooth(A.c - 1400, A.c - 250, P.focus) * (1 - smooth(A.end + 150, A.end + 1100, P.focus)))
       : Wh?.from != null && Wh.to != null ? ease(smooth(Wh.from - 1000, Wh.from - 150, P.focus) * (1 - smooth(Wh.to - 900, Wh.to - 350, P.focus))) : 0;
-    const travel = REDUCED ? 0 : Math.min(1, (R?.travel ?? 0) / 8);
+    // a story that builds the wheel steps back to show all of it, and slides
+    // the wheel out from under the page to lie beside it, as in Part 3, so
+    // that the cell being built is not under the paper
+    const BESIDE = [pageX + 1.1 + RIM, -0.004, -0.8];
+    const beside = A ? 1 : SC?.build && pose ? ease(sw) : 0;
+    if (SC?.build) climax = Math.max(climax, ease(sw));
+    if (!A && beside > 0) pose = { phi: pose.phi, C: pose.C.map((v, k) => lerp(v, BESIDE[k], beside)) };
+    // while the wheel is built, the figures on the page step back
+    const quiet = 1 - 0.85 * (!A && SC?.build ? ease(sw) : 0);
+    // (a long move of the wheel steps the view back, but not while the wheel lies beside the page)
+    const travel = REDUCED ? 0 : Math.min(1, (R?.travel ?? 0) / 8) * (1 - beside);
 
     // the flat view of the sheet, dollied back into a raised, tilted one
     const T = CAM;
     const fov = (lerp(0.5, T.fov, e) * Math.PI) / 180;
     const hO = lerp(H * 0.5 * PX, T.h, e);
-    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + (A ? 0.45 : 0.6) * climax) * e + (SV ? sw * SV.el : 0), 0, 1.35);
+    const el = clamp(lerp(0, T.el, e) + (st.mouse[1] * 0.04 + st.orbit[1] + lerp(0.6, 0.45, beside) * climax) * e + (SV ? sw * SV.el : 0), 0, 1.35);
     const az = (st.mouse[0] * 0.1 + st.orbit[0] - 0.5 * climax) * e + (SV ? sw * SV.az : 0);
     const near0 = [lerp(0, T.tx, e), lerp(0, T.ty, e), lerp(0, T.tz, e)];
     // the whole view looks at the hub; in Part 3, between the page and the hub,
     // so that the plan on the page and the wheel it describes are seen together
-    const hubAt = pose ? (A ? [lerp(pageX, pose.C[0], 0.6), 0.2, lerp(0, pose.C[2], 0.6)] : [pose.C[0], 0.2, pose.C[2]]) : near0;
+    const hubAt = pose ? [lerp(pose.C[0], lerp(pageX, pose.C[0], 0.6), beside), 0.2, lerp(pose.C[2], lerp(0, pose.C[2], 0.6), beside)] : near0;
     let target = near0.map((v, k) => lerp(v, hubAt[k], climax * e));
     if (SV) {
       const a = SV.pa ?? target;
@@ -782,7 +835,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     }
     // a turned view also steps back, so the room and its neighbours come into sight
     const turned = Math.min(1, Math.hypot(st.orbit[0] / ORBIT.az, st.orbit[1] / ORBIT.hi));
-    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + (A ? 5.6 : 3.2) * climax * e) * (SV ? lerp(1, SV.zoom, sw) : 1);
+    const dist = (hO / Math.tan(fov / 2)) * (1 + Math.max(1.4 * turned, 1.3 * travel) * e) * (1 + lerp(3.2, 5.6, beside) * climax * e) * (SV ? lerp(1, SV.zoom, sw) : 1);
     const eye = [target[0] + dist * Math.sin(az) * Math.cos(el), target[1] + dist * Math.sin(el), target[2] + dist * Math.cos(az) * Math.cos(el)];
     const vp = multiply(rect({ x: 0, y: 0, w: W, h: H }, W, H), multiply(perspective(fov, W / H, Math.max(0.005, dist - 9), dist + 40), lookAt(eye, target, [0, 1, 0])));
 
@@ -791,7 +844,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (it.kind === 'grid' || it.kind === 'edge') o = smooth(0.15, 0.9, e);
       else {
         const r = grow(it.group);
-        o = appear * near(it.group) * Math.min(1, r * 1.6);
+        o = appear * near(it.group) * Math.min(1, r * 1.6) * quiet;
         const b = beatOf.get(it.fid) ?? 1e9;
         it.o.hs = ease(r) * LIFT * lifted(it.rise, b);
         if (it.show || it.draw != null || it.head) {
@@ -820,7 +873,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       for (const a of sc.agents) {
         if (Math.abs(a.group.center - P.focus) > 2400) continue;
         const b = beatOf.get(a.fid) ?? 1e9;
-        const gr = ease(grow(a.group)) * appear * vis(a.show, b);
+        const gr = ease(grow(a.group)) * appear * vis(a.show, b) * quiet;
         const x = lerp(a.box[0], a.box[2], a.local[0]);
         const s = lerp(a.box[3], a.box[1], a.local[1]);
         const bw = (a.box[2] - a.box[0]) * PX;
@@ -870,7 +923,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       for (const c of CELLS) {
         if (!c.asset) continue;
         const F = { o: toWorldW(cellCentre(c), pose), X: [1, 0, 0], N: [0, 1, 0], D: [0, 0, 1] };
-        putAgent(c.asset, F, 0, 0.3, 0, climax * appear);
+        putAgent(c.asset, F, 0, 0.3, 0, climax * appear * bw(cellW, c.name));
       }
     }
     const solids = allSolids();
@@ -893,11 +946,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const routeOn = (rt) => climax * (rt.classical ? 1 : Math.max(smooth(A.paths - 1600, A.paths - 400, P.focus), rt.show ? vis(rt.show, b3) : 0));
     const weights = R ? new Map(R.weights) : new Map();
     if (A) for (const rt of A.routes) for (const n of rt.cells) weights.set(n, Math.max(weights.get(n) ?? 0, 0.7 * routeOn(rt) * (rt.draw != null ? clamp(b3 - (rt.draw - 1), 0, 1) : 1)));
-    if (A?.rings) for (const c of CELLS) weights.set(c.name, Math.max(weights.get(c.name) ?? 0, 0.85 * vis(A.rings[c.ring], b3)));
     if (sc.world && pose) {
       const Wd = sc.world;
       const box = [...pose.C, pose.phi];
-      const shown = appear * (R && REDUCED ? 1 - Math.sin(Math.PI * R.s) : 1);
+      // (with reduced motion the wheel fades between places, but not while it
+      // lies beside the page to be built)
+      const shown = appear * (R && REDUCED ? Math.max(1 - Math.sin(Math.PI * R.s), beside) : 1);
       Wd.ring.box = box;
       Wd.grid.box = box;
       Wd.ring.opacity = shown * (0.3 + 0.35 * climax);
@@ -934,18 +988,21 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         Wd.failed.set(failed);
       }
       if (!REDUCED) {
-        Wd.flow.step(dt, 1 + 1.5 * climax, gone);
+        Wd.flow.step(dt, { gone, built: (f) => bw(flowW, f.name) > 0.5, has: (g) => bw(groupW, g) > 0.5, given: (f) => !sc.built || sc.built.flows.get(f.name)?.length === 0 });
         const pp = Wd.flow.points();
         Wd.parcels[0].set(pp.money.pts);
         Wd.parcels[1].set(pp.goods.pts);
         Wd.trails[0].set(pp.money.trail);
         Wd.trails[1].set(pp.goods.trail);
       }
+      const groupOf = new Map(Wd.groups.map((g, k) => [Wd.dots[k], g.name]));
       for (const d of [...Wd.dots, ...Wd.parcels, ...Wd.trails, ...Wd.still]) {
         d.box = box;
         // seen whole, the dots keep more of their size
         d.persp = PERSP * (1 + 3 * climax);
-        d.opacity = shown * d.baseOpacity * (0.75 + 0.25 * climax);
+        // a group's dots come in as it is built, a still route as it is
+        const b = groupOf.has(d) ? bw(groupW, groupOf.get(d)) : d.route ? bw(flowW, d.route) : 1;
+        d.opacity = shown * d.baseOpacity * (0.75 + 0.25 * climax) * b;
         under.push(d);
       }
       // a cell's sign shows while it is read, and every sign once the whole
@@ -958,11 +1015,12 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       for (const w of Wd.cells) {
         const k = weights.get(w.cell.name) ?? 0;
         w.plate.box = box;
-        w.plate.opacity = shown * (0.22 + 0.78 * k);
+        const made = bw(cellW, w.cell.name);
+        w.plate.opacity = shown * (0.22 + 0.78 * k) * made;
         under.push(w.plate);
         const level = climax > 0.3 || k > 0.02;
         const pr = level ? w.spots.map((p) => project(vp, toWorldW(p, pose), W, H)).find(clear) ?? null : null;
-        const o = shown * (A ? climax * (0.7 + 0.3 * k) : Math.max(k, climax * 0.8));
+        const o = shown * made * (A ? climax * (0.7 + 0.3 * k) : Math.max(k, climax * 0.8));
         const door = Boolean(A) && o > 0.5;
         w.sign.tabIndex = door ? 0 : -1;
         w.sign.style.pointerEvents = door ? 'auto' : 'none';
@@ -987,7 +1045,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         rt.dots.opacity = o * clamp((drawn - 0.85) / 0.15, 0, 1);
         over.push(rt.lines, rt.dots);
         const pr = o > 0.02 ? project(vp, toWorldW(rt.start, pose), W, H) : null;
-        rt.el.style.opacity = pr ? String(o) : '0';
+        rt.el.style.opacity = pr ? String(o * clamp(drawn * 3, 0, 1)) : '0';
         if (pr) rt.el.style.transform = `translate(${pr[0].toFixed(1)}px, ${pr[1].toFixed(1)}px) translate(-50%, -140%)`;
       }
     }
@@ -996,7 +1054,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // margin callouts, with a leader to the raised axis
     for (const C of sc.callouts) {
       const r = grow(C.group);
-      const o = appear * near(C.group) * smooth(0.5, 0.9, r);
+      const o = appear * near(C.group) * smooth(0.5, 0.9, r) * quiet;
       const a = o > 0.02 ? project(vp, toWorld([0, 0, 0], [C.x, C.box[1], C.x, C.box[1]], P), W, H) : null;
       const b = a ? project(vp, toWorld(C.target, C.box, P, ease(r) * LIFT * lifted(C.rise, beatOf.get(C.fid) ?? 1e9)), W, H) : null;
       if (!a || !b) {
@@ -1047,7 +1105,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const r = L.chapter || L.ruler ? 1 : grow(L.group);
       const b = beatOf.get(L.fid) ?? 1e9;
       const pr = project(vp, toWorld(L.local, L.box, P, ease(r) * LIFT * lifted(L.rise, b)), W, H);
-      const o = appear * near(L.group) * (L.chapter || L.ruler ? 1 : smooth(0.55, 1, r)) * vis(L.show, b);
+      const o = appear * near(L.group) * (L.chapter || L.ruler ? 1 : smooth(0.55, 1, r) * quiet) * vis(L.show, b);
       if (!pr || o < 0.02 || pr[0] < -300 || pr[0] > W + 300 || pr[1] < -100 || pr[1] > H + 100) {
         L.el.style.opacity = '0';
         if (L.link) L.el.style.pointerEvents = 'none';

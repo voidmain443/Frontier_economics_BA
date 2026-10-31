@@ -238,21 +238,109 @@ export function population() {
 // a group (or to rest in the cell). money: whether it is money (the other way
 // round from goods and work). rate: parcels a second, illustrative.
 export const FLOWS = [
-  { from: 'people', via: 'Goods', to: 'firms', money: true, rate: 9 },
-  { from: 'firms', via: 'Goods', to: 'people', money: false, rate: 9 },
-  { from: 'people', via: 'Labor', to: 'firms', money: false, rate: 7, workers: true },
-  { from: 'firms', via: 'Labor', to: 'people', money: true, rate: 7, workers: true },
-  { from: 'people', via: 'Money', to: 'banks', money: true, rate: 2.5 },
-  { from: 'banks', via: 'Capital', to: 'firms', money: true, rate: 3 },
-  { from: 'people', via: 'Taxes', to: 'governments', money: true, rate: 2.5 },
-  { from: 'firms', via: 'Taxes', to: 'governments', money: true, rate: 1.5 },
-  { from: 'governments', via: 'Goods', to: 'firms', money: true, rate: 3.5 },
-  { from: 'central bank', via: 'Money', to: 'banks', money: true, rate: 1 },
-  { from: 'firms', via: 'Foreign exchange', to: 'other countries', money: false, rate: 2.5 },
-  { from: 'other countries', via: 'Foreign exchange', to: 'firms', money: true, rate: 2.5 },
-  { from: 'firms', via: 'Land and air', to: null, money: false, rate: 1.5 },
+  { name: 'spending', from: 'people', via: 'Goods', to: 'firms', money: true, rate: 4.5 },
+  { name: 'goods', from: 'firms', via: 'Goods', to: 'people', money: false, rate: 4.5 },
+  { name: 'work', from: 'people', via: 'Labor', to: 'firms', money: false, rate: 3.5, workers: true },
+  { name: 'wages', from: 'firms', via: 'Labor', to: 'people', money: true, rate: 3.5, workers: true },
+  { name: 'saving', from: 'people', via: 'Money', to: 'banks', money: true, rate: 1.2 },
+  { name: 'lending', from: 'banks', via: 'Capital', to: 'firms', money: true, rate: 1.5 },
+  { name: 'household taxes', from: 'people', via: 'Taxes', to: 'governments', money: true, rate: 1.2 },
+  { name: 'firm taxes', from: 'firms', via: 'Taxes', to: 'governments', money: true, rate: 0.8 },
+  { name: 'government purchases', from: 'governments', via: 'Goods', to: 'firms', money: true, rate: 1.8 },
+  { name: 'reserves', from: 'central bank', via: 'Money', to: 'banks', money: true, rate: 0.5 },
+  { name: 'exports', from: 'firms', via: 'Foreign exchange', to: 'other countries', money: false, rate: 1.2 },
+  { name: 'export payments', from: 'other countries', via: 'Foreign exchange', to: 'firms', money: true, rate: 1.2 },
+  { name: 'emissions', from: 'firms', via: 'Land and air', to: null, money: false, rate: 0.8 },
 ];
 export const TRIP = 3.4;
+
+// The wheel is built as the reader goes (docs/engine.md): a cell, a group of
+// agents or a route appears in a beat of a story, and until then the cell is an
+// outline and the route carries nothing. A build is { base, stories, events }:
+// base is built from the start; stories are told at a heading of the page
+// (at: a selector), each beat adding { cells, groups, flows }; events add to a
+// beat of a figure's own story (fid, beat).
+const ALL = { cells: CELLS.map((c) => c.name), groups: ['people', 'firms', 'banks', 'central bank', 'other countries', 'governments'], flows: FLOWS.map((f) => f.name) };
+
+// Part 1: each stage adds to the wheel what it adds to the economy, the list
+// under its heading (buyers, sellers, one market; the household; …)
+export const BUILD_P1 = {
+  stories: [
+    { at: '#s1 h2', beats: [
+      { say: 'Under the page lies the economy this part builds, one stage at a time: Frank Knight’s wheel of wealth (1933). For now it is an outline of 24 empty cells.' },
+      { say: 'Stage 1 needs one cell, the goods market, where buyers and sellers meet at a price. Nobody in it has a name yet.', add: { cells: ['Goods'] } },
+      { say: 'And one rule beside it: a tax, for Figure 1.2.', add: { cells: ['Taxes'] } },
+    ] },
+    { at: '#s2 h2', beats: [
+      { say: 'Stage 2 opens up the household. The wheel so far: one market and one tax.' },
+      { say: 'Households arrive on the rim. Each dot is 10,000 Koreans: 5,169 dots for the 51.7 million people of 2025.', add: { cells: ['Households'], groups: ['people'] } },
+      { say: 'Each chooses by one rule, the best it can afford: optimization, at the hub.', add: { cells: ['Optimization'] } },
+      { say: 'They spend in the goods market. Follow one parcel of money: it leaves a household and stops in the market, because nobody sells there yet.', add: { flows: ['spending'] }, dur: 1.4 },
+    ] },
+    { at: '#s3 h2', beats: [
+      { say: 'Stage 3 opens up the firm.' },
+      { say: 'Firms arrive: 600 of them, sized by Zipf’s law, a few large and many small.', add: { cells: ['Firms'], groups: ['firms'] } },
+      { say: 'Now the money reaches the firms, and goods travel the other way, from a firm through the market to a household.', add: { flows: ['goods'] }, dur: 1.4 },
+    ] },
+    { at: '#s4 h2', beats: [
+      { say: 'Stage 4 lets a few firms watch one another.' },
+      { say: 'Nothing new flows. What changes is how firms choose: strategy, at the hub.', add: { cells: ['Strategy'] } },
+    ] },
+    { at: '#s5 h2', beats: [
+      { say: 'Stage 5 joins every market at once.' },
+      { say: 'The labor market joins. The 2,877 dots that stand for the employed send their work to firms.', add: { cells: ['Labor'], flows: ['work'] }, dur: 1.4 },
+      { say: 'Wages come back the other way. The wheel is closed: money runs one way round, goods and work the other.', add: { flows: ['wages'] }, dur: 1.4 },
+      { say: 'Equilibrium, at the hub, is the claim that all of it clears together. Contracts, among the rules, is where hidden information enters.', add: { cells: ['Equilibrium', 'Contracts'] } },
+    ] },
+    { at: '#s6 h2', beats: [
+      { say: 'Stage 6 adds time, money and government. This is the wheel built so far.' },
+      { say: 'Time and money: the capital market, where saving becomes investment, and money itself.', add: { cells: ['Capital', 'Money'] } },
+      { say: 'The government arrives. It takes taxes from households and firms, and buys from firms.', add: { cells: ['Governments'], groups: ['governments'], flows: ['household taxes', 'firm taxes', 'government purchases'] }, dur: 1.4 },
+      { say: 'And the central bank, with the rules it sets for money.', add: { cells: ['Central banks', 'Policy rules'], groups: ['central bank'] } },
+    ] },
+    { at: '#s7 h2', beats: [
+      { say: 'Stage 7 learns to measure.' },
+      { say: 'Measurement, at the hub: the data come from this wheel, and the question is what they can identify.', add: { cells: ['Measurement'] } },
+    ] },
+    { at: '#s8 h2', beats: [
+      { say: 'Each field course adds one thing to the wheel.' },
+      { say: 'A second economy: other countries, and the foreign-exchange market through which exports and their payments pass.', add: { cells: ['Other countries', 'Foreign exchange'], groups: ['other countries'], flows: ['exports', 'export payments'] }, dur: 1.4 },
+      { say: 'Money and risk: banks take households’ saving and lend it to firms through the capital market, with reserves from the central bank.', add: { cells: ['Banks'], groups: ['banks'], flows: ['saving', 'lending', 'reserves'] }, dur: 1.4 },
+      { say: 'Missing markets and the state: land and air, where emissions go with no price, and the rules of regulation and property.', add: { cells: ['Land and air', 'Regulation', 'Property'], flows: ['emissions'] }, dur: 1.4 },
+      { say: 'And the long run: history, at the hub. Two cells stay empty; Part 2 builds them.', add: { cells: ['History'] } },
+    ] },
+  ],
+};
+
+// Part 2 starts from the wheel Part 1 built; it adds the two cells left empty
+export const BUILD_P2 = {
+  base: { ...ALL, cells: ALL.cells.filter((n) => n !== 'Networks' && n !== 'Computation') },
+  stories: [
+    { at: '#b1 h2', beats: [
+      { say: 'This is the wheel Part 1 built. In it every household of a kind is alike, one firm stands for all, and nobody is tied to anybody in particular.' },
+      { say: 'Each section of this part undoes one piece of that, on the same wheel.', cam: { el: 0.12 } },
+    ] },
+    { at: '#b2 h2', beats: [
+      { say: 'Networks: who can reach whom.' },
+      { say: 'Part 1 had no cell for it. It joins the rules.', add: { cells: ['Networks'] } },
+    ] },
+    { at: '#b6 h2', beats: [
+      { say: 'The projects that rebuild the textbook.' },
+      { say: 'Several make the models run as code: computation, the last cell, at the hub.', add: { cells: ['Computation'] } },
+    ] },
+  ],
+};
+
+// Part 3: the plan's story builds the wheel ring by ring, from the rim in
+const ringCells = (...rings) => CELLS.filter((c) => rings.includes(c.ring)).map((c) => c.name);
+const viaRings = (...rings) => FLOWS.filter((f) => rings.includes(BY[f.via].ring)).map((f) => f.name);
+export const BUILD_P3 = {
+  events: [
+    { fid: '3.1', beat: 1, add: { cells: ringCells(3), groups: ALL.groups } },
+    { fid: '3.1', beat: 2, add: { cells: ringCells(2), flows: viaRings(2) } },
+    { fid: '3.1', beat: 3, add: { cells: ringCells(0, 1), flows: viaRings(0, 1) } },
+  ],
+};
 
 // Parcels in flight. step(dt) moves them and starts new ones; points() gives
 // the money and the goods as two lists of wheel points.
@@ -261,6 +349,10 @@ export function circulation(groups, seed = 11) {
   const G = Object.fromEntries(groups.map((x) => [x.name, x]));
   const live = [];
   const due = FLOWS.map(() => rand());
+  // a route that is built carries one parcel alone first, for a trip, then
+  // its flow
+  const on = FLOWS.map(() => false);
+  const hold = FLOWS.map(() => 0);
   // an agent is picked in proportion to its weight (a firm, to its size), and
   // never while it is out
   let out = {};
@@ -282,12 +374,13 @@ export function circulation(groups, seed = 11) {
     }
     return null;
   };
-  function start(f) {
+  // a route whose receiving group is not built yet ends in its cell
+  function start(f, has, lead = false) {
     const a = pick(G[f.from], f);
     const v = inCell(BY[f.via], rand, 0.15);
-    const b = f.to ? pick(G[f.to], f) : inCell(BY[f.via], rand, 0.1);
+    const b = f.to && has(f.to) ? pick(G[f.to], f) : inCell(BY[f.via], rand, 0.1);
     if (!a || !b) return;
-    live.push({ a, v, b, t: 0, money: f.money, lift: f.money ? 0.09 + 0.05 * rand() : 0.04 + 0.03 * rand() });
+    live.push({ a, v, b, t: 0, lead, money: f.money, lift: lead ? 0.16 : f.money ? 0.09 + 0.05 * rand() : 0.04 + 0.03 * rand() });
   }
   // the share of a group's weight still working
   const share = (name) => {
@@ -300,23 +393,41 @@ export function circulation(groups, seed = 11) {
   };
   return {
     share,
-    // k speeds every route up; gone: { group: Set of agents that are out },
-    // whose share of each route stops with them
-    step(dt, k = 1, gone = {}) {
+    // gone: { group: Set of agents that are out }, whose share of each route
+    // stops with them; built(f): whether a route is built; has(group):
+    // whether a group is; given(f): a route built from the start, which needs
+    // no parcel to introduce it
+    step(dt, { gone = {}, built = () => true, has = () => true, given = () => false } = {}) {
       out = gone;
       FLOWS.forEach((f, i) => {
+        if (!built(f)) {
+          on[i] = false;
+          return;
+        }
+        if (!on[i]) {
+          on[i] = true;
+          if (!given(f)) {
+            hold[i] = TRIP;
+            start(f, has, true);
+          }
+        }
+        if (hold[i] > 0) {
+          hold[i] -= dt;
+          return;
+        }
         const open = share(f.from) * (f.to ? share(f.to) : 1);
-        due[i] += f.rate * k * open * dt;
+        due[i] += f.rate * open * dt;
         while (due[i] >= 1) {
           due[i] -= 1;
-          start(f);
+          start(f, has);
         }
       });
       for (const p of live) p.t += dt / TRIP;
       for (let i = live.length - 1; i >= 0; i--) if (live[i].t >= 1) live.splice(i, 1);
     },
     // where each parcel is, and a short trail behind it that shows which way
-    // it is going: money and goods as two lists of points and of segments
+    // it is going: money and goods as two lists of points and of segments. A
+    // lead parcel is larger, with a longer trail.
     points() {
       const money = { pts: [], trail: [] };
       const goods = { pts: [], trail: [] };
@@ -328,24 +439,29 @@ export function circulation(groups, seed = 11) {
       };
       for (const p of live) {
         const to = p.money ? money : goods;
-        const head = pos(p, p.t, 1);
+        const head = pos(p, p.t, p.lead ? 2.6 : 1);
         to.pts.push(head);
-        to.trail.push([pos(p, Math.max(0, p.t - 0.07), 0), head]);
+        if (!p.lead) {
+          to.trail.push([pos(p, Math.max(0, p.t - 0.07), 0), head]);
+          continue;
+        }
+        let prev = pos(p, Math.max(0, p.t - 0.3), 0);
+        for (let k = 1; k <= 8; k++) {
+          const q = pos(p, Math.max(0, p.t - 0.3 * (1 - k / 8)), k / 8);
+          to.trail.push([prev, q]);
+          prev = q;
+        }
       }
       return { money, goods };
     },
-    // with reduced motion: each route once, as a still line through its cells
+    // with reduced motion: each route as a still line through its cells
     lines() {
-      const money = [];
-      const goods = [];
-      for (const f of FLOWS) {
+      return FLOWS.map((f) => {
         const a = G[f.from] ? cellCentre(G[f.from].cell) : null;
         const v = cellCentre(BY[f.via]);
         const b = f.to ? cellCentre(G[f.to].cell) : v;
-        if (!a) continue;
-        (f.money ? money : goods).push([a, v], [v, b]);
-      }
-      return { money, goods };
+        return { f, segs: a ? [[a, v], [v, b]] : [] };
+      });
     },
   };
 }
