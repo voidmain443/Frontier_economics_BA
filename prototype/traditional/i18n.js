@@ -73,3 +73,20 @@ export function localHref(href) {
   if (LANG === 'en' || typeof href !== 'string') return href;
   return href.replace(/^(index|classical|beyond|archive|course)\.html/, '$1.ko.html');
 }
+
+// The language switch in the nav: the language being read stays put, and the
+// other opens its twin at the same place (the twins share their ids, so the
+// section or figure nearest the top of the window is carried as the #).
+for (const a of document.querySelectorAll('.langs a')) {
+  a.addEventListener('click', (e) => {
+    if (a.getAttribute('aria-current') === 'true') { e.preventDefault(); return; }
+    let place = location.hash;
+    if (scrollY > 40) {
+      const marks = [...document.querySelectorAll('section[id], figure[id], li.week[id]')];
+      // where each would land is its scroll margin from the top; take the last at or above it
+      const above = marks.filter((m) => m.getBoundingClientRect().top - parseFloat(getComputedStyle(m).scrollMarginTop) <= innerHeight * 0.2);
+      if (above.length) place = `#${above.at(-1).id}`;
+    }
+    a.href = a.getAttribute('href').split(/[?#]/)[0] + location.search + place;
+  });
+}

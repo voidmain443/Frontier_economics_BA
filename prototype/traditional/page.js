@@ -17,8 +17,6 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
       data[f] = null;
     }
   }));
-  // the switch to the other language keeps the place on the page
-  for (const a of document.querySelectorAll('a.lang')) a.addEventListener('click', () => { a.href = a.getAttribute('href').split(/[?#]/)[0] + location.search + location.hash; });
   await document.fonts.ready;
 
   function draw(fig) {
@@ -39,6 +37,17 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
     }
   }
   for (const fig of sheet.querySelectorAll('figure[data-fig]')) draw(fig);
+  // a # (a link, or the language switch) lands where it points, and stays
+  // there while the rest of the page takes its height, until the reader moves
+  const target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (target) {
+    const keep = new ResizeObserver(() => target.scrollIntoView({ block: 'start' }));
+    keep.observe(sheet);
+    const MOVES = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    const stop = () => { keep.disconnect(); for (const e of MOVES) removeEventListener(e, stop); };
+    for (const e of MOVES) addEventListener(e, stop, { passive: true });
+    setTimeout(stop, 5000);
+  }
 
   for (const st of sheet.querySelectorAll('.stage[data-no]')) {
     for (const eq of st.querySelectorAll('.eq')) eq.dataset.ch = `${st.dataset.no}.`;

@@ -936,4 +936,7 @@ body:not(.unfolded) .story { display: none; }
   --draft: 'Barlow Condensed', 'IBM Plex Sans KR', 'Apple SD Gothic Neo', sans-serif;
 }
 :lang(ko) body, :lang(ko) .sheet { word-break: keep-all; overflow-wrap: anywhere; }
-nav.site a.lang { margin-left: auto; }
+/* the two languages, side by side; the one being read is filled */
+nav.site .langs { display: inline-flex; margin-left: 10px; }
+nav.site .langs a + a { border-left: 0; }
+nav.site .langs a[aria-current='true'] { background: var(--ink); color: var(--sheet); border-color: var(--ink); cursor: default; }
