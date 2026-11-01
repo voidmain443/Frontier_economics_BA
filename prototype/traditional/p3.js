@@ -9,17 +9,18 @@ import { COURSES } from './curriculum.js';
 import { setupPage } from './page.js';
 import { PLACE_P1, BUILD_P3, placeOfLink, stopIndex } from './wheel.js';
 import { MODELS, MODELS_P2, RELATIONS, STAGES, stateOf, stageState, MEASURED } from './ontology.js';
+import { t, localHref } from './i18n.js';
 
 // the textbooks, with the question each answers
 const host = document.querySelector('#course-index');
 for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
   const h = document.createElement('h3');
-  h.textContent = name;
+  h.textContent = t(name);
   const ul = document.createElement('ul');
   ul.className = 'course-grid';
   for (const c of COURSES.filter((x) => x.side === side)) {
     const li = document.createElement('li');
-    li.innerHTML = `<a href="course.html?c=${c.id}"><b>${c.short}</b><span>${c.name}</span><i>${c.question ?? `${c.weeks.length} weeks`}</i></a>`;
+    li.innerHTML = `<a href="${localHref('course.html')}?c=${c.id}"><b>${t(c.short)}</b><span>${t(c.name)}</span><i>${t(c.question ?? `${c.weeks.length} weeks`)}</i></a>`;
     ul.appendChild(li);
   }
   host.append(h, ul);
@@ -28,12 +29,12 @@ for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']
 // every unit of Parts 1 and 2, in four of its nine fields
 const rel = Object.fromEntries(RELATIONS.map((r) => [r.id, r.name]));
 const table = document.createElement('table');
-table.innerHTML = `<caption>The units of Parts 1 and 2</caption><thead><tr><th>Unit</th><th>Moves</th><th>Holds</th><th>Its one change</th><th>Method</th></tr></thead>`;
+table.innerHTML = `<caption>${t('The units of Parts 1 and 2')}</caption><thead><tr><th>${t('Unit')}</th><th>${t('Moves')}</th><th>${t('Holds')}</th><th>${t('Its one change')}</th><th>${t('Method')}</th></tr></thead>`;
 const body = document.createElement('tbody');
 for (const m of [...MODELS, ...MODELS_P2]) {
   const tr = document.createElement('tr');
-  const held = m.held.map(([, v]) => v).filter(Boolean).join('; ');
-  tr.innerHTML = `<td><a href="${m.href}">${m.part === 2 ? 'Part 2, ' : ''}${m.id}</a> ${m.title}</td><td>${m.moving.join(', ')}</td><td>${held}</td><td>${m.rel === 'start' ? 'the start' : `${rel[m.rel]} ${m.what}`}</td><td>${m.method}</td>`;
+  const held = m.held.map(([, v]) => t(v)).filter(Boolean).join('; ');
+  tr.innerHTML = `<td><a href="${localHref(m.href)}">${m.part === 2 ? t('Part 2,') + ' ' : ''}${m.id}</a> ${t(m.title)}</td><td>${m.moving.map(t).join(', ')}</td><td>${held}</td><td>${m.rel === 'start' ? t('the start') : `${t(rel[m.rel])}: ${t(m.what)}`}</td><td>${t(m.method)}</td>`;
   body.appendChild(tr);
 }
 table.appendChild(body);
@@ -118,7 +119,7 @@ const constructs = {
         1: 'Stage 1 starts with one market. The households and firms behind its curves are held, and so is income.',
         2: 'Stage 2 opens demand into households who choose. Optimization arrives at the hub.',
         3: 'Stage 3 opens supply into firms that choose. Income and the wage are still held.',
-        4: 'Stage 4 relaxes price-taking. No cell changes: two firms stop taking the price as given, and strategy arrives at the hub.',
+        4: 'Stage 4 relaxes price-taking. No agent or market opens: two firms stop taking the price as given, and strategy arrives at the hub.',
         5: 'Stage 5 opens income and wages, the last held cell. Every market now moves at once.',
         6: 'Stage 6 adds the capital and money markets, the government, and the central bank with its rules.',
         7: 'Stage 7 measures what the wheel produces. Nothing new moves; beside the hub stand Korea’s output and employment.',

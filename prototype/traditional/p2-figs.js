@@ -46,7 +46,7 @@ export const FIGS = {
     const [l, r] = panels(art, 'two');
     const g = smallWorld(SW.n, SW.k, p0);
     const pos = ringPos(SW.n);
-    const p = P(l, { ...H2, h: 440, x: [-1.2, 1.2], y: [-1.2, 1.2], axes: false, pad: { l: 20, r: 20, t: 20, b: 20 }, alt: 'Eighty people on a ring, each tied to six neighbours, with a few ties rewired as shortcuts.' });
+    const p = P(l, { ...H2, h: 440, x: [-1.2, 1.2], y: [-1.2, 1.2], axes: false, pad: { l: 20, r: 20, t: 20, b: 20 }, alt: 'Eighty people on a ring, each tied to six neighbors, with a few ties rewired as shortcuts.' });
     for (const e of g.edges) p.line(...pos[e.a], ...pos[e.b], e.rewired ? 'md' : 'k thin faint');
     const d = distances(g.adj, 0);
     for (let i = 0; i < SW.n; i++) p.dot(...pos[i], i === 0 ? 'cb' : 'k', i === 0 ? 6 : 2.6);
@@ -288,7 +288,7 @@ export const FIGS = {
 
   // Scarf's economy: the prices circle the equilibrium; one consumer's settle
   '2.10'(art) {
-    const p = P(art, { w: 640, h: 560, x: [-0.12, 1.12], y: [-0.1, 0.98], axes: false, pad: { l: 10, r: 10, t: 10, b: 10 }, alt: 'A triangle of relative prices for three goods, with the equilibrium at its centre. Under the classical adjustment the prices of Scarf’s economy go round the centre in a closed loop; with one representative consumer they go straight to the centre.' });
+    const p = P(art, { w: 640, h: 560, x: [-0.12, 1.12], y: [-0.1, 0.98], axes: false, pad: { l: 10, r: 10, t: 10, b: 10 }, alt: 'A triangle of relative prices for three goods, with the equilibrium at its center. Under the classical adjustment the prices of Scarf’s economy go round the center in a closed loop; with one representative consumer they go straight to the center.' });
     const C = [[0, 0], [1, 0], [0.5, SIMPLEX.h]];
     p.pathPts([...C, C[0]], 'k thin');
     p.note(0, 0, 'good 1 dearest', { anchor: 'middle', dy: 20 });
@@ -314,7 +314,7 @@ export const FIGS = {
     p.note(0.78, 0.55, 'three people who differ:', { cls: 'md' });
     p.note(0.78, 0.55, 'round and round', { dy: 16, cls: 'md' });
     p.note(0.08, 0.5, 'one representative consumer:', { cls: 'cb' });
-    p.note(0.08, 0.5, 'straight to the centre', { dy: 16, cls: 'cb' });
+    p.note(0.08, 0.5, 'straight to the center', { dy: 16, cls: 'cb' });
   },
   // what the top journals published, by method, 1963–2011
   '2.11'(art) {

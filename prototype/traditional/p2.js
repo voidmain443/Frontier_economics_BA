@@ -6,6 +6,7 @@ import { CONSTRUCTS } from './p2-fold.js';
 import { setupPage } from './page.js';
 import { PLACE_P2, BUILD_P2 } from './wheel.js';
 import { SECTOR_NAMES } from './p2-models.js';
+import { t } from './i18n.js';
 
 const state = { p: 0.05, mix: [3, 4, 2, 1, 1], shock: 4, sector: 13 };
 const page = await setupPage({
@@ -44,6 +45,6 @@ $('#ctl-shock').addEventListener('input', (ev) => {
 });
 $('#ctl-sector').addEventListener('input', (ev) => {
   state.sector = Number(ev.target.value);
-  $('#out-sector').textContent = SECTOR_NAMES[page.data['korea-io']?.sectors[state.sector]?.code] ?? '';
+  $('#out-sector').textContent = t(SECTOR_NAMES[page.data['korea-io']?.sectors[state.sector]?.code] ?? '');
   page.redraw('2.8');
 });

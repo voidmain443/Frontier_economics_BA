@@ -1,0 +1,3362 @@
+[
+{
+"key": "Eighty people on a ring, each tied to six neighbors, with a few ties rewired as shortcuts.",
+"file": "p2-figs.js",
+"line": 49
+},
+{
+"key": "farthest person: {0} steps",
+"file": "p2-figs.js",
+"line": 55
+},
+{
+"key": "Average distance falls long before clustering does as more ties are rewired.",
+"file": "p2-figs.js",
+"line": 57
+},
+{
+"key": "average distance",
+"file": "p2-figs.js",
+"line": 63
+},
+{
+"key": "Two networks of twenty-four students: a long chain with short branches, and a core with students around it.",
+"file": "p2-figs.js",
+"line": 72
+},
+{
+"key": "a chain with short branches: {0} ties",
+"file": "p2-figs.js",
+"line": 77
+},
+{
+"key": "a core: {0} ties",
+"file": "p2-figs.js",
+"line": 78
+},
+{
+"key": "Four hundred firms on a plan, shaded by size: a few dark, most pale.",
+"file": "p2-figs.js",
+"line": 84
+},
+{
+"key": "Size against rank on log scales: a straight line, far from the mean.",
+"file": "p2-figs.js",
+"line": 94
+},
+{
+"key": "mean {0}: the representative firm",
+"file": "p2-figs.js",
+"line": 97
+},
+{
+"key": "Guesses by reasoning level, the average, two-thirds of it, and the Nash guess of zero.",
+"file": "p2-figs.js",
+"line": 106
+},
+{
+"key": "winning number ⅔ × average = {0}",
+"file": "p2-figs.js",
+"line": 117
+},
+{
+"key": "Nagel’s first rounds: {0}",
+"file": "p2-figs.js",
+"line": 119
+},
+{
+"key": "Ten banks on a ring and ten banks that all lend to each other; failed banks marked with the round in which they fail.",
+"file": "p2-figs.js",
+"line": 127
+},
+{
+"key": "each owes the next: {0} of {1} fail",
+"file": "p2-figs.js",
+"line": 142
+},
+{
+"key": "each owes all the others: {0} of {1} fail",
+"file": "p2-figs.js",
+"line": 143
+},
+{
+"key": "Five points for the five fifths of Korean households by income, spending against disposable income. The bottom fifth spends more than its income; the top fifth spends about half. A line through the average household from the origin passes through none of them.",
+"file": "p2-figs.js",
+"line": 148
+},
+{
+"key": "spending = income",
+"file": "p2-figs.js",
+"line": 150
+},
+{
+"key": "the representative household: {0}% of any income",
+"file": "p2-figs.js",
+"line": 153
+},
+{
+"key": "top fifth",
+"file": "p2-figs.js",
+"line": 157
+},
+{
+"key": "disposable income, million won a month",
+"file": "p2-figs.js",
+"line": 160
+},
+{
+"key": "Korea’s {0} sectors on a circle, with lines from suppliers to the sectors that buy at least {1} percent of their output from them; {2} is marked.",
+"file": "p2-figs.js",
+"line": 170
+},
+{
+"key": "The output one won of final demand for {0} draws from the ten sectors it draws most from, in rounds; {1} won in all.",
+"file": "p2-figs.js",
+"line": 188
+},
+{
+"key": "the won itself",
+"file": "p2-figs.js",
+"line": 189
+},
+{
+"key": "its suppliers",
+"file": "p2-figs.js",
+"line": 189
+},
+{
+"key": "further rounds",
+"file": "p2-figs.js",
+"line": 189
+},
+{
+"key": "in all, across {0} sectors: {1} won",
+"file": "p2-figs.js",
+"line": 207
+},
+{
+"key": "Korea’s consumer price inflation rose to {0} percent in July {1}; the Bank of Korea’s base rate rose from {2} percent in {3} to {4} percent in {5}.",
+"file": "p2-figs.js",
+"line": 215
+},
+{
+"key": "{0}%, July {1}",
+"file": "p2-figs.js",
+"line": 223
+},
+{
+"key": "consumer prices, % over a year",
+"file": "p2-figs.js",
+"line": 224
+},
+{
+"key": "base rate",
+"file": "p2-figs.js",
+"line": 225
+},
+{
+"key": "Jan {0} = {1}",
+"file": "p2-figs.js",
+"line": 227
+},
+{
+"key": "The price of Brent crude rose to more than twice its January {0} level by June {1}; the won fell by about a third against the dollar by October {2}.",
+"file": "p2-figs.js",
+"line": 227
+},
+{
+"key": "Brent crude",
+"file": "p2-figs.js",
+"line": 232
+},
+{
+"key": "won per dollar",
+"file": "p2-figs.js",
+"line": 233
+},
+{
+"key": "A timeline from {0} to {1}. Above, the textbook’s parts: Marshall {2}, Hicks {3}, Samuelson {4} and {5}, Arrow and Debreu {6}, Solow {7}. Below, findings it leaves out, from Pareto {8} to Axtell {9}; game theory and Akerlof’s lemons entered the core, Kahneman and Tversky a field course, and the rest none of Part {10}.",
+"file": "p2-figs.js",
+"line": 239
+},
+{
+"key": "The textbook",
+"file": "p2-figs.js",
+"line": 243
+},
+{
+"key": "Found, and set aside",
+"file": "p2-figs.js",
+"line": 244
+},
+{
+"key": "in Part {0}’s core",
+"file": "p2-figs.js",
+"line": 279
+},
+{
+"key": "in a field course only",
+"file": "p2-figs.js",
+"line": 279
+},
+{
+"key": "not in Part {0}",
+"file": "p2-figs.js",
+"line": 279
+},
+{
+"key": "A triangle of relative prices for three goods, with the equilibrium at its center. Under the classical adjustment the prices of Scarf’s economy go round the center in a closed loop; with one representative consumer they go straight to the center.",
+"file": "p2-figs.js",
+"line": 291
+},
+{
+"key": "good {0} dearest",
+"file": "p2-figs.js",
+"line": 294
+},
+{
+"key": "three people who differ:",
+"file": "p2-figs.js",
+"line": 314
+},
+{
+"key": "round and round",
+"file": "p2-figs.js",
+"line": 315
+},
+{
+"key": "one representative consumer:",
+"file": "p2-figs.js",
+"line": 316
+},
+{
+"key": "straight to the center",
+"file": "p2-figs.js",
+"line": 317
+},
+{
+"key": "% of articles",
+"file": "p2-figs.js",
+"line": 321
+},
+{
+"key": "Stacked bars for {0} to {1}: pure theory falls from about half of all articles to a fifth; empirical work on the authors’ own data rises from {2} to {3} percent, and experiments from none to {4} percent.",
+"file": "p2-figs.js",
+"line": 321
+},
+{
+"key": "Eight small plans of the wheel, one for each argument about what economics is, from Menger and Schmoller in {0} to the crisis of {1}, each showing which cells it moves, holds or leaves out and which it puts first.",
+"file": "p2-figs.js",
+"line": 350
+},
+{
+"key": "put first",
+"file": "p2-figs.js",
+"line": 360
+},
+{
+"key": "rows, top to bottom: agents, markets, rules, methods",
+"file": "p2-figs.js",
+"line": 368
+},
+{
+"key": "Ten projects that rebuild the teaching of economics as rows, and eight needs found in this part as columns. Every need but the last is met by at least one project; the last, a map of what each model holds, by none.",
+"file": "p2-figs.js",
+"line": 375
+},
+{
+"key": "none yet",
+"file": "p2-figs.js",
+"line": 402
+},
+{
+"key": "Marshall",
+"file": "p2-figs.js",
+"line": 410
+},
+{
+"key": "Hicks, IS–LM",
+"file": "p2-figs.js",
+"line": 410
+},
+{
+"key": "Samuelson, Foundations",
+"file": "p2-figs.js",
+"line": 410
+},
+{
+"key": "Samuelson, Economics",
+"file": "p2-figs.js",
+"line": 410
+},
+{
+"key": "Solow",
+"file": "p2-figs.js",
+"line": 410
+},
+{
+"key": "Pareto",
+"file": "p2-figs.js",
+"line": 412
+},
+{
+"key": "incomes follow a power law",
+"file": "p2-figs.js",
+"line": 412
+},
+{
+"key": "Gibrat",
+"file": "p2-figs.js",
+"line": 413
+},
+{
+"key": "firms grow in proportion",
+"file": "p2-figs.js",
+"line": 413
+},
+{
+"key": "Keynes",
+"file": "p2-figs.js",
+"line": 414
+},
+{
+"key": "guessing what others guess",
+"file": "p2-figs.js",
+"line": 414
+},
+{
+"key": "von Neumann, Morgenstern",
+"file": "p2-figs.js",
+"line": 415
+},
+{
+"key": "Zipf",
+"file": "p2-figs.js",
+"line": 416
+},
+{
+"key": "sizes by rank",
+"file": "p2-figs.js",
+"line": 416
+},
+{
+"key": "Nash",
+"file": "p2-figs.js",
+"line": 417
+},
+{
+"key": "equilibrium in any game",
+"file": "p2-figs.js",
+"line": 417
+},
+{
+"key": "Simon",
+"file": "p2-figs.js",
+"line": 418
+},
+{
+"key": "bounded rationality",
+"file": "p2-figs.js",
+"line": 418
+},
+{
+"key": "Scarf",
+"file": "p2-figs.js",
+"line": 419
+},
+{
+"key": "prices that never settle",
+"file": "p2-figs.js",
+"line": 419
+},
+{
+"key": "Milgram",
+"file": "p2-figs.js",
+"line": 420
+},
+{
+"key": "a few steps to anyone",
+"file": "p2-figs.js",
+"line": 420
+},
+{
+"key": "Akerlof",
+"file": "p2-figs.js",
+"line": 421
+},
+{
+"key": "hidden quality",
+"file": "p2-figs.js",
+"line": 421
+},
+{
+"key": "Granovetter",
+"file": "p2-figs.js",
+"line": 422
+},
+{
+"key": "weak ties",
+"file": "p2-figs.js",
+"line": 422
+},
+{
+"key": "Kahneman, Tversky",
+"file": "p2-figs.js",
+"line": 423
+},
+{
+"key": "prospect theory",
+"file": "p2-figs.js",
+"line": 423
+},
+{
+"key": "Watts, Strogatz",
+"file": "p2-figs.js",
+"line": 424
+},
+{
+"key": "small worlds",
+"file": "p2-figs.js",
+"line": 424
+},
+{
+"key": "Axtell",
+"file": "p2-figs.js",
+"line": 425
+},
+{
+"key": "Zipf’s law for firms",
+"file": "p2-figs.js",
+"line": 425
+},
+{
+"key": "Households",
+"file": "p2-figs.js",
+"line": 464
+},
+{
+"key": "Firms",
+"file": "p2-figs.js",
+"line": 464
+},
+{
+"key": "the farthest person: {0} steps",
+"file": "p2-fold.js",
+"line": 121
+},
+{
+"key": "steps from you, as height",
+"file": "p2-fold.js",
+"line": 121
+},
+{
+"key": "steps {0} … {1}",
+"file": "p2-fold.js",
+"line": 122
+},
+{
+"key": "Eighty people on a ring, each tied to the six nearest. The red ties have been rewired at random into shortcuts.",
+"file": "p2-fold.js",
+"line": 129
+},
+{
+"key": "Raise each person by the number of steps it takes to reach them from you. On a plain ring the far side would stand {0} steps high.",
+"file": "p2-fold.js",
+"line": 130
+},
+{
+"key": "Send a letter to the farthest person, from friend to friend, as Milgram’s senders did. With these shortcuts it arrives in {0} steps.",
+"file": "p2-fold.js",
+"line": 131
+},
+{
+"key": "Granovetter ({0}) found that people often hear of jobs through acquaintances rather than close friends: the weak ties are the shortcuts. Rewire more with the slider in the margin, and distance collapses long before neighbors stop knowing one another.",
+"file": "p2-fold.js",
+"line": 132
+},
+{
+"key": "On the wheel, households now buy from and work for the few firms they are tied to, and what they send one another travels along those ties instead of through the market.",
+"file": "p2-fold.js",
+"line": 133
+},
+{
+"key": "pairs cut off if this tie breaks: up to {0}",
+"file": "p2-fold.js",
+"line": 160
+},
+{
+"key": "the core: at most {0}, one student",
+"file": "p2-fold.js",
+"line": 160
+},
+{
+"key": "pairs cut {0} … {1}",
+"file": "p2-fold.js",
+"line": 161
+},
+{
+"key": "Twenty-four students linked as a long chain with short branches, and twenty-four linked around a core. On average each has about two partners in the chain and two and a half in the core.",
+"file": "p2-fold.js",
+"line": 166
+},
+{
+"key": "Raise every tie as a wall, as tall as the number of pairs of students who would be cut off from each other if it broke.",
+"file": "p2-fold.js",
+"line": 167
+},
+{
+"key": "Break the tallest tie in the chain. The students on either side can no longer reach each other: {0} pairs are cut apart by one tie.",
+"file": "p2-fold.js",
+"line": 168
+},
+{
+"key": "In the core no tie stands higher than {0}, and those only where one student hangs off the edge. Two networks with similar averages differ completely in what one broken tie does.",
+"file": "p2-fold.js",
+"line": 169
+},
+{
+"key": "On the wheel, the networks cell lights over households tied to particular firms. Whether one broken tie cuts the economy apart depends on the shape of these ties, not on how many there are.",
+"file": "p2-fold.js",
+"line": 170
+},
+{
+"key": "Networks",
+"file": "p2-fold.js",
+"line": 172
+},
+{
+"key": "mean {0}: the representative firm, which no firm is",
+"file": "p2-fold.js",
+"line": 192
+},
+{
+"key": "size {0} … {1}",
+"file": "p2-fold.js",
+"line": 193
+},
+{
+"key": "the largest firm, stopped: a seventh of the flow",
+"file": "p2-fold.js",
+"line": 202
+},
+{
+"key": "Four hundred firms grown by preferential attachment, darker for larger: newcomers link to those already well connected.",
+"file": "p2-fold.js",
+"line": 204
+},
+{
+"key": "Raise every firm as tall as it is large. A few giants stand over a long tail.",
+"file": "p2-fold.js",
+"line": 205
+},
+{
+"key": "The mean is a plane at height {0}, and it runs through no actual firm: {1} percent stand below it, and the largest is about {2} times the mean.",
+"file": "p2-fold.js",
+"line": 206
+},
+{
+"key": "On the wheel, drawn as Stage {0}’s representative firm draws them: all {1} firms the same size, each the mean.",
+"file": "p2-fold.js",
+"line": 207
+},
+{
+"key": "As they are, by Zipf’s law, with goods, work and pay reaching each in proportion to its size. Stop the largest, and a seventh of all that flow stops with it: shocks to giants do not average out (Gabaix {0}).",
+"file": "p2-fold.js",
+"line": 208
+},
+{
+"key": "level {0} reasons one step",
+"file": "p2-fold.js",
+"line": 236
+},
+{
+"key": "Nash: the top of a staircase few climb",
+"file": "p2-fold.js",
+"line": 236
+},
+{
+"key": "reasoning level, as height",
+"file": "p2-fold.js",
+"line": 236
+},
+{
+"key": "level {0} … Nash",
+"file": "p2-fold.js",
+"line": 237
+},
+{
+"key": "Everyone chooses a number from {0} to {1}, and the winner is closest to two-thirds of the average. The bars count the players who reason zero, one, two or three steps, or all the way.",
+"file": "p2-fold.js",
+"line": 241
+},
+{
+"key": "Raise each level of reasoning as height. Level {0} guesses {1}, on the page.",
+"file": "p2-fold.js",
+"line": 242
+},
+{
+"key": "Each step up guesses a third lower, and the steps lead down to {0}, the only Nash equilibrium, at the top. The guesses trace a staircase, and the bars show how few players climb it.",
+"file": "p2-fold.js",
+"line": 243
+},
+{
+"key": "In Rosemarie Nagel’s experiments first guesses averaged {0}: most players reason one or two steps and stop. With this mix the winning number is {1}.{2} Change the mix in the margin.",
+"file": "p2-fold.js",
+"line": 244
+},
+{
+"key": "On the wheel, strategy lights at the hub, over players who differ in how far they reason. Stage {0}’s two firms both reasoned all the way.",
+"file": "p2-fold.js",
+"line": 245
+},
+{
+"key": "Strategy",
+"file": "p2-fold.js",
+"line": 247
+},
+{
+"key": "all at once, round {0}",
+"file": "p2-fold.js",
+"line": 279
+},
+{
+"key": "one after another, to round {0}",
+"file": "p2-fold.js",
+"line": 279
+},
+{
+"key": "the round a bank fails, as height",
+"file": "p2-fold.js",
+"line": 282
+},
+{
+"key": "round {0} … {1}",
+"file": "p2-fold.js",
+"line": 283
+},
+{
+"key": "Ten banks with a buffer of {0} each. A failed bank passes its loss beyond the buffer, in equal parts, to the banks it owes: on the left only the next one, on the right all the others.",
+"file": "p2-fold.js",
+"line": 290
+},
+{
+"key": "Raise each bank to the round in which it fails. The ones that survive stay on the page.",
+"file": "p2-fold.js",
+"line": 291
+},
+{
+"key": "A loss of {0} at the first bank. {1} {2} Beside the page they fall in their rounds.",
+"file": "p2-fold.js",
+"line": 292
+},
+{
+"key": "They are the wheel’s ten banks, each now tied to the bank it owes and to the firms it lends to. Each that fails turns red there too, and the saving and lending that ran through it stop. Raise the loss above {0} with the slider, and the dense network falls all at once, in round {1}.",
+"file": "p2-fold.js",
+"line": 293
+},
+{
+"key": "top fifth: {0} of all income",
+"file": "p2-fold.js",
+"line": 321
+},
+{
+"key": "bottom fifth: {0} of all income",
+"file": "p2-fold.js",
+"line": 322
+},
+{
+"key": "{0} of all spending",
+"file": "p2-fold.js",
+"line": 323
+},
+{
+"key": "share of all income {0} … {1}",
+"file": "p2-fold.js",
+"line": 326
+},
+{
+"key": "Korean households in {0}, in five fifths by income: what each spends a month against what it has to spend. The line through the average is the representative household, which spends {1} of whatever it has.",
+"file": "p2-fold.js",
+"line": 330
+},
+{
+"key": "Raise each fifth by its share of all disposable income. The top fifth has {0} of it; the bottom fifth, {1}.",
+"file": "p2-fold.js",
+"line": 331
+},
+{
+"key": "Beside each, its share of all spending. The bottom fifth does {0} of the spending with {1} of the income, the top fifth {2} with {3}. A won given to one does not do what a won given to the other does.",
+"file": "p2-fold.js",
+"line": 332
+},
+{
+"key": "On the wheel the households take their sizes by income, each dot in its fifth, the area in proportion to that fifth’s income. The representative household drew them all alike.",
+"file": "p2-fold.js",
+"line": 333
+},
+{
+"key": "{0}: one won of final demand",
+"file": "p2-fold.js",
+"line": 378
+},
+{
+"key": "in all: {0} won",
+"file": "p2-fold.js",
+"line": 378
+},
+{
+"key": "output drawn, won {0} … {1}",
+"file": "p2-fold.js",
+"line": 379
+},
+{
+"key": "Korea’s {0} sectors in {1}, each on a circle, with a line from a supplier to each sector that buys at least {2} percent of its output from it. Choose a sector in the margin; here it is {3}.",
+"file": "p2-fold.js",
+"line": 382
+},
+{
+"key": "Add one won of final demand for {0}. Without ties, as the firm of Figure {1} has none, that is all: one sector rises by one won.",
+"file": "p2-fold.js",
+"line": 383
+},
+{
+"key": "To make it, {0} buys from its suppliers: {1} won in the first round, most from {2}.",
+"file": "p2-fold.js",
+"line": 384
+},
+{
+"key": "The suppliers buy from theirs: {0} won more in the second round.",
+"file": "p2-fold.js",
+"line": 385
+},
+{
+"key": "And so on, round after round, until one won of final demand has drawn {0} won of output in all. This is the column of the Leontief inverse.",
+"file": "p2-fold.js",
+"line": 386
+},
+{
+"key": "On the wheel, the firms are tied to the firms they buy from. A shock to a firm that supplies many travels along the ties and does not average out (Acemoglu et al. {0}).",
+"file": "p2-fold.js",
+"line": 387
+},
+{
+"key": "oil in won, {0} (Jan {1} = {2})",
+"file": "p2-fold.js",
+"line": 408
+},
+{
+"key": "Brent × won per dollar",
+"file": "p2-fold.js",
+"line": 409
+},
+{
+"key": "Goods",
+"file": "p2-fold.js",
+"line": 410
+},
+{
+"key": "Equilibrium",
+"file": "p2-fold.js",
+"line": 410
+},
+{
+"key": "Other countries",
+"file": "p2-fold.js",
+"line": 415
+},
+{
+"key": "Foreign exchange",
+"file": "p2-fold.js",
+"line": 415
+},
+{
+"key": "Central banks",
+"file": "p2-fold.js",
+"line": 415
+},
+{
+"key": "Consumer prices <b>+{0}%</b><br><i>July {1}, a year earlier</i>",
+"file": "p2-fold.js",
+"line": 415
+},
+{
+"key": "unlike households",
+"file": "p2-fold.js",
+"line": 416
+},
+{
+"key": "supply chains",
+"file": "p2-fold.js",
+"line": 416
+},
+{
+"key": "oil ${0} → ${1}",
+"file": "p2-fold.js",
+"line": 416
+},
+{
+"key": "₩{0} → ₩{1} per $",
+"file": "p2-fold.js",
+"line": 416
+},
+{
+"key": "base rate {0}% → {1}%",
+"file": "p2-fold.js",
+"line": 416
+},
+{
+"key": "Korea, {0}–{1}. Consumer prices rose {2} percent in the year to July {3}, the fastest since {4}, and the base rate followed, from {5} to {6} percent.",
+"file": "p2-fold.js",
+"line": 419
+},
+{
+"key": "Raise the inflation line by what a barrel of oil cost in won: the dollar price times the exchange rate. The path climbs to more than twice its {0} height. The flat line on the page is its shadow, and a one-curve answer reads only the shadow.",
+"file": "p2-fold.js",
+"line": 420
+},
+{
+"key": "The usual explanation names one shift: demand recovered, so the demand curve moved out. On the wheel that answer is one market moving, the households and firms behind its curves held, and the rest left out.",
+"file": "p2-fold.js",
+"line": 421
+},
+{
+"key": "The economy that produced the rise moved all at once: oil from abroad, the exchange rate, the central bank, and firms tied to their suppliers.",
+"file": "p2-fold.js",
+"line": 422
+},
+{
+"key": "Back to one curve, with what it held written on the cells it held. These are the values that moved most.",
+"file": "p2-fold.js",
+"line": 423
+},
+{
+"key": "a representative agent",
+"file": "p2-fold.js",
+"line": 436
+},
+{
+"key": "no connections",
+"file": "p2-fold.js",
+"line": 436
+},
+{
+"key": "full information",
+"file": "p2-fold.js",
+"line": 436
+},
+{
+"key": "consistent choice",
+"file": "p2-fold.js",
+"line": 436
+},
+{
+"key": "equilibrium at once",
+"file": "p2-fold.js",
+"line": 436
+},
+{
+"key": "the assumption it breaks",
+"file": "p2-fold.js",
+"line": 447
+},
+{
+"key": "Optimization",
+"file": "p2-fold.js",
+"line": 454
+},
+{
+"key": "Above, the years in which the textbook’s parts were built. Below, findings about what those parts leave out. Most were known while the textbook was being written.",
+"file": "p2-fold.js",
+"line": 458
+},
+{
+"key": "Raise each finding to the assumption it breaks. The rows are the rows of Part {0}’s table of assumptions. Two rows hold only red marks, findings Part {1} never takes in: a representative agent, and no connections.",
+"file": "p2-fold.js",
+"line": 459
+},
+{
+"key": "Pareto ({0}): incomes follow a power law. Gibrat ({1}): firms grow in proportion to their size. Zipf ({2}): city sizes fall with rank like a power. On the wheel, households and firms take unequal sizes.",
+"file": "p2-fold.js",
+"line": 460
+},
+{
+"key": "Keynes ({0}), von Neumann and Morgenstern ({1}), Nash ({2}), Simon ({3}): people reason about one another, and only so far. Scarf ({4}): prices need not settle. Games and hidden quality entered the core.",
+"file": "p2-fold.js",
+"line": 461
+},
+{
+"key": "Milgram ({0}) and Granovetter ({1}): people reach particular others, through a few steps and weak ties. The households are tied.",
+"file": "p2-fold.js",
+"line": 462
+},
+{
+"key": "For its readers, the textbook settled on what a student can solve by hand on one page: every agent of a kind the same size, anyone trading with anyone. On the wheel, what was found goes out again.",
+"file": "p2-fold.js",
+"line": 463
+},
+{
+"key": "This part puts it back, one assumption at a time.",
+"file": "p2-fold.js",
+"line": 464
+},
+{
+"key": "one representative consumer: settles, then climbs straight up",
+"file": "p2-fold.js",
+"line": 484
+},
+{
+"key": "three people who differ: round the equilibrium, forever",
+"file": "p2-fold.js",
+"line": 485
+},
+{
+"key": "the equilibrium: it exists, a fixed point, and is never reached",
+"file": "p2-fold.js",
+"line": 486
+},
+{
+"key": "time {0} … {1}",
+"file": "p2-fold.js",
+"line": 488
+},
+{
+"key": "Three goods, three people, each owning one good. The triangle holds every set of relative prices; its center is the only equilibrium. The arrows show how the classical adjustment moves the prices: up where a good is in excess demand.",
+"file": "p2-fold.js",
+"line": 490
+},
+{
+"key": "Let time rise off the page. With one representative consumer the prices go to the center and then climb straight up it: equilibrium, reached.",
+"file": "p2-fold.js",
+"line": 491
+},
+{
+"key": "In Scarf’s economy each person wants a different pair of goods. The same adjustment carries the prices round the center, climbing, and never closer to it.",
+"file": "p2-fold.js",
+"line": 492
+},
+{
+"key": "The equilibrium exists in both: a fixed-point theorem from topology guarantees it. Whether it is reached depends on how unlike the people are, and Sonnenschein, Mantel and Debreu showed that adding up unlike people puts almost no shape on total demand.",
+"file": "p2-fold.js",
+"line": 493
+},
+{
+"key": "theory: {0}% → {1}%",
+"file": "p2-fold.js",
+"line": 513
+},
+{
+"key": "own data {0}% → {1}%, experiments {2} → {3}%",
+"file": "p2-fold.js",
+"line": 513
+},
+{
+"key": "share of articles, {0} … {1}%",
+"file": "p2-fold.js",
+"line": 514
+},
+{
+"key": "Empirical articles <b>{0}%</b><br><i>top three journals, {1}</i>",
+"file": "p2-fold.js",
+"line": 515
+},
+{
+"key": "Measurement",
+"file": "p2-fold.js",
+"line": 515
+},
+{
+"key": "Every full-length article in three top journals, one year in each decade, by method (Hamermesh {0}). On the page the methods are stacked, so only the bottom band can be followed.",
+"file": "p2-fold.js",
+"line": 517
+},
+{
+"key": "Take the stack apart. Each method stands in its own row, and each column is as tall as that method’s share of the year.",
+"file": "p2-fold.js",
+"line": 518
+},
+{
+"key": "Theory was half of all articles in {0} and more in {1}. By {2} it was a fifth.",
+"file": "p2-fold.js",
+"line": 519
+},
+{
+"key": "Empirical work on data the authors collected themselves rose from {0} to {1} percent, and experiments from none to {2}. In {3} nearly three articles in four were empirical, and four in five had more than one author.",
+"file": "p2-fold.js",
+"line": 520
+},
+{
+"key": "On the wheel the measurement cell lights, and what it measures now is households and firms that are unlike one another.",
+"file": "p2-fold.js",
+"line": 521
+},
+{
+"key": "Banks",
+"file": "p2-fold.js",
+"line": 542
+},
+{
+"key": "{0}. Menger: economics deduces general laws from choice. Schmoller: it studies the history and institutions of particular economies. The tools at the hub, or the rules and history.",
+"file": "p2-fold.js",
+"line": 544
+},
+{
+"key": "{0} and {1}. Marshall’s economics is the study of mankind in the ordinary business of life: the whole wheel. Robbins’s is behavior as a relationship between ends and scarce means: one tool at the hub.",
+"file": "p2-fold.js",
+"line": 545
+},
+{
+"key": "{0}. Keynes: employment is set by total spending, which can stay too low. He takes the money wage as given, and argues that cutting it need not restore employment. The labor market is held; goods and money move.",
+"file": "p2-fold.js",
+"line": 546
+},
+{
+"key": "{0}. Hayek: knowledge is dispersed among people who differ, prices carry it, and no planner can gather it. Unlike households and firms, joined by a market.",
+"file": "p2-fold.js",
+"line": 547
+},
+{
+"key": "{0}. Friedman: a theory’s assumptions need not be realistic if its predictions are right. The classical wheel, every agent alike, judged only by measurement.",
+"file": "p2-fold.js",
+"line": 548
+},
+{
+"key": "{0}. Lucas: the rules that describe behavior change when policy changes, so models must start from choices. Households choosing, under the central bank’s rules.",
+"file": "p2-fold.js",
+"line": 549
+},
+{
+"key": "{0}. Kirman: whom does the representative individual represent? Unlike people can add up to a total that none of them would choose.",
+"file": "p2-fold.js",
+"line": 550
+},
+{
+"key": "{0}. The benchmark model behind much central-bank analysis, Smets and Wouters ({1}), had no banks, and models that added credit did not tie banks to one another.",
+"file": "p2-fold.js",
+"line": 551
+},
+{
+"key": "Eight arguments about what economics is and how it should model, each drawn on the page as a small plan of the wheel.",
+"file": "p2-fold.js",
+"line": 554
+},
+{
+"key": "The crisis ran through banks tied to one another. Each argument proposes a different state of the same wheel.",
+"file": "p2-fold.js",
+"line": 556
+},
+{
+"key": "Post-Crash Economics Society",
+"file": "p2-fold.js",
+"line": 569
+},
+{
+"key": "ISIPE open letter",
+"file": "p2-fold.js",
+"line": 569
+},
+{
+"key": "Students first. After {0} the Post-Crash Economics Society in Manchester, and then student groups in thirty countries, asked for real problems, history, money and banking, and more than one school.",
+"file": "p2-fold.js",
+"line": 569
+},
+{
+"key": "CORE, The Economy",
+"file": "p2-fold.js",
+"line": 570
+},
+{
+"key": "Teachers built CORE: each unit starts from a problem, inequality first, with data, strategic interaction and power from the first week.",
+"file": "p2-fold.js",
+"line": 570
+},
+{
+"key": "Rebuilding Macroeconomic Theory",
+"file": "p2-fold.js",
+"line": 571
+},
+{
+"key": "Macroeconomists asked for four changes to the benchmark model: banks and finance, limits on rational expectations, unlike agents, and better foundations.",
+"file": "p2-fold.js",
+"line": 571
+},
+{
+"key": "Opportunity Insights course",
+"file": "p2-fold.js",
+"line": 572
+},
+{
+"key": "Causal Inference: The Mixtape",
+"file": "p2-fold.js",
+"line": 572
+},
+{
+"key": "Others start from data: an introductory course built on records of millions of people, and a textbook of research designs.",
+"file": "p2-fold.js",
+"line": 572
+},
+{
+"key": "QuantEcon",
+"file": "p2-fold.js",
+"line": 573
+},
+{
+"key": "Complexity Explorer",
+"file": "p2-fold.js",
+"line": 573
+},
+{
+"key": "The Evolution of Trust",
+"file": "p2-fold.js",
+"line": 573
+},
+{
+"key": "Exploring Economics",
+"file": "p2-fold.js",
+"line": 573
+},
+{
+"key": "Others make the models run as code, simulate agents in networks, let readers play the games, and set the schools side by side.",
+"file": "p2-fold.js",
+"line": 573
+},
+{
+"key": "Labor",
+"file": "p2-fold.js",
+"line": 576
+},
+{
+"key": "income I = {0}",
+"file": "p2-fold.js",
+"line": 576
+},
+{
+"key": "Ten projects that rebuild the teaching of economics, against the needs this part has found. Each mark is what a project sets out to add.",
+"file": "p2-fold.js",
+"line": 578
+},
+{
+"key": "Every need is met somewhere, and one is met nowhere: a common map on which any model, classical or modern, shows what it moves, what it holds still and what it leaves out. Part {0} draws that map.",
+"file": "p2-fold.js",
+"line": 580
+},
+{
+"key": "Computation",
+"file": "p2-fold.js",
+"line": 600
+},
+{
+"key": "History",
+"file": "p2-fold.js",
+"line": 601
+},
+{
+"key": "the price of x",
+"file": "p2-fold.js",
+"line": 604
+},
+{
+"key": "income I",
+"file": "p2-fold.js",
+"line": 604
+},
+{
+"key": "Five tasks recur in everything above. Each is an operation on the wheel.",
+"file": "p2-fold.js",
+"line": 607
+},
+{
+"key": "Say what is held. Every model holds something still; name it and its value, as Part {0} named each figure’s hidden axis.",
+"file": "p2-fold.js",
+"line": 608
+},
+{
+"key": "Find the assumption that decides. A few assumptions change the answer; Rodrik calls them critical. Here: whether agents are alike, and whether they are tied.",
+"file": "p2-fold.js",
+"line": 609
+},
+{
+"key": "Measure with a design. A pattern in data is not a relationship until the design separates cause from coincidence.",
+"file": "p2-fold.js",
+"line": 610
+},
+{
+"key": "Compute when the page cannot solve. Unlike, connected agents are solved by simulation, and the simulation is part of the argument.",
+"file": "p2-fold.js",
+"line": 611
+},
+{
+"key": "Keep history. The networks, the distributions and the rules change, and a model fits a period that should be stated.",
+"file": "p2-fold.js",
+"line": 612
+},
+{
+"key": "Part {0}’s wheel, as it left it: every agent of a kind alike, nobody tied to anybody, two cells empty.",
+"file": "p2-fold.js",
+"line": 613
+},
+{
+"key": "Part {0}’s wheel: the same cells, every one built, its agents unlike and tied. Neither replaces the other; each is a state of one wheel.",
+"file": "p2-fold.js",
+"line": 614
+},
+{
+"key": "Part {0} writes every model this way: what it moves, what it holds and at what value, what it leaves out. Here, Figure {1} of Part {2}.",
+"file": "p2-fold.js",
+"line": 615
+},
+{
+"key": "level {0}",
+"file": "p2-models.js",
+"line": 165
+},
+{
+"key": "bottom fifth",
+"file": "p2-models.js",
+"line": 207
+},
+{
+"key": "second fifth",
+"file": "p2-models.js",
+"line": 207
+},
+{
+"key": "middle fifth",
+"file": "p2-models.js",
+"line": 207
+},
+{
+"key": "fourth fifth",
+"file": "p2-models.js",
+"line": 207
+},
+{
+"key": "all households",
+"file": "p2-models.js",
+"line": 212
+},
+{
+"key": "farming and fishing",
+"file": "p2-models.js",
+"line": 219
+},
+{
+"key": "wood and paper",
+"file": "p2-models.js",
+"line": 219
+},
+{
+"key": "non-metallic minerals",
+"file": "p2-models.js",
+"line": 220
+},
+{
+"key": "basic metals",
+"file": "p2-models.js",
+"line": 220
+},
+{
+"key": "fabricated metal",
+"file": "p2-models.js",
+"line": 220
+},
+{
+"key": "electrical equipment",
+"file": "p2-models.js",
+"line": 221
+},
+{
+"key": "transport equipment",
+"file": "p2-models.js",
+"line": 221
+},
+{
+"key": "other manufacturing",
+"file": "p2-models.js",
+"line": 221
+},
+{
+"key": "power and gas",
+"file": "p2-models.js",
+"line": 222
+},
+{
+"key": "water and waste",
+"file": "p2-models.js",
+"line": 222
+},
+{
+"key": "restaurants and hotels",
+"file": "p2-models.js",
+"line": 222
+},
+{
+"key": "real estate",
+"file": "p2-models.js",
+"line": 223
+},
+{
+"key": "professional services",
+"file": "p2-models.js",
+"line": 223
+},
+{
+"key": "business support",
+"file": "p2-models.js",
+"line": 223
+},
+{
+"key": "public administration",
+"file": "p2-models.js",
+"line": 224
+},
+{
+"key": "arts and leisure",
+"file": "p2-models.js",
+"line": 224
+},
+{
+"key": "other services",
+"file": "p2-models.js",
+"line": 224
+},
+{
+"key": "theory with simulation",
+"file": "p2-models.js",
+"line": 309
+},
+{
+"key": "empirical, borrowed data",
+"file": "p2-models.js",
+"line": 310
+},
+{
+"key": "empirical, own data",
+"file": "p2-models.js",
+"line": 311
+},
+{
+"key": "Menger, Schmoller",
+"file": "p2-models.js",
+"line": 331
+},
+{
+"key": "laws from choice, or history",
+"file": "p2-models.js",
+"line": 331
+},
+{
+"key": "Property",
+"file": "p2-models.js",
+"line": 331
+},
+{
+"key": "Policy rules",
+"file": "p2-models.js",
+"line": 331
+},
+{
+"key": "Marshall, Robbins",
+"file": "p2-models.js",
+"line": 332
+},
+{
+"key": "the business of life, or scarce means",
+"file": "p2-models.js",
+"line": 332
+},
+{
+"key": "spending sets employment",
+"file": "p2-models.js",
+"line": 333
+},
+{
+"key": "Money",
+"file": "p2-models.js",
+"line": 333
+},
+{
+"key": "Governments",
+"file": "p2-models.js",
+"line": 333
+},
+{
+"key": "the money wage, given",
+"file": "p2-models.js",
+"line": 333
+},
+{
+"key": "Hayek",
+"file": "p2-models.js",
+"line": 334
+},
+{
+"key": "knowledge dispersed, prices carry it",
+"file": "p2-models.js",
+"line": 334
+},
+{
+"key": "Friedman",
+"file": "p2-models.js",
+"line": 335
+},
+{
+"key": "judge by predictions",
+"file": "p2-models.js",
+"line": 335
+},
+{
+"key": "Lucas",
+"file": "p2-models.js",
+"line": 336
+},
+{
+"key": "start from choices",
+"file": "p2-models.js",
+"line": 336
+},
+{
+"key": "Kirman",
+"file": "p2-models.js",
+"line": 337
+},
+{
+"key": "whom does one agent represent?",
+"file": "p2-models.js",
+"line": 337
+},
+{
+"key": "after the crisis",
+"file": "p2-models.js",
+"line": 338
+},
+{
+"key": "no banks in the benchmark",
+"file": "p2-models.js",
+"line": 338
+},
+{
+"key": "problems first",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "data and design",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "unlike agents",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "networks, finance, crises",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "behavior and strategy",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "history and schools",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "a map of what each model holds",
+"file": "p2-models.js",
+"line": 346
+},
+{
+"key": "{0} report",
+"file": "p2-models.js",
+"line": 349
+},
+{
+"key": "from {0}",
+"file": "p2-models.js",
+"line": 351
+},
+{
+"key": "Methods",
+"file": "p3-figs.js",
+"line": 18
+},
+{
+"key": "Institutions",
+"file": "p3-figs.js",
+"line": 21
+},
+{
+"key": "Taxes",
+"file": "p3-figs.js",
+"line": 22
+},
+{
+"key": "Contracts",
+"file": "p3-figs.js",
+"line": 22
+},
+{
+"key": "Regulation",
+"file": "p3-figs.js",
+"line": 23
+},
+{
+"key": "Markets",
+"file": "p3-figs.js",
+"line": 24
+},
+{
+"key": "Capital",
+"file": "p3-figs.js",
+"line": 25
+},
+{
+"key": "Land and air",
+"file": "p3-figs.js",
+"line": 26
+},
+{
+"key": "Agents",
+"file": "p3-figs.js",
+"line": 28
+},
+{
+"key": "The archive as a plan: four layers, methods at the bottom and agents at the top, six cells each, the wheel laid flat; every cell links to a course.",
+"file": "p3-figs.js",
+"line": 37
+},
+{
+"key": "Two models drawn on the plan of the archive. Figure {0} moves the goods market and the taxes beside it, holds the households, the firms and the labor market still, with income held at {1}, and leaves out the rest. Figure {2} moves goods, money, households and firms, holds the price level, government spending and the money supply, and leaves out banks, other countries and the rest.",
+"file": "p3-figs.js",
+"line": 57
+},
+{
+"key": "Figure {0}, supply and demand",
+"file": "p3-figs.js",
+"line": 60
+},
+{
+"key": "Figure {0}, IS–LM",
+"file": "p3-figs.js",
+"line": 60
+},
+{
+"key": "The eight stages of Part {0} as rows, the {1} cells of the wheel as columns, from the agents on the rim to the methods at the hub. Each stage opens, adds, relaxes or measures one thing; by stage {2} every cell moves but two, networks and computation.",
+"file": "p3-figs.js",
+"line": 74
+},
+{
+"key": "Eight classical assumptions as rows, the eight stages of Part {0} and Part {1} as columns. Six assumptions are relaxed somewhere in Part {2}. Two, a representative agent and no connections, are relaxed only in Part {3}; the first is touched once, in passing, in figure {4}.",
+"file": "p3-figs.js",
+"line": 104
+},
+{
+"key": "Stage {0}",
+"file": "p3-figs.js",
+"line": 110
+},
+{
+"key": "Part {0}",
+"file": "p3-figs.js",
+"line": 112
+},
+{
+"key": "relaxed in Part {0}",
+"file": "p3-figs.js",
+"line": 137
+},
+{
+"key": "relaxed in passing",
+"file": "p3-figs.js",
+"line": 137
+},
+{
+"key": "held still, at a value",
+"file": "p3-figs.js",
+"line": 185
+},
+{
+"key": "The core",
+"file": "p3.js",
+"line": 16
+},
+{
+"key": "The field courses",
+"file": "p3.js",
+"line": 16
+},
+{
+"key": "<a href=\"{0}?c={1}\"><b>{2}</b><span>{3}</span><i>{4}</i></a>",
+"file": "p3.js",
+"line": 23
+},
+{
+"key": "<td><a href=\"{0}\">{1}{2}</a> {3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td>",
+"file": "p3.js",
+"line": 37
+},
+{
+"key": "Part {0}, the classical sequence",
+"file": "p3.js",
+"line": 56
+},
+{
+"key": "The plan of the archive: four layers of what economics studies, six cells each, and every name a door to the course that teaches it.",
+"file": "p3.js",
+"line": 88
+},
+{
+"key": "Roll the plan up and each layer is a ring of one wheel, Frank Knight’s wheel of wealth ({0}). Build it from the rim in. First the agents, where everything that circulates starts and ends.",
+"file": "p3.js",
+"line": 89
+},
+{
+"key": "Then the markets, where agents meet: goods, labor, money, capital, foreign exchange, and the land and air that have no market until one is made. What the agents send one another starts to circulate through them; each route first carries one parcel alone.",
+"file": "p3.js",
+"line": 90
+},
+{
+"key": "Then the institutions, the rules the agents meet under. Taxes start to flow through theirs.",
+"file": "p3.js",
+"line": 91
+},
+{
+"key": "At the hub, the methods. They are not in the economy: they are the tools every other ring is read with, and Part {0} added one at five of its stages.",
+"file": "p3.js",
+"line": 92
+},
+{
+"key": "The wheel as section {0} built it: every cell moving, every route running. No textbook figure draws all of this.",
+"file": "p3.js",
+"line": 99
+},
+{
+"key": "Figure {0} moves one market: goods, and its price. Its buyers and sellers are there, but what they want and what they can make are given, so their cells are held, hatched. Everything else is left out and empties to its outline.",
+"file": "p3.js",
+"line": 100
+},
+{
+"key": "What Figure {0} holds fixed is income, I = {1}. Income reaches households as wages, through the labor market, and that route has stopped where it was. Folded in Part {2}, this value was the figure’s hidden axis.",
+"file": "p3.js",
+"line": 101
+},
+{
+"key": "Open the held cells and the wages move again: households earn what they spend, and firms hire the work they sell. Every market moves at once, as in Stage {0}.",
+"file": "p3.js",
+"line": 102
+},
+{
+"key": "Figure {0}, IS–LM, moves goods and money together, with the households that consume and the firms that invest. It holds the price level, government spending and the money supply.",
+"file": "p3.js",
+"line": 103
+},
+{
+"key": "It leaves out banks, other countries, and the land and air. A model is a choice of what moves, what is held and what is left out.",
+"file": "p3.js",
+"line": 104
+},
+{
+"key": "The classical sequence of Part {0}, as states of the wheel. It starts with almost all of it held or left out.",
+"file": "p3.js",
+"line": 116
+},
+{
+"key": "Stage {0} starts with one market. The households and firms behind its curves are held, and so is income.",
+"file": "p3.js",
+"line": 119
+},
+{
+"key": "Stage {0} opens demand into households who choose. Optimization arrives at the hub.",
+"file": "p3.js",
+"line": 120
+},
+{
+"key": "Stage {0} opens supply into firms that choose. Income and the wage are still held.",
+"file": "p3.js",
+"line": 121
+},
+{
+"key": "Stage {0} relaxes price-taking. No agent or market opens: two firms stop taking the price as given, and strategy arrives at the hub.",
+"file": "p3.js",
+"line": 122
+},
+{
+"key": "Stage {0} opens income and wages, the last held cell. Every market now moves at once.",
+"file": "p3.js",
+"line": 123
+},
+{
+"key": "Stage {0} adds the capital and money markets, the government, and the central bank with its rules.",
+"file": "p3.js",
+"line": 124
+},
+{
+"key": "Stage {0} measures what the wheel produces. Nothing new moves; beside the hub stand Korea’s output and employment.",
+"file": "p3.js",
+"line": 125
+},
+{
+"key": "Stage {0} adds one thing per field course: other countries, banks, the land and air, property, history. Two cells never move: networks and computation.",
+"file": "p3.js",
+"line": 126
+},
+{
+"key": "The fifth relation adds no cell. The same structure returns in another: the household’s tangency of Figure {0} prices assets in the capital market of Figure {1}.",
+"file": "p3.js",
+"line": 130
+},
+{
+"key": "Every model makes assumptions about the agents in its moving cells. Eight run through Part {0}.",
+"file": "p3.js",
+"line": 139
+},
+{
+"key": "Six of them Part {0} relaxes itself: price-taking at strategy, full information at contracts, complete markets in the land and air, equilibrium at once in the labor market, consistent choice among households, and data that speak for themselves at measurement.",
+"file": "p3.js",
+"line": 140
+},
+{
+"key": "Two it never relaxes head-on. The first is the representative agent: one firm stands for all firms, one household for all households. Drawn that way, every firm on the wheel is the same size.",
+"file": "p3.js",
+"line": 141
+},
+{
+"key": "Relaxed, the firms are as unequal as Zipf’s law says, a few giants and a long tail, and households differ in income too.",
+"file": "p3.js",
+"line": 142
+},
+{
+"key": "The second is no connections: any household buys from any firm, through the market.",
+"file": "p3.js",
+"line": 143
+},
+{
+"key": "Relaxed, each household is tied to a few firms, firms to their suppliers, banks to one another, and what moves travels along the ties.",
+"file": "p3.js",
+"line": 144
+},
+{
+"key": "Unlike and connected: the two assumptions Part {0} keeps to the end are what Part {1} relaxes, in the two cells it builds.",
+"file": "p3.js",
+"line": 145
+},
+{
+"key": "A unit of the textbook is one model, in nine fields. This is Figure {0}’s.",
+"file": "p3.js",
+"line": 158
+},
+{
+"key": "Its question: where does a demand curve come from? Demand lives in the goods market.",
+"file": "p3.js",
+"line": 159
+},
+{
+"key": "It moves one cell: the households, each choosing the best bundle it can afford. Everything else is left out.",
+"file": "p3.js",
+"line": 160
+},
+{
+"key": "It holds two values: the price of x, one per budget line, which is its hidden axis, and income.",
+"file": "p3.js",
+"line": 161
+},
+{
+"key": "Its one change opens a cell that Figure {0} held. There, demand was given; here, it is a list of choices.",
+"file": "p3.js",
+"line": 162
+},
+{
+"key": "It assumes one household stands for all. Drawn as it assumes, every household is the same size.",
+"file": "p3.js",
+"line": 163
+},
+{
+"key": "Its method is optimization, at the hub: the best affordable bundle, a tangency.",
+"file": "p3.js",
+"line": 164
+},
+{
+"key": "Its evidence: in Hunan, poor households given cheaper rice bought less of it, a demand curve that slopes up (Jensen and Miller {0}).",
+"file": "p3.js",
+"line": 165
+},
+{
+"key": "It builds on Figure {0} and returns in Figure {1}’s demand surface and in labor supply.",
+"file": "p3.js",
+"line": 166
+},
+{
+"key": "The route of Part {0} is one way through the wheel.",
+"file": "p3.js",
+"line": 181
+},
+{
+"key": "By a question, why are some countries rich: from all markets at once to capital, institutions, history and the largest firms.",
+"file": "p3.js",
+"line": 182
+},
+{
+"key": "By an agent, the household: its choice, its saving, its consumption in macroeconomics, its portfolio, and its departures from the model.",
+"file": "p3.js",
+"line": 183
+},
+{
+"key": "By a market, labor: the firm’s demand for it, unemployment, who sets the wage, how to measure it, and jobs found through ties.",
+"file": "p3.js",
+"line": 184
+},
+{
+"key": "By an assumption, no connections: from Figure {0}, where anyone trades with anyone, through networks to the banks a loss travels between.",
+"file": "p3.js",
+"line": 185
+},
+{
+"key": "By a method, optimization: one tool at the hub, used by the household, the firm, the central bank and the investor.",
+"file": "p3.js",
+"line": 186
+},
+{
+"key": "Five ways through, and the route of Part {0} among them. The archive keeps the classical sequence as one way in, not the only one.",
+"file": "p3.js",
+"line": 187
+},
+{
+"key": "Section",
+"file": "p3.js",
+"line": 191
+},
+{
+"key": "A new archive",
+"file": "p3.js",
+"line": 191
+},
+{
+"key": "The units of Parts {0} and {1}",
+"file": "p3.js",
+"line": 32
+},
+{
+"key": "Unit",
+"file": "p3.js",
+"line": 32
+},
+{
+"key": "Moves",
+"file": "p3.js",
+"line": 32
+},
+{
+"key": "Holds",
+"file": "p3.js",
+"line": 32
+},
+{
+"key": "Its one change",
+"file": "p3.js",
+"line": 32
+},
+{
+"key": "Method",
+"file": "p3.js",
+"line": 32
+},
+{
+"key": "Part {0},",
+"file": "p3.js",
+"line": 37
+},
+{
+"key": "the start",
+"file": "p3.js",
+"line": 37
+},
+{
+"key": "Opens",
+"file": "ontology.js",
+"line": 8
+},
+{
+"key": "a part held still starts to move",
+"file": "ontology.js",
+"line": 8
+},
+{
+"key": "Adds",
+"file": "ontology.js",
+"line": 9
+},
+{
+"key": "a part left out is built",
+"file": "ontology.js",
+"line": 9
+},
+{
+"key": "Relaxes",
+"file": "ontology.js",
+"line": 10
+},
+{
+"key": "the same parts, under a different assumption",
+"file": "ontology.js",
+"line": 10
+},
+{
+"key": "Measures",
+"file": "ontology.js",
+"line": 11
+},
+{
+"key": "data ask what the moving parts produce",
+"file": "ontology.js",
+"line": 11
+},
+{
+"key": "Returns",
+"file": "ontology.js",
+"line": 12
+},
+{
+"key": "the same structure, in another cell",
+"file": "ontology.js",
+"line": 12
+},
+{
+"key": "A representative agent",
+"file": "ontology.js",
+"line": 19
+},
+{
+"key": "one agent stands for all of its kind; only the total matters",
+"file": "ontology.js",
+"line": 19
+},
+{
+"key": "No connections",
+"file": "ontology.js",
+"line": 20
+},
+{
+"key": "anyone can trade with anyone",
+"file": "ontology.js",
+"line": 20
+},
+{
+"key": "Price-taking",
+"file": "ontology.js",
+"line": 21
+},
+{
+"key": "nobody can move the price",
+"file": "ontology.js",
+"line": 21
+},
+{
+"key": "Full information",
+"file": "ontology.js",
+"line": 22
+},
+{
+"key": "everyone knows the same things",
+"file": "ontology.js",
+"line": 22
+},
+{
+"key": "Complete markets",
+"file": "ontology.js",
+"line": 23
+},
+{
+"key": "everything has a market",
+"file": "ontology.js",
+"line": 23
+},
+{
+"key": "Consistent choice",
+"file": "ontology.js",
+"line": 24
+},
+{
+"key": "a plan made today is kept tomorrow",
+"file": "ontology.js",
+"line": 24
+},
+{
+"key": "Equilibrium at once",
+"file": "ontology.js",
+"line": 25
+},
+{
+"key": "markets clear without delay",
+"file": "ontology.js",
+"line": 25
+},
+{
+"key": "Data show relationships",
+"file": "ontology.js",
+"line": 26
+},
+{
+"key": "a pattern in the data is the relationship",
+"file": "ontology.js",
+"line": 26
+},
+{
+"key": "Supply and demand",
+"file": "ontology.js",
+"line": 35
+},
+{
+"key": "the seed of the core",
+"file": "ontology.js",
+"line": 35
+},
+{
+"key": "A tax and the trades it stops",
+"file": "ontology.js",
+"line": 36
+},
+{
+"key": "who the buyers are",
+"file": "ontology.js",
+"line": 36
+},
+{
+"key": "a tax",
+"file": "ontology.js",
+"line": 36
+},
+{
+"key": "Elasticity grows with time",
+"file": "ontology.js",
+"line": 37
+},
+{
+"key": "the time buyers have had to adjust",
+"file": "ontology.js",
+"line": 37
+},
+{
+"key": "the time to adjust",
+"file": "ontology.js",
+"line": 37
+},
+{
+"key": "The best affordable bundle",
+"file": "ontology.js",
+"line": 38
+},
+{
+"key": "the household, which chooses the best it can afford",
+"file": "ontology.js",
+"line": 38
+},
+{
+"key": "Demand is a list of choices",
+"file": "ontology.js",
+"line": 39
+},
+{
+"key": "demand, into a list of choices",
+"file": "ontology.js",
+"line": 39
+},
+{
+"key": "Choice over time",
+"file": "ontology.js",
+"line": 40
+},
+{
+"key": "interest rate r",
+"file": "ontology.js",
+"line": 40
+},
+{
+"key": "a second period",
+"file": "ontology.js",
+"line": 40
+},
+{
+"key": "Plants of every size",
+"file": "ontology.js",
+"line": 41
+},
+{
+"key": "plant size K",
+"file": "ontology.js",
+"line": 41
+},
+{
+"key": "wage w",
+"file": "ontology.js",
+"line": 41
+},
+{
+"key": "supply, into a firm that chooses",
+"file": "ontology.js",
+"line": 41
+},
+{
+"key": "Entry",
+"file": "ontology.js",
+"line": 42
+},
+{
+"key": "the number of firms N",
+"file": "ontology.js",
+"line": 42
+},
+{
+"key": "the number of firms",
+"file": "ontology.js",
+"line": 42
+},
+{
+"key": "Two sellers",
+"file": "ontology.js",
+"line": 43
+},
+{
+"key": "profit, read as contours",
+"file": "ontology.js",
+"line": 43
+},
+{
+"key": "price-taking (A{0})",
+"file": "ontology.js",
+"line": 43
+},
+{
+"key": "A threat not carried out",
+"file": "ontology.js",
+"line": 44
+},
+{
+"key": "the order of moves",
+"file": "ontology.js",
+"line": 44
+},
+{
+"key": "Two consumers make a box",
+"file": "ontology.js",
+"line": 45
+},
+{
+"key": "two utilities, read as contours",
+"file": "ontology.js",
+"line": 45
+},
+{
+"key": "every market at once",
+"file": "ontology.js",
+"line": 45
+},
+{
+"key": "A good everyone uses",
+"file": "ontology.js",
+"line": 46
+},
+{
+"key": "the number of households n",
+"file": "ontology.js",
+"line": 46
+},
+{
+"key": "complete markets (A{0})",
+"file": "ontology.js",
+"line": 46
+},
+{
+"key": "Quality the buyer cannot see",
+"file": "ontology.js",
+"line": 47
+},
+{
+"key": "full information (A{0})",
+"file": "ontology.js",
+"line": 47
+},
+{
+"key": "Capital accumulates",
+"file": "ontology.js",
+"line": 48
+},
+{
+"key": "IS–LM and aggregate demand",
+"file": "ontology.js",
+"line": 49
+},
+{
+"key": "price level P",
+"file": "ontology.js",
+"line": 49
+},
+{
+"key": "spending G",
+"file": "ontology.js",
+"line": 49
+},
+{
+"key": "money supply M",
+"file": "ontology.js",
+"line": 49
+},
+{
+"key": "money and government",
+"file": "ontology.js",
+"line": 49
+},
+{
+"key": "The Phillips curve",
+"file": "ontology.js",
+"line": 50
+},
+{
+"key": "expected inflation",
+"file": "ontology.js",
+"line": 50
+},
+{
+"key": "equilibrium at once (A{0})",
+"file": "ontology.js",
+"line": 50
+},
+{
+"key": "The central bank chooses",
+"file": "ontology.js",
+"line": 51
+},
+{
+"key": "the bank’s loss, read as contours",
+"file": "ontology.js",
+"line": 51
+},
+{
+"key": "a policymaker who chooses",
+"file": "ontology.js",
+"line": 51
+},
+{
+"key": "The scatter is a shadow",
+"file": "ontology.js",
+"line": 52
+},
+{
+"key": "nothing: x₂ is left out",
+"file": "ontology.js",
+"line": 52
+},
+{
+"key": "a relationship, from data",
+"file": "ontology.js",
+"line": 52
+},
+{
+"key": "A cloud of prices",
+"file": "ontology.js",
+"line": 53
+},
+{
+"key": "nothing: each point a month",
+"file": "ontology.js",
+"line": 53
+},
+{
+"key": "the market of Figure {0}",
+"file": "ontology.js",
+"line": 53
+},
+{
+"key": "Trade",
+"file": "ontology.js",
+"line": 54
+},
+{
+"key": "the relative price",
+"file": "ontology.js",
+"line": 54
+},
+{
+"key": "a second economy",
+"file": "ontology.js",
+"line": 54
+},
+{
+"key": "The exchange rate",
+"file": "ontology.js",
+"line": 55
+},
+{
+"key": "the expected rate",
+"file": "ontology.js",
+"line": 55
+},
+{
+"key": "a second currency",
+"file": "ontology.js",
+"line": 55
+},
+{
+"key": "A run",
+"file": "ontology.js",
+"line": 56
+},
+{
+"key": "deposit guarantee, zero",
+"file": "ontology.js",
+"line": 56
+},
+{
+"key": "a balance sheet",
+"file": "ontology.js",
+"line": 56
+},
+{
+"key": "Diversification",
+"file": "ontology.js",
+"line": 57
+},
+{
+"key": "the correlation ρ",
+"file": "ontology.js",
+"line": 57
+},
+{
+"key": "the household’s tangency, pricing assets",
+"file": "ontology.js",
+"line": 57
+},
+{
+"key": "The cost of a tax",
+"file": "ontology.js",
+"line": 58
+},
+{
+"key": "the tax rate t",
+"file": "ontology.js",
+"line": 58
+},
+{
+"key": "a state that chooses taxes",
+"file": "ontology.js",
+"line": 58
+},
+{
+"key": "A cost a century later",
+"file": "ontology.js",
+"line": 59
+},
+{
+"key": "a hundred years to the damage",
+"file": "ontology.js",
+"line": 59
+},
+{
+"key": "A minimum wage",
+"file": "ontology.js",
+"line": 60
+},
+{
+"key": "the minimum wage",
+"file": "ontology.js",
+"line": 60
+},
+{
+"key": "A cartel",
+"file": "ontology.js",
+"line": 61
+},
+{
+"key": "patience δ",
+"file": "ontology.js",
+"line": 61
+},
+{
+"key": "Present bias",
+"file": "ontology.js",
+"line": 62
+},
+{
+"key": "the day you decide",
+"file": "ontology.js",
+"line": 62
+},
+{
+"key": "consistent choice (A{0})",
+"file": "ontology.js",
+"line": 62
+},
+{
+"key": "Missing credit",
+"file": "ontology.js",
+"line": 63
+},
+{
+"key": "the owner’s wealth",
+"file": "ontology.js",
+"line": 63
+},
+{
+"key": "Malthus",
+"file": "ontology.js",
+"line": 64
+},
+{
+"key": "the very long run",
+"file": "ontology.js",
+"line": 64
+},
+{
+"key": "No representative firm",
+"file": "ontology.js",
+"line": 68
+},
+{
+"key": "firm sizes, drawn not assumed",
+"file": "ontology.js",
+"line": 68
+},
+{
+"key": "a representative agent (A{0})",
+"file": "ontology.js",
+"line": 68
+},
+{
+"key": "Unlike households",
+"file": "ontology.js",
+"line": 69
+},
+{
+"key": "income, by fifths of households",
+"file": "ontology.js",
+"line": 69
+},
+{
+"key": "Games real people play",
+"file": "ontology.js",
+"line": 70
+},
+{
+"key": "the mix of reasoning levels",
+"file": "ontology.js",
+"line": 70
+},
+{
+"key": "a representative agent (A{0}), consistent choice (A{1})",
+"file": "ontology.js",
+"line": 70
+},
+{
+"key": "Who trades with whom",
+"file": "ontology.js",
+"line": 71
+},
+{
+"key": "the share of ties rewired",
+"file": "ontology.js",
+"line": 71
+},
+{
+"key": "no connections (A{0})",
+"file": "ontology.js",
+"line": 71
+},
+{
+"key": "Chains, not cores",
+"file": "ontology.js",
+"line": 72
+},
+{
+"key": "the average number of ties",
+"file": "ontology.js",
+"line": 72
+},
+{
+"key": "Connected firms",
+"file": "ontology.js",
+"line": 73
+},
+{
+"key": "the sector whose demand changes",
+"file": "ontology.js",
+"line": 73
+},
+{
+"key": "Contagion between banks",
+"file": "ontology.js",
+"line": 74
+},
+{
+"key": "who owes whom",
+"file": "ontology.js",
+"line": 74
+},
+{
+"key": "Prices that never settle",
+"file": "ontology.js",
+"line": 75
+},
+{
+"key": "nothing: time runs",
+"file": "ontology.js",
+"line": 75
+},
+{
+"key": "One market",
+"file": "ontology.js",
+"line": 97
+},
+{
+"key": "one market, the rest held",
+"file": "ontology.js",
+"line": 97
+},
+{
+"key": "demand given",
+"file": "ontology.js",
+"line": 97
+},
+{
+"key": "supply given",
+"file": "ontology.js",
+"line": 97
+},
+{
+"key": "The household",
+"file": "ontology.js",
+"line": 98
+},
+{
+"key": "demand, into households",
+"file": "ontology.js",
+"line": 98
+},
+{
+"key": "The firm",
+"file": "ontology.js",
+"line": 99
+},
+{
+"key": "supply, into firms",
+"file": "ontology.js",
+"line": 99
+},
+{
+"key": "income I, wage w",
+"file": "ontology.js",
+"line": 99
+},
+{
+"key": "A few firms",
+"file": "ontology.js",
+"line": 100
+},
+{
+"key": "All markets",
+"file": "ontology.js",
+"line": 101
+},
+{
+"key": "income and wages",
+"file": "ontology.js",
+"line": 101
+},
+{
+"key": "Time, money, government",
+"file": "ontology.js",
+"line": 102
+},
+{
+"key": "capital, money, the state",
+"file": "ontology.js",
+"line": 102
+},
+{
+"key": "what the wheel produces",
+"file": "ontology.js",
+"line": 103
+},
+{
+"key": "one thing per course",
+"file": "ontology.js",
+"line": 104
+},
+{
+"key": "Output <b>{0}</b> trillion won<br>Employed <b>{1}</b> million<br><i>Korea, {2} (real, {3} prices)</i>",
+"file": "ontology.js",
+"line": 110
+},
+{
+"key": "Part {0}, Figure {1}",
+"file": "ontology.js",
+"line": 138
+},
+{
+"key": "Figure {0}",
+"file": "ontology.js",
+"line": 138
+},
+{
+"key": "unknown cell in {0}",
+"file": "wheel.js",
+"line": 59
+},
+{
+"key": "{0} share no wall or arc",
+"file": "wheel.js",
+"line": 65
+},
+{
+"key": "central bank",
+"file": "wheel.js",
+"line": 293
+},
+{
+"key": "other countries",
+"file": "wheel.js",
+"line": 294
+},
+{
+"key": "household taxes",
+"file": "wheel.js",
+"line": 348
+},
+{
+"key": "firm taxes",
+"file": "wheel.js",
+"line": 349
+},
+{
+"key": "government purchases",
+"file": "wheel.js",
+"line": 350
+},
+{
+"key": "export payments",
+"file": "wheel.js",
+"line": 353
+},
+{
+"key": "Under the page lies the economy this part builds, one stage at a time: Frank Knight’s wheel of wealth ({0}). For now it is an outline of {1} empty cells.",
+"file": "wheel.js",
+"line": 371
+},
+{
+"key": "Stage {0} needs one cell, the goods market, where buyers and sellers meet at a price. Nobody in it has a name yet.",
+"file": "wheel.js",
+"line": 372
+},
+{
+"key": "And one rule beside it: a tax, for Figure {0}.",
+"file": "wheel.js",
+"line": 373
+},
+{
+"key": "Stage {0} opens up the household. The wheel so far: one market and one tax.",
+"file": "wheel.js",
+"line": 376
+},
+{
+"key": "Households arrive on the rim. Each dot is {0} Koreans: {1} dots for the {2} million people of {3}.",
+"file": "wheel.js",
+"line": 377
+},
+{
+"key": "Each chooses by one rule, the best it can afford: optimization, at the hub.",
+"file": "wheel.js",
+"line": 378
+},
+{
+"key": "They spend in the goods market. Follow one parcel of money: it leaves a household and stops in the market, because nobody sells there yet.",
+"file": "wheel.js",
+"line": 379
+},
+{
+"key": "Stage {0} opens up the firm.",
+"file": "wheel.js",
+"line": 382
+},
+{
+"key": "Firms arrive: {0} of them, sized by Zipf’s law, a few large and many small.",
+"file": "wheel.js",
+"line": 383
+},
+{
+"key": "Now the money reaches the firms, and goods travel the other way, from a firm through the market to a household.",
+"file": "wheel.js",
+"line": 384
+},
+{
+"key": "Stage {0} lets a few firms watch one another.",
+"file": "wheel.js",
+"line": 387
+},
+{
+"key": "Nothing new flows. What changes is how firms choose: strategy, at the hub.",
+"file": "wheel.js",
+"line": 388
+},
+{
+"key": "Stage {0} joins every market at once.",
+"file": "wheel.js",
+"line": 391
+},
+{
+"key": "The labor market joins. The {0} dots that stand for the employed send their work to firms.",
+"file": "wheel.js",
+"line": 392
+},
+{
+"key": "Wages come back the other way. The wheel is closed: money runs one way round, goods and work the other.",
+"file": "wheel.js",
+"line": 393
+},
+{
+"key": "Equilibrium, at the hub, is the claim that all of it clears together. Contracts, among the rules, is where hidden information enters.",
+"file": "wheel.js",
+"line": 394
+},
+{
+"key": "Stage {0} adds time, money and government. This is the wheel built so far.",
+"file": "wheel.js",
+"line": 397
+},
+{
+"key": "Time and money: the capital market, where saving becomes investment, and money itself.",
+"file": "wheel.js",
+"line": 398
+},
+{
+"key": "The government arrives. It takes taxes from households and firms, and buys from firms.",
+"file": "wheel.js",
+"line": 399
+},
+{
+"key": "And the central bank, with the rules it sets for money.",
+"file": "wheel.js",
+"line": 400
+},
+{
+"key": "Stage {0} learns to measure.",
+"file": "wheel.js",
+"line": 403
+},
+{
+"key": "Measurement, at the hub: the data come from this wheel, and the question is what they can identify.",
+"file": "wheel.js",
+"line": 404
+},
+{
+"key": "Each field course adds one thing to the wheel.",
+"file": "wheel.js",
+"line": 407
+},
+{
+"key": "A second economy: other countries, and the foreign-exchange market through which exports and their payments pass.",
+"file": "wheel.js",
+"line": 408
+},
+{
+"key": "Money and risk: banks take households’ saving and lend it to firms through the capital market, with reserves from the central bank.",
+"file": "wheel.js",
+"line": 409
+},
+{
+"key": "Missing markets and the state: land and air, where emissions go with no price, and the rules of regulation and property.",
+"file": "wheel.js",
+"line": 410
+},
+{
+"key": "And the long run: history, at the hub. Two cells stay empty; Part {0} builds them.",
+"file": "wheel.js",
+"line": 411
+},
+{
+"key": "This is the wheel Part {0} built. In it every agent of a kind is alike, and nobody is tied to anybody in particular.",
+"file": "wheel.js",
+"line": 429
+},
+{
+"key": "This part asks why that wheel is no longer enough, and changes it one section at a time. What changes stays changed.",
+"file": "wheel.js",
+"line": 430
+},
+{
+"key": "Unlike: one firm does not stand for all firms, one household for all households, or one way of reasoning for every player.",
+"file": "wheel.js",
+"line": 433
+},
+{
+"key": "Connected: who can reach whom.",
+"file": "wheel.js",
+"line": 436
+},
+{
+"key": "Part {0} had no cell for it. Networks joins the rules.",
+"file": "wheel.js",
+"line": 437
+},
+{
+"key": "Unlike and connected agents are harder to solve.",
+"file": "wheel.js",
+"line": 440
+},
+{
+"key": "The last cell joins the methods at the hub: computation.",
+"file": "wheel.js",
+"line": 441
+},
+{
+"key": "MIT {0}, Principles of Microeconomics (Fall {1})",
+"file": "course.js",
+"line": 21
+},
+{
+"key": "MIT {0}, Principles of Macroeconomics (Spring {1})",
+"file": "course.js",
+"line": 21
+},
+{
+"key": "CORE Econ, The Economy {0}",
+"file": "course.js",
+"line": 21
+},
+{
+"key": "Marginal Revolution University",
+"file": "course.js",
+"line": 21
+},
+{
+"key": "QuantEcon lectures",
+"file": "course.js",
+"line": 22
+},
+{
+"key": "Chiang and Wainwright, Fundamental Methods of Mathematical Economics (book)",
+"file": "course.js",
+"line": 22
+},
+{
+"key": "MIT {0}, Intermediate Microeconomic Theory (Fall {1})",
+"file": "course.js",
+"line": 23
+},
+{
+"key": "EconGraphs: interactive intermediate micro",
+"file": "course.js",
+"line": 23
+},
+{
+"key": "CORE Econ",
+"file": "course.js",
+"line": 23
+},
+{
+"key": "MIT {0}, Economic Applications of Game Theory (Fall {1})",
+"file": "course.js",
+"line": 24
+},
+{
+"key": "The Evolution of Trust (Nicky Case)",
+"file": "course.js",
+"line": 24
+},
+{
+"key": "MIT {0}, Intermediate Macroeconomics (Spring {1})",
+"file": "course.js",
+"line": 25
+},
+{
+"key": "MIT {0} syllabus (Spring {1}, Angrist)",
+"file": "course.js",
+"line": 26
+},
+{
+"key": "The Effect",
+"file": "course.js",
+"line": 26
+},
+{
+"key": "MIT {0}, International Trade (Fall {1})",
+"file": "course.js",
+"line": 27
+},
+{
+"key": "Berkeley Econ {0}, International Monetary Economics (Obstfeld)",
+"file": "course.js",
+"line": 28
+},
+{
+"key": "Mishkin, The Economics of Money, Banking, and Financial Markets (book)",
+"file": "course.js",
+"line": 29
+},
+{
+"key": "MIT {0}, Public Finance and Public Policy (Fall {1})",
+"file": "course.js",
+"line": 30
+},
+{
+"key": "MIT {0}, Labor Economics (Fall {1}, outline)",
+"file": "course.js",
+"line": 31
+},
+{
+"key": "MIT {0}, Industrial Organization and Public Policy (Spring {1})",
+"file": "course.js",
+"line": 32
+},
+{
+"key": "MIT {0}, The Challenge of World Poverty (Spring {1})",
+"file": "course.js",
+"line": 33
+},
+{
+"key": "MIT {0}, Foundations of Development Policy (Spring {1})",
+"file": "course.js",
+"line": 33
+},
+{
+"key": "Our World in Data",
+"file": "course.js",
+"line": 33
+},
+{
+"key": "MIT {0}, Environmental Policy and Economics (Spring {1})",
+"file": "course.js",
+"line": 34
+},
+{
+"key": "MIT {0}, Finance Theory I (Fall {1})",
+"file": "course.js",
+"line": 35
+},
+{
+"key": "Yale ECON {0}, Financial Markets (Shiller)",
+"file": "course.js",
+"line": 35
+},
+{
+"key": "MIT {0}, Psychology and Economics (Spring {1})",
+"file": "course.js",
+"line": 36
+},
+{
+"key": "UC Davis ECN {0}A, World Economic History (Gregory Clark)",
+"file": "course.js",
+"line": 37
+},
+{
+"key": "<p class=\"lede\">{0}</p><p><b>{1}</b> {2}{3}</p>{4}",
+"file": "course.js",
+"line": 43
+},
+{
+"key": "<p class=\"lede\">{0}</p>",
+"file": "course.js",
+"line": 44
+},
+{
+"key": "nothing named",
+"file": "course.js",
+"line": 49
+},
+{
+"key": "<header class=\"opening\"><p class=\"kicker\">{0}</p><h{1}>{2}</h{3}>{4}</header>",
+"file": "course.js",
+"line": 50
+},
+{
+"key": "<section class=\"chapter\" id=\"c-path\"><h{0}>{1}</h{2}>\n    <p>{3} (<a href=\"{4}\">{5}</a>). {6}</p>\n    <p class=\"needs-fold\" hidden>{7}</p>\n    <figure class=\"fig wide dense\" data-fig=\"route\" id=\"c-route\">\n      <div class=\"fig-art\"></div>\n      <figcaption><span class=\"fig-no\">{8}</span>{9} (<a href=\"{10}\">{11}</a>), {12}</figcaption>\n    </figure>\n    <ol class=\"units-path\">{13}</ol>\n  </section>",
+"file": "course.js",
+"line": 51
+},
+{
+"key": "<section class=\"chapter\"><h{0}>{1}</h{2}><div data-ladder=\"{3}\"></div></section>",
+"file": "course.js",
+"line": 60
+},
+{
+"key": "<section class=\"chapter\" id=\"c-jx\"><h{0}>{1}</h{2}><ul class=\"course-links\" id=\"c-junctions\"></ul></section>",
+"file": "course.js",
+"line": 61
+},
+{
+"key": "<section class=\"chapter\" id=\"c-read\"><h{0}>{1}</h{2}><ul class=\"course-links\" id=\"c-reading\"></ul></section>",
+"file": "course.js",
+"line": 62
+},
+{
+"key": "<li><a href=\"{0}?c={1}#{2}\"><b>{3}</b><span>{4}</span></a></li>",
+"file": "course.js",
+"line": 82
+},
+{
+"key": "<li><a href=\"{0}\"><b>{1}</b></a></li>",
+"file": "course.js",
+"line": 86
+},
+{
+"key": "{0} on the wheel: {1} units, from {2} to {3}, in the order the course teaches them.",
+"file": "course.js",
+"line": 136
+},
+{
+"key": "The whole path. Each unit changed one thing, and the course is the sequence of those changes.",
+"file": "course.js",
+"line": 138
+},
+{
+"key": "Field",
+"file": "course.js",
+"line": 149
+},
+{
+"key": "Core",
+"file": "course.js",
+"line": 149
+},
+{
+"key": "Course",
+"file": "course.js",
+"line": 151
+},
+{
+"key": "Field course",
+"file": "course.js",
+"line": 151
+},
+{
+"key": "Core course",
+"file": "course.js",
+"line": 151
+},
+{
+"key": "Cross-Section",
+"file": "course.js",
+"line": 40
+},
+{
+"key": "Built from",
+"file": "course.js",
+"line": 43
+},
+{
+"key": "It adds",
+"file": "course.js",
+"line": 43
+},
+{
+"key": "Sequence after",
+"file": "course.js",
+"line": 43
+},
+{
+"key": "A core course: every field course is assembled from its parts.",
+"file": "course.js",
+"line": 44
+},
+{
+"key": "Its path through the wheel",
+"file": "course.js",
+"line": 51
+},
+{
+"key": "A course is a path of units, and each unit is one model: what it moves, what it holds still, and the one thing it changes",
+"file": "course.js",
+"line": 52
+},
+{
+"key": "Part {0}, section {1}",
+"file": "course.js",
+"line": 52
+},
+{
+"key": "Folded, the wheel lies beside the page, and the path is drawn through it unit by unit, each unit putting the wheel in its state.",
+"file": "course.js",
+"line": 53
+},
+{
+"key": "The path",
+"file": "course.js",
+"line": 56
+},
+{
+"key": "The plan of the wheel",
+"file": "course.js",
+"line": 56
+},
+{
+"key": "with the cell each unit is read in, numbered in the order the course teaches them.",
+"file": "course.js",
+"line": 56
+},
+{
+"key": "Week by week",
+"file": "course.js",
+"line": 60
+},
+{
+"key": "Where it meets other courses",
+"file": "course.js",
+"line": 61
+},
+{
+"key": "Read next",
+"file": "course.js",
+"line": 62
+},
+{
+"key": "No junction passes through this course yet.",
+"file": "course.js",
+"line": 84
+},
+{
+"key": "Stage",
+"file": "page.js",
+"line": 9
+},
+{
+"key": "Figure {0} could not be drawn ({1}). The text beside it describes it in full.",
+"file": "page.js",
+"line": 37
+},
+{
+"key": "Lay the page flat",
+"file": "page.js",
+"line": 118
+},
+{
+"key": "Fold the page into space",
+"file": "page.js",
+"line": 118
+},
+{
+"key": "Escape",
+"file": "page.js",
+"line": 151
+},
+{
+"key": "{0}Frames {1}: median {2} ms, {3}% {4}, {5}% {6}, slowest {7}{8}",
+"file": "page.js",
+"line": 218
+},
+{
+"key": "Fold the page to start the walk.",
+"file": "page.js",
+"line": 223
+},
+{
+"key": "The fold needs WebGPU with HTML-in-Canvas.",
+"file": "page.js",
+"line": 126
+},
+{
+"key": "The flat page is complete on its own.",
+"file": "page.js",
+"line": 126
+},
+{
+"key": "Could not fold the page:",
+"file": "page.js",
+"line": 145
+},
+{
+"key": "The fold could not start:",
+"file": "page.js",
+"line": 156
+},
+{
+"key": "(prefers-reduced-motion: reduce)",
+"file": "fold.js",
+"line": 19
+},
+{
+"key": "svg, .fig-art, .zones",
+"file": "fold.js",
+"line": 106
+},
+{
+"key": "This browser cannot draw HTML into WebGPU textures yet (HTML-in-Canvas).",
+"file": "fold.js",
+"line": 147
+},
+{
+"key": "No WebGPU adapter is available.",
+"file": "fold.js",
+"line": 149
+},
+{
+"key": "Cells of the archive",
+"file": "fold.js",
+"line": 163
+},
+{
+"key": "<p class=\"say\"></p><ol class=\"beats\" aria-hidden=\"true\"></ol>",
+"file": "fold.js",
+"line": 172
+},
+{
+"key": "No paint event from the canvas.",
+"file": "fold.js",
+"line": 217
+},
+{
+"key": "{0}<i> min</i>",
+"file": "fold.js",
+"line": 392
+},
+{
+"key": "xl title{0}",
+"file": "fold.js",
+"line": 413
+},
+{
+"key": "xl tag measured",
+"file": "fold.js",
+"line": 505
+},
+{
+"key": "xl callout",
+"file": "fold.js",
+"line": 641
+},
+{
+"key": "Held fixed",
+"file": "fold.js",
+"line": 649
+},
+{
+"key": "a, button, input, nav, .titleblock, .callout",
+"file": "fold.js",
+"line": 1300
+},
+{
+"key": "held",
+"file": "fold.js",
+"line": 1142
+},
+{
+"key": "<a href=\"#{0}\">{1} {2}</a>",
+"file": "ladder.js",
+"line": 14
+},
+{
+"key": "<span class=\"wk-no\">{0}</span><div class=\"wk-body\">",
+"file": "ladder.js",
+"line": 26
+},
+{
+"key": "<p class=\"wk-q\">{0}</p>",
+"file": "ladder.js",
+"line": 28
+},
+{
+"key": "<p class=\"wk-a\">{0}</p>",
+"file": "ladder.js",
+"line": 29
+},
+{
+"key": "<p class=\"wk-eq\">{0}</p>",
+"file": "ladder.js",
+"line": 30
+},
+{
+"key": "<p class=\"wk-links\">{0}</p>",
+"file": "ladder.js",
+"line": 31
+},
+{
+"key": "<p class=\"jx-title\">{0} {1}</p>",
+"file": "ladder.js",
+"line": 50
+},
+{
+"key": "<p class=\"jx-text\">{0}</p>",
+"file": "ladder.js",
+"line": 51
+},
+{
+"key": "<ol class=\"chain\">{0}</ol>",
+"file": "ladder.js",
+"line": 52
+},
+{
+"key": "<p class=\"jx-links\"><b>{0}</b> {1}</p>",
+"file": "ladder.js",
+"line": 53
+},
+{
+"key": "<p class=\"field-q\"><b>{0}</b> {1}</p>",
+"file": "ladder.js",
+"line": 82
+},
+{
+"key": "<p class=\"field-from\"><b>{0}</b> {1}</p>",
+"file": "ladder.js",
+"line": 83
+},
+{
+"key": "<p class=\"field-adds\"><b>{0}</b> {1}</p>",
+"file": "ladder.js",
+"line": 84
+},
+{
+"key": "<p class=\"field-src\">{0} {1}.</p>",
+"file": "ladder.js",
+"line": 85
+},
+{
+"key": "Builds on",
+"file": "ladder.js",
+"line": 24
+},
+{
+"key": "Used in",
+"file": "ladder.js",
+"line": 25
+},
+{
+"key": "Junction:",
+"file": "ladder.js",
+"line": 50
+},
+{
+"key": "Where it reappears",
+"file": "ladder.js",
+"line": 53
+},
+{
+"key": "The question",
+"file": "ladder.js",
+"line": 82
+},
+{
+"key": "Adds to the core",
+"file": "ladder.js",
+"line": 84
+},
+{
+"key": "Stage {0} of {1}",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "Section {0} of {1}",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "Course {0} of {1}",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "{0} weeks",
+"file": "(built at run time)",
+"line": 0
+}
+]

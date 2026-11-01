@@ -1,0 +1,2717 @@
+[
+{
+"key": "Principles",
+"file": "curriculum.js",
+"line": 9
+},
+{
+"key": "Principles of economics",
+"file": "curriculum.js",
+"line": 9
+},
+{
+"key": "Scarcity and opportunity cost",
+"file": "curriculum.js",
+"line": 11
+},
+{
+"key": "What does anything really cost?",
+"file": "curriculum.js",
+"line": 11
+},
+{
+"key": "The value of the best alternative given up. The production possibilities frontier draws the trade-offs of a whole economy.",
+"file": "curriculum.js",
+"line": 11
+},
+{
+"key": "MRT = −dy/dx",
+"file": "curriculum.js",
+"line": 11
+},
+{
+"key": "Comparative advantage and trade",
+"file": "curriculum.js",
+"line": 12
+},
+{
+"key": "Why trade with someone who is worse at everything?",
+"file": "curriculum.js",
+"line": 12
+},
+{
+"key": "Each side specializes where its opportunity cost is lowest, and both gain.",
+"file": "curriculum.js",
+"line": 12
+},
+{
+"key": "Supply, demand, equilibrium",
+"file": "curriculum.js",
+"line": 13
+},
+{
+"key": "How do prices coordinate millions of separate decisions?",
+"file": "curriculum.js",
+"line": 13
+},
+{
+"key": "At the equilibrium price the quantity demanded equals the quantity supplied; shocks shift the curves.",
+"file": "curriculum.js",
+"line": 13
+},
+{
+"key": "Q<sub>d</sub>(P) = Q<sub>s</sub>(P)",
+"file": "curriculum.js",
+"line": 13
+},
+{
+"key": "Elasticity",
+"file": "curriculum.js",
+"line": 14
+},
+{
+"key": "How strongly do quantities respond to prices?",
+"file": "curriculum.js",
+"line": 14
+},
+{
+"key": "The percentage response of quantity to a one percent change in price. It decides who bears a tax.",
+"file": "curriculum.js",
+"line": 14
+},
+{
+"key": "ε = (dQ/dP)(P/Q)",
+"file": "curriculum.js",
+"line": 14
+},
+{
+"key": "Surplus, taxes, price controls",
+"file": "curriculum.js",
+"line": 15
+},
+{
+"key": "What does a market intervention cost?",
+"file": "curriculum.js",
+"line": 15
+},
+{
+"key": "Surplus measures the gains from trade; taxes and price controls destroy part of it as deadweight loss.",
+"file": "curriculum.js",
+"line": 15
+},
+{
+"key": "Externalities and public goods",
+"file": "curriculum.js",
+"line": 16
+},
+{
+"key": "When does the market get it wrong?",
+"file": "curriculum.js",
+"line": 16
+},
+{
+"key": "When a cost or benefit falls outside the transaction, or no one can be excluded from a good.",
+"file": "curriculum.js",
+"line": 16
+},
+{
+"key": "Firms and market structure",
+"file": "curriculum.js",
+"line": 17
+},
+{
+"key": "How much does a firm produce, and does competition matter?",
+"file": "curriculum.js",
+"line": 17
+},
+{
+"key": "Competitive firms produce where price equals marginal cost; a monopolist restricts output.",
+"file": "curriculum.js",
+"line": 17
+},
+{
+"key": "P = MC",
+"file": "curriculum.js",
+"line": 17
+},
+{
+"key": "Measuring the economy",
+"file": "curriculum.js",
+"line": 18
+},
+{
+"key": "How big is the economy and how fast are prices rising?",
+"file": "curriculum.js",
+"line": 18
+},
+{
+"key": "GDP counts final output; price indices turn nominal values real; surveys count the unemployed.",
+"file": "curriculum.js",
+"line": 18
+},
+{
+"key": "Y = C + I + G + NX",
+"file": "curriculum.js",
+"line": 18
+},
+{
+"key": "Long-run growth",
+"file": "curriculum.js",
+"line": 19
+},
+{
+"key": "Why are some countries rich and others poor?",
+"file": "curriculum.js",
+"line": 19
+},
+{
+"key": "Capital per worker, skills, technology, and the institutions that let them accumulate.",
+"file": "curriculum.js",
+"line": 19
+},
+{
+"key": "Money and banks",
+"file": "curriculum.js",
+"line": 20
+},
+{
+"key": "What is money, and who creates it?",
+"file": "curriculum.js",
+"line": 20
+},
+{
+"key": "Banks create deposits when they lend; the central bank sets the base and the policy rate.",
+"file": "curriculum.js",
+"line": 20
+},
+{
+"key": "MV = PY",
+"file": "curriculum.js",
+"line": 20
+},
+{
+"key": "Short-run fluctuations",
+"file": "curriculum.js",
+"line": 21
+},
+{
+"key": "Why do recessions happen?",
+"file": "curriculum.js",
+"line": 21
+},
+{
+"key": "With sticky prices, swings in total spending move output and employment.",
+"file": "curriculum.js",
+"line": 21
+},
+{
+"key": "Fiscal and monetary policy",
+"file": "curriculum.js",
+"line": 22
+},
+{
+"key": "What can governments and central banks do about it?",
+"file": "curriculum.js",
+"line": 22
+},
+{
+"key": "Spending, taxes and interest rates shift aggregate demand, with lags and limits.",
+"file": "curriculum.js",
+"line": 22
+},
+{
+"key": "Math",
+"file": "curriculum.js",
+"line": 26
+},
+{
+"key": "Mathematics for economists",
+"file": "curriculum.js",
+"line": 26
+},
+{
+"key": "Sets, functions, models",
+"file": "curriculum.js",
+"line": 28
+},
+{
+"key": "How is an economic model written down?",
+"file": "curriculum.js",
+"line": 28
+},
+{
+"key": "Variables, functions and equations; endogenous and exogenous variables; levels and rates of change.",
+"file": "curriculum.js",
+"line": 28
+},
+{
+"key": "One-variable calculus",
+"file": "curriculum.js",
+"line": 29
+},
+{
+"key": "What is a marginal quantity?",
+"file": "curriculum.js",
+"line": 29
+},
+{
+"key": "The derivative. Marginal cost, marginal utility and elasticity are all derivatives.",
+"file": "curriculum.js",
+"line": 29
+},
+{
+"key": "f′(x) = lim (f(x+h) − f(x))/h",
+"file": "curriculum.js",
+"line": 29
+},
+{
+"key": "Several variables",
+"file": "curriculum.js",
+"line": 30
+},
+{
+"key": "How does an output respond when many inputs change?",
+"file": "curriculum.js",
+"line": 30
+},
+{
+"key": "Partial derivatives, the gradient, the total differential, and homogeneous functions.",
+"file": "curriculum.js",
+"line": 30
+},
+{
+"key": "dF = F<sub>x</sub>dx + F<sub>y</sub>dy",
+"file": "curriculum.js",
+"line": 30
+},
+{
+"key": "Unconstrained optimization",
+"file": "curriculum.js",
+"line": 31
+},
+{
+"key": "Where is a function at its best?",
+"file": "curriculum.js",
+"line": 31
+},
+{
+"key": "Where the gradient is zero and the Hessian is negative definite; concavity makes the first condition sufficient.",
+"file": "curriculum.js",
+"line": 31
+},
+{
+"key": "Constrained optimization",
+"file": "curriculum.js",
+"line": 32
+},
+{
+"key": "Where is it best among the allowed points?",
+"file": "curriculum.js",
+"line": 32
+},
+{
+"key": "At a tangency: the gradient of the objective is a multiple λ of the constraint’s. Kuhn–Tucker handles inequalities.",
+"file": "curriculum.js",
+"line": 32
+},
+{
+"key": "Comparative statics",
+"file": "curriculum.js",
+"line": 33
+},
+{
+"key": "How does the best point move when a parameter changes?",
+"file": "curriculum.js",
+"line": 33
+},
+{
+"key": "Differentiate the first-order conditions (implicit function theorem). The envelope theorem gives the change in the optimal value.",
+"file": "curriculum.js",
+"line": 33
+},
+{
+"key": "dV/dα = ∂ℒ/∂α",
+"file": "curriculum.js",
+"line": 33
+},
+{
+"key": "Matrices and systems",
+"file": "curriculum.js",
+"line": 34
+},
+{
+"key": "When does a system of equations have one solution?",
+"file": "curriculum.js",
+"line": 34
+},
+{
+"key": "When its matrix has full rank; determinants and Cramer’s rule compute it.",
+"file": "curriculum.js",
+"line": 34
+},
+{
+"key": "Ax = b",
+"file": "curriculum.js",
+"line": 34
+},
+{
+"key": "Eigenvalues and definiteness",
+"file": "curriculum.js",
+"line": 35
+},
+{
+"key": "Does a system return to rest, or run away?",
+"file": "curriculum.js",
+"line": 35
+},
+{
+"key": "Eigenvalues decide stability; definiteness of a quadratic form decides second-order conditions.",
+"file": "curriculum.js",
+"line": 35
+},
+{
+"key": "Av = λv",
+"file": "curriculum.js",
+"line": 35
+},
+{
+"key": "Dynamics",
+"file": "curriculum.js",
+"line": 36
+},
+{
+"key": "How do variables move from one period to the next?",
+"file": "curriculum.js",
+"line": 36
+},
+{
+"key": "Difference and differential equations, steady states, phase diagrams, saddle paths.",
+"file": "curriculum.js",
+"line": 36
+},
+{
+"key": "ẋ = f(x), stable if f′(x*) < {0}",
+"file": "curriculum.js",
+"line": 36
+},
+{
+"key": "Probability",
+"file": "curriculum.js",
+"line": 37
+},
+{
+"key": "How is uncertainty described?",
+"file": "curriculum.js",
+"line": 37
+},
+{
+"key": "Random variables, distributions, expectations and variances.",
+"file": "curriculum.js",
+"line": 37
+},
+{
+"key": "E[X] = Σ x p(x)",
+"file": "curriculum.js",
+"line": 37
+},
+{
+"key": "Micro",
+"file": "curriculum.js",
+"line": 41
+},
+{
+"key": "Intermediate microeconomics",
+"file": "curriculum.js",
+"line": 41
+},
+{
+"key": "Preferences and utility",
+"file": "curriculum.js",
+"line": 43
+},
+{
+"key": "What does it mean to choose rationally?",
+"file": "curriculum.js",
+"line": 43
+},
+{
+"key": "Complete, transitive, monotone preferences can be represented by a utility function; only its ranking matters.",
+"file": "curriculum.js",
+"line": 43
+},
+{
+"key": "x ≿ y ⇔ u(x) ≥ u(y)",
+"file": "curriculum.js",
+"line": 43
+},
+{
+"key": "Budget and optimal choice",
+"file": "curriculum.js",
+"line": 44
+},
+{
+"key": "Which affordable bundle is best?",
+"file": "curriculum.js",
+"line": 44
+},
+{
+"key": "The tangency where the marginal rate of substitution equals the price ratio.",
+"file": "curriculum.js",
+"line": 44
+},
+{
+"key": "MRS = p<sub>x</sub>/p<sub>y</sub>",
+"file": "curriculum.js",
+"line": 44
+},
+{
+"key": "Demand: income and substitution",
+"file": "curriculum.js",
+"line": 45
+},
+{
+"key": "How does demand respond to a price change?",
+"file": "curriculum.js",
+"line": 45
+},
+{
+"key": "The Slutsky equation splits it into a substitution effect, always negative, and an income effect of either sign.",
+"file": "curriculum.js",
+"line": 45
+},
+{
+"key": "∂x/∂p = ∂h/∂p − x ∂x/∂m",
+"file": "curriculum.js",
+"line": 45
+},
+{
+"key": "Market demand and surplus",
+"file": "curriculum.js",
+"line": 46
+},
+{
+"key": "How do individual demands add up, and how is welfare measured?",
+"file": "curriculum.js",
+"line": 46
+},
+{
+"key": "Market demand is the horizontal sum; consumer surplus is the area under demand above the price.",
+"file": "curriculum.js",
+"line": 46
+},
+{
+"key": "D(p) = Σ<sub>i</sub> x<sub>i</sub>(p)",
+"file": "curriculum.js",
+"line": 46
+},
+{
+"key": "Choice over time",
+"file": "curriculum.js",
+"line": 47
+},
+{
+"key": "How much should one save?",
+"file": "curriculum.js",
+"line": 47
+},
+{
+"key": "Future consumption has a price, {0}/({1} + r); the tangency is the Euler equation.",
+"file": "curriculum.js",
+"line": 47
+},
+{
+"key": "c<sub>{0}</sub> + c<sub>{1}</sub>/({2} + r) = m<sub>{3}</sub> + m<sub>{4}</sub>/({5} + r)",
+"file": "curriculum.js",
+"line": 47
+},
+{
+"key": "Uncertainty and risk",
+"file": "curriculum.js",
+"line": 48
+},
+{
+"key": "How are risky prospects compared?",
+"file": "curriculum.js",
+"line": 48
+},
+{
+"key": "Expected utility; a concave utility function means risk aversion and a demand for insurance.",
+"file": "curriculum.js",
+"line": 48
+},
+{
+"key": "E[u(w)] ≤ u(E[w])",
+"file": "curriculum.js",
+"line": 48
+},
+{
+"key": "Technology and cost",
+"file": "curriculum.js",
+"line": 49
+},
+{
+"key": "What is the cheapest way to produce?",
+"file": "curriculum.js",
+"line": 49
+},
+{
+"key": "Cost minimization sets the technical rate of substitution equal to the factor-price ratio.",
+"file": "curriculum.js",
+"line": 49
+},
+{
+"key": "MRTS = w/r",
+"file": "curriculum.js",
+"line": 49
+},
+{
+"key": "Competitive firms and markets",
+"file": "curriculum.js",
+"line": 50
+},
+{
+"key": "How much does a price-taking firm supply, and what happens in the long run?",
+"file": "curriculum.js",
+"line": 50
+},
+{
+"key": "Supply is marginal cost above average variable cost; free entry drives economic profit to zero.",
+"file": "curriculum.js",
+"line": 50
+},
+{
+"key": "P = MC = min ATC",
+"file": "curriculum.js",
+"line": 50
+},
+{
+"key": "Monopoly and price discrimination",
+"file": "curriculum.js",
+"line": 51
+},
+{
+"key": "What does market power do?",
+"file": "curriculum.js",
+"line": 51
+},
+{
+"key": "Output falls to where marginal revenue equals marginal cost; the markup rises as demand becomes less elastic.",
+"file": "curriculum.js",
+"line": 51
+},
+{
+"key": "(P − MC)/P = {0}/|ε|",
+"file": "curriculum.js",
+"line": 51
+},
+{
+"key": "Oligopoly",
+"file": "curriculum.js",
+"line": 52
+},
+{
+"key": "What happens with a few interdependent firms?",
+"file": "curriculum.js",
+"line": 52
+},
+{
+"key": "Cournot, Bertrand and Stackelberg outcomes, each a Nash equilibrium of a different game.",
+"file": "curriculum.js",
+"line": 52
+},
+{
+"key": "q<sub>i</sub>* = R<sub>i</sub>(q<sub>−i</sub>)",
+"file": "curriculum.js",
+"line": 52
+},
+{
+"key": "Exchange and general equilibrium",
+"file": "curriculum.js",
+"line": 53
+},
+{
+"key": "Can all markets clear at once, and is the result any good?",
+"file": "curriculum.js",
+"line": 53
+},
+{
+"key": "Walrasian equilibrium exists under convexity and continuity; it is Pareto efficient (first welfare theorem).",
+"file": "curriculum.js",
+"line": 53
+},
+{
+"key": "p · z(p) = {0}",
+"file": "curriculum.js",
+"line": 53
+},
+{
+"key": "What goes wrong when a market is missing?",
+"file": "curriculum.js",
+"line": 54
+},
+{
+"key": "Private and social costs diverge; Pigouvian taxes, permits or Coasean bargaining can repair it; public goods need Σ MRS = MRT.",
+"file": "curriculum.js",
+"line": 54
+},
+{
+"key": "MSC = MPC + MEC",
+"file": "curriculum.js",
+"line": 54
+},
+{
+"key": "Asymmetric information",
+"file": "curriculum.js",
+"line": 55
+},
+{
+"key": "What if one side knows more than the other?",
+"file": "curriculum.js",
+"line": 55
+},
+{
+"key": "Adverse selection can unravel markets; signaling and screening reveal types; moral hazard trades insurance against incentives.",
+"file": "curriculum.js",
+"line": 55
+},
+{
+"key": "Games",
+"file": "curriculum.js",
+"line": 59
+},
+{
+"key": "Game theory",
+"file": "curriculum.js",
+"line": 59
+},
+{
+"key": "Games and dominance",
+"file": "curriculum.js",
+"line": 61
+},
+{
+"key": "How is a strategic situation written down?",
+"file": "curriculum.js",
+"line": 61
+},
+{
+"key": "Players, strategies and payoffs; dominated strategies can be eliminated one after another.",
+"file": "curriculum.js",
+"line": 61
+},
+{
+"key": "Nash equilibrium",
+"file": "curriculum.js",
+"line": 62
+},
+{
+"key": "What is a stable outcome when everyone best-responds?",
+"file": "curriculum.js",
+"line": 62
+},
+{
+"key": "A profile from which no player gains by deviating alone; mixed strategies guarantee one exists.",
+"file": "curriculum.js",
+"line": 62
+},
+{
+"key": "s<sub>i</sub>* ∈ BR<sub>i</sub>(s<sub>−i</sub>*)",
+"file": "curriculum.js",
+"line": 62
+},
+{
+"key": "Applications: competition and the commons",
+"file": "curriculum.js",
+"line": 63
+},
+{
+"key": "What does Nash equilibrium predict in markets and shared resources?",
+"file": "curriculum.js",
+"line": 63
+},
+{
+"key": "Cournot and Bertrand competition; overuse of commons and under-provision of public goods.",
+"file": "curriculum.js",
+"line": 63
+},
+{
+"key": "Sequential games",
+"file": "curriculum.js",
+"line": 64
+},
+{
+"key": "What if players move in turn?",
+"file": "curriculum.js",
+"line": 64
+},
+{
+"key": "Backward induction and subgame perfection rule out threats that would not be carried out.",
+"file": "curriculum.js",
+"line": 64
+},
+{
+"key": "Repeated games",
+"file": "curriculum.js",
+"line": 65
+},
+{
+"key": "Can cooperation survive self-interest?",
+"file": "curriculum.js",
+"line": 65
+},
+{
+"key": "Yes, if the future matters enough: the folk theorem, and collusion between firms.",
+"file": "curriculum.js",
+"line": 65
+},
+{
+"key": "δ ≥ (π<sup>D</sup> − π<sup>C</sup>)/(π<sup>D</sup> − π<sup>N</sup>)",
+"file": "curriculum.js",
+"line": 65
+},
+{
+"key": "Bargaining",
+"file": "curriculum.js",
+"line": 66
+},
+{
+"key": "How is a surplus divided?",
+"file": "curriculum.js",
+"line": 66
+},
+{
+"key": "In alternating offers the more patient side gets more (Rubinstein).",
+"file": "curriculum.js",
+"line": 66
+},
+{
+"key": "Incomplete information and auctions",
+"file": "curriculum.js",
+"line": 67
+},
+{
+"key": "How do players act on private information?",
+"file": "curriculum.js",
+"line": 67
+},
+{
+"key": "Bayesian Nash equilibrium; auction formats and revenue equivalence.",
+"file": "curriculum.js",
+"line": 67
+},
+{
+"key": "Signaling",
+"file": "curriculum.js",
+"line": 68
+},
+{
+"key": "Can actions reveal what words cannot?",
+"file": "curriculum.js",
+"line": 68
+},
+{
+"key": "Costly signals separate types in a perfect Bayesian equilibrium (Spence).",
+"file": "curriculum.js",
+"line": 68
+},
+{
+"key": "Macro",
+"file": "curriculum.js",
+"line": 72
+},
+{
+"key": "Intermediate macroeconomics",
+"file": "curriculum.js",
+"line": 72
+},
+{
+"key": "National accounts and data",
+"file": "curriculum.js",
+"line": 74
+},
+{
+"key": "What exactly is being measured?",
+"file": "curriculum.js",
+"line": 74
+},
+{
+"key": "GDP as value added, as income and as spending; real versus nominal; price indices and the unemployment rate.",
+"file": "curriculum.js",
+"line": 74
+},
+{
+"key": "The long-run closed economy",
+"file": "curriculum.js",
+"line": 75
+},
+{
+"key": "What determines output, factor prices and the interest rate when prices are flexible?",
+"file": "curriculum.js",
+"line": 75
+},
+{
+"key": "Output from factors and technology; factors earn their marginal products; saving equals investment at the real rate.",
+"file": "curriculum.js",
+"line": 75
+},
+{
+"key": "S(r) = I(r)",
+"file": "curriculum.js",
+"line": 75
+},
+{
+"key": "Solow growth",
+"file": "curriculum.js",
+"line": 76
+},
+{
+"key": "Why does capital per worker settle down?",
+"file": "curriculum.js",
+"line": 76
+},
+{
+"key": "Saving adds capital, depreciation and population growth subtract it; the economy converges to a steady state.",
+"file": "curriculum.js",
+"line": 76
+},
+{
+"key": "k̇ = s f(k) − (n + δ)k",
+"file": "curriculum.js",
+"line": 76
+},
+{
+"key": "Technology and endogenous growth",
+"file": "curriculum.js",
+"line": 77
+},
+{
+"key": "What sustains growth?",
+"file": "curriculum.js",
+"line": 77
+},
+{
+"key": "Only technology; growth accounting measures it as a residual, and endogenous growth asks who produces ideas.",
+"file": "curriculum.js",
+"line": 77
+},
+{
+"key": "g<sub>Y</sub> = g<sub>A</sub> + αg<sub>K</sub> + ({0} − α)g<sub>L</sub>",
+"file": "curriculum.js",
+"line": 77
+},
+{
+"key": "Consumption and saving",
+"file": "curriculum.js",
+"line": 78
+},
+{
+"key": "How do households spread income over time?",
+"file": "curriculum.js",
+"line": 78
+},
+{
+"key": "The Euler equation: consumption is smoothed, so it follows permanent rather than current income.",
+"file": "curriculum.js",
+"line": 78
+},
+{
+"key": "u′(c<sub>t</sub>) = β({0} + r)E u′(c<sub>t+{1}</sub>)",
+"file": "curriculum.js",
+"line": 78
+},
+{
+"key": "Money and inflation",
+"file": "curriculum.js",
+"line": 79
+},
+{
+"key": "What determines the price level?",
+"file": "curriculum.js",
+"line": 79
+},
+{
+"key": "In the long run, money growth: the quantity equation and the Fisher effect.",
+"file": "curriculum.js",
+"line": 79
+},
+{
+"key": "i = r + π<sup>e</sup>",
+"file": "curriculum.js",
+"line": 79
+},
+{
+"key": "Unemployment and the labor market",
+"file": "curriculum.js",
+"line": 80
+},
+{
+"key": "Why are some people always unemployed?",
+"file": "curriculum.js",
+"line": 80
+},
+{
+"key": "Job search, matching frictions and wage rigidities set a natural rate.",
+"file": "curriculum.js",
+"line": 80
+},
+{
+"key": "u* = s/(s + f)",
+"file": "curriculum.js",
+"line": 80
+},
+{
+"key": "Short run: IS–LM",
+"file": "curriculum.js",
+"line": 81
+},
+{
+"key": "What sets output when prices are sticky?",
+"file": "curriculum.js",
+"line": 81
+},
+{
+"key": "Demand: the goods market and the money market clear at one output and interest rate.",
+"file": "curriculum.js",
+"line": 81
+},
+{
+"key": "Y = C(Y − T) + I(r) + G",
+"file": "curriculum.js",
+"line": 81
+},
+{
+"key": "Aggregate demand and supply",
+"file": "curriculum.js",
+"line": 82
+},
+{
+"key": "How do output and prices move together?",
+"file": "curriculum.js",
+"line": 82
+},
+{
+"key": "Let prices vary: IS–LM traces aggregate demand; sticky prices give short-run supply.",
+"file": "curriculum.js",
+"line": 82
+},
+{
+"key": "Y = Y(P), P = P<sup>e</sup> + λ(Y − Y<sub>n</sub>)",
+"file": "curriculum.js",
+"line": 82
+},
+{
+"key": "Expectations and the Phillips curve",
+"file": "curriculum.js",
+"line": 83
+},
+{
+"key": "Can policy trade inflation for unemployment?",
+"file": "curriculum.js",
+"line": 83
+},
+{
+"key": "Only until expectations adjust; rational expectations and the Lucas critique change how models are built.",
+"file": "curriculum.js",
+"line": 83
+},
+{
+"key": "π = π<sup>e</sup> − β(u − u<sub>n</sub>)",
+"file": "curriculum.js",
+"line": 83
+},
+{
+"key": "Monetary policy rules",
+"file": "curriculum.js",
+"line": 84
+},
+{
+"key": "How should a central bank set interest rates?",
+"file": "curriculum.js",
+"line": 84
+},
+{
+"key": "The three-equation model: an IS curve, a Phillips curve, and a rule; commitment beats discretion.",
+"file": "curriculum.js",
+"line": 84
+},
+{
+"key": "i = r* + π + ½(π − π*) + ½x",
+"file": "curriculum.js",
+"line": 84
+},
+{
+"key": "Fiscal policy and debt",
+"file": "curriculum.js",
+"line": 85
+},
+{
+"key": "When is public debt a problem?",
+"file": "curriculum.js",
+"line": 85
+},
+{
+"key": "The debt ratio grows when the interest rate exceeds growth; Ricardian equivalence asks whether deficits matter at all.",
+"file": "curriculum.js",
+"line": 85
+},
+{
+"key": "Δb = (r − g)b − s",
+"file": "curriculum.js",
+"line": 85
+},
+{
+"key": "The open economy",
+"file": "curriculum.js",
+"line": 86
+},
+{
+"key": "How do exchange rates and capital flows change the story?",
+"file": "curriculum.js",
+"line": 86
+},
+{
+"key": "Mundell–Fleming and the trilemma: a country cannot fix its exchange rate, open its capital account and run its own monetary policy.",
+"file": "curriculum.js",
+"line": 86
+},
+{
+"key": "NX = NX(ε), i = i*",
+"file": "curriculum.js",
+"line": 86
+},
+{
+"key": "Metrics",
+"file": "curriculum.js",
+"line": 90
+},
+{
+"key": "Econometrics",
+"file": "curriculum.js",
+"line": 90
+},
+{
+"key": "Probability and estimation",
+"file": "curriculum.js",
+"line": 92
+},
+{
+"key": "How can a sample speak for a population?",
+"file": "curriculum.js",
+"line": 92
+},
+{
+"key": "Estimators have sampling distributions; unbiasedness and consistency are the standards.",
+"file": "curriculum.js",
+"line": 92
+},
+{
+"key": "Simple regression",
+"file": "curriculum.js",
+"line": 93
+},
+{
+"key": "What line best summarizes a relationship?",
+"file": "curriculum.js",
+"line": 93
+},
+{
+"key": "Least squares: the slope is the covariance over the variance.",
+"file": "curriculum.js",
+"line": 93
+},
+{
+"key": "b = Cov(x, y)/Var(x)",
+"file": "curriculum.js",
+"line": 93
+},
+{
+"key": "Multiple regression",
+"file": "curriculum.js",
+"line": 94
+},
+{
+"key": "What is the effect of one variable holding others fixed?",
+"file": "curriculum.js",
+"line": 94
+},
+{
+"key": "Partial regression; the fitted values are a projection onto the regressors.",
+"file": "curriculum.js",
+"line": 94
+},
+{
+"key": "β̂ = (XᵀX)<sup>−{0}</sup>Xᵀy",
+"file": "curriculum.js",
+"line": 94
+},
+{
+"key": "Gauss–Markov and inference",
+"file": "curriculum.js",
+"line": 95
+},
+{
+"key": "How precise is the estimate?",
+"file": "curriculum.js",
+"line": 95
+},
+{
+"key": "Under exogeneity and spherical errors OLS is the best linear unbiased estimator; t and F tests follow.",
+"file": "curriculum.js",
+"line": 95
+},
+{
+"key": "Var(β̂) = σ²(XᵀX)<sup>−{0}</sup>",
+"file": "curriculum.js",
+"line": 95
+},
+{
+"key": "Specification",
+"file": "curriculum.js",
+"line": 96
+},
+{
+"key": "Which variables, and in what form?",
+"file": "curriculum.js",
+"line": 96
+},
+{
+"key": "Logs, dummies and interactions; leaving out a relevant variable biases the rest.",
+"file": "curriculum.js",
+"line": 96
+},
+{
+"key": "E[b<sub>{0}</sub>] = β<sub>{1}</sub> + β<sub>{2}</sub>δ",
+"file": "curriculum.js",
+"line": 96
+},
+{
+"key": "Heteroskedasticity",
+"file": "curriculum.js",
+"line": 97
+},
+{
+"key": "What if errors are uneven?",
+"file": "curriculum.js",
+"line": 97
+},
+{
+"key": "Estimates stay unbiased but standard errors need repair: robust and clustered errors.",
+"file": "curriculum.js",
+"line": 97
+},
+{
+"key": "Endogeneity",
+"file": "curriculum.js",
+"line": 98
+},
+{
+"key": "When does correlation fail to be causation?",
+"file": "curriculum.js",
+"line": 98
+},
+{
+"key": "Omitted variables, simultaneity and measurement error all break E[ε | X] = {0}.",
+"file": "curriculum.js",
+"line": 98
+},
+{
+"key": "Instrumental variables",
+"file": "curriculum.js",
+"line": 99
+},
+{
+"key": "How can a causal effect be recovered anyway?",
+"file": "curriculum.js",
+"line": 99
+},
+{
+"key": "With a variable that moves the regressor but not the outcome directly; two-stage least squares.",
+"file": "curriculum.js",
+"line": 99
+},
+{
+"key": "β = Cov(z, y)/Cov(z, x)",
+"file": "curriculum.js",
+"line": 99
+},
+{
+"key": "Panel data and differences-in-differences",
+"file": "curriculum.js",
+"line": 100
+},
+{
+"key": "How do repeated observations help?",
+"file": "curriculum.js",
+"line": 100
+},
+{
+"key": "Fixed effects remove what does not change; differences-in-differences compares changes across groups.",
+"file": "curriculum.js",
+"line": 100
+},
+{
+"key": "y<sub>it</sub> = α<sub>i</sub> + λ<sub>t</sub> + βD<sub>it</sub> + ε<sub>it</sub>",
+"file": "curriculum.js",
+"line": 100
+},
+{
+"key": "Discontinuities and experiments",
+"file": "curriculum.js",
+"line": 101
+},
+{
+"key": "What is the cleanest comparison?",
+"file": "curriculum.js",
+"line": 101
+},
+{
+"key": "People just either side of a cutoff, or treatment assigned at random.",
+"file": "curriculum.js",
+"line": 101
+},
+{
+"key": "Time series",
+"file": "curriculum.js",
+"line": 102
+},
+{
+"key": "How are dynamic relationships estimated?",
+"file": "curriculum.js",
+"line": 102
+},
+{
+"key": "Stationarity, autoregressions and vector autoregressions that trace a shock through a system.",
+"file": "curriculum.js",
+"line": 102
+},
+{
+"key": "y<sub>t</sub> = A y<sub>t−{0}</sub> + ε<sub>t</sub>",
+"file": "curriculum.js",
+"line": 102
+},
+{
+"key": "Trade",
+"file": "curriculum.js",
+"line": 108
+},
+{
+"key": "International trade",
+"file": "curriculum.js",
+"line": 108
+},
+{
+"key": "Who gains from trade between countries, and who loses inside each of them?",
+"file": "curriculum.js",
+"line": 109
+},
+{
+"key": "comparative advantage from principles, general equilibrium and production from micro.",
+"file": "curriculum.js",
+"line": 110
+},
+{
+"key": "a second country.",
+"file": "curriculum.js",
+"line": 111
+},
+{
+"key": "MIT {0} (Fall {1}), condensed; heterogeneous firms from Melitz ({2})",
+"file": "curriculum.js",
+"line": 112
+},
+{
+"key": "Ricardian comparative advantage",
+"file": "curriculum.js",
+"line": 114
+},
+{
+"key": "Differences in productivity alone make trade mutually beneficial.",
+"file": "curriculum.js",
+"line": 114
+},
+{
+"key": "Specific factors and distribution",
+"file": "curriculum.js",
+"line": 115
+},
+{
+"key": "Trade raises total income but factors stuck in import-competing sectors lose.",
+"file": "curriculum.js",
+"line": 115
+},
+{
+"key": "Countries export goods that use their abundant factor intensively; goods prices move factor prices (Stolper–Samuelson).",
+"file": "curriculum.js",
+"line": 116
+},
+{
+"key": "p ↑ ⇒ w<sub>intensive</sub> ↑ more than p",
+"file": "curriculum.js",
+"line": 116
+},
+{
+"key": "Increasing returns and variety",
+"file": "curriculum.js",
+"line": 117
+},
+{
+"key": "Similar countries trade similar goods because scale economies and love of variety reward specialization (Krugman).",
+"file": "curriculum.js",
+"line": 117
+},
+{
+"key": "Heterogeneous firms",
+"file": "curriculum.js",
+"line": 118
+},
+{
+"key": "Only the most productive firms export; trade reallocates output toward them (Melitz).",
+"file": "curriculum.js",
+"line": 118
+},
+{
+"key": "Trade policy",
+"file": "curriculum.js",
+"line": 119
+},
+{
+"key": "Tariffs, quotas and subsidies; a large country can gain from a tariff at its partners’ expense.",
+"file": "curriculum.js",
+"line": 119
+},
+{
+"key": "Trade agreements and politics",
+"file": "curriculum.js",
+"line": 120
+},
+{
+"key": "Agreements escape a prisoners’ dilemma of mutual protection; politics decides who is compensated.",
+"file": "curriculum.js",
+"line": 120
+},
+{
+"key": "Intl finance",
+"file": "curriculum.js",
+"line": 124
+},
+{
+"key": "International finance",
+"file": "curriculum.js",
+"line": 124
+},
+{
+"key": "What sets exchange rates, current accounts and the room for national policy?",
+"file": "curriculum.js",
+"line": 125
+},
+{
+"key": "intertemporal choice and money from macro, the trilemma from Mundell–Fleming.",
+"file": "curriculum.js",
+"line": 126
+},
+{
+"key": "the exchange rate and capital flows.",
+"file": "curriculum.js",
+"line": 127
+},
+{
+"key": "Krugman and Obstfeld, chapters {0}–{1}, as taught in Berkeley Econ {2} (Spring {3})",
+"file": "curriculum.js",
+"line": 128
+},
+{
+"key": "The current account over time",
+"file": "curriculum.js",
+"line": 130
+},
+{
+"key": "A current account deficit is borrowing from the future: saving minus investment.",
+"file": "curriculum.js",
+"line": 130
+},
+{
+"key": "CA = S − I",
+"file": "curriculum.js",
+"line": 130
+},
+{
+"key": "The asset approach to exchange rates",
+"file": "curriculum.js",
+"line": 131
+},
+{
+"key": "Uncovered interest parity: expected returns on currencies equalize.",
+"file": "curriculum.js",
+"line": 131
+},
+{
+"key": "i = i* + E[Δe]",
+"file": "curriculum.js",
+"line": 131
+},
+{
+"key": "Money, prices and the long run",
+"file": "curriculum.js",
+"line": 132
+},
+{
+"key": "Purchasing power parity holds roughly in the long run and poorly in the short run.",
+"file": "curriculum.js",
+"line": 132
+},
+{
+"key": "e = P/P*",
+"file": "curriculum.js",
+"line": 132
+},
+{
+"key": "Short-run open-economy macro",
+"file": "curriculum.js",
+"line": 133
+},
+{
+"key": "Monetary and fiscal policy under floating and fixed rates (Mundell–Fleming).",
+"file": "curriculum.js",
+"line": 133
+},
+{
+"key": "Fixed rates and crises",
+"file": "curriculum.js",
+"line": 134
+},
+{
+"key": "Pegs defended with reserves invite speculative attacks; the trilemma bites.",
+"file": "curriculum.js",
+"line": 134
+},
+{
+"key": "Capital flows and currency unions",
+"file": "curriculum.js",
+"line": 135
+},
+{
+"key": "Sudden stops, global financial cycles, and the costs of giving up a currency.",
+"file": "curriculum.js",
+"line": 135
+},
+{
+"key": "Money & banking",
+"file": "curriculum.js",
+"line": 139
+},
+{
+"key": "Money and banking",
+"file": "curriculum.js",
+"line": 139
+},
+{
+"key": "How do banks and central banks create money, set interest rates, and fail?",
+"file": "curriculum.js",
+"line": 140
+},
+{
+"key": "money and policy rules from macro, information from micro.",
+"file": "curriculum.js",
+"line": 141
+},
+{
+"key": "the policy instrument and the balance sheet.",
+"file": "curriculum.js",
+"line": 142
+},
+{
+"key": "Mishkin, <i>The Economics of Money, Banking, and Financial Markets</i>, {0}th edition",
+"file": "curriculum.js",
+"line": 143
+},
+{
+"key": "Money and financial intermediation",
+"file": "curriculum.js",
+"line": 145
+},
+{
+"key": "Intermediaries pool savings, transform maturities and screen borrowers.",
+"file": "curriculum.js",
+"line": 145
+},
+{
+"key": "Interest rates and the term structure",
+"file": "curriculum.js",
+"line": 146
+},
+{
+"key": "Long rates as expected short rates plus a term premium; risk and liquidity spreads.",
+"file": "curriculum.js",
+"line": 146
+},
+{
+"key": "i<sub>n</sub> ≈ (i<sub>{0}</sub> + E i<sub>{1}</sub> + … )/n + tp",
+"file": "curriculum.js",
+"line": 146
+},
+{
+"key": "Bank balance sheets",
+"file": "curriculum.js",
+"line": 147
+},
+{
+"key": "Banks hold illiquid loans against liquid deposits and thin capital.",
+"file": "curriculum.js",
+"line": 147
+},
+{
+"key": "Runs and deposit insurance",
+"file": "curriculum.js",
+"line": 148
+},
+{
+"key": "Self-fulfilling runs are an equilibrium (Diamond–Dybvig); insurance and a lender of last resort remove it.",
+"file": "curriculum.js",
+"line": 148
+},
+{
+"key": "Central banking and the money supply",
+"file": "curriculum.js",
+"line": 149
+},
+{
+"key": "Reserves, the policy rate and balance-sheet tools.",
+"file": "curriculum.js",
+"line": 149
+},
+{
+"key": "Monetary policy strategy and transmission",
+"file": "curriculum.js",
+"line": 150
+},
+{
+"key": "Inflation targeting, rules, and the channels from the policy rate to spending and prices.",
+"file": "curriculum.js",
+"line": 150
+},
+{
+"key": "Crises and regulation",
+"file": "curriculum.js",
+"line": 151
+},
+{
+"key": "Leverage, contagion and the macroprudential response after {0}.",
+"file": "curriculum.js",
+"line": 151
+},
+{
+"key": "Public",
+"file": "curriculum.js",
+"line": 155
+},
+{
+"key": "Public economics",
+"file": "curriculum.js",
+"line": 155
+},
+{
+"key": "When should the state tax, spend or insure, and how much does it cost?",
+"file": "curriculum.js",
+"line": 156
+},
+{
+"key": "welfare theorems, externalities and public goods from micro; debt from macro.",
+"file": "curriculum.js",
+"line": 157
+},
+{
+"key": "the state as a choosing agent.",
+"file": "curriculum.js",
+"line": 158
+},
+{
+"key": "MIT {0} (Fall {1}), condensed",
+"file": "curriculum.js",
+"line": 159
+},
+{
+"key": "Efficiency and the role of government",
+"file": "curriculum.js",
+"line": 161
+},
+{
+"key": "The welfare theorems say when markets suffice; the second says redistribution could be lump-sum, which it never is.",
+"file": "curriculum.js",
+"line": 161
+},
+{
+"key": "Public goods and externalities",
+"file": "curriculum.js",
+"line": 162
+},
+{
+"key": "The Samuelson condition and the free-rider problem; corrective taxes.",
+"file": "curriculum.js",
+"line": 162
+},
+{
+"key": "Σ<sub>i</sub> MRS<sub>i</sub> = MRT",
+"file": "curriculum.js",
+"line": 162
+},
+{
+"key": "Political economy",
+"file": "curriculum.js",
+"line": 163
+},
+{
+"key": "The median voter, interest groups and why policy is what it is.",
+"file": "curriculum.js",
+"line": 163
+},
+{
+"key": "Social insurance",
+"file": "curriculum.js",
+"line": 164
+},
+{
+"key": "Unemployment, health and pension insurance against moral hazard and adverse selection.",
+"file": "curriculum.js",
+"line": 164
+},
+{
+"key": "Tax incidence",
+"file": "curriculum.js",
+"line": 165
+},
+{
+"key": "Who bears a tax depends on elasticities, not on who pays it.",
+"file": "curriculum.js",
+"line": 165
+},
+{
+"key": "share<sub>buyers</sub> = ε<sub>S</sub>/(ε<sub>S</sub> − ε<sub>D</sub>)",
+"file": "curriculum.js",
+"line": 165
+},
+{
+"key": "Optimal taxation",
+"file": "curriculum.js",
+"line": 166
+},
+{
+"key": "Tax inelastic goods more (Ramsey); trade equity against labor-supply distortions (Mirrlees).",
+"file": "curriculum.js",
+"line": 166
+},
+{
+"key": "Deficits and debt",
+"file": "curriculum.js",
+"line": 167
+},
+{
+"key": "Debt dynamics, tax smoothing and Ricardian equivalence.",
+"file": "curriculum.js",
+"line": 167
+},
+{
+"key": "Labor",
+"file": "curriculum.js",
+"line": 171
+},
+{
+"key": "Labor economics",
+"file": "curriculum.js",
+"line": 171
+},
+{
+"key": "How are wages and employment set, and why do they differ so much between people?",
+"file": "curriculum.js",
+"line": 172
+},
+{
+"key": "consumer choice and factor demand from micro, unemployment from macro, causal methods from econometrics.",
+"file": "curriculum.js",
+"line": 173
+},
+{
+"key": "people as the commodity, and the frictions in matching them to jobs.",
+"file": "curriculum.js",
+"line": 174
+},
+{
+"key": "MIT {0} (Fall {1}), with compensating differentials and search added from the textbook sequence",
+"file": "curriculum.js",
+"line": 175
+},
+{
+"key": "Labor supply",
+"file": "curriculum.js",
+"line": 177
+},
+{
+"key": "Work against leisure: income and substitution effects of a wage change; participation.",
+"file": "curriculum.js",
+"line": 177
+},
+{
+"key": "Labor demand and the minimum wage",
+"file": "curriculum.js",
+"line": 178
+},
+{
+"key": "Factor demand from cost minimization; what minimum wages do, measured.",
+"file": "curriculum.js",
+"line": 178
+},
+{
+"key": "Human capital",
+"file": "curriculum.js",
+"line": 179
+},
+{
+"key": "Schooling as investment; the returns to education and how to estimate them.",
+"file": "curriculum.js",
+"line": 179
+},
+{
+"key": "ln w = α + ρS + …",
+"file": "curriculum.js",
+"line": 179
+},
+{
+"key": "Compensating differentials",
+"file": "curriculum.js",
+"line": 180
+},
+{
+"key": "Unpleasant or risky jobs must pay more, all else equal.",
+"file": "curriculum.js",
+"line": 180
+},
+{
+"key": "Discrimination",
+"file": "curriculum.js",
+"line": 181
+},
+{
+"key": "Taste-based and statistical discrimination and how to detect them.",
+"file": "curriculum.js",
+"line": 181
+},
+{
+"key": "Search and unemployment",
+"file": "curriculum.js",
+"line": 182
+},
+{
+"key": "Job finding and separation rates; matching functions (Diamond–Mortensen–Pissarides).",
+"file": "curriculum.js",
+"line": 182
+},
+{
+"key": "u* = s/(s + f(θ))",
+"file": "curriculum.js",
+"line": 182
+},
+{
+"key": "Inequality and institutions",
+"file": "curriculum.js",
+"line": 183
+},
+{
+"key": "Skill-biased technical change, trade, unions and the minimum wage in the wage distribution.",
+"file": "curriculum.js",
+"line": 183
+},
+{
+"key": "Industrial organization",
+"file": "curriculum.js",
+"line": 187
+},
+{
+"key": "How do firms compete when markets are not perfectly competitive?",
+"file": "curriculum.js",
+"line": 188
+},
+{
+"key": "market structure from micro, strategy from game theory.",
+"file": "curriculum.js",
+"line": 189
+},
+{
+"key": "strategy among firms.",
+"file": "curriculum.js",
+"line": 190
+},
+{
+"key": "MIT {0} (Spring {1}) and Church and Ware; auctions and platforms from MIT {2}",
+"file": "curriculum.js",
+"line": 191
+},
+{
+"key": "Market structure and power",
+"file": "curriculum.js",
+"line": 193
+},
+{
+"key": "Concentration, markups and how to measure market power.",
+"file": "curriculum.js",
+"line": 193
+},
+{
+"key": "L = (P − MC)/P",
+"file": "curriculum.js",
+"line": 193
+},
+{
+"key": "Pricing with market power",
+"file": "curriculum.js",
+"line": 194
+},
+{
+"key": "Price discrimination, bundling and two-part tariffs.",
+"file": "curriculum.js",
+"line": 194
+},
+{
+"key": "Oligopoly and differentiation",
+"file": "curriculum.js",
+"line": 195
+},
+{
+"key": "Cournot, Bertrand and product differentiation (Hotelling).",
+"file": "curriculum.js",
+"line": 195
+},
+{
+"key": "Collusion",
+"file": "curriculum.js",
+"line": 196
+},
+{
+"key": "When repeated interaction sustains high prices, and how cartels break down.",
+"file": "curriculum.js",
+"line": 196
+},
+{
+"key": "Entry and strategic investment",
+"file": "curriculum.js",
+"line": 197
+},
+{
+"key": "Limit pricing, capacity as commitment, and contestable markets.",
+"file": "curriculum.js",
+"line": 197
+},
+{
+"key": "Auctions, platforms and information",
+"file": "curriculum.js",
+"line": 198
+},
+{
+"key": "Auction design and two-sided markets.",
+"file": "curriculum.js",
+"line": 198
+},
+{
+"key": "Antitrust and regulation",
+"file": "curriculum.js",
+"line": 199
+},
+{
+"key": "Mergers, monopolization and the regulation of natural monopolies.",
+"file": "curriculum.js",
+"line": 199
+},
+{
+"key": "Development",
+"file": "curriculum.js",
+"line": 203
+},
+{
+"key": "Development economics",
+"file": "curriculum.js",
+"line": 203
+},
+{
+"key": "Why do some countries stay poor, and what helps the poor in them?",
+"file": "curriculum.js",
+"line": 204
+},
+{
+"key": "growth from macro, information and contracts from micro, experiments from econometrics.",
+"file": "curriculum.js",
+"line": 205
+},
+{
+"key": "history, institutions, and missing markets.",
+"file": "curriculum.js",
+"line": 206
+},
+{
+"key": "MIT {0} (Spring {1}) and {2} (Spring {3}), condensed",
+"file": "curriculum.js",
+"line": 207
+},
+{
+"key": "Facts of development",
+"file": "curriculum.js",
+"line": 209
+},
+{
+"key": "Measuring income, poverty and well-being across countries.",
+"file": "curriculum.js",
+"line": 209
+},
+{
+"key": "Growth and poverty traps",
+"file": "curriculum.js",
+"line": 210
+},
+{
+"key": "Convergence, and the conditions under which poor economies stay poor.",
+"file": "curriculum.js",
+"line": 210
+},
+{
+"key": "Institutions",
+"file": "curriculum.js",
+"line": 211
+},
+{
+"key": "Property rights and the colonial origins of today’s differences.",
+"file": "curriculum.js",
+"line": 211
+},
+{
+"key": "Health and education",
+"file": "curriculum.js",
+"line": 212
+},
+{
+"key": "Human capital in poor countries and the evidence on what raises it.",
+"file": "curriculum.js",
+"line": 212
+},
+{
+"key": "Credit and insurance",
+"file": "curriculum.js",
+"line": 213
+},
+{
+"key": "Missing markets, microfinance and informal risk sharing.",
+"file": "curriculum.js",
+"line": 213
+},
+{
+"key": "Evaluation with experiments",
+"file": "curriculum.js",
+"line": 214
+},
+{
+"key": "Randomized controlled trials and their limits.",
+"file": "curriculum.js",
+"line": 214
+},
+{
+"key": "Environment",
+"file": "curriculum.js",
+"line": 218
+},
+{
+"key": "Environmental economics",
+"file": "curriculum.js",
+"line": 218
+},
+{
+"key": "How should a society price damage to the environment, including damage far in the future?",
+"file": "curriculum.js",
+"line": 219
+},
+{
+"key": "externalities from micro, discounting from macro and finance, strategy from game theory.",
+"file": "curriculum.js",
+"line": 220
+},
+{
+"key": "the very long horizon.",
+"file": "curriculum.js",
+"line": 221
+},
+{
+"key": "MIT {0} (Spring {1}), condensed",
+"file": "curriculum.js",
+"line": 222
+},
+{
+"key": "Externalities and the commons",
+"file": "curriculum.js",
+"line": 224
+},
+{
+"key": "Pollution as a missing market; open-access resources are overused.",
+"file": "curriculum.js",
+"line": 224
+},
+{
+"key": "Taxes or permits",
+"file": "curriculum.js",
+"line": 225
+},
+{
+"key": "Pigouvian taxes and tradable permits under uncertainty (Weitzman).",
+"file": "curriculum.js",
+"line": 225
+},
+{
+"key": "Valuing the environment",
+"file": "curriculum.js",
+"line": 226
+},
+{
+"key": "Revealed and stated preferences for non-market goods.",
+"file": "curriculum.js",
+"line": 226
+},
+{
+"key": "Discounting",
+"file": "curriculum.js",
+"line": 227
+},
+{
+"key": "How much the far future counts: the Ramsey rule for the discount rate.",
+"file": "curriculum.js",
+"line": 227
+},
+{
+"key": "Climate change",
+"file": "curriculum.js",
+"line": 228
+},
+{
+"key": "Integrated assessment and the social cost of carbon.",
+"file": "curriculum.js",
+"line": 228
+},
+{
+"key": "International agreements",
+"file": "curriculum.js",
+"line": 229
+},
+{
+"key": "Why climate cooperation is a public-goods game.",
+"file": "curriculum.js",
+"line": 229
+},
+{
+"key": "Finance",
+"file": "curriculum.js",
+"line": 233
+},
+{
+"key": "Financial economics",
+"file": "curriculum.js",
+"line": 233
+},
+{
+"key": "What is a risky future payment worth today?",
+"file": "curriculum.js",
+"line": 234
+},
+{
+"key": "choice over time and under risk from micro, the Euler equation from macro.",
+"file": "curriculum.js",
+"line": 235
+},
+{
+"key": "prices of risk.",
+"file": "curriculum.js",
+"line": 236
+},
+{
+"key": "MIT {0} (Fall {1}), condensed; the stochastic discount factor from Cochrane’s <i>Asset Pricing</i>",
+"file": "curriculum.js",
+"line": 237
+},
+{
+"key": "Present value",
+"file": "curriculum.js",
+"line": 239
+},
+{
+"key": "Discounting cash flows; bonds and the term structure.",
+"file": "curriculum.js",
+"line": 239
+},
+{
+"key": "PV = Σ CF<sub>t</sub>/({0} + r)<sup>t</sup>",
+"file": "curriculum.js",
+"line": 239
+},
+{
+"key": "Risk and diversification",
+"file": "curriculum.js",
+"line": 240
+},
+{
+"key": "Mean–variance portfolios; only undiversifiable risk is rewarded.",
+"file": "curriculum.js",
+"line": 240
+},
+{
+"key": "CAPM",
+"file": "curriculum.js",
+"line": 241
+},
+{
+"key": "Expected returns are linear in market beta.",
+"file": "curriculum.js",
+"line": 241
+},
+{
+"key": "E[R<sub>i</sub>] − r<sub>f</sub> = β<sub>i</sub>(E[R<sub>m</sub>] − r<sub>f</sub>)",
+"file": "curriculum.js",
+"line": 241
+},
+{
+"key": "Efficient markets",
+"file": "curriculum.js",
+"line": 242
+},
+{
+"key": "If prices reflect information, returns are hard to predict; the evidence.",
+"file": "curriculum.js",
+"line": 242
+},
+{
+"key": "The stochastic discount factor",
+"file": "curriculum.js",
+"line": 243
+},
+{
+"key": "Every asset price is an expectation of payoff times marginal utility growth.",
+"file": "curriculum.js",
+"line": 243
+},
+{
+"key": "p = E[m x], m = βu′(c<sub>t+{0}</sub>)/u′(c<sub>t</sub>)",
+"file": "curriculum.js",
+"line": 243
+},
+{
+"key": "Corporate finance",
+"file": "curriculum.js",
+"line": 244
+},
+{
+"key": "Modigliani–Miller, and the frictions that make capital structure matter.",
+"file": "curriculum.js",
+"line": 244
+},
+{
+"key": "Behavioral",
+"file": "curriculum.js",
+"line": 248
+},
+{
+"key": "Behavioral economics",
+"file": "curriculum.js",
+"line": 248
+},
+{
+"key": "What changes when people are not the agents of the core courses?",
+"file": "curriculum.js",
+"line": 249
+},
+{
+"key": "every model of choice in micro, and experiments from econometrics.",
+"file": "curriculum.js",
+"line": 250
+},
+{
+"key": "psychology inside the utility function.",
+"file": "curriculum.js",
+"line": 251
+},
+{
+"key": "MIT {0} (Spring {1})",
+"file": "curriculum.js",
+"line": 252
+},
+{
+"key": "Departures from the standard model",
+"file": "curriculum.js",
+"line": 254
+},
+{
+"key": "Evidence that choices violate the core assumptions.",
+"file": "curriculum.js",
+"line": 254
+},
+{
+"key": "Present bias",
+"file": "curriculum.js",
+"line": 255
+},
+{
+"key": "Time-inconsistent preferences, procrastination and commitment (β–δ).",
+"file": "curriculum.js",
+"line": 255
+},
+{
+"key": "U = u(c<sub>{0}</sub>) + β Σ δ<sup>t</sup>u(c<sub>t</sub>)",
+"file": "curriculum.js",
+"line": 255
+},
+{
+"key": "Prospect theory",
+"file": "curriculum.js",
+"line": 256
+},
+{
+"key": "Reference dependence and loss aversion.",
+"file": "curriculum.js",
+"line": 256
+},
+{
+"key": "Social preferences",
+"file": "curriculum.js",
+"line": 257
+},
+{
+"key": "Fairness, reciprocity and altruism in experiments.",
+"file": "curriculum.js",
+"line": 257
+},
+{
+"key": "Attention and heuristics",
+"file": "curriculum.js",
+"line": 258
+},
+{
+"key": "Limited attention, salience and rules of thumb.",
+"file": "curriculum.js",
+"line": 258
+},
+{
+"key": "Behavioral policy",
+"file": "curriculum.js",
+"line": 259
+},
+{
+"key": "Defaults, nudges, and welfare when preferences are inconsistent.",
+"file": "curriculum.js",
+"line": 259
+},
+{
+"key": "History",
+"file": "curriculum.js",
+"line": 263
+},
+{
+"key": "Economic history",
+"file": "curriculum.js",
+"line": 263
+},
+{
+"key": "How did the world economy become what it is?",
+"file": "curriculum.js",
+"line": 264
+},
+{
+"key": "growth and money from macro, institutions from development, data from econometrics.",
+"file": "curriculum.js",
+"line": 265
+},
+{
+"key": "time beyond the model.",
+"file": "curriculum.js",
+"line": 266
+},
+{
+"key": "Gregory Clark’s ECN {0}A at UC Davis (Spring {1}) for the years before {2}",
+"file": "curriculum.js",
+"line": 267
+},
+{
+"key": "The Malthusian economy and the Great Divergence",
+"file": "curriculum.js",
+"line": 269
+},
+{
+"key": "Before {0} higher output meant more people, not richer ones; then western Europe escaped.",
+"file": "curriculum.js",
+"line": 269
+},
+{
+"key": "y = A f(L)/L, L̇ > {0} while y > y<sub>s</sub>",
+"file": "curriculum.js",
+"line": 269
+},
+{
+"key": "The Industrial Revolution",
+"file": "curriculum.js",
+"line": 270
+},
+{
+"key": "Wages, energy and the onset of sustained growth.",
+"file": "curriculum.js",
+"line": 270
+},
+{
+"key": "Institutions and colonization",
+"file": "curriculum.js",
+"line": 271
+},
+{
+"key": "How colonial rule shaped institutions that persist.",
+"file": "curriculum.js",
+"line": 271
+},
+{
+"key": "The Great Depression",
+"file": "curriculum.js",
+"line": 272
+},
+{
+"key": "The gold standard, banking panics and the policy response.",
+"file": "curriculum.js",
+"line": 272
+},
+{
+"key": "Waves of globalization",
+"file": "curriculum.js",
+"line": 273
+},
+{
+"key": "Trade and capital flows before {0} and since {1}.",
+"file": "curriculum.js",
+"line": 273
+},
+{
+"key": "Natural experiments in history",
+"file": "curriculum.js",
+"line": 274
+},
+{
+"key": "Using historical accidents to identify causes.",
+"file": "curriculum.js",
+"line": 274
+},
+{
+"key": "general equilibrium and welfare",
+"file": "curriculum.js",
+"line": 283
+},
+{
+"key": "Walrasian equilibrium is where microeconomics meets the rest of the degree. Long-run macro is a general-equilibrium model with time; trade theory is general equilibrium with two countries; public economics starts from the second welfare theorem’s promise that efficiency and redistribution can be separated, and from the fact that the lump-sum transfers it needs do not exist.",
+"file": "curriculum.js",
+"line": 285
+},
+{
+"key": "Preferences are continuous, convex and locally non-satiated; endowments are positive.",
+"file": "curriculum.js",
+"line": 287
+},
+{
+"key": "Then aggregate excess demand z(p) is continuous and homogeneous of degree zero in prices.",
+"file": "curriculum.js",
+"line": 288
+},
+{
+"key": "Local non-satiation gives Walras’ law: p · z(p) = {0} for every price vector.",
+"file": "curriculum.js",
+"line": 289
+},
+{
+"key": "Prices can be normalized to a simplex; a continuous map of the simplex into itself has a fixed point (Brouwer). At that point z(p*) = {0}: an equilibrium exists.",
+"file": "curriculum.js",
+"line": 290
+},
+{
+"key": "First welfare theorem: with local non-satiation every Walrasian equilibrium is Pareto efficient.",
+"file": "curriculum.js",
+"line": 291
+},
+{
+"key": "Second welfare theorem: with convexity every Pareto-efficient allocation is an equilibrium after lump-sum transfers (separating hyperplane theorem).",
+"file": "curriculum.js",
+"line": 292
+},
+{
+"key": "from individuals to aggregates",
+"file": "curriculum.js",
+"line": 296
+},
+{
+"key": "Macroeconomics talks about one consumption function and one production function for a whole economy. Whether that is legitimate is a theorem, not a convenience, and the answer explains why most macro models have a single representative household.",
+"file": "curriculum.js",
+"line": 298
+},
+{
+"key": "Market demand is the sum of individual demands.",
+"file": "curriculum.js",
+"line": 300
+},
+{
+"key": "Individual demand obeys the Slutsky restrictions; summed demand generally does not.",
+"file": "curriculum.js",
+"line": 301
+},
+{
+"key": "Sonnenschein–Mantel–Debreu: aggregate excess demand inherits only continuity, homogeneity and Walras’ law, so equilibrium need not be unique or stable.",
+"file": "curriculum.js",
+"line": 302
+},
+{
+"key": "A representative agent exists exactly when preferences have the Gorman form, with linear and parallel Engel curves.",
+"file": "curriculum.js",
+"line": 303
+},
+{
+"key": "Heterogeneous-agent models are the modern response.",
+"file": "curriculum.js",
+"line": 304
+},
+{
+"key": "the Euler equation",
+"file": "curriculum.js",
+"line": 308
+},
+{
+"key": "Take the consumer from micro, date the goods, and the tangency becomes the most reused equation in the degree: consumption smoothing in macro, the IS curve of the three-equation model, asset prices in finance, the current account in international finance, and Ricardian equivalence in public finance.",
+"file": "curriculum.js",
+"line": 310
+},
+{
+"key": "A household maximizes Σ β<sup>t</sup> u(c<sub>t</sub>) subject to a lifetime budget: the two-good problem with goods dated t and t + {0}.",
+"file": "curriculum.js",
+"line": 312
+},
+{
+"key": "The price of tomorrow’s consumption in today’s is {0}/({1} + r).",
+"file": "curriculum.js",
+"line": 313
+},
+{
+"key": "The tangency becomes u′(c<sub>t</sub>) = β({0} + r)E[u′(c<sub>t+{1}</sub>)].",
+"file": "curriculum.js",
+"line": 314
+},
+{
+"key": "Consumption is smoothed: temporary income is spread over a lifetime (permanent income).",
+"file": "curriculum.js",
+"line": 315
+},
+{
+"key": "Log-linearized, it is the IS curve of the New Keynesian model.",
+"file": "curriculum.js",
+"line": 316
+},
+{
+"key": "Under uncertainty the same condition prices any asset: E[m R] = {0}.",
+"file": "curriculum.js",
+"line": 317
+},
+{
+"key": "production and distribution",
+"file": "curriculum.js",
+"line": 321
+},
+{
+"key": "The firm from micro, multiplied across an economy, becomes the aggregate production function, and the same marginal-product conditions that set a firm’s hiring set the shares of national income going to labor and capital.",
+"file": "curriculum.js",
+"line": 323
+},
+{
+"key": "A firm hires each factor until its marginal product equals its real price: w = F<sub>L</sub>, r = F<sub>K</sub>.",
+"file": "curriculum.js",
+"line": 325
+},
+{
+"key": "With constant returns, Euler’s theorem gives F(K, L) = F<sub>K</sub>K + F<sub>L</sub>L: factor payments exhaust output.",
+"file": "curriculum.js",
+"line": 326
+},
+{
+"key": "Aggregated, the economy has Y = F(K, AL); accumulating K gives the Solow model.",
+"file": "curriculum.js",
+"line": 327
+},
+{
+"key": "Growth accounting splits output growth into capital, labor and the residual, technology.",
+"file": "curriculum.js",
+"line": 328
+},
+{
+"key": "In an open economy, goods prices move factor prices (Stolper–Samuelson), so trade redistributes income.",
+"file": "curriculum.js",
+"line": 329
+},
+{
+"key": "strategic interaction",
+"file": "curriculum.js",
+"line": 333
+},
+{
+"key": "Once agents affect each other directly, the price-taking model of micro gives way to games, and the same equilibrium idea organizes oligopoly, central-bank credibility, trade wars and climate treaties.",
+"file": "curriculum.js",
+"line": 335
+},
+{
+"key": "A game lists players, strategies and payoffs.",
+"file": "curriculum.js",
+"line": 337
+},
+{
+"key": "A Nash equilibrium is a profile in which each strategy is a best response to the others.",
+"file": "curriculum.js",
+"line": 338
+},
+{
+"key": "Mixed strategies guarantee existence, again by a fixed-point theorem (Kakutani).",
+"file": "curriculum.js",
+"line": 339
+},
+{
+"key": "In dynamic games, subgame perfection discards threats that would not be carried out.",
+"file": "curriculum.js",
+"line": 340
+},
+{
+"key": "A central bank that cannot commit plays a dynamic game with the public, and ends with higher inflation for no gain (Kydland–Prescott).",
+"file": "curriculum.js",
+"line": 341
+},
+{
+"key": "information and incentives",
+"file": "curriculum.js",
+"line": 345
+},
+{
+"key": "Drop the assumption that everyone knows the same things and a new set of failures appears. The tools that handle them run through labor markets, banking, insurance and development.",
+"file": "curriculum.js",
+"line": 347
+},
+{
+"key": "Expected utility describes choice over risky prospects; concave utility is risk aversion.",
+"file": "curriculum.js",
+"line": 349
+},
+{
+"key": "Hidden types (adverse selection): the uninformed side’s best response can drive good types out of the market.",
+"file": "curriculum.js",
+"line": 350
+},
+{
+"key": "Signaling and screening: the informed take costly actions that reveal their type.",
+"file": "curriculum.js",
+"line": 351
+},
+{
+"key": "Hidden actions (moral hazard): contracts trade insurance against incentives.",
+"file": "curriculum.js",
+"line": 352
+},
+{
+"key": "Banks that fund illiquid loans with demand deposits can suffer self-fulfilling runs.",
+"file": "curriculum.js",
+"line": 353
+},
+{
+"key": "market failure and the state",
+"file": "curriculum.js",
+"line": 357
+},
+{
+"key": "Every assumption of the first welfare theorem names a field: missing markets lead to environmental economics, public goods to public finance, market power to industrial organization, and information to the economics of contracts.",
+"file": "curriculum.js",
+"line": 359
+},
+{
+"key": "The first welfare theorem needs complete markets, price taking and no externalities.",
+"file": "curriculum.js",
+"line": 361
+},
+{
+"key": "An externality is a missing market for a side effect, so marginal social and private costs diverge.",
+"file": "curriculum.js",
+"line": 362
+},
+{
+"key": "A tax equal to marginal external cost, tradable permits, or bargaining with clear property rights can restore efficiency.",
+"file": "curriculum.js",
+"line": 363
+},
+{
+"key": "Public goods require Σ MRS = MRT; voluntary contributions fall short.",
+"file": "curriculum.js",
+"line": 364
+},
+{
+"key": "If one distortion cannot be removed, removing another need not help (the theory of the second best).",
+"file": "curriculum.js",
+"line": 365
+},
+{
+"key": "money, interest rates and the exchange rate",
+"file": "curriculum.js",
+"line": 369
+},
+{
+"key": "The price level, the interest rate and the exchange rate are one system. Money and banking, monetary policy and international finance each study one face of it.",
+"file": "curriculum.js",
+"line": 371
+},
+{
+"key": "Quantity equation: MV = PY; in the long run money is neutral.",
+"file": "curriculum.js",
+"line": 373
+},
+{
+"key": "Fisher: the nominal rate is the real rate plus expected inflation.",
+"file": "curriculum.js",
+"line": 374
+},
+{
+"key": "With sticky prices, moving the nominal rate moves the real rate, which is how monetary policy works.",
+"file": "curriculum.js",
+"line": 375
+},
+{
+"key": "Open the economy: uncovered interest parity ties interest rates to expected depreciation.",
+"file": "curriculum.js",
+"line": 376
+},
+{
+"key": "Hence the trilemma: a fixed rate with free capital flows forces i = i*.",
+"file": "curriculum.js",
+"line": 377
+},
+{
+"key": "Every empirical field rests on the same question: what variation in the data identifies a causal effect? The answers taught in econometrics reappear, almost word for word, in the field courses.",
+"file": "curriculum.js",
+"line": 383
+},
+{
+"key": "OLS recovers a causal effect only if E[ε | X] = {0}.",
+"file": "curriculum.js",
+"line": 385
+},
+{
+"key": "Omitted variables, simultaneity and measurement error all violate it.",
+"file": "curriculum.js",
+"line": 386
+},
+{
+"key": "An instrument z, correlated with x but not with ε, identifies β = Cov(z, y)/Cov(z, x).",
+"file": "curriculum.js",
+"line": 387
+},
+{
+"key": "Differences-in-differences identifies an effect if treated and control groups would have moved in parallel.",
+"file": "curriculum.js",
+"line": 388
+},
+{
+"key": "Randomization makes treatment independent of everything else by design.",
+"file": "curriculum.js",
+"line": 389
+}
+]

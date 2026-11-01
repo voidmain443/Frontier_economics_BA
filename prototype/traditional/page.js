@@ -2,6 +2,8 @@
 // equations, keep the title block current, and offer the one 3D mode, the page
 // fold (fold.js), with that part's constructs.
 
+import { t } from './i18n.js';
+
 const $ = (s) => document.querySelector(s);
 
 export async function setupPage({ figs, constructs, world = null, whole = null, archive = null, build = null, files = [], agents = {}, stages = 8, unit = 'Stage', part = 'Part 1', name = '', data: extra = {} }) {
@@ -15,6 +17,8 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
       data[f] = null;
     }
   }));
+  // the switch to the other language keeps the place on the page
+  for (const a of document.querySelectorAll('a.lang')) a.addEventListener('click', () => { a.href = a.getAttribute('href').split(/[?#]/)[0] + location.search + location.hash; });
   await document.fonts.ready;
 
   function draw(fig) {
@@ -90,8 +94,8 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
     const key = `${no}|${nf}|${ne}`;
     if (key === last) return;
     last = key;
-    tb.sheet.textContent = no ? `${unit} ${no} of ${stages}` : part;
-    tb.name.textContent = stage?.dataset.name ?? name;
+    tb.sheet.textContent = no ? t(`${unit} ${no} of ${stages}`) : t(part);
+    tb.name.textContent = stage?.dataset.name ?? t(name);
     if (tb.agents) tb.agents.textContent = String(no ? agents[no] ?? 0 : 0);
     if (tb.figs) tb.figs.textContent = String(nf);
     if (tb.eqs) tb.eqs.textContent = String(ne);
@@ -111,7 +115,7 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
   const btn = $('#unfold');
   const status = $('#tb-status');
   const setLabel = (on) => {
-    btn.textContent = on ? 'Lay the page flat' : 'Fold the page into space';
+    btn.textContent = on ? t('Lay the page flat') : t('Fold the page into space');
     btn.setAttribute('aria-pressed', String(on));
   };
   if (btn) {
@@ -119,7 +123,7 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
       const { createFold } = await import('./fold.js');
       fold = await createFold({ canvas: $('#stage'), sheet, labelsRoot: $('#expo-labels'), constructs, data, world, whole, archive, build, onChange: setLabel });
       if (!fold.supported) {
-        status.textContent = `The fold needs WebGPU with HTML-in-Canvas. ${fold.reason} The flat page is complete on its own.`;
+        status.textContent = `${t('The fold needs WebGPU with HTML-in-Canvas.')} ${t(fold.reason)} ${t('The flat page is complete on its own.')}`;
         fold = null;
       } else {
         btn.hidden = false;
@@ -138,7 +142,7 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
             update();
           } catch (err) {
             console.error(err);
-            status.textContent = `Could not fold the page: ${err.message}`;
+            status.textContent = `${t('Could not fold the page:')} ${err.message}`;
           } finally {
             btn.disabled = false;
           }
@@ -149,7 +153,7 @@ export async function setupPage({ figs, constructs, world = null, whole = null, 
       }
     } catch (err) {
       console.error(err);
-      status.textContent = `The fold could not start: ${err.message}. The flat page is complete on its own.`;
+      status.textContent = `${t('The fold could not start:')} ${err.message}. ${t('The flat page is complete on its own.')}`;
     }
   }
 

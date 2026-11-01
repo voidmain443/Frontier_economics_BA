@@ -6,6 +6,7 @@ import { SW, smallWorld, distances, chainAndCore, chainLayout, coreLayout, cutPa
 import { ringPos, FINDINGS } from './p2-figs.js';
 import { CELLS } from './wheel.js';
 import { MEASURED } from './ontology.js';
+import { t } from './i18n.js';
 
 // dims: a dimension line along the raised axis. crowd: { asset, items }, the
 // many agents that fill the figure's room in place of one representative
@@ -63,7 +64,7 @@ function letterEngine(path, at) {
 }
 
 // 2.7: the tallest tie of the chain breaks; its two ends pull apart, and the
-// students on each side of it take their own colour
+// students on each side of it take their own color
 function breakEngine(pos, edges, cut) {
   const e = cut.indexOf(Math.max(...cut));
   const [a, b] = edges[e];
@@ -128,7 +129,7 @@ export const CONSTRUCTS = {
         { say: 'Eighty people on a ring, each tied to the six nearest. The red ties have been rewired at random into shortcuts.' },
         { say: 'Raise each person by the number of steps it takes to reach them from you. On a plain ring the far side would stand 14 steps high.', cam: { az: -0.5, el: 0.14, zoom: 0.85, at: [0, 0, 0.12] }, dur: 1.6 },
         { say: `Send a letter to the farthest person, from friend to friend, as Milgram’s senders did. With these shortcuts it arrives in ${d[far]} steps.`, cam: { az: -0.3, el: 0.22, zoom: 0.8, at: [0, 0, 0.12] }, dur: 1.4 },
-        { say: 'Granovetter (1973) found that people often hear of jobs through acquaintances rather than close friends: the weak ties are the shortcuts. Rewire more with the slider in the margin, and distance collapses long before neighbours stop knowing one another.', cam: { az: -0.6, el: 0.12, zoom: 0.9, at: [0, 0, 0.1] } },
+        { say: 'Granovetter (1973) found that people often hear of jobs through acquaintances rather than close friends: the weak ties are the shortcuts. Rewire more with the slider in the margin, and distance collapses long before neighbors stop knowing one another.', cam: { az: -0.6, el: 0.12, zoom: 0.9, at: [0, 0, 0.1] } },
         { say: 'On the wheel, households now buy from and work for the few firms they are tied to, and what they send one another travels along those ties instead of through the market.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
       X.model = (b) => (b >= 4 ? { tied: ['households'] } : null);
@@ -240,7 +241,7 @@ export const CONSTRUCTS = {
         { say: 'Everyone chooses a number from 0 to 100, and the winner is closest to two-thirds of the average. The bars count the players who reason zero, one, two or three steps, or all the way.' },
         { say: 'Raise each level of reasoning as height. Level 0 guesses 50, on the page.', cam: { az: 0.5, el: 0.14, zoom: 0.85, at: [40, 1, 0.15] }, dur: 1.4 },
         { say: 'Each step up guesses a third lower, and the steps lead down to 0, the only Nash equilibrium, at the top. The guesses trace a staircase, and the bars show how few players climb it.', dur: 2.2 },
-        { say: `In Rosemarie Nagel’s experiments first guesses averaged 36.7: most players reason one or two steps and stop. With this mix the winning number is ${target.toFixed(1)}${target >= 1 ? ', and a guess of 0 loses' : ''}. Change the mix in the margin.`, cam: { az: 0.3, el: 0.3, zoom: 0.85, at: [35, 1, 0.1] } },
+        { say: `In Rosemarie Nagel’s experiments first guesses averaged 36.7: most players reason one or two steps and stop. With this mix the winning number is ${target.toFixed(1)}.${target >= 1 ? ' A guess of 0 loses.' : ''} Change the mix in the margin.`, cam: { az: 0.3, el: 0.3, zoom: 0.85, at: [35, 1, 0.1] } },
         { say: 'On the wheel, strategy lights at the hub, over players who differ in how far they reason. Stage 4’s two firms both reasoned all the way.', cam: { az: 0, el: 0, zoom: 1, at: null }, beside: true, dur: 1.6 },
       ];
       X.model = (b) => (b >= 4 ? { unlike: true, lit: ['Strategy', 'Households', 'Firms'] } : null);
@@ -285,11 +286,10 @@ export const CONSTRUCTS = {
       // the story reaches beat 2
       X.crowd = { asset: 'bank', items: banks, from: 2 };
       const [ring, dense] = told;
-      const banksOf = (n) => (n === 1 ? 'one bank fails' : `${n} banks fail`);
       X.story = [
         { say: 'Ten banks with a buffer of 1 each. A failed bank passes its loss beyond the buffer, in equal parts, to the banks it owes: on the left only the next one, on the right all the others.' },
         { say: 'Raise each bank to the round in which it fails. The ones that survive stay on the page.', cam: { az: -0.5, el: 0.14, zoom: 0.85, at: [1.1, 0.5, 0.12] }, dur: 1.6 },
-        { say: `A loss of ${s} at the first bank. On the ring ${banksOf(ring.n)}${ring.n > 1 ? `, one after another, to round ${ring.end}` : ''}; in the dense network ${dense.n === 1 ? 'only the first fails' : `${dense.n} banks fail, all by round ${dense.end}`}. Beside the page they fall in their rounds.`, cam: { az: -0.3, el: 0.3, zoom: 1.4, at: [1.1, 0.5, 0.05] }, dur: 1.4 },
+        { say: `A loss of ${s} at the first bank. ${ring.n === 1 ? 'On the ring only the first fails.' : `On the ring ${ring.n} banks fail, one after another, to round ${ring.end}.`} ${dense.n === 1 ? 'In the dense network only the first fails.' : `In the dense network ${dense.n} banks fail, all by round ${dense.end}.`} Beside the page they fall in their rounds.`, cam: { az: -0.3, el: 0.3, zoom: 1.4, at: [1.1, 0.5, 0.05] }, dur: 1.4 },
         { say: 'They are the wheel’s ten banks, each now tied to the bank it owes and to the firms it lends to. Each that fails turns red there too, and the saving and lending that ran through it stop. Raise the loss above 10 with the slider, and the dense network falls all at once, in round 2.', cam: { az: -0.25, el: 0.4, zoom: 2.2, at: null }, dur: 1.6 },
       ];
       X.model = (b) => (b >= 3 ? { tied: true } : null);
@@ -373,7 +373,7 @@ export const CONSTRUCTS = {
       X.segs.push({ segs: ties, c: 'ochre', w: 1.4, o: 0.8, show: [2] });
       const name = m.names[j];
       const total = R.reduce((a, v) => a + v.total, 0);
-      const first = R.filter((v) => v.i !== j).sort((a, b) => b.r1 - a.r1).slice(0, 3).map((v) => m.names[v.i]);
+      const first = R.filter((v) => v.i !== j).sort((a, b) => b.r1 - a.r1).slice(0, 3).map((v) => t(m.names[v.i]));
       const [x, y] = pos[j];
       X.tags.push({ text: `${name}: one won of final demand`, at: [x, y, k], c: 'madder', show: [1] }, { text: `in all: ${total.toFixed(2)} won`, at: [x, y, R[j].total * k], c: 'cobalt', show: [4] });
       X.dims.push({ from: [1.6, -1.6, 0], to: [1.6, -1.6, R[j].total * k], text: `output drawn, won 0 … ${R[j].total.toFixed(2)}`, ...UP });
@@ -443,7 +443,7 @@ export const CONSTRUCTS = {
       const rows = [];
       for (const [a2, L] of Object.entries(LEVEL)) rows.push([[1880, 0.14, L * k], [2010, 0.14, L * k]]);
       X.segs.push({ segs: rows, c: 'chalk', w: 0.8, o: 0.3, dash: true, show: [1], rise: 1 });
-      for (const [a2, L] of Object.entries(LEVEL)) X.tags.push({ text: `${a2} ${NAME[a2]}`, at: [2010, 0.14, L * k], c: a2 === 'A1' || a2 === 'A2' ? 'madder' : '', show: [1, 3] });
+      for (const [a2, L] of Object.entries(LEVEL)) X.tags.push({ text: `${a2} ${t(NAME[a2])}`, at: [2010, 0.14, L * k], c: a2 === 'A1' || a2 === 'A2' ? 'madder' : '', show: [1, 3] });
       X.dims.push({ from: [1876, 0.14, 0], to: [1876, 0.14, 6 * k], text: 'the assumption it breaks', ...UP });
       X.model = (b) => [
         null,
@@ -487,9 +487,9 @@ export const CONSTRUCTS = {
       );
       X.dims.push({ from: [1.05, -0.05, 0], to: [1.05, -0.05, T * k], text: `time 0 … ${T}`, ...UP });
       X.story = [
-        { say: 'Three goods, three people, each owning one good. The triangle holds every set of relative prices; its centre is the only equilibrium. The arrows show how the classical adjustment moves the prices: up where a good is in excess demand.' },
-        { say: 'Let time rise off the page. With one representative consumer the prices go to the centre and then climb straight up it: equilibrium, reached.', cam: { az: -0.4, el: 0.12, zoom: 0.9, at: [0.5, 0.3, 0.15] }, dur: 2.2 },
-        { say: 'In Scarf’s economy each person wants a different pair of goods. The same adjustment carries the prices round the centre, climbing, and never closer to it.', cam: { az: -0.2, el: 0.2, zoom: 0.9, at: [0.5, 0.3, 0.2] }, dur: 2.6 },
+        { say: 'Three goods, three people, each owning one good. The triangle holds every set of relative prices; its center is the only equilibrium. The arrows show how the classical adjustment moves the prices: up where a good is in excess demand.' },
+        { say: 'Let time rise off the page. With one representative consumer the prices go to the center and then climb straight up it: equilibrium, reached.', cam: { az: -0.4, el: 0.12, zoom: 0.9, at: [0.5, 0.3, 0.15] }, dur: 2.2 },
+        { say: 'In Scarf’s economy each person wants a different pair of goods. The same adjustment carries the prices round the center, climbing, and never closer to it.', cam: { az: -0.2, el: 0.2, zoom: 0.9, at: [0.5, 0.3, 0.2] }, dur: 2.6 },
         { say: 'The equilibrium exists in both: a fixed-point theorem from topology guarantees it. Whether it is reached depends on how unlike the people are, and Sonnenschein, Mantel and Debreu showed that adding up unlike people puts almost no shape on total demand.', cam: { az: -0.5, el: 0.3, zoom: 1, at: [0.5, 0.3, 0.2] }, dur: 1.4 },
       ];
       return X;
@@ -542,11 +542,11 @@ export const CONSTRUCTS = {
       X.model = (b) => (b >= 1 && b <= ARGUMENTS.length ? stateOfArg(ARGUMENTS[b - 1]) : b > ARGUMENTS.length ? { tied: true, lit: ['Banks'] } : null);
       const say = {
         1883: '1883. Menger: economics deduces general laws from choice. Schmoller: it studies the history and institutions of particular economies. The tools at the hub, or the rules and history.',
-        '1890, 1932': '1890 and 1932. Marshall’s economics is the study of mankind in the ordinary business of life: the whole wheel. Robbins’s is behaviour as a relationship between ends and scarce means: one tool at the hub.',
-        1936: '1936. Keynes: employment is set by total spending, which can stay too low. He takes the money wage as given, and cutting it need not restore employment. The labour market is held; goods and money move.',
+        '1890, 1932': '1890 and 1932. Marshall’s economics is the study of mankind in the ordinary business of life: the whole wheel. Robbins’s is behavior as a relationship between ends and scarce means: one tool at the hub.',
+        1936: '1936. Keynes: employment is set by total spending, which can stay too low. He takes the money wage as given, and argues that cutting it need not restore employment. The labor market is held; goods and money move.',
         1945: '1945. Hayek: knowledge is dispersed among people who differ, prices carry it, and no planner can gather it. Unlike households and firms, joined by a market.',
         1953: '1953. Friedman: a theory’s assumptions need not be realistic if its predictions are right. The classical wheel, every agent alike, judged only by measurement.',
-        1976: '1976. Lucas: the rules that describe behaviour change when policy changes, so models must start from choices. Households choosing, under the central bank’s rules.',
+        1976: '1976. Lucas: the rules that describe behavior change when policy changes, so models must start from choices. Households choosing, under the central bank’s rules.',
         1992: '1992. Kirman: whom does the representative individual represent? Unlike people can add up to a total that none of them would choose.',
         2008: '2008. The benchmark model behind much central-bank analysis, Smets and Wouters (2007), had no banks, and models that added credit did not tie banks to one another.',
       };

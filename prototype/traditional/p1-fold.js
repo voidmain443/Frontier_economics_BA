@@ -399,7 +399,7 @@ export const CONSTRUCTS = {
         { say: 'A demand curve is a list of people. Here are 120 buyers, each standing at the most it would pay.', cam: { zoom: 0.58, el: 0.5, at: [4.5, 7.5, 0] }, dur: 2.2 },
         { say: 'And 120 sellers, each at what its unit costs to make. The two lines were people all along.', dur: 2 },
         { say: 'Let them trade. Each quotes a price at random, under one rule: never trade at a loss.', cam: { zoom: 0.55, el: 0.5, at: [4, 6.5, 0] } },
-        { say: 'Nobody aims at E, yet the prices close in on it. Markets like this realise about 97 percent of the possible gain on average.', cam: { zoom: 0.42, el: 0.45, at: [4.5, 5.8, 0] }, dur: 1.2 },
+        { say: 'Nobody aims at E, yet the prices close in on it. Markets like this realize about 97 percent of the possible gain on average.', cam: { zoom: 0.42, el: 0.45, at: [4.5, 5.8, 0] }, dur: 1.2 },
         { say: 'Each arc joins a buyer to the seller it traded with, and its drop is their gain. Who met whom is chance; the total depends only on who traded.', cam: { az: 0.55, el: 0.3, zoom: 0.6, at: [4, 6, 0.04] }, dur: 1.8 },
         { say: 'Now give every buyer a fifth more income. Each would pay more, and the whole crowd rises along an axis the page does not draw.', cam: { az: 0.3, el: 0.02, zoom: 0.7, at: [5.5, 6.5, 0.12] }, dur: 2 },
         { say: 'They trade again, and the prices find E′. The sellers have not changed: supply does not move.', cam: { az: 0.22, el: 0.04, zoom: 0.62, at: [5.5, 6.5, 0.12] } },

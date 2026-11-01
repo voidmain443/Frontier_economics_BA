@@ -14,6 +14,7 @@ import { loadAssets } from './maquettes.js';
 import { RIM, FLOWS, placeOf, polar, cellCentre, wheelAt, poseFor, toWorldW, wheelGeometry, signSpots, routeOf, hatchOf, population, ties, circulation, crowdSpots } from './wheel.js';
 import { perspective, lookAt, multiply, project, rect, ortho, basis } from './math.js';
 import { lerp, clamp, smooth, ease, surfaceVerts, quadVerts } from './geom.js';
+import { t, localHref } from './i18n.js';
 
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const DURATION = REDUCED ? 0.01 : 1.6;
@@ -345,8 +346,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const label = (html, cls, local, box, group, href = null) => {
       const el = document.createElement(href ? 'a' : 'div');
       el.className = `xl ${cls}`;
-      el.innerHTML = html;
-      if (href) el.href = href;
+      el.innerHTML = t(html);
+      if (href) el.href = localHref(href);
       labelsRoot.appendChild(el);
       sc.labels.push({ el, local, box, group, link: Boolean(href) });
       return sc.labels[sc.labels.length - 1];
@@ -478,9 +479,9 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         plate.space = 0;
         const sign = document.createElement(archive ? 'a' : 'div');
         sign.className = archive ? 'xl room door' : 'xl room';
-        sign.innerHTML = `<span>${cell.layer}</span>${cell.name}`;
+        sign.innerHTML = `<span>${t(cell.layer)}</span>${t(cell.name)}`;
         if (archive) {
-          sign.href = cell.href;
+          sign.href = localHref(cell.href);
           sign.tabIndex = -1;
           doorsRoot.appendChild(sign);
         } else labelsRoot.appendChild(sign);
@@ -527,7 +528,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         dots.space = 0;
         const el = document.createElement('div');
         el.className = `xl route ${rt.c}`;
-        el.textContent = rt.name;
+        el.textContent = t(rt.name);
         labelsRoot.appendChild(el);
         return { ...rt, lines, dots, el, start: pts[0], stops, at, reached: stops.length, cells: new Set(rt.places.flat()) };
       });
@@ -645,8 +646,9 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       if (held) {
         const s = document.createElement('span');
         const i = document.createElement('i');
-        i.textContent = 'Held fixed';
-        s.append(i, ` ${held.textContent.replace(/^\s*Held fixed\s*/, '')}`);
+        i.textContent = t('Held fixed');
+        const label = held.querySelector('span')?.textContent ?? '';
+        s.append(i, ` ${held.textContent.replace(label, '').trim()}`);
         el.append(s);
       }
       const ctl = fig.querySelector('.fig-ctl');
@@ -673,7 +675,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // { group: [their indices] }
     if (X.wheel) {
       // wheelTag names the first agent taken out, beside it on the wheel
-      const tag = X.wheelTag ? Object.assign(document.createElement('div'), { className: 'xl tag madder', innerHTML: X.wheelTag }) : null;
+      const tag = X.wheelTag ? Object.assign(document.createElement('div'), { className: 'xl tag madder', innerHTML: t(X.wheelTag) }) : null;
       if (tag) labelsRoot.appendChild(tag);
       sc.wheels.push({ fid: id, group, fn: X.wheel, tag });
     }
@@ -1137,7 +1139,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
         const value = state?.stopped?.get(w.cell.name);
         if (value && w.held.dataset.v !== value) {
           w.held.dataset.v = value;
-          w.held.innerHTML = `<i>held</i> ${value}`;
+          w.held.innerHTML = `<i>${t('held')}</i> ${t(value)}`;
         }
         const ho = w.held.dataset.v ? shown * made * md.s * (value === '' ? 0 : 1) : 0;
         const hp = ho > 0.02 ? project(vp, toWorldW(cellCentre(w.cell, 0.02), pose), W, H) : null;
@@ -1162,7 +1164,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const o = appear * Wd.look.measured;
       if (state?.measured && Wd.measured.dataset.v !== state.measured) {
         Wd.measured.dataset.v = state.measured;
-        Wd.measured.innerHTML = state.measured;
+        Wd.measured.innerHTML = t(state.measured);
       }
       const pr = o > 0.02 ? project(vp, toWorldW([0, 0.05, 0], pose), W, H) : null;
       Wd.measured.style.opacity = pr ? String(o) : '0';
@@ -1265,7 +1267,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     if (told && caption.dataset.key !== `${SC.fid}:${SC.target}:${SC.beats[SC.target].say}`) {
       caption.dataset.key = `${SC.fid}:${SC.target}:${SC.beats[SC.target].say}`;
       const say = caption.querySelector('.say');
-      say.innerHTML = SC.beats[SC.target].say;
+      say.innerHTML = t(SC.beats[SC.target].say);
       say.classList.remove('in');
       void say.offsetWidth;
       say.classList.add('in');

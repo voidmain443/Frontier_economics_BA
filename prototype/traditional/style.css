@@ -928,3 +928,12 @@ body:not(.unfolded) .story { display: none; }
 @media (max-width: 1320px) { .story { left: 20px; transform: none; width: min(600px, calc(100vw - 390px)); } }
 @media (max-width: 760px) { .story { top: 12px; bottom: auto; left: 12px; width: calc(100vw - 24px); } }
 @media (max-width: 640px) { .story { padding: 12px 14px 10px; } .story .say { font-size: 16px; } }
+
+/* the Korean twin of each page (docs/i18n.md): Hangul set in Noto Serif KR
+   beside Computer Modern, and in IBM Plex Sans KR beside Barlow Condensed */
+:root:lang(ko) {
+  --serif: 'CMU Serif', 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+  --draft: 'Barlow Condensed', 'IBM Plex Sans KR', 'Apple SD Gothic Neo', sans-serif;
+}
+:lang(ko) body, :lang(ko) .sheet { word-break: keep-all; overflow-wrap: anywhere; }
+nav.site a.lang { margin-left: auto; }

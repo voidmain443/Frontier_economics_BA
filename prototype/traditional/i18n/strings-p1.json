@@ -1,0 +1,1662 @@
+[
+{
+"key": "lb ptitle",
+"file": "p1-figs.js",
+"line": 92
+},
+{
+"key": "Supply and demand, with demand drawn at several incomes.",
+"file": "p1-figs.js",
+"line": 101
+},
+{
+"key": "Twenty buyers and twenty sellers as staircases, with the gains, the tax and the lost trades shaded.",
+"file": "p1-figs.js",
+"line": 118
+},
+{
+"key": "buyers pay {0}",
+"file": "p1-figs.js",
+"line": 136
+},
+{
+"key": "no tax: {0}",
+"file": "p1-figs.js",
+"line": 137
+},
+{
+"key": "sellers keep {0}",
+"file": "p1-figs.js",
+"line": 138
+},
+{
+"key": "tax {0} × {1} = {2}",
+"file": "p1-figs.js",
+"line": 139
+},
+{
+"key": "lost: {0} + {1} + {2}",
+"file": "p1-figs.js",
+"line": 140
+},
+{
+"key": "willingness to pay",
+"file": "p1-figs.js",
+"line": 141
+},
+{
+"key": "Demand curves through one point at different horizons, steeper in the short run.",
+"file": "p1-figs.js",
+"line": 146
+},
+{
+"key": "first month, |ε| = {0}",
+"file": "p1-figs.js",
+"line": 158
+},
+{
+"key": "five years, |ε| = {0}",
+"file": "p1-figs.js",
+"line": 159
+},
+{
+"key": "after P + {0}%:",
+"file": "p1-figs.js",
+"line": 161
+},
+{
+"key": "{0}, later {1}",
+"file": "p1-figs.js",
+"line": 162
+},
+{
+"key": "Indifference curves and a budget line touching at six and six.",
+"file": "p1-figs.js",
+"line": 167
+},
+{
+"key": "A price rise split into substitution and income effects.",
+"file": "p1-figs.js",
+"line": 180
+},
+{
+"key": "substitution −{0}",
+"file": "p1-figs.js",
+"line": 192
+},
+{
+"key": "income −{0}",
+"file": "p1-figs.js",
+"line": 193
+},
+{
+"key": "The same choices plotted against the price: the demand curve.",
+"file": "p1-figs.js",
+"line": 194
+},
+{
+"key": "Choice between consumption now and later.",
+"file": "p1-figs.js",
+"line": 204
+},
+{
+"key": "saves {0}",
+"file": "p1-figs.js",
+"line": 216
+},
+{
+"key": "Five short-run average cost curves and their lower envelope.",
+"file": "p1-figs.js",
+"line": 221
+},
+{
+"key": "LRAC",
+"file": "p1-figs.js",
+"line": 234
+},
+{
+"key": "Industry supply moving out as firms enter, the price falling toward {0}.",
+"file": "p1-figs.js",
+"line": 241
+},
+{
+"key": "long-run supply",
+"file": "p1-figs.js",
+"line": 257
+},
+{
+"key": "Two reaction curves crossing, with the two firms’ profit contours through the crossing.",
+"file": "p1-figs.js",
+"line": 263
+},
+{
+"key": "Nash",
+"file": "p1-figs.js",
+"line": 275
+},
+{
+"key": "firm {0}’s reaction",
+"file": "p1-figs.js",
+"line": 277
+},
+{
+"key": "firm {0}’s profit {1}",
+"file": "p1-figs.js",
+"line": 279
+},
+{
+"key": "The entry game as a table with two equilibria, and as a tree in which only one survives.",
+"file": "p1-figs.js",
+"line": 284
+},
+{
+"key": "Fight",
+"file": "p1-figs.js",
+"line": 288
+},
+{
+"key": "Accommodate",
+"file": "p1-figs.js",
+"line": 289
+},
+{
+"key": "Out",
+"file": "p1-figs.js",
+"line": 290
+},
+{
+"key": "two Nash equilibria (ringed)",
+"file": "p1-figs.js",
+"line": 297
+},
+{
+"key": "An Edgeworth box with the endowment, the lens of mutually better trades and the equilibrium on the diagonal.",
+"file": "p1-figs.js",
+"line": 316
+},
+{
+"key": "contract curve",
+"file": "p1-figs.js",
+"line": 335
+},
+{
+"key": "Willingness to pay for a public good added vertically for one, two and three households.",
+"file": "p1-figs.js",
+"line": 339
+},
+{
+"key": "cost {0}",
+"file": "p1-figs.js",
+"line": 350
+},
+{
+"key": "voluntary giving stops",
+"file": "p1-figs.js",
+"line": 351
+},
+{
+"key": "cars, ranked by quality",
+"file": "p1-figs.js",
+"line": 355
+},
+{
+"key": "A used-car market in which the best forty cars are not traded.",
+"file": "p1-figs.js",
+"line": 355
+},
+{
+"key": "seller’s value θ",
+"file": "p1-figs.js",
+"line": 364
+},
+{
+"key": "buyer’s value θ + {0}",
+"file": "p1-figs.js",
+"line": 365
+},
+{
+"key": "what buyers pay: p/{0} + {1}",
+"file": "p1-figs.js",
+"line": 366
+},
+{
+"key": "{0} best cars stay home",
+"file": "p1-figs.js",
+"line": 367
+},
+{
+"key": "The Solow diagram with two saving rates.",
+"file": "p1-figs.js",
+"line": 373
+},
+{
+"key": "Korea: real GDP per person ({0} = {1})",
+"file": "p1-figs.js",
+"line": 392
+},
+{
+"key": "Fixed investment, % of GDP",
+"file": "p1-figs.js",
+"line": 394
+},
+{
+"key": "IS and three LM curves, one per price level.",
+"file": "p1-figs.js",
+"line": 400
+},
+{
+"key": "LM, P = {0}",
+"file": "p1-figs.js",
+"line": 407
+},
+{
+"key": "Aggregate demand traced by the IS–LM equilibria.",
+"file": "p1-figs.js",
+"line": 411
+},
+{
+"key": "Short-run Phillips curves stacked by expected inflation, with the United States {0} to {1}.",
+"file": "p1-figs.js",
+"line": 419
+},
+{
+"key": "Loss circles around the target and the Phillips curve; the bank picks the closest point.",
+"file": "p1-figs.js",
+"line": 440
+},
+{
+"key": "monetary rule",
+"file": "p1-figs.js",
+"line": 451
+},
+{
+"key": "A scatter whose fitted slope is about one, with the true slope of one half at three values of a hidden variable.",
+"file": "p1-figs.js",
+"line": 459
+},
+{
+"key": "fitted slope {0}",
+"file": "p1-figs.js",
+"line": 469
+},
+{
+"key": "Twelve months of prices and quantities; the fitted line is flat.",
+"file": "p1-figs.js",
+"line": 475
+},
+{
+"key": "thin cb ghost",
+"file": "p1-figs.js",
+"line": 477
+},
+{
+"key": "thin ol ghost",
+"file": "p1-figs.js",
+"line": 478
+},
+{
+"key": "demand slope −{0}",
+"file": "p1-figs.js",
+"line": 488
+},
+{
+"key": "Break-even curves for two goods in factor-price space, before and after a rise in the price of textiles.",
+"file": "p1-figs.js",
+"line": 494
+},
+{
+"key": "textiles, p = {0}",
+"file": "p1-figs.js",
+"line": 503
+},
+{
+"key": "machines, p = {0}",
+"file": "p1-figs.js",
+"line": 505
+},
+{
+"key": "The foreign-exchange market for two expected future rates.",
+"file": "p1-figs.js",
+"line": 512
+},
+{
+"key": "won deposits, i = {0}%",
+"file": "p1-figs.js",
+"line": 521
+},
+{
+"key": "Won per dollar, monthly average",
+"file": "p1-figs.js",
+"line": 525
+},
+{
+"key": "Call rate, %",
+"file": "p1-figs.js",
+"line": 527
+},
+{
+"key": "Payoffs from waiting and withdrawing against the share who withdraw.",
+"file": "p1-figs.js",
+"line": 533
+},
+{
+"key": "only the impatient withdraw: wait",
+"file": "p1-figs.js",
+"line": 541
+},
+{
+"key": "everyone runs",
+"file": "p1-figs.js",
+"line": 543
+},
+{
+"key": "withdraw: {0}",
+"file": "p1-figs.js",
+"line": 544
+},
+{
+"key": "TED spread, percentage points (weekly average)",
+"file": "p1-figs.js",
+"line": 546
+},
+{
+"key": "Mixes of two assets for five correlations.",
+"file": "p1-figs.js",
+"line": 551
+},
+{
+"key": "A tax of two in the market of Figure {0}.",
+"file": "p1-figs.js",
+"line": 568
+},
+{
+"key": "revenue {0}",
+"file": "p1-figs.js",
+"line": 574
+},
+{
+"key": "loss {0}",
+"file": "p1-figs.js",
+"line": 575
+},
+{
+"key": "Revenue and deadweight loss at every tax rate.",
+"file": "p1-figs.js",
+"line": 578
+},
+{
+"key": "deadweight loss",
+"file": "p1-figs.js",
+"line": 583
+},
+{
+"key": "Private cost with a layer of discounted future damage on top, at two discount rates.",
+"file": "p1-figs.js",
+"line": 588
+},
+{
+"key": "social cost at r = {0}%: + {1}",
+"file": "p1-figs.js",
+"line": 598
+},
+{
+"key": "private cost (r = {0}% adds {1})",
+"file": "p1-figs.js",
+"line": 599
+},
+{
+"key": "A labor market with a single employer.",
+"file": "p1-figs.js",
+"line": 604
+},
+{
+"key": "price-taking: {0} at {1}",
+"file": "p1-figs.js",
+"line": 610
+},
+{
+"key": "single employer: {0} at {1}",
+"file": "p1-figs.js",
+"line": 611
+},
+{
+"key": "marginal cost of labor",
+"file": "p1-figs.js",
+"line": 613
+},
+{
+"key": "marginal product",
+"file": "p1-figs.js",
+"line": 614
+},
+{
+"key": "Employment at every minimum wage: a tent under a single employer.",
+"file": "p1-figs.js",
+"line": 615
+},
+{
+"key": "single employer",
+"file": "p1-figs.js",
+"line": 619
+},
+{
+"key": "Two streams of profit: steady for the cartel, high once then low for the cheat.",
+"file": "p1-figs.js",
+"line": 626
+},
+{
+"key": "cartel {0}",
+"file": "p1-figs.js",
+"line": 632
+},
+{
+"key": "cheat {0}",
+"file": "p1-figs.js",
+"line": 633
+},
+{
+"key": "What each stream is worth at every discount factor; they cross at nine seventeenths.",
+"file": "p1-figs.js",
+"line": 635
+},
+{
+"key": "keep the cartel",
+"file": "p1-figs.js",
+"line": 642
+},
+{
+"key": "Values of the two payments seen from day zero and from day ten.",
+"file": "p1-figs.js",
+"line": 647
+},
+{
+"key": "{0}, day {1}",
+"file": "p1-figs.js",
+"line": 648
+},
+{
+"key": "seen from day {0}: wait",
+"file": "p1-figs.js",
+"line": 654
+},
+{
+"key": "seen from day {0}: take {1}",
+"file": "p1-figs.js",
+"line": 655
+},
+{
+"key": "k = wealth",
+"file": "p1-figs.js",
+"line": 659
+},
+{
+"key": "Marginal product of capital falling with scale; poor owners sit where returns are high.",
+"file": "p1-figs.js",
+"line": 659
+},
+{
+"key": "interest rate {0}%",
+"file": "p1-figs.js",
+"line": 662
+},
+{
+"key": "Birth and death rates crossing at subsistence income.",
+"file": "p1-figs.js",
+"line": 675
+},
+{
+"key": "Income per person falling with population; better technology lifts the curve.",
+"file": "p1-figs.js",
+"line": 683
+},
+{
+"key": "better technology",
+"file": "p1-figs.js",
+"line": 691
+},
+{
+"key": "Income per person, {0} dollars (log scale)",
+"file": "p1-figs.js",
+"line": 692
+},
+{
+"key": "England, then the UK",
+"file": "p1-figs.js",
+"line": 694
+},
+{
+"key": "Netherlands",
+"file": "p1-figs.js",
+"line": 695
+},
+{
+"key": "China",
+"file": "p1-figs.js",
+"line": 696
+},
+{
+"key": "India",
+"file": "p1-figs.js",
+"line": 697
+},
+{
+"key": "buyers, by what each would pay",
+"file": "p1-fold.js",
+"line": 385
+},
+{
+"key": "sellers, by what each unit costs",
+"file": "p1-fold.js",
+"line": 386
+},
+{
+"key": "trade prices, in order",
+"file": "p1-fold.js",
+"line": 387
+},
+{
+"key": "this day: {0} percent of the possible gain",
+"file": "p1-fold.js",
+"line": 388
+},
+{
+"key": "each arc a trade, its drop their gain",
+"file": "p1-fold.js",
+"line": 389
+},
+{
+"key": "income I",
+"file": "p1-fold.js",
+"line": 390
+},
+{
+"key": "supply does not move",
+"file": "p1-fold.js",
+"line": 392
+},
+{
+"key": "bid &lt; value, ask &gt; cost",
+"file": "p1-fold.js",
+"line": 394
+},
+{
+"key": "The textbook draws demand and supply as two lines and calls their crossing E. Where does E come from?",
+"file": "p1-fold.js",
+"line": 398
+},
+{
+"key": "A demand curve is a list of people. Here are {0} buyers, each standing at the most it would pay.",
+"file": "p1-fold.js",
+"line": 399
+},
+{
+"key": "And {0} sellers, each at what its unit costs to make. The two lines were people all along.",
+"file": "p1-fold.js",
+"line": 400
+},
+{
+"key": "Let them trade. Each quotes a price at random, under one rule: never trade at a loss.",
+"file": "p1-fold.js",
+"line": 401
+},
+{
+"key": "Nobody aims at E, yet the prices close in on it. Markets like this realize about {0} percent of the possible gain on average.",
+"file": "p1-fold.js",
+"line": 402
+},
+{
+"key": "Each arc joins a buyer to the seller it traded with, and its drop is their gain. Who met whom is chance; the total depends only on who traded.",
+"file": "p1-fold.js",
+"line": 403
+},
+{
+"key": "Now give every buyer a fifth more income. Each would pay more, and the whole crowd rises along an axis the page does not draw.",
+"file": "p1-fold.js",
+"line": 404
+},
+{
+"key": "They trade again, and the prices find E′. The sellers have not changed: supply does not move.",
+"file": "p1-fold.js",
+"line": 405
+},
+{
+"key": "Stack every income and the buyers form a surface. A shift is a move along this hidden axis; <i>ceteris paribus</i> means one slice.",
+"file": "p1-fold.js",
+"line": 406
+},
+{
+"key": "without the tax: {0} in gains",
+"file": "p1-fold.js",
+"line": 434
+},
+{
+"key": "buyers keep {0}",
+"file": "p1-fold.js",
+"line": 435
+},
+{
+"key": "the state takes {0}",
+"file": "p1-fold.js",
+"line": 436
+},
+{
+"key": "one column a trader",
+"file": "p1-fold.js",
+"line": 438
+},
+{
+"key": "Twenty buyers will pay {0}, {1}, … {2}, and twenty sellers have costs {3}, {4}, … {5}. Each step of the two staircases is one person.",
+"file": "p1-fold.js",
+"line": 440
+},
+{
+"key": "Without a tax, ten trades happen at a price of {0}. Stand each trader’s gain up as a column: value minus price, or price minus cost. They total {1}.",
+"file": "p1-fold.js",
+"line": 441
+},
+{
+"key": "A tax of {0} opens a wedge: buyers pay {1}, sellers keep {2}, and seven trades remain. Each hands {3} to the state.",
+"file": "p1-fold.js",
+"line": 442
+},
+{
+"key": "The three marginal trades stop. Their gains, {0}, {1} and {2}, were real but smaller than the tax.",
+"file": "p1-fold.js",
+"line": 443
+},
+{
+"key": "Buyers and sellers keep {0}, the state takes {1}, and {2} is gone: the trades that no longer happen. A curve is a list of people.",
+"file": "p1-fold.js",
+"line": 444
+},
+{
+"key": "first month: R = {0}",
+"file": "p1-fold.js",
+"line": 464
+},
+{
+"key": "still buying at {0}",
+"file": "p1-fold.js",
+"line": 465
+},
+{
+"key": "time to adjust",
+"file": "p1-fold.js",
+"line": 466
+},
+{
+"key": "five years: R = {0}",
+"file": "p1-fold.js",
+"line": 467
+},
+{
+"key": "first month … five years",
+"file": "p1-fold.js",
+"line": 469
+},
+{
+"key": "Elasticity is quoted as one number. Yet today’s point, <i>Q</i> = {0} at <i>P</i> = {1}, lies on a different curve depending on how long buyers have had.",
+"file": "p1-fold.js",
+"line": 472
+},
+{
+"key": "In the first month few buyers can switch. Their values run steeply through the point: |<i>ε</i>| = {0}. Revenue is {1} × {2} = {3}.",
+"file": "p1-fold.js",
+"line": 473
+},
+{
+"key": "Raise the price {0} percent. Almost everyone still buys, and revenue rises to about {1}.",
+"file": "p1-fold.js",
+"line": 474
+},
+{
+"key": "Give them time. Over five years they find substitutes, the same buyers’ values draw in toward {0}, and the line they make turns flat.",
+"file": "p1-fold.js",
+"line": 475
+},
+{
+"key": "Now the same rise loses revenue: {0}. Elasticity is not one number; it depends on how long you wait.",
+"file": "p1-fold.js",
+"line": 476
+},
+{
+"key": "the budget, a fence",
+"file": "p1-fold.js",
+"line": 493
+},
+{
+"key": "u = {0} at the best bundle",
+"file": "p1-fold.js",
+"line": 495
+},
+{
+"key": "The household’s choice as the page draws it: contour lines of utility, and the budget line <i>x</i> + <i>y</i> = {0} touching one of them at ({1}, {2}).",
+"file": "p1-fold.js",
+"line": 498
+},
+{
+"key": "Raise utility, √(<i>xy</i>), as height. It is a hill, and each indifference curve is a contour line on it.",
+"file": "p1-fold.js",
+"line": 499
+},
+{
+"key": "The budget is a fence standing on the hill. Walk along it and the hill’s profile is one arch.",
+"file": "p1-fold.js",
+"line": 500
+},
+{
+"key": "Put twelve households anywhere on the fence. Each steps the way its utility rises, and every one ends at the top of the arch.",
+"file": "p1-fold.js",
+"line": 501
+},
+{
+"key": "There the fence runs along a contour: MRS equals the price ratio, ∇<i>u</i> = <i>λ</i>∇<i>g</i>. Here <i>λ</i> = {0}, how much higher the household could climb if the fence moved out by one unit.",
+"file": "p1-fold.js",
+"line": 502
+},
+{
+"key": "price of x",
+"file": "p1-fold.js",
+"line": 520
+},
+{
+"key": "The price of <i>x</i> doubles, from {0} to {1}, and the choice moves from A ({2}, {3}) to B ({4}, {5}). The page copies the choices into a second panel, against the price.",
+"file": "p1-fold.js",
+"line": 523
+},
+{
+"key": "Stand the price up as a third axis along the top edge, so that the two panels are one figure.",
+"file": "p1-fold.js",
+"line": 524
+},
+{
+"key": "At <i>p</i> = {0} the household chooses <i>x</i> = {1}, at A. Carry that choice up to its price.",
+"file": "p1-fold.js",
+"line": 525
+},
+{
+"key": "At <i>p</i> = {0} it chooses <i>x</i> = {1}, at B.",
+"file": "p1-fold.js",
+"line": 526
+},
+{
+"key": "Do the same at every price, and the choices trace <i>x</i> = {0}/<i>p</i>. The demand curve is a list of optima.",
+"file": "p1-fold.js",
+"line": 527
+},
+{
+"key": "Give the household just enough income to reach its old curve at <i>p</i> = {0}, and it chooses C, <i>x</i> = {1}. A → C, −{2}, is the substitution effect; C → B, −{3}, the income effect. The dashed curve is demand without the income effect.",
+"file": "p1-fold.js",
+"line": 528
+},
+{
+"key": "interest rate",
+"file": "p1-fold.js",
+"line": 549
+},
+{
+"key": "u′(c<sub>{0}</sub>) = β({1} + r)u′(c<sub>{2}</sub>)",
+"file": "p1-fold.js",
+"line": 550
+},
+{
+"key": "The household has {0} now and {1} later. At {2} percent interest it consumes {3} now and saves {4}.",
+"file": "p1-fold.js",
+"line": 553
+},
+{
+"key": "Stand the interest rate up as height, from {0} to {1} percent. Each rate is a budget line through the same endowment, ({2}, {3}), steeper as <i>r</i> rises.",
+"file": "p1-fold.js",
+"line": 554
+},
+{
+"key": "On each line the household takes its best point. As <i>r</i> rises, <i>c</i><sub>{0}</sub> falls from {1} to {2}: saving rises from {3} to {4}.",
+"file": "p1-fold.js",
+"line": 555
+},
+{
+"key": "Each of these points satisfies the Euler equation. Read up the rate axis, they are the household’s saving curve. Relabel the axes as two states of the world, and the same tangency chooses insurance.",
+"file": "p1-fold.js",
+"line": 556
+},
+{
+"key": "plant size K",
+"file": "p1-fold.js",
+"line": 584
+},
+{
+"key": "touches the envelope once",
+"file": "p1-fold.js",
+"line": 584
+},
+{
+"key": "its own minimum",
+"file": "p1-fold.js",
+"line": 584
+},
+{
+"key": "five plant sizes",
+"file": "p1-fold.js",
+"line": 585
+},
+{
+"key": "Short-run average cost for five plant sizes, and the long-run curve that lies under all of them.",
+"file": "p1-fold.js",
+"line": 587
+},
+{
+"key": "Give each plant size its own plane, ordered into the page: one plant and its short-run curve on each.",
+"file": "p1-fold.js",
+"line": 588
+},
+{
+"key": "Each short-run curve touches the long-run curve at one point. Join those points across the planes.",
+"file": "p1-fold.js",
+"line": 589
+},
+{
+"key": "Seen from above, the planes collapse into the page, and the lowest cost at each output traces the envelope.",
+"file": "p1-fold.js",
+"line": 590
+},
+{
+"key": "Take the smallest plant: its curve touches the envelope at <i>Q</i> = {0}, left of its own minimum. The two coincide only at the bottom, <i>Q</i> = {1}. In {2} Jacob Viner asked his draftsman, Y. K. Wong, for a curve through every minimum; Wong said that no curve could do it.",
+"file": "p1-fold.js",
+"line": 591
+},
+{
+"key": "firms enter",
+"file": "p1-fold.js",
+"line": 616
+},
+{
+"key": "P = {0}, the minimum of average cost",
+"file": "p1-fold.js",
+"line": 616
+},
+{
+"key": "N = {0} … {1} firms",
+"file": "p1-fold.js",
+"line": 617
+},
+{
+"key": "Industry supply with {0} to {1} identical firms, each with the cost of Figure {2}, against market demand <i>Q</i> = {3} − {4}<i>P</i>.",
+"file": "p1-fold.js",
+"line": 620
+},
+{
+"key": "Raise the number of firms as height. Each supply curve stands at its own level, one firm a step.",
+"file": "p1-fold.js",
+"line": 621
+},
+{
+"key": "With {0} firms the price is about {1}, well above the minimum of average cost. The profits draw another firm in, and the market moves up to the next level.",
+"file": "p1-fold.js",
+"line": 622
+},
+{
+"key": "Firm by firm the price falls: {0}, {1}, {2}, {3}, {4}.",
+"file": "p1-fold.js",
+"line": 623
+},
+{
+"key": "An eighth firm would make a loss, so entry stops near <i>P</i> = {0}, the minimum of average cost. Perfect competition is the end of an entry process: profits are zero because that is where entry stops.",
+"file": "p1-fold.js",
+"line": 624
+},
+{
+"key": "firm {0}’s ridge",
+"file": "p1-fold.js",
+"line": 645
+},
+{
+"key": "π = {0} each at the Nash point",
+"file": "p1-fold.js",
+"line": 646
+},
+{
+"key": "Two firms choose outputs. The page draws each one’s best response as a line, and they cross at the Nash equilibrium, {0} each.",
+"file": "p1-fold.js",
+"line": 649
+},
+{
+"key": "Raise firm {0}’s profit over the plane of outputs: a hill. For each output of firm {1}, firm {2}’s best is the top in its own direction, and those tops form a ridge, its reaction curve.",
+"file": "p1-fold.js",
+"line": 650
+},
+{
+"key": "Firm {0}’s hill faces the other way, with its own ridge.",
+"file": "p1-fold.js",
+"line": 651
+},
+{
+"key": "Let them take turns, each climbing its own hill with the other’s output held fixed. Turn by turn they close in on the crossing.",
+"file": "p1-fold.js",
+"line": 652
+},
+{
+"key": "Where the ridges cross, each earns {0}. The two contours cross there rather than touch, so both firms could earn more by producing less: the cartel of Figure {1}.",
+"file": "p1-fold.js",
+"line": 653
+},
+{
+"key": "entrant moves first",
+"file": "p1-fold.js",
+"line": 672
+},
+{
+"key": "incumbent: fight pays {0}, accommodate {1}",
+"file": "p1-fold.js",
+"line": 672
+},
+{
+"key": "(In, Accommodate)",
+"file": "p1-fold.js",
+"line": 672
+},
+{
+"key": "two moves, entrant first",
+"file": "p1-fold.js",
+"line": 673
+},
+{
+"key": "The entry game as a table. (Out, Fight) is a Nash equilibrium: if the incumbent will fight, staying out is best, and if nobody enters, fighting costs the incumbent nothing.",
+"file": "p1-fold.js",
+"line": 675
+},
+{
+"key": "Stand the table up into a tree along a time axis. The entrant moves first, at the top.",
+"file": "p1-fold.js",
+"line": 676
+},
+{
+"key": "If the entrant comes in, the threat is tested at the moment it would have to be carried out. Fighting then pays the incumbent {0}; accommodating pays {1}.",
+"file": "p1-fold.js",
+"line": 677
+},
+{
+"key": "So the incumbent would accommodate, and the entrant, who can see this, enters. The threat drops out and only (In, Accommodate) survives: the subgame-perfect equilibrium.",
+"file": "p1-fold.js",
+"line": 678
+},
+{
+"key": "both tops on one fence",
+"file": "p1-fold.js",
+"line": 699
+},
+{
+"key": "A’s hill",
+"file": "p1-fold.js",
+"line": 699
+},
+{
+"key": "B’s hill",
+"file": "p1-fold.js",
+"line": 699
+},
+{
+"key": "u = {0} for each at the equilibrium",
+"file": "p1-fold.js",
+"line": 700
+},
+{
+"key": "barter stops on x = y",
+"file": "p1-fold.js",
+"line": 701
+},
+{
+"key": "Households A and B share {0} units of each good, starting from ω = ({1}, {2}). A’s curves start at the lower left, B’s at the upper right.",
+"file": "p1-fold.js",
+"line": 704
+},
+{
+"key": "A’s utility rises as a hill from A’s corner.",
+"file": "p1-fold.js",
+"line": 705
+},
+{
+"key": "B’s rises from the opposite corner, facing it. The contract curve is where their contour lines touch: the diagonal.",
+"file": "p1-fold.js",
+"line": 706
+},
+{
+"key": "Let them barter, every swap raising both utilities. From each start the swapping stops on the diagonal, each time at a different split.",
+"file": "p1-fold.js",
+"line": 707
+},
+{
+"key": "A price line through ω is a fence. At slope −{0} both households’ tops along it are the same point, E = ({1}, {2}): both tops on one fence, Walras’ law made visible.",
+"file": "p1-fold.js",
+"line": 708
+},
+{
+"key": "households, one plane each",
+"file": "p1-fold.js",
+"line": 729
+},
+{
+"key": "efficient: {0}, {1}, {2} … {3}",
+"file": "p1-fold.js",
+"line": 729
+},
+{
+"key": "voluntary: {0}",
+"file": "p1-fold.js",
+"line": 729
+},
+{
+"key": "n = {0} … {1} households",
+"file": "p1-fold.js",
+"line": 730
+},
+{
+"key": "One household would pay {0} − <i>G</i> for one more unit of street lighting, and a unit costs {1}. Alone, it buys {2}.",
+"file": "p1-fold.js",
+"line": 732
+},
+{
+"key": "Add households, one plane each. Every household uses the same lighting, so what they would pay together adds up vertically: <i>n</i>({0} − <i>G</i>).",
+"file": "p1-fold.js",
+"line": 733
+},
+{
+"key": "The efficient amount is where that sum meets the cost: {0} with one household, {1} with two, {2} with three, {3} with six.",
+"file": "p1-fold.js",
+"line": 734
+},
+{
+"key": "Voluntary giving stops at {0} however many share the good, because past {1} no single household values a unit at its cost. The gap grows with every household.",
+"file": "p1-fold.js",
+"line": 735
+},
+{
+"key": "quality θ: the buyer cannot see this axis",
+"file": "p1-fold.js",
+"line": 754
+},
+{
+"key": "p = {0}: cars below trade",
+"file": "p1-fold.js",
+"line": 754
+},
+{
+"key": "the best stay home",
+"file": "p1-fold.js",
+"line": 754
+},
+{
+"key": "quality θ = {0} … {1}",
+"file": "p1-fold.js",
+"line": 755
+},
+{
+"key": "A market for {0} used cars of quality <i>θ</i> from {1} to {2}. A car is worth <i>θ</i> to its owner and <i>θ</i> + {3} to any buyer, but the buyer cannot see <i>θ</i>.",
+"file": "p1-fold.js",
+"line": 758
+},
+{
+"key": "Give each car a column as tall as its quality: the axis the buyer cannot see.",
+"file": "p1-fold.js",
+"line": 759
+},
+{
+"key": "Buyers pay what the average car on offer is worth to them, <i>p</i>/{0} + {1}. At {2} that is {3}. Owners of better cars than {4} take them home, and the price falls again: {5}, {6}, … toward {7}.",
+"file": "p1-fold.js",
+"line": 760
+},
+{
+"key": "At <i>p</i> = {0} the {1} cars below {2} trade, and the {3} best stay home, though each is worth {4} more to a buyer than to its owner. Of {5} in possible gains, {6} are lost, from the top of the market.",
+"file": "p1-fold.js",
+"line": 761
+},
+{
+"key": "k* = {0} at every date",
+"file": "p1-fold.js",
+"line": 786
+},
+{
+"key": "year {0} … {1}",
+"file": "p1-fold.js",
+"line": 787
+},
+{
+"key": "The page is a phase diagram. At every <i>k</i> it says whether capital grows or shrinks, and saving meets break-even investment at <i>k</i>* ≈ {0}. It does not say when.",
+"file": "p1-fold.js",
+"line": 789
+},
+{
+"key": "Stand time up as a third axis, sixty years tall. The steady state is a line straight up.",
+"file": "p1-fold.js",
+"line": 790
+},
+{
+"key": "Start four economies with different capital and follow them through time. Every path bends toward <i>k</i>*; half the gap closes in about {0} years.",
+"file": "p1-fold.js",
+"line": 791
+},
+{
+"key": "Raise the saving rate to {0} at <i>k</i>*, and the path leans toward a higher steady state, about {1}, then flattens again. Saving raises the level, not the long-run growth rate; only technology does that.",
+"file": "p1-fold.js",
+"line": 792
+},
+{
+"key": "price level P",
+"file": "p1-fold.js",
+"line": 808
+},
+{
+"key": "IS does not move",
+"file": "p1-fold.js",
+"line": 808
+},
+{
+"key": "IS and LM cross at one output for each price level. The page draws LM at <i>P</i> = {0}, {1} and {2}.",
+"file": "p1-fold.js",
+"line": 811
+},
+{
+"key": "Stand the price level up. IS does not depend on <i>P</i>, so it becomes a wall; each LM curve stands at its own height.",
+"file": "p1-fold.js",
+"line": 812
+},
+{
+"key": "A higher <i>P</i> shrinks real balances and lifts LM, so output falls: {0} at <i>P</i> = {1}, {2} at {3}, {4} at {5}. The crossings trace aggregate demand.",
+"file": "p1-fold.js",
+"line": 813
+},
+{
+"key": "AD is a list of equilibria of a list of equilibria: Keynesian crosses stacked by the interest rate make IS, and IS–LM pairs stacked by the price level make AD.",
+"file": "p1-fold.js",
+"line": 814
+},
+{
+"key": "expected inflation",
+"file": "p1-fold.js",
+"line": 841
+},
+{
+"key": "π<sup>e</sup> = {0} … {1} percent",
+"file": "p1-fold.js",
+"line": 842
+},
+{
+"key": "Short-run Phillips curves for expected inflation from {0} to {1} percent, and the long-run curve at <i>u</i> = {2}.",
+"file": "p1-fold.js",
+"line": 844
+},
+{
+"key": "Stack the short-run curves by expected inflation, and they form a sloping surface.",
+"file": "p1-fold.js",
+"line": 845
+},
+{
+"key": "Lift each year of the United States to last year’s inflation, taken as its expected inflation. In the {0}s it moves up and to the left along one slice, in the {1}s onto ever higher slices, and after {2}–{3} back down.",
+"file": "p1-fold.js",
+"line": 846
+},
+{
+"key": "The points sit near the slices rather than on them, because of the oil shocks and a natural rate above {0} in those years. The trade-off holds only along one slice; Friedman and Phelps added the axis, and the {1}s moved along it.",
+"file": "p1-fold.js",
+"line": 847
+},
+{
+"key": "loss: a bowl around the target",
+"file": "p1-fold.js",
+"line": 867
+},
+{
+"key": "lowest point along the fence",
+"file": "p1-fold.js",
+"line": 867
+},
+{
+"key": "loss {0} at the chosen point",
+"file": "p1-fold.js",
+"line": 868
+},
+{
+"key": "The central bank wants {0} percent inflation at <i>u</i> = {1}. The page draws its loss as circles around that target.",
+"file": "p1-fold.js",
+"line": 870
+},
+{
+"key": "Raise the loss as height: a bowl, (<i>π</i> − {0})² + (<i>u</i> − {1})², whose lowest point is the target.",
+"file": "p1-fold.js",
+"line": 871
+},
+{
+"key": "The Phillips curve at <i>π</i><sup>e</sup> = {0} is a fence across the bowl, and the bank can stand only on the fence.",
+"file": "p1-fold.js",
+"line": 872
+},
+{
+"key": "It goes to the lowest point along the fence: <i>u</i> ≈ {0}, <i>π</i> ≈ {1}, a loss of {2}. It is Figure {3}’s household, with a bowl for a hill and the Phillips curve for a budget.",
+"file": "p1-fold.js",
+"line": 873
+},
+{
+"key": "x₂, lifted",
+"file": "p1-fold.js",
+"line": 890
+},
+{
+"key": "slope {0} along the plane",
+"file": "p1-fold.js",
+"line": 890
+},
+{
+"key": "The line fitted to this scatter has a slope of about {0}. The true effect of <i>x</i><sub>{1}</sub> is {2}.",
+"file": "p1-fold.js",
+"line": 893
+},
+{
+"key": "Lift each point by its value of <i>x</i><sub>{0}</sub>, the variable the regression left out.",
+"file": "p1-fold.js",
+"line": 894
+},
+{
+"key": "The points lie close to a tilted plane, <i>y</i> = {0} + {1}<i>x</i><sub>{2}</sub> + {3}<i>x</i><sub>{4}</sub>. Along the plane, the slope in <i>x</i><sub>{5}</sub> is {6}.",
+"file": "p1-fold.js",
+"line": 895
+},
+{
+"key": "Look straight down the <i>x</i><sub>{0}</sub> axis and the cloud collapses into the page’s scatter. Because <i>x</i><sub>{1}</sub> rises with <i>x</i><sub>{2}</sub>, by about {3} a unit, the shadow’s line tilts by {4} × {5}: a slope near {6}.",
+"file": "p1-fold.js",
+"line": 896
+},
+{
+"key": "month {0}",
+"file": "p1-fold.js",
+"line": 920
+},
+{
+"key": "the weather alone: slope −{0}",
+"file": "p1-fold.js",
+"line": 920
+},
+{
+"key": "months {0} … {1}",
+"file": "p1-fold.js",
+"line": 921
+},
+{
+"key": "Twelve months of prices and quantities from the market of Figure {0}. The least-squares line through them is flat.",
+"file": "p1-fold.js",
+"line": 923
+},
+{
+"key": "Give each month its own plane, carrying that month’s demand and supply.",
+"file": "p1-fold.js",
+"line": 924
+},
+{
+"key": "Each point is only where its month’s two curves cross. Income moved demand and the weather moved supply, by the same amount and unrelated, so the crossings make a cloud with no slope.",
+"file": "p1-fold.js",
+"line": 925
+},
+{
+"key": "Months that differed only in the weather would slide along one demand curve, with slope −{0}. Using the weather as an instrument recovers it (Working {1}; Wright {2}).",
+"file": "p1-fold.js",
+"line": 926
+},
+{
+"key": "price of textiles",
+"file": "p1-fold.js",
+"line": 942
+},
+{
+"key": "wage up, return to capital down",
+"file": "p1-fold.js",
+"line": 942
+},
+{
+"key": "Each curve is the set of wages and rental rates at which a good just breaks even. Today’s factor prices are where the two cross.",
+"file": "p1-fold.js",
+"line": 945
+},
+{
+"key": "Raise the price of textiles as height, from {0} to {1}. The machines’ curve does not move; it becomes a wall.",
+"file": "p1-fold.js",
+"line": 946
+},
+{
+"key": "Textiles’ curve moves out with its price, and the crossing slides along the wall. A {0} percent rise lifts the wage {1} percent and lowers the return to capital {2} percent.",
+"file": "p1-fold.js",
+"line": 947
+},
+{
+"key": "The wage outruns both prices and capital loses against both (Stolper–Samuelson). Trade raises the country’s income and moves it between the people inside.",
+"file": "p1-fold.js",
+"line": 948
+},
+{
+"key": "expected future rate",
+"file": "p1-fold.js",
+"line": 965
+},
+{
+"key": "today’s rate follows",
+"file": "p1-fold.js",
+"line": 965
+},
+{
+"key": "E<sup>e</sup> = {0} … {1}",
+"file": "p1-fold.js",
+"line": 966
+},
+{
+"key": "Won deposits pay {0} percent. Dollar deposits are expected to pay <i>i</i>* + (<i>E</i><sup>e</sup> − <i>E</i>)/<i>E</i> in won. Today’s rate is where the two returns meet.",
+"file": "p1-fold.js",
+"line": 968
+},
+{
+"key": "Stack the dollar-return curve by the expected future rate, from {0} to {1}. The won return, {2} percent, becomes a wall.",
+"file": "p1-fold.js",
+"line": 969
+},
+{
+"key": "Today’s rate follows the expectation: <i>E</i> = <i>E</i><sup>e</sup>/({0} + <i>i</i> − <i>i</i>*). A rise in <i>E</i><sup>e</sup> from {1} to {2} moves <i>E</i> from {3} to {4} at once, with no change in trade or output.",
+"file": "p1-fold.js",
+"line": 970
+},
+{
+"key": "In {0} the won fell from {1} per dollar in June to {2} in January, and expectations moved before the interest-rate defense began. An exchange rate is an asset price: it jumps when expectations move.",
+"file": "p1-fold.js",
+"line": 971
+},
+{
+"key": "deposit guarantee g",
+"file": "p1-fold.js",
+"line": 993
+},
+{
+"key": "the run: shrinks above g = {0}, gone at {1}",
+"file": "p1-fold.js",
+"line": 993
+},
+{
+"key": "What a patient depositor gets by waiting, and by withdrawing, against the share <i>f</i> who withdraw early. If more than {0} percent withdraw, waiting pays less than {1}, and everyone runs.",
+"file": "p1-fold.js",
+"line": 996
+},
+{
+"key": "Stand the deposit guarantee <i>g</i> up as height. The page is <i>g</i> = {0}: a good equilibrium and a run.",
+"file": "p1-fold.js",
+"line": 997
+},
+{
+"key": "The guarantee is a floor under what waiting pays. Below <i>g</i> = {0} it changes nothing, because in a full run each depositor still gets {1}.",
+"file": "p1-fold.js",
+"line": 998
+},
+{
+"key": "Between {0} and {1} the full run disappears, but a partial run survives, at <i>f</i> = {2}/<i>g</i>.",
+"file": "p1-fold.js",
+"line": 999
+},
+{
+"key": "At <i>g</i> = {0}, the amount promised, waiting never pays less than running. No run is left, and on the equilibrium path the guarantee is never paid.",
+"file": "p1-fold.js",
+"line": 1000
+},
+{
+"key": "correlation ρ: {0} on the page, −{1} at the top",
+"file": "p1-fold.js",
+"line": 1015
+},
+{
+"key": "least risky mix",
+"file": "p1-fold.js",
+"line": 1015
+},
+{
+"key": "Every mix of asset A (return {0} percent, risk {1}) and asset B (return {2}, risk {3}), drawn for five correlations.",
+"file": "p1-fold.js",
+"line": 1018
+},
+{
+"key": "Raise the correlation as height: <i>ρ</i> = {0} on the page, −{1} at the top. The mixes form a surface.",
+"file": "p1-fold.js",
+"line": 1019
+},
+{
+"key": "Follow the least risky mix as <i>ρ</i> falls. At <i>ρ</i> = {0} it holds {1} percent in B and has a risk of {2}, below either asset alone.",
+"file": "p1-fold.js",
+"line": 1020
+},
+{
+"key": "At <i>ρ</i> = −{0} a third in B removes the risk entirely and earns {1} percent. Combining assets that do not move together removes risk without giving up return.",
+"file": "p1-fold.js",
+"line": 1021
+},
+{
+"key": "tax rate t",
+"file": "p1-fold.js",
+"line": 1038
+},
+{
+"key": "t = {0}: revenue {1}, loss {2}",
+"file": "p1-fold.js",
+"line": 1038
+},
+{
+"key": "The market of Figure {0} with a tax of {1} a unit. Quantity falls from {2} to {3}; the tax raises {4} and costs {5} in trades that no longer happen.",
+"file": "p1-fold.js",
+"line": 1041
+},
+{
+"key": "Raise the tax rate as height. At <i>t</i> = {0} the revenue is the ochre rectangle and the loss the red triangle.",
+"file": "p1-fold.js",
+"line": 1042
+},
+{
+"key": "At <i>t</i> = {0} revenue is {1} and the loss {2}. The extra loss for one more unit of revenue has gone from {3} to {4}.",
+"file": "p1-fold.js",
+"line": 1043
+},
+{
+"key": "Revenue, <i>t</i>({0} − <i>t</i>)/{1}, peaks at {2}; the loss, <i>t</i>²/{3}, keeps growing. At <i>t</i> = {4} revenue is {5} and the loss {6}. That is why broad bases with low rates win.",
+"file": "p1-fold.js",
+"line": 1044
+},
+{
+"key": "damage of {0}, a century ahead",
+"file": "p1-fold.js",
+"line": 1061
+},
+{
+"key": "today: {0} at {1}%",
+"file": "p1-fold.js",
+"line": 1061
+},
+{
+"key": "years ahead",
+"file": "p1-fold.js",
+"line": 1061
+},
+{
+"key": "Demand and private cost meet at {0}. Each unit also does {1} of damage, {2} years later, and its present value is a layer on top of private cost.",
+"file": "p1-fold.js",
+"line": 1064
+},
+{
+"key": "Stand time up. The damage of {0} arrives at the top, a century ahead.",
+"file": "p1-fold.js",
+"line": 1065
+},
+{
+"key": "Discount it back to today at {0} percent, the Stern Review’s rate, and {1} remains. The efficient output falls from {2} to {3}, and the corrective tax is {4}.",
+"file": "p1-fold.js",
+"line": 1066
+},
+{
+"key": "At {0} percent only {1} remains, and the market looks almost efficient as it is. The discount rate decides how much of the future’s cost we see.",
+"file": "p1-fold.js",
+"line": 1067
+},
+{
+"key": "employment as height: most jobs at m = {0}",
+"file": "p1-fold.js",
+"line": 1088
+},
+{
+"key": "employment up to {0}, at m = {1}",
+"file": "p1-fold.js",
+"line": 1089
+},
+{
+"key": "A single employer facing labor supply <i>w</i> = {0} + <i>L</i> hires {1} at a wage of {2}. A price-taking market would employ {3} at {4}.",
+"file": "p1-fold.js",
+"line": 1091
+},
+{
+"key": "Raise employment as height, for every minimum wage from {0} to {1}.",
+"file": "p1-fold.js",
+"line": 1092
+},
+{
+"key": "Up to a minimum of {0} nothing changes. Then employment rises, to {1} at a minimum of {2}, and falls to zero at {3}: a tent.",
+"file": "p1-fold.js",
+"line": 1093
+},
+{
+"key": "In a price-taking market there is no rising side; employment only falls past {0}. Theory alone cannot say whether a minimum wage costs jobs, so the question moved to natural experiments (Card and Krueger {1}).",
+"file": "p1-fold.js",
+"line": 1094
+},
+{
+"key": "at δ = {0} the two streams are worth the same",
+"file": "p1-fold.js",
+"line": 1114
+},
+{
+"key": "If both keep the cartel, each earns {0} a period. A cheat earns {1} once, then the Cournot {2} for ever after.",
+"file": "p1-fold.js",
+"line": 1117
+},
+{
+"key": "Raise how much the firms care about tomorrow as height. Each later period counts <i>δ</i> times the one before, so each stream shrinks into the future.",
+"file": "p1-fold.js",
+"line": 1118
+},
+{
+"key": "At <i>δ</i> = {0} the cheat’s stream is worth more, {1} against {2}. At {3} the cartel’s is, {4} against {5}.",
+"file": "p1-fold.js",
+"line": 1119
+},
+{
+"key": "They are worth the same at <i>δ</i> = {0}/{1}, about {2}; above it, collusion pays. A cartel is held together by the future, and Figure {3} is the <i>δ</i> = {4} slice.",
+"file": "p1-fold.js",
+"line": 1120
+},
+{
+"key": "day {0}: take {1}",
+"file": "p1-fold.js",
+"line": 1136
+},
+{
+"key": "the day you decide",
+"file": "p1-fold.js",
+"line": 1138
+},
+{
+"key": "day {0} … {1}",
+"file": "p1-fold.js",
+"line": 1139
+},
+{
+"key": "A choice between {0} on day {1} and {2} on day {3}. Every future payment is multiplied by <i>β</i> = {4}; only the present escapes.",
+"file": "p1-fold.js",
+"line": 1141
+},
+{
+"key": "Seen from day {0} both payments are in the future: {1} against {2}. You plan to wait for {3}.",
+"file": "p1-fold.js",
+"line": 1142
+},
+{
+"key": "Raise the day on which you decide. Through day {0} the comparison is the same, and the plan stands.",
+"file": "p1-fold.js",
+"line": 1143
+},
+{
+"key": "On day {0} the first payment is now: {1} against {2}, and you take {3}. An exponential discounter would rank the two the same way on every day.",
+"file": "p1-fold.js",
+"line": 1144
+},
+{
+"key": "owner’s wealth, as height",
+"file": "p1-fold.js",
+"line": 1160
+},
+{
+"key": "with credit, all would be here",
+"file": "p1-fold.js",
+"line": 1160
+},
+{
+"key": "wealth {0} … {1}",
+"file": "p1-fold.js",
+"line": 1161
+},
+{
+"key": "A small firm with output √<i>k</i> earns {0}/({1}√<i>k</i>) on its capital. Without credit, each invests only its owner’s wealth: {2}, {3}, {4}, {5} or {6}.",
+"file": "p1-fold.js",
+"line": 1163
+},
+{
+"key": "Raise each owner’s wealth as height. The poorest firms earn the most at the margin: {0} percent at a wealth of {1}, {2} percent at {3}, and {4} percent only at {5}.",
+"file": "p1-fold.js",
+"line": 1164
+},
+{
+"key": "With credit at {0} percent every firm would invest up to <i>k</i> = {1} and earn the same at the margin. Without it, capital stays where wealth already is.",
+"file": "p1-fold.js",
+"line": 1165
+},
+{
+"key": "Randomized cash grants to small firms in Sri Lanka earned about {0} percent a month (de Mel, McKenzie and Woodruff {1}). High returns at small scale are the fingerprint of a missing market.",
+"file": "p1-fold.js",
+"line": 1166
+},
+{
+"key": "back to y* each time",
+"file": "p1-fold.js",
+"line": 1189
+},
+{
+"key": "after {0}: the escape",
+"file": "p1-fold.js",
+"line": 1189
+},
+{
+"key": "centuries, to {0} and after",
+"file": "p1-fold.js",
+"line": 1190
+},
+{
+"key": "Births and deaths cross at subsistence income <i>y</i>*. For a given technology, income per person falls as population grows.",
+"file": "p1-fold.js",
+"line": 1192
+},
+{
+"key": "Stack the curves by technology over the centuries, each better technology lifting the whole curve.",
+"file": "p1-fold.js",
+"line": 1193
+},
+{
+"key": "Each step in technology lifts income above <i>y</i>*. Births exceed deaths, population grows, and income falls back to <i>y</i>*: a flat ridge, with population climbing beside it.",
+"file": "p1-fold.js",
+"line": 1194
+},
+{
+"key": "Around {0} technology began to grow faster than population could respond: the escape. Before it, progress made more people, not richer ones.",
+"file": "p1-fold.js",
+"line": 1195
+},
+{
+"key": "{0} is not a GLB file",
+"file": "geo3d.js",
+"line": 93
+}
+]

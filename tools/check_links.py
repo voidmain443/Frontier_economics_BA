@@ -15,8 +15,10 @@ import re
 import sys
 
 ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prototype", "traditional")
-PAGES = ("index.html", "classical.html", "beyond.html", "archive.html", "course.html")
-LINK = re.compile(r"""(?<![\w./-])((?:index|classical|beyond|archive|course)\.html)(\?c=[\w-]+)?(#[\w-]+)?""")
+BASE = ("index", "classical", "beyond", "archive", "course")
+# each page and its Korean twin (docs/i18n.md), where the twin exists
+PAGES = tuple(n for b in BASE for n in ("%s.html" % b, "%s.ko.html" % b) if os.path.exists(os.path.join(ROOT, n)))
+LINK = re.compile(r"""(?<![\w./-])((?:index|classical|beyond|archive|course)(?:\.ko)?\.html)(\?c=[\w-]+)?(#[\w-]+)?""")
 SAME = re.compile(r"""href=["']#([\w-]+)["']""")
 ID = re.compile(r"""\bid=["']([\w-]+)["']""")
 
@@ -58,7 +60,7 @@ def main():
                 if not os.path.exists(os.path.join(ROOT, page)):
                     bad.append((f, line_no, m.group(0), "no such page"))
                     continue
-                if page == "course.html":
+                if page in ("course.html", "course.ko.html"):
                     cid = query[3:] if query else None
                     if cid and cid not in known:
                         bad.append((f, line_no, m.group(0), "no course '%s'" % cid))

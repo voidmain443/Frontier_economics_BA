@@ -2,6 +2,8 @@
 // Figure 7.1. A figure's 2D drawing and its folded construct share one data
 // domain, so the construct rises exactly out of the drawn curves.
 
+import { t as tr } from './i18n.js';
+
 const NS = 'http://www.w3.org/2000/svg';
 
 function el(tag, attrs = {}, parent = null) {
@@ -35,7 +37,7 @@ export function plot(host, o) {
   const P = { l: 58, r: 34, t: 26, b: 50, ...(o.pad ?? {}) };
   const [x0, x1] = o.x;
   const [y0, y1] = o.y;
-  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, class: 'plot', role: 'img', 'aria-label': o.alt ?? '' });
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, class: 'plot', role: 'img', 'aria-label': tr(o.alt ?? '') });
   const id = `ah${uid++}`;
   const defs = el('defs', {}, svg);
   const mk = el('marker', { id, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, defs);
@@ -89,7 +91,7 @@ export function plot(host, o) {
     },
     label(x, y, s, { cls = '', dx = 0, dy = 0, anchor = 'start', roman = false } = {}) {
       const t = el('text', { x: X(x) + dx, y: Y(y) + dy, 'text-anchor': anchor, class: `lb ${roman ? 'rm' : 'it'} ${cls}` }, layers.text);
-      rich(t, s);
+      rich(t, tr(s));
       return t;
     },
     note(x, y, s, opts = {}) {

@@ -6,6 +6,7 @@
 
 import { plot } from './figures.js';
 import { MODELS, STAGES, RELATIONS, ASSUMPTIONS } from './ontology.js';
+import { t, localHref } from './i18n.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -42,7 +43,7 @@ export const FIGS = {
         p.pathPts([[i + 0.06, L + 0.1], [i + 0.94, L + 0.1], [i + 0.94, L + 0.9], [i + 0.06, L + 0.9], [i + 0.06, L + 0.1]], 'k thin');
         const t = p.label(i + 0.5, L + 0.5, name, { anchor: 'middle', dy: 6, roman: true, cls: 'room' });
         const a = document.createElementNS(NS, 'a');
-        a.setAttribute('href', href);
+        a.setAttribute('href', localHref(href));
         a.setAttribute('class', 'room-door');
         t.parentNode.insertBefore(a, t);
         a.appendChild(t);
@@ -90,7 +91,7 @@ export const FIGS = {
         box(p, c.x, y + 6, 18, rh - 12, md, c.c, hatch, changed);
       }
       const R = RELATIONS.find((r) => r.id === S.rel);
-      p.label(cols.at(-1).x + 34, y + 23, `${R ? R.name : 'Starts'}: ${S.what}`, { roman: true, cls: 'note' });
+      p.label(cols.at(-1).x + 34, y + 23, `${t(R ? R.name : 'Starts')}: ${t(S.what)}`, { roman: true, cls: 'note' });
       prev = mode;
     });
     legend(p, null, null, hatch, { x: 206, y: top + 8 * rh + 30 });

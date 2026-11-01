@@ -17,6 +17,7 @@
   <a href="classical.html"><span>1</span>The classical textbook</a>
   <a href="beyond.html"><span>2</span>Unlike and connected</a>
   <a href="archive.html"><span>3</span>A new archive</a>
+  <a class="lang" href="index.ko.html" hreflang="ko" lang="ko">한국어</a>
 </nav>
 
 <div class="desk">
@@ -60,15 +61,16 @@
 
 <script type="module">
   import { COURSES } from './curriculum.js';
+  import { t, localHref } from './i18n.js';
   const host = document.querySelector('#course-index');
   for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
     const h = document.createElement('h3');
-    h.textContent = name;
+    h.textContent = t(name);
     const ul = document.createElement('ul');
     ul.className = 'course-grid';
     for (const c of COURSES.filter((x) => x.side === side)) {
       const li = document.createElement('li');
-      li.innerHTML = `<a href="course.html?c=${c.id}"><b>${c.short}</b><span>${c.name}</span><i>${c.weeks.length} weeks</i></a>`;
+      li.innerHTML = `<a href="${localHref('course.html')}?c=${c.id}"><b>${t(c.short)}</b><span>${t(c.name)}</span><i>${t(`${c.weeks.length} weeks`)}</i></a>`;
       ul.appendChild(li);
     }
     host.append(h, ul);

@@ -343,7 +343,7 @@ export const ARGUMENTS = [
 // What each project sets out to add, by its own description, against the
 // needs this part finds. The last need is the archive's (Part 3).
 export const NEEDS = [
-  'problems first', 'data and design', 'unlike agents', 'networks, finance, crises', 'behaviour and strategy', 'computation', 'history and schools', 'a map of what each model holds',
+  'problems first', 'data and design', 'unlike agents', 'networks, finance, crises', 'behavior and strategy', 'computation', 'history and schools', 'a map of what each model holds',
 ];
 export const PROJECTS = [
   { name: 'Post-Crash Economics Society', when: '2014 report', href: 'https://post-crasheconomics.com/', needs: [0, 3, 6], lit: ['History', 'Banks'] },

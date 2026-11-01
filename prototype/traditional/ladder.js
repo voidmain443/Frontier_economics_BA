@@ -3,6 +3,7 @@
 // The atlas reads these same elements back to build the towers in 3D.
 
 import { COURSES, JUNCTIONS } from './curriculum.js';
+import { t } from './i18n.js';
 
 const byWeek = {};
 for (const c of COURSES) c.weeks.forEach((w, i) => { byWeek[`${c.id}-${i + 1}`] = { c, w, n: i + 1 }; });
@@ -10,7 +11,7 @@ for (const c of COURSES) c.weeks.forEach((w, i) => { byWeek[`${c.id}-${i + 1}`] 
 const ref = (id) => {
   const hit = byWeek[id];
   if (!hit) return id;
-  return `<a href="#${id}">${hit.c.short} ${hit.n}</a>`;
+  return `<a href="#${id}">${t(hit.c.short)} ${hit.n}</a>`;
 };
 
 function week(c, w, n) {
@@ -20,12 +21,12 @@ function week(c, w, n) {
   li.dataset.course = c.id;
   li.dataset.week = n;
   const links = [];
-  if (w.uses?.length) links.push(`<b>Builds on</b> ${w.uses.map(ref).join(', ')}`);
-  if (w.feeds?.length) links.push(`<b>Used in</b> ${w.feeds.map(ref).join(', ')}`);
+  if (w.uses?.length) links.push(`<b>${t('Builds on')}</b> ${w.uses.map(ref).join(', ')}`);
+  if (w.feeds?.length) links.push(`<b>${t('Used in')}</b> ${w.feeds.map(ref).join(', ')}`);
   li.innerHTML = `<span class="wk-no">${n}</span><div class="wk-body">` +
-    `<h4>${w.t}</h4>` +
-    (w.q ? `<p class="wk-q">${w.q}</p>` : '') +
-    (w.a ? `<p class="wk-a">${w.a}</p>` : '') +
+    `<h4>${t(w.t)}</h4>` +
+    (w.q ? `<p class="wk-q">${t(w.q)}</p>` : '') +
+    (w.a ? `<p class="wk-a">${t(w.a)}</p>` : '') +
     (w.eq ? `<p class="wk-eq">${w.eq}</p>` : '') +
     (links.length ? `<p class="wk-links">${links.join('<span class="sep"></span>')}</p>` : '') +
     `</div>`;
@@ -46,10 +47,10 @@ function junction(j) {
   aside.className = 'junction';
   aside.id = `j-${j.id}`;
   aside.dataset.links = j.links.join(' ');
-  aside.innerHTML = `<p class="jx-title">Junction: ${j.title}</p>` +
-    `<p class="jx-text">${j.text}</p>` +
-    (j.chain ? `<ol class="chain">${j.chain.map((s) => `<li>${s}</li>`).join('')}</ol>` : '') +
-    `<p class="jx-links"><b>Where it reappears</b> ${j.links.slice(1).map(ref).join(', ')}</p>`;
+  aside.innerHTML = `<p class="jx-title">${t('Junction:')} ${t(j.title)}</p>` +
+    `<p class="jx-text">${t(j.text)}</p>` +
+    (j.chain ? `<ol class="chain">${j.chain.map((s) => `<li>${t(s)}</li>`).join('')}</ol>` : '') +
+    `<p class="jx-links"><b>${t('Where it reappears')}</b> ${j.links.slice(1).map(ref).join(', ')}</p>`;
   return aside;
 }
 
@@ -77,11 +78,11 @@ export function renderCurriculum(root) {
       const sec = document.createElement('section');
       sec.className = 'field';
       sec.id = `field-${c.id}`;
-      sec.innerHTML = `<h3>${c.name}</h3>` +
-        `<p class="field-q"><b>The question</b> ${c.question}</p>` +
-        `<p class="field-from"><b>Built from</b> ${c.from}</p>` +
-        (c.adds ? `<p class="field-adds"><b>Adds to the core</b> ${c.adds}</p>` : '') +
-        (c.source ? `<p class="field-src">Sequence after ${c.source}.</p>` : '');
+      sec.innerHTML = `<h3>${t(c.name)}</h3>` +
+        `<p class="field-q"><b>${t('The question')}</b> ${t(c.question)}</p>` +
+        `<p class="field-from"><b>${t('Built from')}</b> ${t(c.from)}</p>` +
+        (c.adds ? `<p class="field-adds"><b>${t('Adds to the core')}</b> ${t(c.adds)}</p>` : '') +
+        (c.source ? `<p class="field-src">${t('Sequence after')} ${t(c.source)}.</p>` : '');
       sec.appendChild(ladder(c));
       for (const j of JUNCTIONS.filter((x) => x.home === c.id)) sec.appendChild(junction(j));
       frag.appendChild(sec);

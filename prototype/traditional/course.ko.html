@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>교과서 — 단면</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=IBM+Plex+Sans+KR:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="site-page p1 course-body">
+<nav class="site" aria-label="부 목록">
+  <a class="site-home" href="index.ko.html">단면</a>
+  <a href="classical.ko.html"><span>1</span>고전 교과서</a>
+  <a href="beyond.ko.html"><span>2</span>같지 않고 연결된</a>
+  <a href="archive.ko.html"><span>3</span>새 아카이브</a>
+  <a class="lang" href="course.html" hreflang="en" lang="en">English</a>
+</nav>
+<div class="desk">
+<main id="sheet" class="sheet course-page"></main>
+</div>
+
+<aside class="titleblock" aria-label="표제란">
+  <div class="tb-row tb-title"><span class="tb-name">단면</span><span class="tb-sheet" id="tb-sheet">과목</span></div>
+  <div class="tb-row tb-sub" id="tb-course"></div>
+  <div class="tb-row tb-counts">
+    <div><span class="tb-k">단원</span><span class="tb-v" id="tb-units">0</span></div>
+    <div><span class="tb-k">주</span><span class="tb-v" id="tb-weeks">0</span></div>
+    <div><span class="tb-k">구분</span><span class="tb-v" id="tb-side"></span></div>
+  </div>
+  <button class="tb-unfold" id="unfold" type="button" aria-pressed="false" hidden>페이지를 공간으로 접기</button>
+  <p class="tb-status" id="tb-status" role="status"></p>
+</aside>
+
+<canvas id="stage" layoutsubtree aria-hidden="true"></canvas>
+<div id="expo-labels" aria-hidden="true"></div>
+
+<script type="module" src="course.js"></script>
+</body>
+</html>

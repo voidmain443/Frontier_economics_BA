@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>단면</title>
+<meta name="description" content="경제학을 어떻게 가르쳐 왔는지, 평평한 교과서가 보여 줄 수 없는 것은 무엇인지, 그리고 경제학을 다르게 가르치는 아카이브에 대한 제안.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=IBM+Plex+Sans+KR:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="site-page">
+<nav class="site" aria-label="각 부">
+  <a class="site-home" href="index.ko.html" aria-current="page">단면</a>
+  <a href="classical.ko.html"><span>1</span>고전 교과서</a>
+  <a href="beyond.ko.html"><span>2</span>같지 않고 연결된</a>
+  <a href="archive.ko.html"><span>3</span>새 아카이브</a>
+  <a class="lang" href="index.html" hreflang="en" lang="en">English</a>
+</nav>
+
+<div class="desk">
+<main class="sheet landing">
+  <header class="opening">
+    <h1>단면</h1>
+    <p class="lede">경제학 교과서는 세계를 평평한 단면으로 그린다. 나머지를 모두 고정한 시장 하나, 수백만 가구를 대신하는 가계 하나가 그 단면이다. 이 프로젝트는 그 단면들이 무엇을 자른 것인지, 무엇을 보여 줄 수 없는지, 그리고 그것들 없이 경제학을 어떻게 가르칠 수 있는지 묻는다.</p>
+  </header>
+
+  <ol class="parts-index">
+    <li>
+      <a href="classical.ko.html">
+        <span class="pi-no">1</span>
+        <span class="pi-title">고전 교과서</span>
+        <span class="pi-text">시장 하나에서 각론 과목(field course) 열한 개까지, 여덟 단계로 된 하나의 이야기로 본 학부 교과 과정. 단계마다 주체나 시장이 하나 더해지고, 모든 그림은 더 큰 것의 단면이다. 페이지를 접으면, 각 그림은 단계마다 더 지어지는 경제 전체의 그림 위에서, 자신이 빼고 그려진 차원을 한 걸음씩 세운다.</span>
+      </a>
+    </li>
+    <li>
+      <a href="beyond.ko.html">
+        <span class="pi-no">2</span>
+        <span class="pi-title">같지 않고 연결된</span>
+        <span class="pi-text">교과서를 확장하는 대신 다시 지어야 하는 이유. 경제 뉴스가 곡선 하나의 이동으로 설명되는 방식과 그 설명이 고정하는 것, 교과서가 알고도 독자를 위해 제쳐 둔 것, 한국의 가계와 산업 부문에서 은행까지 같지 않고 연결된 주체들, 수학과 증거가 바뀐 이유, 경제학이 무엇인가를 둘러싼 오래된 논쟁, 먼저 물었던 학생, 교수자, 경제학자들, 그리고 지금 경제를 이해하는 데 필요한 과업들.</span>
+      </a>
+    </li>
+    <li>
+      <a href="archive.ko.html">
+        <span class="pi-no">3</span>
+        <span class="pi-title">새 아카이브</span>
+        <span class="pi-text">고전 경제학과 현대 경제학을 함께 가르치자는 제안. 아카이브는 과목 이름이 아니라 교과서가 가르치는 모형을 기준으로 정리된다. 각 모형은 바퀴 하나, 곧 경제 전체의 순환 흐름이 놓인 한 상태다. 그 모형에서 무엇이 움직이고, 무엇이 고정되고, 무엇이 빠지는지가 그 상태다. 관계 다섯 가지와 가정 여덟 개가 모형들을 잇고, 길 다섯 갈래가 모형들을 지나 모든 교과서에 닿는다.</span>
+      </a>
+    </li>
+  </ol>
+
+  <section class="textbooks">
+    <h2>교과서들</h2>
+    <p>교과 과정의 과목마다 자기 페이지가 있다. 거기에는 주차별 내용, 그 과목이 1부와 2부에서 나오는 곳, 다음에 읽을 바깥 자료가 있다.</p>
+    <div id="course-index"></div>
+  </section>
+</main>
+</div>
+
+<script type="module">
+  import { COURSES } from './curriculum.js';
+  import { t, localHref } from './i18n.js';
+  const host = document.querySelector('#course-index');
+  for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
+    const h = document.createElement('h3');
+    h.textContent = t(name);
+    const ul = document.createElement('ul');
+    ul.className = 'course-grid';
+    for (const c of COURSES.filter((x) => x.side === side)) {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${localHref('course.html')}?c=${c.id}"><b>${t(c.short)}</b><span>${t(c.name)}</span><i>${t(`${c.weeks.length} weeks`)}</i></a>`;
+      ul.appendChild(li);
+    }
+    host.append(h, ul);
+  }
+</script>
+</body>
+</html>

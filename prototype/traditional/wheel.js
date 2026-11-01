@@ -69,7 +69,7 @@ export function placeOf(place) {
 // (classical.html#f6-1, #c8-10), a Part 1 stage (#s5: its first figure), or a
 // Part 2 figure (beyond.html#f2-3).
 export function placeOfLink(href) {
-  const m = href.match(/(classical|beyond)\.html#([a-z])(\d+)-?(\d+)?/);
+  const m = href.match(/(classical|beyond)(?:\.ko)?\.html#([a-z])(\d+)-?(\d+)?/);
   if (!m) return null;
   const [, page, kind, a, b] = m;
   if (page === 'beyond') return kind === 'f' ? PLACE_P2[`${a}.${b}`] ?? null : null;
