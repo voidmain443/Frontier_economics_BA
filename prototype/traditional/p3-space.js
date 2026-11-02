@@ -92,6 +92,23 @@ export function phillipsFits(data) {
   };
 }
 const kE = 0.034;
+
+// 3.8: a minimum wage m where the employer's power to set the wage is μ:
+// supply w = L, the value of the marginal worker w = 10 − L, and the firm
+// counts the cost of a worker as (1 + μ)L. Without a floor it hires L0(μ);
+// with a floor above what it would pay, it hires min(m, 10 − m)
+const L0 = (mu) => 10 / (2 + mu);
+const jobs = (m, mu) => (m <= L0(mu) ? L0(mu) : Math.min(m, 10 - m));
+const hMu = (mu) => mu * 0.4;
+
+// 3.9: the government-spending multiplier dY/dG in Mundell–Fleming, with
+// consumption share c = 0.6 and IS–LM slopes b = 1, k = 0.5, h = 1;
+// capital mobility κ = 40s² for s in [0, 1], import share m
+const K = (s) => 40 * s * s;
+const closedMult = 1 / (0.4 + 0.5);
+const floatMult = (s) => 1 / (0.4 + (1 + K(s)) * 0.5);
+const fixedMult = (s, m) => (K(s) === 0 ? 0 : 1 / (0.4 + m + m / K(s)));
+const hM = (m) => (m - 0.1);
 const fmt = (v, d = 2) => (v < 0 ? `−${Math.abs(v).toFixed(d)}` : v.toFixed(d));
 
 export const SPACE_FIGS = {
@@ -120,6 +137,28 @@ export const SPACE_FIGS = {
     p.dot(lowBranch(0.1), 0, 'md', 3);
     p.dot(highBranch(0.9), 0, 'md', 3);
     ticks(p, { x: [2, 4, 6, 8], y: [-6, -3, 0, 3, 6] });
+  },
+
+  '3.8'(art) {
+    const p = P(art, { x: [2, 8], y: [0, 6.5], xl: 'minimum wage m', yl: 'employment', alt: 'Employment against the minimum wage in a competitive market and where the employer sets the wage.' });
+    p.fn((m) => jobs(m, 0), 2, 8, 'cb');
+    p.fn((m) => jobs(m, 1), 2, 8, 'md');
+    p.line(5, 0, 5, 6.5, 'thin dash');
+    p.note(2.2, 5.2, 'competitive market (μ = 0)', { dy: -6, cls: 'cb' });
+    p.note(2.2, 3.5, 'the employer sets the wage (μ = 1)', { dy: -6, cls: 'md' });
+    p.note(5, 6.3, 'competitive wage 5', { dx: 6 });
+    ticks(p, { x: [2, 4, 6, 8], y: [0, 2, 4, 6] });
+  },
+
+  '3.9'(art) {
+    const p = P(art, { x: [0, 1], y: [0, 2], xl: 'capital mobility', yl: 'dY/dG', alt: 'The government-spending multiplier against capital mobility under floating and fixed exchange rates, with the closed-economy value.' });
+    p.line(0, closedMult, 1, closedMult, 'k dash');
+    p.fn(floatMult, 0, 1, 'cb');
+    p.fn((s) => fixedMult(s, 0.3), 0.005, 1, 'md');
+    p.note(0.55, closedMult, `closed economy (Figure 6.2): ${closedMult.toFixed(2)}`, { dy: -8 });
+    p.note(0.62, floatMult(0.62), 'floating rate', { dx: 6, dy: 16, cls: 'cb' });
+    p.note(0.62, fixedMult(0.62, 0.3), 'fixed rate', { dx: 6, dy: -8, cls: 'md' });
+    ticks(p, { x: [0, 0.5, 1], y: [0, 0.5, 1, 1.5, 2] });
   },
 
   '3.7'(art, data) {
@@ -211,6 +250,67 @@ export const SPACE_CONSTRUCTS = {
         { say: 'Raise ω slowly. The price follows the low branch until the branch ends at ω = 5/6, then leaps to the high one: a small change in what is held moves the economy a long way.', dur: 2 },
         { say: 'Lower ω again and the price does not leap back at 5/6. It stays high until ω = 1/6. Where the economy is depends on where it came from.', dur: 2 },
         { say: 'Nothing here is irrational. The households are unlike, and it was the representative agent that bought Figure 3.5 its single crossing.', cam: { az: 0, el: 0.15, zoom: 1, at: null }, beside: true },
+      ];
+      return X;
+    },
+  },
+
+  '3.8': {
+    dom: { x: [2, 8], y: [0, 6.5] },
+    build() {
+      const X = blank();
+      for (const mu of [0, 1]) {
+        const pts = [];
+        for (let i = 0; i <= 120; i++) { const m = 2 + (6 * i) / 120; pts.push([m, jobs(m, mu), hMu(mu)]); }
+        X.lines.push({ pts, c: mu ? 'madder' : 'cobalt', w: 2, show: [1], rise: 1 });
+      }
+      X.surfaces.push({ param: (m, mu) => [m, jobs(m, mu), hMu(mu)], u: [2, 8], v: [0, 1], c: 'cobalt', alpha: 0.14, freq: 0, n: 48, show: [2] });
+      // where the floor raises employment: above what the employer would pay, below the competitive wage
+      X.surfaces.push({ param: (f, mu) => { const m = L0(mu) + f * (5 - L0(mu)); return [m, jobs(m, mu), hMu(mu) + 0.002]; }, u: [0, 1], v: [0.02, 1], c: 'ochre', alpha: 0.4, freq: 0, n: 20, show: [3] });
+      const ridge = [];
+      for (let i = 0; i <= 30; i++) { const mu = i / 30; ridge.push([5, 5, hMu(mu)]); }
+      X.lines.push({ pts: ridge, c: 'white', w: 2.6, show: [3], draw: 3 });
+      const edge = [];
+      for (let i = 0; i <= 30; i++) { const mu = i / 30; edge.push([L0(mu), L0(mu), hMu(mu)]); }
+      X.lines.push({ pts: edge, c: 'ochre', w: 2, show: [3], draw: 3 });
+      X.tags.push(
+        { text: 'here a higher floor adds jobs', at: [4.3, 4.5, hMu(0.8)], c: 'ochre', show: [3] },
+        { text: 'past the competitive wage it costs jobs, whatever μ is', at: [6.6, 3.6, hMu(0.5)], show: [3] },
+      );
+      X.dims.push({ from: [8.2, 0, 0], to: [8.2, 0, 0.4], text: 'the employer’s power to set the wage μ, 0 … 1', show: [1], rise: 1 });
+      X.model = (b) => (b >= 1 ? stateOf(byId['8.7'], b >= 4 ? { lit: ['Labor', 'Measurement'] } : { lit: ['Labor'] }) : null);
+      X.story = [
+        { say: 'Does a minimum wage cost jobs? In a competitive market, a floor above the competitive wage of 5 cuts employment. Where the employer sets the wage, a floor between what it would pay and 5 raises employment. Two answers, one for each hand.' },
+        { say: 'What decides between them is held still in each drawing: the employer’s power to set the wage, μ. Fold it up as an axis.', cam: { az: -0.5, el: 0.22, zoom: 0.85, at: [0.5, 0.5, 0.2] }, dur: 1.8 },
+        { say: 'Between the two lines a surface fills in: employment for every floor and every degree of power.', cam: { az: -0.8, el: 0.3 }, dur: 1.6 },
+        { say: 'On it, the sign of the effect changes along two lines. Above what the employer would pay and below the competitive wage, a higher floor adds jobs. Past the competitive wage it costs jobs, whatever μ is.', dur: 2.2 },
+        { say: 'The economist’s answer is therefore a condition, not a sign: which side of the line the actual market is on. That is measurable. Card and Krueger (1994) compared fast-food employment in New Jersey, which raised its minimum wage, with neighboring Pennsylvania, which did not, and found no fall.', cam: { az: -0.4, el: 0.4 }, dur: 2.2 },
+        { say: 'On the wheel the minimum wage is a held value of regulation, and the labor market moves. The two hands are two regions of one surface, and a design tells which one we are in.', cam: { az: 0, el: 0.15, zoom: 1, at: null }, beside: true },
+      ];
+      return X;
+    },
+  },
+
+  '3.9': {
+    dom: { x: [0, 1], y: [0, 2] },
+    build() {
+      const X = blank();
+      X.lines.push({ pts: [[0, closedMult, 0], [1, closedMult, 0]], c: 'white', w: 1.6, dash: true, show: [1] });
+      X.surfaces.push({ param: (s, m) => [s, floatMult(s), hM(m)], u: [0, 1], v: [0.1, 0.5], c: 'cobalt', alpha: 0.2, freq: 0, n: 30, show: [2] });
+      X.surfaces.push({ param: (s, m) => [s, fixedMult(s, m), hM(m)], u: [0.02, 1], v: [0.1, 0.5], c: 'madder', alpha: 0.2, freq: 0, n: 30, show: [3] });
+      X.tags.push(
+        { text: 'the core’s answer: a closed economy', at: [0.05, closedMult, 0.03], show: [1] },
+        { text: 'floating: as capital moves freely, the multiplier goes to zero', at: [0.75, floatMult(0.75), hM(0.3)], c: 'cobalt', show: [2] },
+        { text: 'fixed: it rises, and falls with openness', at: [0.75, fixedMult(0.75, 0.3), hM(0.3)], c: 'madder', show: [3] },
+      );
+      X.dims.push({ from: [1.04, 0, 0], to: [1.04, 0, 0.4], text: 'import share m, 0.1 … 0.5', show: [2], rise: 2 });
+      X.model = (b) => (b >= 4 ? { ...stateOf(byId['6.2']), moving: new Set([...stateOf(byId['6.2']).moving, 'Other countries', 'Foreign exchange']), lit: ['Other countries', 'Foreign exchange'] } : b >= 1 ? stateOf(byId['6.2']) : null);
+      X.story = [
+        { say: `How much does a won of government spending raise output? The closed economy of Figure 6.2 says ${closedMult.toFixed(2)}. It leaves out other countries, and with them the exchange rate and capital that can leave.` },
+        { say: 'That number is the core’s answer, drawn as a line across every degree of capital mobility, as if mobility did not matter.', cam: { az: -0.4, el: 0.25, zoom: 0.85, at: [0.5, 0.5, 0.15] }, dur: 1.6 },
+        { say: 'Add the cell it left out. Under a floating rate, spending raises the interest rate, capital flows in, the currency appreciates and exports fall: the more mobile capital is, the closer the multiplier comes to zero. The import share, folded up as an axis, does not change this.', cam: { az: -0.8, el: 0.3 }, dur: 2.4 },
+        { say: 'Under a fixed rate the central bank must buy the inflow, money expands, and the multiplier rises above the closed value; the more the economy imports, the less it rises.', dur: 2 },
+        { say: 'Adding the left-out cell reverses the core’s conclusion for a floating, open economy such as Korea’s since December 1997. Ilzetzki, Mendoza and Végh (2013) found fiscal multipliers near zero under flexible exchange rates and larger under fixed ones. By the reversal rule, the foreign cell belongs in the core.', cam: { az: 0, el: 0.15, zoom: 1, at: null }, beside: true },
       ];
       return X;
     },

@@ -1582,167 +1582,307 @@
 {
 "key": "excess demand z",
 "file": "p3-space.js",
-"line": 99
+"line": 116
 },
 {
 "key": "Excess demand in the market of Figure {0} at three incomes; each line crosses zero once.",
 "file": "p3-space.js",
-"line": 99
+"line": 116
 },
 {
 "key": "Excess demand of unlike households at three splits of the endowment; at the middle one it crosses zero three times.",
 "file": "p3-space.js",
-"line": 111
+"line": 128
 },
 {
-"key": "US unemployment and CPI inflation, every year from {0} to {1}; a fitted line is flat.",
+"key": "minimum wage m",
 "file": "p3-space.js",
-"line": 127
+"line": 143
 },
 {
-"key": "the sheet crosses zero along one line",
+"key": "Employment against the minimum wage in a competitive market and where the employer sets the wage.",
 "file": "p3-space.js",
-"line": 153
+"line": 143
 },
 {
-"key": "slope: dp*/dI = {0}",
+"key": "competitive market (μ = {0})",
+"file": "p3-space.js",
+"line": 147
+},
+{
+"key": "the employer sets the wage (μ = {0})",
+"file": "p3-space.js",
+"line": 148
+},
+{
+"key": "competitive wage {0}",
+"file": "p3-space.js",
+"line": 149
+},
+{
+"key": "capital mobility",
 "file": "p3-space.js",
 "line": 154
 },
 {
-"key": "income I, {0} … {1}",
+"key": "The government-spending multiplier against capital mobility under floating and fixed exchange rates, with the closed-economy value.",
+"file": "p3-space.js",
+"line": 154
+},
+{
+"key": "closed economy (Figure {0}): {1}",
+"file": "p3-space.js",
+"line": 158
+},
+{
+"key": "floating rate",
 "file": "p3-space.js",
 "line": 159
 },
 {
-"key": "Figure {0}’s market, drawn as excess demand: what buyers want minus what sellers offer, at each price. The equilibrium is where it crosses zero. Income is held at I = {1}; the faint lines hold it at {2} and {3}.",
+"key": "fixed rate",
 "file": "p3-space.js",
-"line": 162
+"line": 160
 },
 {
-"key": "Fold the held value up. Income becomes an axis, and each line lies at its own income.",
-"file": "p3-space.js",
-"line": 163
-},
-{
-"key": "Between the lines the sheet fills in. It crosses the floor of zero along one line: at every income an equilibrium exists, only one, and it moves without a break.",
-"file": "p3-space.js",
-"line": 164
-},
-{
-"key": "The slope of that line is what “other things equal” means here: as income rises from {0} to {1}, the price rises from {2} to {3}, five for every unit of income.",
-"file": "p3-space.js",
-"line": 165
-},
-{
-"key": "Off the line, the sheet pushes the price back: excess demand is positive below the equilibrium price and negative above it. The equilibrium is stable.",
+"key": "US unemployment and CPI inflation, every year from {0} to {1}; a fitted line is flat.",
 "file": "p3-space.js",
 "line": 166
 },
 {
-"key": "On the wheel, income is the hatched cell, held. Existence, uniqueness, continuity and stability are each a theorem about this sheet, and each can fail.",
+"key": "the sheet crosses zero along one line",
 "file": "p3-space.js",
-"line": 167
+"line": 192
 },
 {
-"key": "three equilibria for ω between {0}/{1} and {2}/{3}; the middle one is unstable",
+"key": "slope: dp*/dI = {0}",
 "file": "p3-space.js",
-"line": 191
+"line": 193
 },
 {
-"key": "ω = {0}/{1}: the price leaps from {2} to {3}",
+"key": "income I, {0} … {1}",
 "file": "p3-space.js",
 "line": 198
 },
 {
-"key": "back down, the jump comes at ω = {0}/{1}, from {2} to {3}",
+"key": "Figure {0}’s market, drawn as excess demand: what buyers want minus what sellers offer, at each price. The equilibrium is where it crosses zero. Income is held at I = {1}; the faint lines hold it at {2} and {3}.",
+"file": "p3-space.js",
+"line": 201
+},
+{
+"key": "Fold the held value up. Income becomes an axis, and each line lies at its own income.",
+"file": "p3-space.js",
+"line": 202
+},
+{
+"key": "Between the lines the sheet fills in. It crosses the floor of zero along one line: at every income an equilibrium exists, only one, and it moves without a break.",
+"file": "p3-space.js",
+"line": 203
+},
+{
+"key": "The slope of that line is what “other things equal” means here: as income rises from {0} to {1}, the price rises from {2} to {3}, five for every unit of income.",
 "file": "p3-space.js",
 "line": 204
 },
 {
-"key": "endowment split ω, {0} … {1}",
+"key": "Off the line, the sheet pushes the price back: excess demand is positive below the equilibrium price and negative above it. The equilibrium is stable.",
 "file": "p3-space.js",
 "line": 205
 },
 {
-"key": "Households who are each rational, but unlike one another. Sonnenschein, Mantel and Debreu showed that their excess demands can add up to almost any shape. This one crosses zero once, three times, or once, as ω, the split of the endowment between two kinds of household, changes.",
+"key": "On the wheel, income is the hatched cell, held. Existence, uniqueness, continuity and stability are each a theorem about this sheet, and each can fail.",
 "file": "p3-space.js",
-"line": 208
+"line": 206
 },
 {
-"key": "Fold ω up. Each split lies at its own height.",
+"key": "three equilibria for ω between {0}/{1} and {2}/{3}; the middle one is unstable",
 "file": "p3-space.js",
-"line": 209
+"line": 230
 },
 {
-"key": "The sheet folds. Its crossing of zero is now an S: between ω = {0}/{1} and {2}/{3} there are three equilibria, and in the middle one the sheet slopes the wrong way, so the price runs away from it.",
+"key": "ω = {0}/{1}: the price leaps from {2} to {3}",
 "file": "p3-space.js",
-"line": 210
+"line": 237
 },
 {
-"key": "Raise ω slowly. The price follows the low branch until the branch ends at ω = {0}/{1}, then leaps to the high one: a small change in what is held moves the economy a long way.",
-"file": "p3-space.js",
-"line": 211
-},
-{
-"key": "Lower ω again and the price does not leap back at {0}/{1}. It stays high until ω = {2}/{3}. Where the economy is depends on where it came from.",
-"file": "p3-space.js",
-"line": 212
-},
-{
-"key": "Nothing here is irrational. The households are unlike, and it was the representative agent that bought Figure {0} its single crossing.",
-"file": "p3-space.js",
-"line": 213
-},
-{
-"key": "{0}: expected {1}%",
-"file": "p3-space.js",
-"line": 228
-},
-{
-"key": "expected inflation πᵉ, {0} … {1}%",
-"file": "p3-space.js",
-"line": 232
-},
-{
-"key": "inflation less what expectations account for: π − {0}(πᵉ − {1})",
-"file": "p3-space.js",
-"line": 238
-},
-{
-"key": "Expected inflation <b>measured</b><br><i>Michigan survey, {0}–{1}</i>",
-"file": "p3-space.js",
-"line": 239
-},
-{
-"key": "Unemployment and inflation in the United States, every year from {0} to {1}. The line fitted through the cloud is flat and explains none of it. Has the Phillips curve been refuted?",
-"file": "p3-space.js",
-"line": 241
-},
-{
-"key": "Figure {0} held one value, expected inflation. Here it is measured, by the University of Michigan’s survey of households, and each year rises to it.",
-"file": "p3-space.js",
-"line": 242
-},
-{
-"key": "The years lie close to one plane. With the third axis, the same {0} years account for {1} percent of the variation in inflation.",
+"key": "back down, the jump comes at ω = {0}/{1}, from {2} to {3}",
 "file": "p3-space.js",
 "line": 243
 },
 {
-"key": "Seen along the plane, the cloud closes up: take from each year what its expectations account for, and the years fall into a narrow band. The flat drawing was the shadow of the plane.",
+"key": "endowment split ω, {0} … {1}",
 "file": "p3-space.js",
 "line": 244
 },
 {
+"key": "Households who are each rational, but unlike one another. Sonnenschein, Mantel and Debreu showed that their excess demands can add up to almost any shape. This one crosses zero once, three times, or once, as ω, the split of the endowment between two kinds of household, changes.",
+"file": "p3-space.js",
+"line": 247
+},
+{
+"key": "Fold ω up. Each split lies at its own height.",
+"file": "p3-space.js",
+"line": 248
+},
+{
+"key": "The sheet folds. Its crossing of zero is now an S: between ω = {0}/{1} and {2}/{3} there are three equilibria, and in the middle one the sheet slopes the wrong way, so the price runs away from it.",
+"file": "p3-space.js",
+"line": 249
+},
+{
+"key": "Raise ω slowly. The price follows the low branch until the branch ends at ω = {0}/{1}, then leaps to the high one: a small change in what is held moves the economy a long way.",
+"file": "p3-space.js",
+"line": 250
+},
+{
+"key": "Lower ω again and the price does not leap back at {0}/{1}. It stays high until ω = {2}/{3}. Where the economy is depends on where it came from.",
+"file": "p3-space.js",
+"line": 251
+},
+{
+"key": "Nothing here is irrational. The households are unlike, and it was the representative agent that bought Figure {0} its single crossing.",
+"file": "p3-space.js",
+"line": 252
+},
+{
+"key": "here a higher floor adds jobs",
+"file": "p3-space.js",
+"line": 277
+},
+{
+"key": "past the competitive wage it costs jobs, whatever μ is",
+"file": "p3-space.js",
+"line": 278
+},
+{
+"key": "the employer’s power to set the wage μ, {0} … {1}",
+"file": "p3-space.js",
+"line": 280
+},
+{
+"key": "Does a minimum wage cost jobs? In a competitive market, a floor above the competitive wage of {0} cuts employment. Where the employer sets the wage, a floor between what it would pay and {1} raises employment. Two answers, one for each hand.",
+"file": "p3-space.js",
+"line": 283
+},
+{
+"key": "What decides between them is held still in each drawing: the employer’s power to set the wage, μ. Fold it up as an axis.",
+"file": "p3-space.js",
+"line": 284
+},
+{
+"key": "Between the two lines a surface fills in: employment for every floor and every degree of power.",
+"file": "p3-space.js",
+"line": 285
+},
+{
+"key": "On it, the sign of the effect changes along two lines. Above what the employer would pay and below the competitive wage, a higher floor adds jobs. Past the competitive wage it costs jobs, whatever μ is.",
+"file": "p3-space.js",
+"line": 286
+},
+{
+"key": "The economist’s answer is therefore a condition, not a sign: which side of the line the actual market is on. That is measurable. Card and Krueger ({0}) compared fast-food employment in New Jersey, which raised its minimum wage, with neighboring Pennsylvania, which did not, and found no fall.",
+"file": "p3-space.js",
+"line": 287
+},
+{
+"key": "On the wheel the minimum wage is a held value of regulation, and the labor market moves. The two hands are two regions of one surface, and a design tells which one we are in.",
+"file": "p3-space.js",
+"line": 288
+},
+{
+"key": "the core’s answer: a closed economy",
+"file": "p3-space.js",
+"line": 302
+},
+{
+"key": "floating: as capital moves freely, the multiplier goes to zero",
+"file": "p3-space.js",
+"line": 303
+},
+{
+"key": "fixed: it rises, and falls with openness",
+"file": "p3-space.js",
+"line": 304
+},
+{
+"key": "import share m, {0} … {1}",
+"file": "p3-space.js",
+"line": 306
+},
+{
+"key": "How much does a won of government spending raise output? The closed economy of Figure {0} says {1}. It leaves out other countries, and with them the exchange rate and capital that can leave.",
+"file": "p3-space.js",
+"line": 309
+},
+{
+"key": "That number is the core’s answer, drawn as a line across every degree of capital mobility, as if mobility did not matter.",
+"file": "p3-space.js",
+"line": 310
+},
+{
+"key": "Add the cell it left out. Under a floating rate, spending raises the interest rate, capital flows in, the currency appreciates and exports fall: the more mobile capital is, the closer the multiplier comes to zero. The import share, folded up as an axis, does not change this.",
+"file": "p3-space.js",
+"line": 311
+},
+{
+"key": "Under a fixed rate the central bank must buy the inflow, money expands, and the multiplier rises above the closed value; the more the economy imports, the less it rises.",
+"file": "p3-space.js",
+"line": 312
+},
+{
+"key": "Adding the left-out cell reverses the core’s conclusion for a floating, open economy such as Korea’s since December {0}. Ilzetzki, Mendoza and Végh ({1}) found fiscal multipliers near zero under flexible exchange rates and larger under fixed ones. By the reversal rule, the foreign cell belongs in the core.",
+"file": "p3-space.js",
+"line": 313
+},
+{
+"key": "{0}: expected {1}%",
+"file": "p3-space.js",
+"line": 328
+},
+{
+"key": "expected inflation πᵉ, {0} … {1}%",
+"file": "p3-space.js",
+"line": 332
+},
+{
+"key": "inflation less what expectations account for: π − {0}(πᵉ − {1})",
+"file": "p3-space.js",
+"line": 338
+},
+{
+"key": "Expected inflation <b>measured</b><br><i>Michigan survey, {0}–{1}</i>",
+"file": "p3-space.js",
+"line": 339
+},
+{
+"key": "Unemployment and inflation in the United States, every year from {0} to {1}. The line fitted through the cloud is flat and explains none of it. Has the Phillips curve been refuted?",
+"file": "p3-space.js",
+"line": 341
+},
+{
+"key": "Figure {0} held one value, expected inflation. Here it is measured, by the University of Michigan’s survey of households, and each year rises to it.",
+"file": "p3-space.js",
+"line": 342
+},
+{
+"key": "The years lie close to one plane. With the third axis, the same {0} years account for {1} percent of the variation in inflation.",
+"file": "p3-space.js",
+"line": 343
+},
+{
+"key": "Seen along the plane, the cloud closes up: take from each year what its expectations account for, and the years fall into a narrow band. The flat drawing was the shadow of the plane.",
+"file": "p3-space.js",
+"line": 344
+},
+{
 "key": "The plane is steep in expectations and nearly flat in unemployment: {0} against {1}. Once the axis stands, the data do reject something: since {2} the short-run trade-off has been small.",
 "file": "p3-space.js",
-"line": 245
+"line": 345
 },
 {
 "key": "The rescue is fair because the axis was named before the test and measured apart from it. An axis found after the test can rescue any cloud. And survey expectations move with recent inflation, so part of the fit is inflation explaining itself: a design is still needed.",
 "file": "p3-space.js",
-"line": 246
+"line": 346
 },
 {
 "key": "The core",
@@ -3387,22 +3527,22 @@
 {
 "key": "xl callout",
 "file": "fold.js",
-"line": 645
+"line": 646
 },
 {
 "key": "Held fixed",
 "file": "fold.js",
-"line": 653
+"line": 654
 },
 {
 "key": "a, button, input, nav, .titleblock, .callout",
 "file": "fold.js",
-"line": 1306
+"line": 1307
 },
 {
 "key": "held",
 "file": "fold.js",
-"line": 1148
+"line": 1149
 },
 {
 "key": "<a href=\"#{0}\">{1} {2}</a>",

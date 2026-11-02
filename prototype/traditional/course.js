@@ -49,7 +49,7 @@ const relName = Object.fromEntries(RELATIONS.map((r) => [r.id, r.name]));
 const held = (m) => m.held.map(([, v]) => t(v)).filter(Boolean).join('; ') || t('nothing named');
 root.innerHTML = `<header class="opening"><p class="kicker">${t(c.side === 'field' ? 'Field course' : 'Core course')}</p><h1>${t(c.name)}</h1>${intro}</header>` +
   `<section class="chapter" id="c-path"><h2>${t('Its path through the wheel')}</h2>
-    <p>${t('A course is a path of units, and each unit is one model: what it moves, what it holds still, and the one thing it changes')} (<a href="${localHref('archive.html#a6')}">${t('Part 3, section 6')}</a>). ${t(`This course teaches ${units.length} of the units of Parts 1 and 2, in this order.`)}</p>
+    <p>${t('A course is a path of units, and each unit is one model: what it moves, what it holds still, and the one thing it changes')} (<a href="${localHref('archive.html#a7')}">${t('Part 3, section 7')}</a>). ${t(`This course teaches ${units.length} of the units of Parts 1 and 2, in this order.`)}</p>
     <p class="needs-fold" hidden>${t('Folded, the wheel lies beside the page, and the path is drawn through it unit by unit, each unit putting the wheel in its state.')}</p>
     <figure class="fig wide dense" data-fig="route" id="c-route">
       <div class="fig-art"></div>

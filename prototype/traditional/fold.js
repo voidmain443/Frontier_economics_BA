@@ -522,7 +522,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       const end = sheet.querySelector(archive.end)?.getBoundingClientRect();
       // a span of the archive whose figures stand on the page and are read up
       // close, the wheel still beside them (Part 3, section 5)
-      const near = archive.near ? sheet.querySelector(archive.near)?.getBoundingClientRect() : null;
+      const nearOf = [archive.near ?? []].flat().map((q) => sheet.querySelector(q)?.getBoundingClientRect()).filter(Boolean);
+      const near = nearOf.length ? { top: nearOf[0].top, bottom: nearOf.at(-1).bottom } : null;
       const routes = archive.routes.map((rt, i) => {
         const { pts, stops, at } = routeOf(rt.places, 0.12 + 0.07 * i);
         const segs = pts.slice(1).map((q, k) => [pts[k], q]);

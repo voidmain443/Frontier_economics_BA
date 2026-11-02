@@ -55,12 +55,12 @@ const paths = [...document.querySelectorAll('.paths section')];
 const colours = ['ochre', 'cobalt', 'olive', 'madder', 'violet'];
 const routes = [
   { name: 'Part 1, the classical sequence', places: classical, c: 'white', fid: '3.3', show: [1], upto },
-  { name: 'Part 1', places: classical, c: 'chalk', fid: '3.9', dim: [1, 6] },
+  { name: 'Part 1', places: classical, c: 'chalk', fid: '3.11', dim: [1, 6] },
   ...paths.map((sec, i) => ({
     name: sec.querySelector('h3').textContent.split(':')[0],
     places: [...sec.querySelectorAll('a')].map((a) => placeOfLink(a.getAttribute('href'))).filter(Boolean),
     c: colours[i],
-    fid: '3.9',
+    fid: '3.11',
     show: [i + 1],
     draw: i + 1,
     dim: [i + 2, paths.length + 1],
@@ -155,7 +155,7 @@ const constructs = {
   ]),
 
   // a unit, one field at a time
-  '3.8': told([
+  '3.10': told([
     { say: 'A unit of the textbook is one model, in nine fields. This is Figure 2.2’s.' },
     { say: 'Its question: where does a demand curve come from? Demand lives in the goods market.', cam: { el: 0.06 } },
     { say: 'It moves one cell: the households, each choosing the best bundle it can afford. Everything else is left out.', dur: 1.4 },
@@ -178,7 +178,7 @@ const constructs = {
   ], true),
 
   // five ways through, one a beat
-  '3.9': told([
+  '3.11': told([
     { say: 'The route of Part 1 is one way through the wheel.' },
     { say: 'By a question, why are some countries rich: from all markets at once to capital, institutions, history and the largest firms.', dur: 1.6 },
     { say: 'By an agent, the household: its choice, its saving, its consumption in macroeconomics, its portfolio, and its departures from the model.', dur: 1.6 },
@@ -192,4 +192,4 @@ const constructs = {
   ...SPACE_CONSTRUCTS,
 };
 
-await setupPage({ figs: { ...FIGS, ...SPACE_FIGS }, constructs, files: ['us-phillips'], world: {}, archive: { figure: '3.1', end: '#a7', near: '#a5', routes }, build: BUILD_P3, stages: 8, unit: 'Section', part: 'Part 3', name: 'A new archive' });
+await setupPage({ figs: { ...FIGS, ...SPACE_FIGS }, constructs, files: ['us-phillips'], world: {}, archive: { figure: '3.1', end: '#a8', near: ['#a5', '#a6'], routes }, build: BUILD_P3, stages: 9, unit: 'Section', part: 'Part 3', name: 'A new archive' });
