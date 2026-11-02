@@ -5,6 +5,7 @@
 // docs/engine.md, docs/part3-ontology.md).
 
 import { FIGS } from './p3-figs.js';
+import { SPACE_FIGS, SPACE_CONSTRUCTS } from './p3-space.js';
 import { COURSES } from './curriculum.js';
 import { setupPage } from './page.js';
 import { PLACE_P1, BUILD_P3, placeOfLink, stopIndex } from './wheel.js';
@@ -54,12 +55,12 @@ const paths = [...document.querySelectorAll('.paths section')];
 const colours = ['ochre', 'cobalt', 'olive', 'madder', 'violet'];
 const routes = [
   { name: 'Part 1, the classical sequence', places: classical, c: 'white', fid: '3.3', show: [1], upto },
-  { name: 'Part 1', places: classical, c: 'chalk', fid: '3.6', dim: [1, 6] },
+  { name: 'Part 1', places: classical, c: 'chalk', fid: '3.9', dim: [1, 6] },
   ...paths.map((sec, i) => ({
     name: sec.querySelector('h3').textContent.split(':')[0],
     places: [...sec.querySelectorAll('a')].map((a) => placeOfLink(a.getAttribute('href'))).filter(Boolean),
     c: colours[i],
-    fid: '3.6',
+    fid: '3.9',
     show: [i + 1],
     draw: i + 1,
     dim: [i + 2, paths.length + 1],
@@ -154,7 +155,7 @@ const constructs = {
   ]),
 
   // a unit, one field at a time
-  '3.5': told([
+  '3.8': told([
     { say: 'A unit of the textbook is one model, in nine fields. This is Figure 2.2’s.' },
     { say: 'Its question: where does a demand curve come from? Demand lives in the goods market.', cam: { el: 0.06 } },
     { say: 'It moves one cell: the households, each choosing the best bundle it can afford. Everything else is left out.', dur: 1.4 },
@@ -177,7 +178,7 @@ const constructs = {
   ], true),
 
   // five ways through, one a beat
-  '3.6': told([
+  '3.9': told([
     { say: 'The route of Part 1 is one way through the wheel.' },
     { say: 'By a question, why are some countries rich: from all markets at once to capital, institutions, history and the largest firms.', dur: 1.6 },
     { say: 'By an agent, the household: its choice, its saving, its consumption in macroeconomics, its portfolio, and its departures from the model.', dur: 1.6 },
@@ -186,6 +187,9 @@ const constructs = {
     { say: 'By a method, optimization: one tool at the hub, used by the household, the firm, the central bank and the investor.', dur: 1.6 },
     { say: 'Five ways through, and the route of Part 1 among them. The archive keeps the classical sequence as one way in, not the only one.' },
   ], [all], true),
+
+  // section 5: what holding still requires (p3-space.js)
+  ...SPACE_CONSTRUCTS,
 };
 
-await setupPage({ figs: FIGS, constructs, world: {}, archive: { figure: '3.1', end: '#a6', routes }, build: BUILD_P3, stages: 7, unit: 'Section', part: 'Part 3', name: 'A new archive' });
+await setupPage({ figs: { ...FIGS, ...SPACE_FIGS }, constructs, files: ['us-phillips'], world: {}, archive: { figure: '3.1', end: '#a7', near: '#a5', routes }, build: BUILD_P3, stages: 8, unit: 'Section', part: 'Part 3', name: 'A new archive' });

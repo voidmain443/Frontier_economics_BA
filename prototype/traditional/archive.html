@@ -34,9 +34,10 @@
       <li><a href="#a2"><span>2</span>What a model is</a></li>
       <li><a href="#a3"><span>3</span>How models are related</a></li>
       <li><a href="#a4"><span>4</span>The assumptions</a></li>
-      <li><a href="#a5"><span>5</span>A unit of the textbook</a></li>
-      <li><a href="#a6"><span>6</span>Five ways through</a></li>
-      <li><a href="#a7"><span>7</span>The textbooks</a></li>
+      <li><a href="#a5"><span>5</span>What holding still requires</a></li>
+      <li><a href="#a6"><span>6</span>A unit of the textbook</a></li>
+      <li><a href="#a7"><span>7</span>Five ways through</a></li>
+      <li><a href="#a8"><span>8</span>The textbooks</a></li>
     </ol>
   </header>
 
@@ -126,12 +127,44 @@
     <p class="aha">Part 2 is not a separate economics. It relaxes the two assumptions the classical sequence keeps to the end.</p>
   </section>
 
-  <section class="stage" id="a5" data-no="5" data-name="A unit of the textbook">
-    <h2><span class="no">5</span>A unit of the textbook</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 5">5</span>A unit is one model, written in nine fields.</p></div>
+  <section class="stage" id="a5" data-no="5" data-name="What holding still requires">
+    <h2><span class="no">5</span>What holding still requires</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 5">5</span>A held value is an axis, and four things must be true of the surface above it.</p></div>
+    <p>Every figure of Parts 1 and 2 holds something still, and folded, the held value rose as the figure’s hidden axis. This section takes that axis seriously. A model sends what it holds to what it moves: in <a href="classical.html#f1-1">Figure 1.1</a> the equilibrium price is a function of income, p*(I). “Other things equal, a higher income raises the price” is a claim about the slope of that function. The claim means something only if four things are true. An equilibrium exists at every held value. Near each there is only one. It moves without breaks as the held value moves. And the economy reaches it. Each is a property of a surface, and each is guaranteed by a theorem: existence by the fixed-point theorems of Brouwer and Kakutani, local uniqueness and the slope by the implicit function theorem, continuity by Berge’s maximum theorem, and stability by the conditions Paul Samuelson (1947) tied to comparative statics. This is why economists learn topology.</p>
+
+    <figure class="fig" data-fig="3.5" id="f3-5">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 3.5</span>One crossing. The market of <a href="classical.html#f1-1">Figure 1.1</a> as excess demand, z = (10I − p) − (p − 1), at incomes I = 1, 1.2 and 1.4. Each line crosses zero once, at p* = (10I + 1)/2.</figcaption>
+      <p class="held"><span>Held fixed</span>income I, one value per line: the hidden axis.</p>
+    </figure>
+    <p>Folded, income rises as an axis and the three lines lie at their incomes. Between them a sheet fills in, and the sheet crosses the floor of zero along a single line: at every income there is one equilibrium, and it moves without a break. The slope of that line, five units of price for one of income, is what “other things equal” means here. Off the line the sheet pushes the price back toward it, so the equilibrium is also stable.</p>
+    <p>The four properties can fail, and not because anyone is irrational. Hugo Sonnenschein (1972), Rolf Mantel (1974) and Gérard Debreu (1974) showed that the excess demands of households who are each rational can add up to almost any shape. Figure 3.6 takes one that the theorem allows.</p>
+
+    <figure class="fig" data-fig="3.6" id="f3-6">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 3.6</span>A fold. An excess demand of the shape unlike households can add up to, z = b − (x³ − 3x) with x = (p − 5)/1.5 and b = 6ω − 3, at ω = 0.1, 0.5 and 0.9. At ω = 0.5 it crosses zero three times.</figcaption>
+      <p class="held"><span>Held fixed</span>ω, how the endowment is split between two kinds of household: the hidden axis.</p>
+    </figure>
+    <p>Folded, the sheet folds over itself, and its crossing of zero becomes an S. Between ω = 1/6 and 5/6 there are three equilibria. In the middle one the sheet slopes the wrong way, so a price near it runs away. Raise ω slowly and the price follows the low branch until the branch ends at ω = 5/6, then leaps from 3.5 to 8. Lower it again and the price stays high until ω = 1/6, where it falls to 2. A small change in what is held moves the economy a long way, and where it ends up depends on where it came from.</p>
+    <p class="aha">The textbook’s single crossing is bought by the representative agent. Relax it, as Part 2 does, and the theorems that made “other things equal” safe have to be checked again.</p>
+    <p>A held value matters for evidence as well. A scatter of two variables is the shadow of every other value that moved while they were recorded (<a href="classical.html#f7-1">Figure 7.1</a>). Figure 3.7 draws one such shadow from data.</p>
+
+    <figure class="fig" data-fig="3.7" id="f3-7">
+      <div class="fig-art"></div>
+      <figcaption><span class="fig-no">Figure 3.7</span>The United States, 1978 to 2025: the unemployment rate and CPI inflation, annual. The line fitted through the cloud is flat and explains none of it.</figcaption>
+      <p class="held"><span>Held fixed</span>expected inflation, measured by the University of Michigan’s survey of households: the hidden axis.</p>
+    </figure>
+    <p>Flat, the cloud seems to refute the Phillips curve. Folded, each year rises to the inflation households expected, and the years lie close to one plane: with the third axis, inflation’s variation is 87 percent accounted for. Seen along the plane, the cloud is a line. The plane then rejects something in its turn. It is steep in expectations and nearly flat in unemployment, so since 1978 the short-run trade-off of <a href="classical.html#f6-3">Figure 6.3</a> has been small.</p>
+    <p>The rescue is fair only because the axis was named before the test and measured apart from it. When a prediction fails, what is refuted is the theory together with everything it held, as Pierre Duhem (1906) and W. V. O. Quine (1951) argued. An axis chosen after the test can rescue any cloud. Survey expectations also move with recent inflation, so part of the plane is inflation explaining itself, and separating the two takes a research design.</p>
+    <p class="aha">Name what is held before the test, with its value, and measure it apart. Then “other things equal” leaves a model refutable.</p>
+  </section>
+
+  <section class="stage" id="a6" data-no="6" data-name="A unit of the textbook">
+    <h2><span class="no">6</span>A unit of the textbook</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 6">6</span>A unit is one model, written in nine fields.</p></div>
     <p>If what a textbook teaches is models, a unit of the textbook is one model, and it can be written down in the same nine fields every time. Part 1 already writes most of them beside each figure.</p>
 
-    <figure class="fig wide unit-fig" data-fig="3.5" id="f3-5">
+    <figure class="fig wide unit-fig" data-fig="3.8" id="f3-8">
       <dl class="unit">
         <div><dt>Question</dt><dd>Where does a demand curve come from?</dd></div>
         <div><dt>Moves</dt><dd>Households: each chooses the best bundle it can afford.</dd></div>
@@ -143,7 +176,7 @@
         <div><dt>Builds on</dt><dd><a href="classical.html#f2-1">Figure 2.1</a>, the best affordable bundle.</dd></div>
         <div><dt>Returns in</dt><dd>Figure 1.1, whose demand surface is built this way; labor supply, with leisure as the good.</dd></div>
       </dl>
-      <figcaption><span class="fig-no">Figure 3.5</span>A unit card: <a href="classical.html#f2-2">Figure 2.2</a>, demand is a list of choices, in nine fields.</figcaption>
+      <figcaption><span class="fig-no">Figure 3.8</span>A unit card: <a href="classical.html#f2-2">Figure 2.2</a>, demand is a list of choices, in nine fields.</figcaption>
       <p class="held"><span>Held fixed</span>the unit’s text and its figure; the card lists what they contain.</p>
     </figure>
     <p>Five rules arrange the units into a textbook.</p>
@@ -162,12 +195,12 @@
     <p class="aha">Written in the same nine fields, units can be put in a different order without losing what each one assumes.</p>
   </section>
 
-  <section class="stage" id="a6" data-no="6" data-name="Five ways through">
-    <h2><span class="no">6</span>Five ways through</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 6">6</span>Paths, not only courses.</p></div>
+  <section class="stage" id="a7" data-no="7" data-name="Five ways through">
+    <h2><span class="no">7</span>Five ways through</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 7">7</span>Paths, not only courses.</p></div>
     <p>Each path below enters the wheel somewhere else and visits the cells it needs in its own order. A question, an agent or a market enters at a cell. An assumption follows a property of the agents from cell to cell, and a method starts at the hub.</p>
 
-    <figure class="fig wide paths-fig" data-fig="3.6" id="f3-6">
+    <figure class="fig wide paths-fig" data-fig="3.9" id="f3-9">
       <div class="paths">
         <section>
           <h3>By a question: why are some countries rich?</h3>
@@ -220,16 +253,16 @@
           </ol>
         </section>
       </div>
-      <figcaption><span class="fig-no">Figure 3.6</span>Five ways through the archive. Folded, each is drawn through the wheel in its own color, after the route of Part 1.</figcaption>
+      <figcaption><span class="fig-no">Figure 3.9</span>Five ways through the archive. Folded, each is drawn through the wheel in its own color, after the route of Part 1.</figcaption>
       <p class="held"><span>Held fixed</span>the length of each path: five stops, though a path can be longer.</p>
     </figure>
     <p>The paths by question, agent and market follow cells. The path by an assumption follows what Part 2 relaxes: it starts where Figure 1.1 makes the assumption of no connections and ends where a loss travels between banks. The path by a method stays at one tool of the hub while it moves around the rim, from the household to the firm, the central bank and the investor.</p>
     <p class="aha">A course is one path among several. The archive keeps the classical sequence as one of them, without making it the only way in.</p>
   </section>
 
-  <section class="stage" id="a7" data-no="7" data-name="The textbooks">
-    <h2><span class="no">7</span>The textbooks</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 7">7</span>Every door, and what to read next.</p></div>
+  <section class="stage" id="a8" data-no="8" data-name="The textbooks">
+    <h2><span class="no">8</span>The textbooks</h2>
+    <div class="adds"><p><span class="rev" aria-label="Revision 8">8</span>Every door, and what to read next.</p></div>
     <div id="course-index"></div>
     <p class="transition">The archive is a proposal, not a finished machine. Its cells are the courses that already exist, read through the models they teach. What it adds is the wheel that shows what each model moves, holds and leaves out, and how the models connect.</p>
   </section>

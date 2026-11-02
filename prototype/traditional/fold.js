@@ -520,6 +520,9 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     if (archive && world) {
       const fig = sheet.querySelector(`figure[data-fig="${archive.figure}"]`)?.getBoundingClientRect();
       const end = sheet.querySelector(archive.end)?.getBoundingClientRect();
+      // a span of the archive whose figures stand on the page and are read up
+      // close, the wheel still beside them (Part 3, section 5)
+      const near = archive.near ? sheet.querySelector(archive.near)?.getBoundingClientRect() : null;
       const routes = archive.routes.map((rt, i) => {
         const { pts, stops, at } = routeOf(rt.places, 0.12 + 0.07 * i);
         const segs = pts.slice(1).map((q, k) => [pts[k], q]);
@@ -535,6 +538,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
       sc.archive = {
         c: fig ? (fig.top + fig.bottom) / 2 + scrollY : 0,
         end: end ? end.bottom + scrollY : 0,
+        near: near ? [near.top + scrollY, near.bottom + scrollY] : null,
         routes,
       };
     }
@@ -840,8 +844,9 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     // as stage 6 opens, over the wheel the page lies on
     if (A) pose = { phi: 0.35, C: [pageX + 1.1 + RIM, -0.004, -0.8] };
     const Wh = sc.whole;
+    const close = A?.near ? smooth(A.near[0] - 900, A.near[0] + 100, P.focus) * (1 - smooth(A.near[1] - 300, A.near[1] + 600, P.focus)) : 0;
     let climax = A
-      ? ease(smooth(A.c - 1400, A.c - 250, P.focus) * (1 - smooth(A.end + 150, A.end + 1100, P.focus)))
+      ? ease(smooth(A.c - 1400, A.c - 250, P.focus) * (1 - smooth(A.end + 150, A.end + 1100, P.focus)) * (1 - close))
       : Wh?.from != null && Wh.to != null ? ease(smooth(Wh.from - 1000, Wh.from - 150, P.focus) * (1 - smooth(Wh.to - 900, Wh.to - 350, P.focus))) : 0;
     // a story that builds the wheel steps back to show all of it, and slides
     // the wheel out from under the page to lie beside it, as in Part 3, so
@@ -852,7 +857,8 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     const flag = (i) => (SC?.build || SC?.beats[clamp(i, 0, nb - 1)]?.beside ? 1 : 0);
     const out = SC ? lerp(flag(Math.floor(SC.shown)), flag(Math.ceil(SC.shown)), ease(SC.shown - Math.floor(SC.shown))) : 0;
     const beside = A ? 1 : pose ? ease(sw) * out : 0;
-    climax = Math.max(climax, beside);
+    // (a beat marked beside: true steps back to the wheel within that span too)
+    climax = Math.max(climax, beside * (1 - close * (1 - out)));
     if (!A && beside > 0) pose = { phi: pose.phi, C: pose.C.map((v, k) => lerp(v, BESIDE[k], beside)) };
     // while the wheel is built, the figures on the page step back
     const quiet = 1 - 0.85 * (!A && SC?.build ? ease(sw) : 0);

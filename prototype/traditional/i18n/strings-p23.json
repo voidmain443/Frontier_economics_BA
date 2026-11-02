@@ -1580,299 +1580,464 @@
 "line": 185
 },
 {
+"key": "excess demand z",
+"file": "p3-space.js",
+"line": 99
+},
+{
+"key": "Excess demand in the market of Figure {0} at three incomes; each line crosses zero once.",
+"file": "p3-space.js",
+"line": 99
+},
+{
+"key": "Excess demand of unlike households at three splits of the endowment; at the middle one it crosses zero three times.",
+"file": "p3-space.js",
+"line": 111
+},
+{
+"key": "US unemployment and CPI inflation, every year from {0} to {1}; a fitted line is flat.",
+"file": "p3-space.js",
+"line": 127
+},
+{
+"key": "the sheet crosses zero along one line",
+"file": "p3-space.js",
+"line": 153
+},
+{
+"key": "slope: dp*/dI = {0}",
+"file": "p3-space.js",
+"line": 154
+},
+{
+"key": "income I, {0} … {1}",
+"file": "p3-space.js",
+"line": 159
+},
+{
+"key": "Figure {0}’s market, drawn as excess demand: what buyers want minus what sellers offer, at each price. The equilibrium is where it crosses zero. Income is held at I = {1}; the faint lines hold it at {2} and {3}.",
+"file": "p3-space.js",
+"line": 162
+},
+{
+"key": "Fold the held value up. Income becomes an axis, and each line lies at its own income.",
+"file": "p3-space.js",
+"line": 163
+},
+{
+"key": "Between the lines the sheet fills in. It crosses the floor of zero along one line: at every income an equilibrium exists, only one, and it moves without a break.",
+"file": "p3-space.js",
+"line": 164
+},
+{
+"key": "The slope of that line is what “other things equal” means here: as income rises from {0} to {1}, the price rises from {2} to {3}, five for every unit of income.",
+"file": "p3-space.js",
+"line": 165
+},
+{
+"key": "Off the line, the sheet pushes the price back: excess demand is positive below the equilibrium price and negative above it. The equilibrium is stable.",
+"file": "p3-space.js",
+"line": 166
+},
+{
+"key": "On the wheel, income is the hatched cell, held. Existence, uniqueness, continuity and stability are each a theorem about this sheet, and each can fail.",
+"file": "p3-space.js",
+"line": 167
+},
+{
+"key": "three equilibria for ω between {0}/{1} and {2}/{3}; the middle one is unstable",
+"file": "p3-space.js",
+"line": 191
+},
+{
+"key": "ω = {0}/{1}: the price leaps from {2} to {3}",
+"file": "p3-space.js",
+"line": 198
+},
+{
+"key": "back down, the jump comes at ω = {0}/{1}, from {2} to {3}",
+"file": "p3-space.js",
+"line": 204
+},
+{
+"key": "endowment split ω, {0} … {1}",
+"file": "p3-space.js",
+"line": 205
+},
+{
+"key": "Households who are each rational, but unlike one another. Sonnenschein, Mantel and Debreu showed that their excess demands can add up to almost any shape. This one crosses zero once, three times, or once, as ω, the split of the endowment between two kinds of household, changes.",
+"file": "p3-space.js",
+"line": 208
+},
+{
+"key": "Fold ω up. Each split lies at its own height.",
+"file": "p3-space.js",
+"line": 209
+},
+{
+"key": "The sheet folds. Its crossing of zero is now an S: between ω = {0}/{1} and {2}/{3} there are three equilibria, and in the middle one the sheet slopes the wrong way, so the price runs away from it.",
+"file": "p3-space.js",
+"line": 210
+},
+{
+"key": "Raise ω slowly. The price follows the low branch until the branch ends at ω = {0}/{1}, then leaps to the high one: a small change in what is held moves the economy a long way.",
+"file": "p3-space.js",
+"line": 211
+},
+{
+"key": "Lower ω again and the price does not leap back at {0}/{1}. It stays high until ω = {2}/{3}. Where the economy is depends on where it came from.",
+"file": "p3-space.js",
+"line": 212
+},
+{
+"key": "Nothing here is irrational. The households are unlike, and it was the representative agent that bought Figure {0} its single crossing.",
+"file": "p3-space.js",
+"line": 213
+},
+{
+"key": "{0}: expected {1}%",
+"file": "p3-space.js",
+"line": 228
+},
+{
+"key": "expected inflation πᵉ, {0} … {1}%",
+"file": "p3-space.js",
+"line": 232
+},
+{
+"key": "inflation less what expectations account for: π − {0}(πᵉ − {1})",
+"file": "p3-space.js",
+"line": 238
+},
+{
+"key": "Expected inflation <b>measured</b><br><i>Michigan survey, {0}–{1}</i>",
+"file": "p3-space.js",
+"line": 239
+},
+{
+"key": "Unemployment and inflation in the United States, every year from {0} to {1}. The line fitted through the cloud is flat and explains none of it. Has the Phillips curve been refuted?",
+"file": "p3-space.js",
+"line": 241
+},
+{
+"key": "Figure {0} held one value, expected inflation. Here it is measured, by the University of Michigan’s survey of households, and each year rises to it.",
+"file": "p3-space.js",
+"line": 242
+},
+{
+"key": "The years lie close to one plane. With the third axis, the same {0} years account for {1} percent of the variation in inflation.",
+"file": "p3-space.js",
+"line": 243
+},
+{
+"key": "Seen along the plane, the cloud closes up: take from each year what its expectations account for, and the years fall into a narrow band. The flat drawing was the shadow of the plane.",
+"file": "p3-space.js",
+"line": 244
+},
+{
+"key": "The plane is steep in expectations and nearly flat in unemployment: {0} against {1}. Once the axis stands, the data do reject something: since {2} the short-run trade-off has been small.",
+"file": "p3-space.js",
+"line": 245
+},
+{
+"key": "The rescue is fair because the axis was named before the test and measured apart from it. An axis found after the test can rescue any cloud. And survey expectations move with recent inflation, so part of the fit is inflation explaining itself: a design is still needed.",
+"file": "p3-space.js",
+"line": 246
+},
+{
 "key": "The core",
 "file": "p3.js",
-"line": 16
+"line": 17
 },
 {
 "key": "The field courses",
 "file": "p3.js",
-"line": 16
+"line": 17
 },
 {
 "key": "<a href=\"{0}?c={1}\"><b>{2}</b><span>{3}</span><i>{4}</i></a>",
 "file": "p3.js",
-"line": 23
+"line": 24
 },
 {
 "key": "<td><a href=\"{0}\">{1}{2}</a> {3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td>",
 "file": "p3.js",
-"line": 37
+"line": 38
 },
 {
 "key": "Part {0}, the classical sequence",
 "file": "p3.js",
-"line": 56
+"line": 57
 },
 {
 "key": "The plan of the archive: four layers of what economics studies, six cells each, and every name a door to the course that teaches it.",
 "file": "p3.js",
-"line": 88
+"line": 89
 },
 {
 "key": "Roll the plan up and each layer is a ring of one wheel, Frank Knight’s wheel of wealth ({0}). Build it from the rim in. First the agents, where everything that circulates starts and ends.",
 "file": "p3.js",
-"line": 89
+"line": 90
 },
 {
 "key": "Then the markets, where agents meet: goods, labor, money, capital, foreign exchange, and the land and air that have no market until one is made. What the agents send one another starts to circulate through them; each route first carries one parcel alone.",
 "file": "p3.js",
-"line": 90
+"line": 91
 },
 {
 "key": "Then the institutions, the rules the agents meet under. Taxes start to flow through theirs.",
 "file": "p3.js",
-"line": 91
+"line": 92
 },
 {
 "key": "At the hub, the methods. They are not in the economy: they are the tools every other ring is read with, and Part {0} added one at five of its stages.",
 "file": "p3.js",
-"line": 92
+"line": 93
 },
 {
 "key": "The wheel as section {0} built it: every cell moving, every route running. No textbook figure draws all of this.",
 "file": "p3.js",
-"line": 99
+"line": 100
 },
 {
 "key": "Figure {0} moves one market: goods, and its price. Its buyers and sellers are there, but what they want and what they can make are given, so their cells are held, hatched. Everything else is left out and empties to its outline.",
 "file": "p3.js",
-"line": 100
+"line": 101
 },
 {
 "key": "What Figure {0} holds fixed is income, I = {1}. Income reaches households as wages, through the labor market, and that route has stopped where it was. Folded in Part {2}, this value was the figure’s hidden axis.",
 "file": "p3.js",
-"line": 101
+"line": 102
 },
 {
 "key": "Open the held cells and the wages move again: households earn what they spend, and firms hire the work they sell. Every market moves at once, as in Stage {0}.",
 "file": "p3.js",
-"line": 102
+"line": 103
 },
 {
 "key": "Figure {0}, IS–LM, moves goods and money together, with the households that consume and the firms that invest. It holds the price level, government spending and the money supply.",
 "file": "p3.js",
-"line": 103
+"line": 104
 },
 {
 "key": "It leaves out banks, other countries, and the land and air. A model is a choice of what moves, what is held and what is left out.",
 "file": "p3.js",
-"line": 104
+"line": 105
 },
 {
 "key": "The classical sequence of Part {0}, as states of the wheel. It starts with almost all of it held or left out.",
 "file": "p3.js",
-"line": 116
+"line": 117
 },
 {
 "key": "Stage {0} starts with one market. The households and firms behind its curves are held, and so is income.",
 "file": "p3.js",
-"line": 119
+"line": 120
 },
 {
 "key": "Stage {0} opens demand into households who choose. Optimization arrives at the hub.",
 "file": "p3.js",
-"line": 120
+"line": 121
 },
 {
 "key": "Stage {0} opens supply into firms that choose. Income and the wage are still held.",
 "file": "p3.js",
-"line": 121
+"line": 122
 },
 {
 "key": "Stage {0} relaxes price-taking. No agent or market opens: two firms stop taking the price as given, and strategy arrives at the hub.",
 "file": "p3.js",
-"line": 122
+"line": 123
 },
 {
 "key": "Stage {0} opens income and wages, the last held cell. Every market now moves at once.",
 "file": "p3.js",
-"line": 123
+"line": 124
 },
 {
 "key": "Stage {0} adds the capital and money markets, the government, and the central bank with its rules.",
 "file": "p3.js",
-"line": 124
+"line": 125
 },
 {
 "key": "Stage {0} measures what the wheel produces. Nothing new moves; beside the hub stand Korea’s output and employment.",
 "file": "p3.js",
-"line": 125
+"line": 126
 },
 {
 "key": "Stage {0} adds one thing per field course: other countries, banks, the land and air, property, history. Two cells never move: networks and computation.",
 "file": "p3.js",
-"line": 126
+"line": 127
 },
 {
 "key": "The fifth relation adds no cell. The same structure returns in another: the household’s tangency of Figure {0} prices assets in the capital market of Figure {1}.",
 "file": "p3.js",
-"line": 130
+"line": 131
 },
 {
 "key": "Every model makes assumptions about the agents in its moving cells. Eight run through Part {0}.",
 "file": "p3.js",
-"line": 139
+"line": 140
 },
 {
 "key": "Six of them Part {0} relaxes itself: price-taking at strategy, full information at contracts, complete markets in the land and air, equilibrium at once in the labor market, consistent choice among households, and data that speak for themselves at measurement.",
 "file": "p3.js",
-"line": 140
+"line": 141
 },
 {
 "key": "Two it never relaxes head-on. The first is the representative agent: one firm stands for all firms, one household for all households. Drawn that way, every firm on the wheel is the same size.",
 "file": "p3.js",
-"line": 141
+"line": 142
 },
 {
 "key": "Relaxed, the firms are as unequal as Zipf’s law says, a few giants and a long tail, and households differ in income too.",
 "file": "p3.js",
-"line": 142
+"line": 143
 },
 {
 "key": "The second is no connections: any household buys from any firm, through the market.",
 "file": "p3.js",
-"line": 143
+"line": 144
 },
 {
 "key": "Relaxed, each household is tied to a few firms, firms to their suppliers, banks to one another, and what moves travels along the ties.",
 "file": "p3.js",
-"line": 144
+"line": 145
 },
 {
 "key": "Unlike and connected: the two assumptions Part {0} keeps to the end are what Part {1} relaxes, in the two cells it builds.",
 "file": "p3.js",
-"line": 145
+"line": 146
 },
 {
 "key": "A unit of the textbook is one model, in nine fields. This is Figure {0}’s.",
 "file": "p3.js",
-"line": 158
+"line": 159
 },
 {
 "key": "Its question: where does a demand curve come from? Demand lives in the goods market.",
 "file": "p3.js",
-"line": 159
+"line": 160
 },
 {
 "key": "It moves one cell: the households, each choosing the best bundle it can afford. Everything else is left out.",
 "file": "p3.js",
-"line": 160
+"line": 161
 },
 {
 "key": "It holds two values: the price of x, one per budget line, which is its hidden axis, and income.",
 "file": "p3.js",
-"line": 161
+"line": 162
 },
 {
 "key": "Its one change opens a cell that Figure {0} held. There, demand was given; here, it is a list of choices.",
 "file": "p3.js",
-"line": 162
+"line": 163
 },
 {
 "key": "It assumes one household stands for all. Drawn as it assumes, every household is the same size.",
 "file": "p3.js",
-"line": 163
+"line": 164
 },
 {
 "key": "Its method is optimization, at the hub: the best affordable bundle, a tangency.",
 "file": "p3.js",
-"line": 164
+"line": 165
 },
 {
 "key": "Its evidence: in Hunan, poor households given cheaper rice bought less of it, a demand curve that slopes up (Jensen and Miller {0}).",
 "file": "p3.js",
-"line": 165
+"line": 166
 },
 {
 "key": "It builds on Figure {0} and returns in Figure {1}’s demand surface and in labor supply.",
 "file": "p3.js",
-"line": 166
+"line": 167
 },
 {
 "key": "The route of Part {0} is one way through the wheel.",
 "file": "p3.js",
-"line": 181
+"line": 182
 },
 {
 "key": "By a question, why are some countries rich: from all markets at once to capital, institutions, history and the largest firms.",
 "file": "p3.js",
-"line": 182
+"line": 183
 },
 {
 "key": "By an agent, the household: its choice, its saving, its consumption in macroeconomics, its portfolio, and its departures from the model.",
 "file": "p3.js",
-"line": 183
+"line": 184
 },
 {
 "key": "By a market, labor: the firm’s demand for it, unemployment, who sets the wage, how to measure it, and jobs found through ties.",
 "file": "p3.js",
-"line": 184
+"line": 185
 },
 {
 "key": "By an assumption, no connections: from Figure {0}, where anyone trades with anyone, through networks to the banks a loss travels between.",
 "file": "p3.js",
-"line": 185
+"line": 186
 },
 {
 "key": "By a method, optimization: one tool at the hub, used by the household, the firm, the central bank and the investor.",
 "file": "p3.js",
-"line": 186
+"line": 187
 },
 {
 "key": "Five ways through, and the route of Part {0} among them. The archive keeps the classical sequence as one way in, not the only one.",
 "file": "p3.js",
-"line": 187
+"line": 188
 },
 {
 "key": "Section",
 "file": "p3.js",
-"line": 191
+"line": 195
 },
 {
 "key": "A new archive",
 "file": "p3.js",
-"line": 191
+"line": 195
 },
 {
 "key": "The units of Parts {0} and {1}",
 "file": "p3.js",
-"line": 32
+"line": 33
 },
 {
 "key": "Unit",
 "file": "p3.js",
-"line": 32
+"line": 33
 },
 {
 "key": "Moves",
 "file": "p3.js",
-"line": 32
+"line": 33
 },
 {
 "key": "Holds",
 "file": "p3.js",
-"line": 32
+"line": 33
 },
 {
 "key": "Its one change",
 "file": "p3.js",
-"line": 32
+"line": 33
 },
 {
 "key": "Method",
 "file": "p3.js",
-"line": 32
+"line": 33
 },
 {
 "key": "Part {0},",
 "file": "p3.js",
-"line": 37
+"line": 38
 },
 {
 "key": "the start",
 "file": "p3.js",
-"line": 37
+"line": 38
 },
 {
 "key": "Opens",
@@ -3122,52 +3287,52 @@
 {
 "key": "Figure {0} could not be drawn ({1}). The text beside it describes it in full.",
 "file": "page.js",
-"line": 37
+"line": 35
 },
 {
 "key": "Lay the page flat",
 "file": "page.js",
-"line": 118
+"line": 127
 },
 {
 "key": "Fold the page into space",
 "file": "page.js",
-"line": 118
+"line": 127
 },
 {
 "key": "Escape",
 "file": "page.js",
-"line": 151
+"line": 160
 },
 {
 "key": "{0}Frames {1}: median {2} ms, {3}% {4}, {5}% {6}, slowest {7}{8}",
 "file": "page.js",
-"line": 218
+"line": 227
 },
 {
 "key": "Fold the page to start the walk.",
 "file": "page.js",
-"line": 223
+"line": 232
 },
 {
 "key": "The fold needs WebGPU with HTML-in-Canvas.",
 "file": "page.js",
-"line": 126
+"line": 135
 },
 {
 "key": "The flat page is complete on its own.",
 "file": "page.js",
-"line": 126
+"line": 135
 },
 {
 "key": "Could not fold the page:",
 "file": "page.js",
-"line": 145
+"line": 154
 },
 {
 "key": "The fold could not start:",
 "file": "page.js",
-"line": 156
+"line": 165
 },
 {
 "key": "(prefers-reduced-motion: reduce)",
@@ -3222,22 +3387,22 @@
 {
 "key": "xl callout",
 "file": "fold.js",
-"line": 641
+"line": 645
 },
 {
 "key": "Held fixed",
 "file": "fold.js",
-"line": 649
+"line": 653
 },
 {
 "key": "a, button, input, nav, .titleblock, .callout",
 "file": "fold.js",
-"line": 1300
+"line": 1306
 },
 {
 "key": "held",
 "file": "fold.js",
-"line": 1142
+"line": 1148
 },
 {
 "key": "<a href=\"#{0}\">{1} {2}</a>",
