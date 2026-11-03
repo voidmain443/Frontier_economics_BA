@@ -2,6 +2,8 @@
 
 > 교과서의 경제 그래프는 고차원 구조의 **단면**이다.
 
+사이트: <https://voidmain443.github.io/Frontier_economics_BA/> (한국어판: [index.ko.html](https://voidmain443.github.io/Frontier_economics_BA/index.ko.html)). `.github/workflows/pages.yml`이 `main`에 올라온 `prototype/traditional/`을 GitHub Pages에 배포한다. 페이지를 공간으로 접는 기능에는 WebGPU를 지원하는 브라우저가 필요하다.
+
 경제학 학부 커리큘럼을 개념 그래프(온톨로지) 위에서 다시 설계하고, 그 설계를 공간으로 보여주는 프로젝트의 런칭 사이트.
 
 - **2D (종이)** — 교과서처럼 단순화된 그래프. 그 자체로 완결된, 좋은 틀이다.
