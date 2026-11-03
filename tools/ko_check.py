@@ -164,17 +164,28 @@ def sound(word):
             if depth == 0:
                 # a gloss after a Korean word, 수요곡선(demand curve)은, is read
                 # as that word; a coordinate or formula, (3, 6)으로, as its end
-                inside, before = w[i + 1:-1], w[:i].rstrip('』」’”')
-                gloss = i and not w[i - 1].isspace() and (before != w[:i] or '가' <= w[i - 1] <= '힣' or HANGUL.search(inside))
+                inside, before = w[i + 1:-1], w[:i].rstrip('』」’”\'"')
+                gloss = i and not w[i - 1].isspace() and (before != w[:i] or '가' <= w[i - 1] <= '힣' or HANGUL.search(inside)
+                                                          or re.fullmatch(r'\d{4}(?:[–-]\d{2,4})?', inside))  # GATT(1947)와
                 return sound(before) if gloss else sound(inside)
             i -= 1
         return None
     if '가' <= ch <= '힣':
         f = (ord(ch) - 0xAC00) % 28
         return 'v' if f == 0 else 'l' if f == 8 else 'c'
-    if ch.isdigit():
-        m = re.search(r'(\d+)$', w)
-        n = m.group(1).lstrip('0') or '0'
+    # a fraction is read denominator first, 1/2 as 2분의 1, so it ends as its
+    # numerator; a ratio of letters, K/L, is read either way and is not checked
+    m = re.search(r'(?:^|[^0-9A-Za-z])([0-9]+)/[0-9A-Za-z]+$', w)
+    if m:
+        return sound(m.group(1))
+    if re.search(r'[0-9A-Za-z)]/[0-9A-Za-z(]+$', w):
+        return None
+    # a Roman numeral in a name, 경제수학 I, is read as a number: 일, 이, 삼
+    m = re.search(r'(?:경제수학|바젤) (I|II|III|IV|V|VI)$', w)
+    if m:
+        return {'I': 'l', 'II': 'v', 'III': 'c', 'IV': 'v', 'V': 'v', 'VI': 'c'}[m.group(1)]
+    if '0' <= ch <= '9':
+        n = re.search(r'([0-9]+)$', w).group(1).lstrip('0') or '0'
         return 'c' if n.endswith('0') else DIGIT[n[-1]]
     if ch == '%':
         return 'v'
