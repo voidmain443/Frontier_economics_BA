@@ -3900,79 +3900,84 @@
 "line": 44
 },
 {
+"key": "Starts",
+"file": "course.js",
+"line": 52
+},
+{
 "key": "nothing named",
 "file": "course.js",
-"line": 49
+"line": 53
 },
 {
 "key": "<header class=\"opening\"><p class=\"kicker\">{0}</p><h{1}>{2}</h{3}>{4}</header>",
 "file": "course.js",
-"line": 50
+"line": 54
 },
 {
 "key": "<section class=\"chapter\" id=\"c-path\"><h{0}>{1}</h{2}>\n    <p>{3} (<a href=\"{4}\">{5}</a>). {6}</p>\n    <p class=\"needs-fold\" hidden>{7}</p>\n    <figure class=\"fig wide dense\" data-fig=\"route\" id=\"c-route\">\n      <div class=\"fig-art\"></div>\n      <figcaption><span class=\"fig-no\">{8}</span>{9} (<a href=\"{10}\">{11}</a>), {12}</figcaption>\n    </figure>\n    <ol class=\"units-path\">{13}</ol>\n  </section>",
 "file": "course.js",
-"line": 51
+"line": 55
 },
 {
 "key": "<section class=\"chapter\"><h{0}>{1}</h{2}><div data-ladder=\"{3}\"></div></section>",
 "file": "course.js",
-"line": 60
+"line": 64
 },
 {
 "key": "<section class=\"chapter\" id=\"c-jx\"><h{0}>{1}</h{2}><ul class=\"course-links\" id=\"c-junctions\"></ul></section>",
 "file": "course.js",
-"line": 61
+"line": 65
 },
 {
 "key": "<section class=\"chapter\" id=\"c-read\"><h{0}>{1}</h{2}><ul class=\"course-links\" id=\"c-reading\"></ul></section>",
 "file": "course.js",
-"line": 62
+"line": 66
 },
 {
 "key": "<li><a href=\"{0}?c={1}#{2}\"><b>{3}</b><span>{4}</span></a></li>",
 "file": "course.js",
-"line": 82
+"line": 86
 },
 {
 "key": "<li><a href=\"{0}\"><b>{1}</b></a></li>",
 "file": "course.js",
-"line": 86
+"line": 90
 },
 {
 "key": "{0} on the wheel: {1} units, from {2} to {3}, in the order the course teaches them.",
 "file": "course.js",
-"line": 136
+"line": 140
 },
 {
 "key": "The whole path. Each unit changed one thing, and the course is the sequence of those changes.",
 "file": "course.js",
-"line": 138
+"line": 142
 },
 {
 "key": "Field",
 "file": "course.js",
-"line": 149
+"line": 153
 },
 {
 "key": "Core",
 "file": "course.js",
-"line": 149
+"line": 153
 },
 {
 "key": "Course",
 "file": "course.js",
-"line": 151
+"line": 155
 },
 {
 "key": "Field course",
 "file": "course.js",
-"line": 151
+"line": 155
 },
 {
 "key": "Core course",
 "file": "course.js",
-"line": 151
+"line": 155
 },
 {
 "key": "Cross-Section",
@@ -4002,57 +4007,57 @@
 {
 "key": "Its path through the wheel",
 "file": "course.js",
-"line": 51
+"line": 55
 },
 {
 "key": "A course is a path of units, and each unit is one model: what it moves, what it holds still, and the one thing it changes",
 "file": "course.js",
-"line": 52
+"line": 56
 },
 {
 "key": "Part {0}, section {1}",
 "file": "course.js",
-"line": 52
+"line": 56
 },
 {
 "key": "Folded, the wheel lies beside the page, and the path is drawn through it unit by unit, each unit putting the wheel in its state.",
 "file": "course.js",
-"line": 53
+"line": 57
 },
 {
 "key": "The path",
 "file": "course.js",
-"line": 56
+"line": 60
 },
 {
 "key": "The plan of the wheel",
 "file": "course.js",
-"line": 56
+"line": 60
 },
 {
 "key": "with the cell each unit is read in, numbered in the order the course teaches them.",
 "file": "course.js",
-"line": 56
+"line": 60
 },
 {
 "key": "Week by week",
 "file": "course.js",
-"line": 60
+"line": 64
 },
 {
 "key": "Where it meets other courses",
 "file": "course.js",
-"line": 61
+"line": 65
 },
 {
 "key": "Read next",
 "file": "course.js",
-"line": 62
+"line": 66
 },
 {
 "key": "No junction passes through this course yet.",
 "file": "course.js",
-"line": 84
+"line": 88
 },
 {
 "key": "Stage",

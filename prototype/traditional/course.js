@@ -46,6 +46,10 @@ const intro = c.side === 'field'
 const units = (COURSE_UNITS[c.id] ?? []).map((key) => ({ key, m: unitOf(key) })).filter((u) => u.m);
 const placeOfUnit = (u) => (u.m.part === 2 ? PLACE_P2[u.m.id] : PLACE_P1[u.m.id]);
 const relName = Object.fromEntries(RELATIONS.map((r) => [r.id, r.name]));
+// the label before what a unit changes; Korean names it as a noun phrase
+// (드러내는 것, …) where the English uses the relation's verb
+const relKo = { start: '출발점', open: '드러내는 것', add: '더하는 것', relax: '완화하는 가정', measure: '측정하는 것', return: '다시 나오는 것' };
+const relLabel = (rel) => (LANG === 'ko' ? relKo[rel] : rel === 'start' ? 'Starts' : relName[rel]);
 const held = (m) => m.held.map(([, v]) => t(v)).filter(Boolean).join('; ') || t('nothing named');
 root.innerHTML = `<header class="opening"><p class="kicker">${t(c.side === 'field' ? 'Field course' : 'Core course')}</p><h1>${t(c.name)}</h1>${intro}</header>` +
   `<section class="chapter" id="c-path"><h2>${t('Its path through the wheel')}</h2>
@@ -55,7 +59,7 @@ root.innerHTML = `<header class="opening"><p class="kicker">${t(c.side === 'fiel
       <div class="fig-art"></div>
       <figcaption><span class="fig-no">${t('The path')}</span>${t('The plan of the wheel')} (<a href="${localHref('archive.html#f3-1')}">${t('Figure 3.1')}</a>), ${t('with the cell each unit is read in, numbered in the order the course teaches them.')}</figcaption>
     </figure>
-    <ol class="units-path">${units.map((u) => `<li><a href="${localHref(u.m.href)}"><b>${t(unitName(u.m))}</b> ${t(u.m.title)}</a><span><i>${t('Moves')}</i> ${u.m.moving.map(t).join(', ')}. <i>${t('Holds')}</i> ${held(u.m)}. <i>${t(u.m.rel === 'start' ? 'Starts' : relName[u.m.rel])}</i> ${t(u.m.what)}. <i>${t('Method')}</i> ${t(u.m.method)}.</span></li>`).join('')}</ol>
+    <ol class="units-path">${units.map((u) => `<li><a href="${localHref(u.m.href)}"><b>${t(unitName(u.m))}</b> ${t(u.m.title)}</a><span><i>${t('Moves')}</i> ${u.m.moving.map(t).join(', ')}. <i>${t('Holds')}</i> ${held(u.m)}. <i>${relLabel(u.m.rel)}</i> ${t(u.m.what)}. <i>${t('Method')}</i> ${t(u.m.method)}.</span></li>`).join('')}</ol>
   </section>` +
   `<section class="chapter"><h2>${t('Week by week')}</h2><div data-ladder="${c.id}"></div></section>` +
   `<section class="chapter" id="c-jx"><h2>${t('Where it meets other courses')}</h2><ul class="course-links" id="c-junctions"></ul></section>` +
@@ -125,7 +129,7 @@ function drawPath(art) {
 const verb = { open: 'opens', add: 'adds', relax: 'relaxes', measure: 'measures', return: 'returns' };
 const and = (xs) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}` : xs[0] ?? 'nothing named');
 const say = (u, i) => (LANG === 'ko'
-  ? `${i + 1}. ${t(unitName(u.m))}, ${t(u.m.title)}. 움직이는 것: ${u.m.moving.map(t).join(', ')}. 고정한 것: ${held(u.m)}. ${t(u.m.rel === 'start' ? 'Starts' : relName[u.m.rel])}: ${t(u.m.what)}. 바퀴통의 방법: ${t(u.m.method)}.`
+  ? `${i + 1}. ${t(unitName(u.m))}, ${t(u.m.title)}. 움직이는 칸: ${u.m.moving.map(t).join(', ')}. 고정한 조건: ${held(u.m)}. ${relLabel(u.m.rel)}: ${t(u.m.what)}. 바퀴통의 방법: ${t(u.m.method)}.`
   : `${i + 1}. ${unitName(u.m)}, ${u.m.title}. It moves ${and(u.m.moving).toLowerCase()} and holds ${and(u.m.held.map(([, v]) => v).filter(Boolean))}. ${u.m.rel === 'start' ? 'It is where the core starts' : `It ${verb[u.m.rel]} ${u.m.what}`}, with ${u.m.method.toLowerCase()} at the hub.`);
 const constructs = units.length ? {
   route: {
@@ -133,7 +137,7 @@ const constructs = units.length ? {
     callout: false,
     build: () => ({
       story: [
-        { say: LANG === 'ko' ? `바퀴 위의 ${t(c.name)}: 단원 ${units.length}개, ${t(unitName(units[0].m))}부터 ${t(unitName(units.at(-1).m))}까지, 과정이 가르치는 순서대로.` : `${c.name} on the wheel: ${units.length} units, from ${unitName(units[0].m)} to ${unitName(units.at(-1).m)}, in the order the course teaches them.` },
+        { say: LANG === 'ko' ? `${t(c.name)}의 단원 ${units.length}개를 과목에서 가르치는 순서대로 바퀴 위에 놓는다. 첫 단원은 ${t(unitName(units[0].m))}, 마지막 단원은 ${t(unitName(units.at(-1).m))}이다.` : `${c.name} on the wheel: ${units.length} units, from ${unitName(units[0].m)} to ${unitName(units.at(-1).m)}, in the order the course teaches them.` },
         ...units.map((u, i) => ({ say: say(u, i), dur: 1.2 })),
         { say: 'The whole path. Each unit changed one thing, and the course is the sequence of those changes.' },
       ],

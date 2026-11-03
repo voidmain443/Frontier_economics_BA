@@ -4,6 +4,7 @@
 // the flat page can show them.
 
 import { plot, regressionData } from './figures.js';
+import { t } from './i18n.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const sv = (tag, attrs, parent) => {
@@ -89,7 +90,7 @@ function chart(host, o) {
     }
   }
   ticks(p, { x: o.xt ?? [], y: o.yt ?? [], fx: o.fx ?? String, fy: o.fy ?? String, log });
-  sv('text', { x: p.X(o.x[0]), y: 18, class: 'lb ptitle' }, p.svg).textContent = o.title ?? '';
+  sv('text', { x: p.X(o.x[0]), y: 18, class: 'lb ptitle' }, p.svg).textContent = t(o.title ?? '');
   return p;
 }
 

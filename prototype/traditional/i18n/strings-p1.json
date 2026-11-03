@@ -2,542 +2,542 @@
 {
 "key": "lb ptitle",
 "file": "p1-figs.js",
-"line": 92
+"line": 93
 },
 {
 "key": "Supply and demand, with demand drawn at several incomes.",
 "file": "p1-figs.js",
-"line": 101
+"line": 102
 },
 {
 "key": "Twenty buyers and twenty sellers as staircases, with the gains, the tax and the lost trades shaded.",
 "file": "p1-figs.js",
-"line": 118
+"line": 119
 },
 {
 "key": "buyers pay {0}",
 "file": "p1-figs.js",
-"line": 136
+"line": 137
 },
 {
 "key": "no tax: {0}",
 "file": "p1-figs.js",
-"line": 137
+"line": 138
 },
 {
 "key": "sellers keep {0}",
 "file": "p1-figs.js",
-"line": 138
+"line": 139
 },
 {
 "key": "tax {0} × {1} = {2}",
 "file": "p1-figs.js",
-"line": 139
+"line": 140
 },
 {
 "key": "lost: {0} + {1} + {2}",
 "file": "p1-figs.js",
-"line": 140
+"line": 141
 },
 {
 "key": "willingness to pay",
 "file": "p1-figs.js",
-"line": 141
+"line": 142
 },
 {
 "key": "Demand curves through one point at different horizons, steeper in the short run.",
 "file": "p1-figs.js",
-"line": 146
+"line": 147
 },
 {
 "key": "first month, |ε| = {0}",
 "file": "p1-figs.js",
-"line": 158
+"line": 159
 },
 {
 "key": "five years, |ε| = {0}",
 "file": "p1-figs.js",
-"line": 159
+"line": 160
 },
 {
 "key": "after P + {0}%:",
 "file": "p1-figs.js",
-"line": 161
+"line": 162
 },
 {
 "key": "{0}, later {1}",
 "file": "p1-figs.js",
-"line": 162
+"line": 163
 },
 {
 "key": "Indifference curves and a budget line touching at six and six.",
 "file": "p1-figs.js",
-"line": 167
+"line": 168
 },
 {
 "key": "A price rise split into substitution and income effects.",
 "file": "p1-figs.js",
-"line": 180
+"line": 181
 },
 {
 "key": "substitution −{0}",
 "file": "p1-figs.js",
-"line": 192
+"line": 193
 },
 {
 "key": "income −{0}",
 "file": "p1-figs.js",
-"line": 193
+"line": 194
 },
 {
 "key": "The same choices plotted against the price: the demand curve.",
 "file": "p1-figs.js",
-"line": 194
+"line": 195
 },
 {
 "key": "Choice between consumption now and later.",
 "file": "p1-figs.js",
-"line": 204
+"line": 205
 },
 {
 "key": "saves {0}",
 "file": "p1-figs.js",
-"line": 216
+"line": 217
 },
 {
 "key": "Five short-run average cost curves and their lower envelope.",
 "file": "p1-figs.js",
-"line": 221
+"line": 222
 },
 {
 "key": "LRAC",
 "file": "p1-figs.js",
-"line": 234
+"line": 235
 },
 {
 "key": "Industry supply moving out as firms enter, the price falling toward {0}.",
 "file": "p1-figs.js",
-"line": 241
+"line": 242
 },
 {
 "key": "long-run supply",
 "file": "p1-figs.js",
-"line": 257
+"line": 258
 },
 {
 "key": "Two reaction curves crossing, with the two firms’ profit contours through the crossing.",
 "file": "p1-figs.js",
-"line": 263
+"line": 264
 },
 {
 "key": "Nash",
 "file": "p1-figs.js",
-"line": 275
+"line": 276
 },
 {
 "key": "firm {0}’s reaction",
 "file": "p1-figs.js",
-"line": 277
+"line": 278
 },
 {
 "key": "firm {0}’s profit {1}",
 "file": "p1-figs.js",
-"line": 279
+"line": 280
 },
 {
 "key": "The entry game as a table with two equilibria, and as a tree in which only one survives.",
 "file": "p1-figs.js",
-"line": 284
+"line": 285
 },
 {
 "key": "Fight",
 "file": "p1-figs.js",
-"line": 288
+"line": 289
 },
 {
 "key": "Accommodate",
 "file": "p1-figs.js",
-"line": 289
+"line": 290
 },
 {
 "key": "Out",
 "file": "p1-figs.js",
-"line": 290
+"line": 291
 },
 {
 "key": "two Nash equilibria (ringed)",
 "file": "p1-figs.js",
-"line": 297
+"line": 298
 },
 {
 "key": "An Edgeworth box with the endowment, the lens of mutually better trades and the equilibrium on the diagonal.",
 "file": "p1-figs.js",
-"line": 316
+"line": 317
 },
 {
 "key": "contract curve",
 "file": "p1-figs.js",
-"line": 335
+"line": 336
 },
 {
 "key": "Willingness to pay for a public good added vertically for one, two and three households.",
 "file": "p1-figs.js",
-"line": 339
+"line": 340
 },
 {
 "key": "cost {0}",
 "file": "p1-figs.js",
-"line": 350
+"line": 351
 },
 {
 "key": "voluntary giving stops",
 "file": "p1-figs.js",
-"line": 351
+"line": 352
 },
 {
 "key": "cars, ranked by quality",
 "file": "p1-figs.js",
-"line": 355
+"line": 356
 },
 {
 "key": "A used-car market in which the best forty cars are not traded.",
 "file": "p1-figs.js",
-"line": 355
+"line": 356
 },
 {
 "key": "seller’s value θ",
 "file": "p1-figs.js",
-"line": 364
+"line": 365
 },
 {
 "key": "buyer’s value θ + {0}",
 "file": "p1-figs.js",
-"line": 365
+"line": 366
 },
 {
 "key": "what buyers pay: p/{0} + {1}",
 "file": "p1-figs.js",
-"line": 366
+"line": 367
 },
 {
 "key": "{0} best cars stay home",
 "file": "p1-figs.js",
-"line": 367
+"line": 368
 },
 {
 "key": "The Solow diagram with two saving rates.",
 "file": "p1-figs.js",
-"line": 373
+"line": 374
 },
 {
 "key": "Korea: real GDP per person ({0} = {1})",
 "file": "p1-figs.js",
-"line": 392
+"line": 393
 },
 {
 "key": "Fixed investment, % of GDP",
 "file": "p1-figs.js",
-"line": 394
+"line": 395
 },
 {
 "key": "IS and three LM curves, one per price level.",
 "file": "p1-figs.js",
-"line": 400
+"line": 401
 },
 {
 "key": "LM, P = {0}",
 "file": "p1-figs.js",
-"line": 407
+"line": 408
 },
 {
 "key": "Aggregate demand traced by the IS–LM equilibria.",
 "file": "p1-figs.js",
-"line": 411
+"line": 412
 },
 {
 "key": "Short-run Phillips curves stacked by expected inflation, with the United States {0} to {1}.",
 "file": "p1-figs.js",
-"line": 419
+"line": 420
 },
 {
 "key": "Loss circles around the target and the Phillips curve; the bank picks the closest point.",
 "file": "p1-figs.js",
-"line": 440
+"line": 441
 },
 {
 "key": "monetary rule",
 "file": "p1-figs.js",
-"line": 451
+"line": 452
 },
 {
 "key": "A scatter whose fitted slope is about one, with the true slope of one half at three values of a hidden variable.",
 "file": "p1-figs.js",
-"line": 459
+"line": 460
 },
 {
 "key": "fitted slope {0}",
 "file": "p1-figs.js",
-"line": 469
+"line": 470
 },
 {
 "key": "Twelve months of prices and quantities; the fitted line is flat.",
 "file": "p1-figs.js",
-"line": 475
+"line": 476
 },
 {
 "key": "thin cb ghost",
 "file": "p1-figs.js",
-"line": 477
+"line": 478
 },
 {
 "key": "thin ol ghost",
 "file": "p1-figs.js",
-"line": 478
+"line": 479
 },
 {
 "key": "demand slope −{0}",
 "file": "p1-figs.js",
-"line": 488
+"line": 489
 },
 {
 "key": "Break-even curves for two goods in factor-price space, before and after a rise in the price of textiles.",
 "file": "p1-figs.js",
-"line": 494
+"line": 495
 },
 {
 "key": "textiles, p = {0}",
 "file": "p1-figs.js",
-"line": 503
+"line": 504
 },
 {
 "key": "machines, p = {0}",
 "file": "p1-figs.js",
-"line": 505
+"line": 506
 },
 {
 "key": "The foreign-exchange market for two expected future rates.",
 "file": "p1-figs.js",
-"line": 512
+"line": 513
 },
 {
 "key": "won deposits, i = {0}%",
 "file": "p1-figs.js",
-"line": 521
+"line": 522
 },
 {
 "key": "Won per dollar, monthly average",
 "file": "p1-figs.js",
-"line": 525
+"line": 526
 },
 {
 "key": "Call rate, %",
 "file": "p1-figs.js",
-"line": 527
+"line": 528
 },
 {
 "key": "Payoffs from waiting and withdrawing against the share who withdraw.",
 "file": "p1-figs.js",
-"line": 533
+"line": 534
 },
 {
 "key": "only the impatient withdraw: wait",
 "file": "p1-figs.js",
-"line": 541
+"line": 542
 },
 {
 "key": "everyone runs",
 "file": "p1-figs.js",
-"line": 543
+"line": 544
 },
 {
 "key": "withdraw: {0}",
 "file": "p1-figs.js",
-"line": 544
+"line": 545
 },
 {
 "key": "TED spread, percentage points (weekly average)",
 "file": "p1-figs.js",
-"line": 546
+"line": 547
 },
 {
 "key": "Mixes of two assets for five correlations.",
 "file": "p1-figs.js",
-"line": 551
+"line": 552
 },
 {
 "key": "A tax of two in the market of Figure {0}.",
 "file": "p1-figs.js",
-"line": 568
+"line": 569
 },
 {
 "key": "revenue {0}",
 "file": "p1-figs.js",
-"line": 574
+"line": 575
 },
 {
 "key": "loss {0}",
 "file": "p1-figs.js",
-"line": 575
+"line": 576
 },
 {
 "key": "Revenue and deadweight loss at every tax rate.",
 "file": "p1-figs.js",
-"line": 578
+"line": 579
 },
 {
 "key": "deadweight loss",
 "file": "p1-figs.js",
-"line": 583
+"line": 584
 },
 {
 "key": "Private cost with a layer of discounted future damage on top, at two discount rates.",
 "file": "p1-figs.js",
-"line": 588
+"line": 589
 },
 {
 "key": "social cost at r = {0}%: + {1}",
 "file": "p1-figs.js",
-"line": 598
+"line": 599
 },
 {
 "key": "private cost (r = {0}% adds {1})",
 "file": "p1-figs.js",
-"line": 599
+"line": 600
 },
 {
 "key": "A labor market with a single employer.",
 "file": "p1-figs.js",
-"line": 604
+"line": 605
 },
 {
 "key": "price-taking: {0} at {1}",
 "file": "p1-figs.js",
-"line": 610
+"line": 611
 },
 {
 "key": "single employer: {0} at {1}",
 "file": "p1-figs.js",
-"line": 611
+"line": 612
 },
 {
 "key": "marginal cost of labor",
 "file": "p1-figs.js",
-"line": 613
+"line": 614
 },
 {
 "key": "marginal product",
 "file": "p1-figs.js",
-"line": 614
+"line": 615
 },
 {
 "key": "Employment at every minimum wage: a tent under a single employer.",
 "file": "p1-figs.js",
-"line": 615
+"line": 616
 },
 {
 "key": "single employer",
 "file": "p1-figs.js",
-"line": 619
+"line": 620
 },
 {
 "key": "Two streams of profit: steady for the cartel, high once then low for the cheat.",
 "file": "p1-figs.js",
-"line": 626
+"line": 627
 },
 {
 "key": "cartel {0}",
 "file": "p1-figs.js",
-"line": 632
+"line": 633
 },
 {
 "key": "cheat {0}",
 "file": "p1-figs.js",
-"line": 633
+"line": 634
 },
 {
 "key": "What each stream is worth at every discount factor; they cross at nine seventeenths.",
 "file": "p1-figs.js",
-"line": 635
+"line": 636
 },
 {
 "key": "keep the cartel",
 "file": "p1-figs.js",
-"line": 642
+"line": 643
 },
 {
 "key": "Values of the two payments seen from day zero and from day ten.",
 "file": "p1-figs.js",
-"line": 647
+"line": 648
 },
 {
 "key": "{0}, day {1}",
 "file": "p1-figs.js",
-"line": 648
+"line": 649
 },
 {
 "key": "seen from day {0}: wait",
 "file": "p1-figs.js",
-"line": 654
+"line": 655
 },
 {
 "key": "seen from day {0}: take {1}",
 "file": "p1-figs.js",
-"line": 655
+"line": 656
 },
 {
 "key": "k = wealth",
 "file": "p1-figs.js",
-"line": 659
+"line": 660
 },
 {
 "key": "Marginal product of capital falling with scale; poor owners sit where returns are high.",
 "file": "p1-figs.js",
-"line": 659
+"line": 660
 },
 {
 "key": "interest rate {0}%",
 "file": "p1-figs.js",
-"line": 662
+"line": 663
 },
 {
 "key": "Birth and death rates crossing at subsistence income.",
 "file": "p1-figs.js",
-"line": 675
+"line": 676
 },
 {
 "key": "Income per person falling with population; better technology lifts the curve.",
 "file": "p1-figs.js",
-"line": 683
+"line": 684
 },
 {
 "key": "better technology",
 "file": "p1-figs.js",
-"line": 691
+"line": 692
 },
 {
 "key": "Income per person, {0} dollars (log scale)",
 "file": "p1-figs.js",
-"line": 692
+"line": 693
 },
 {
 "key": "England, then the UK",
 "file": "p1-figs.js",
-"line": 694
+"line": 695
 },
 {
 "key": "Netherlands",
 "file": "p1-figs.js",
-"line": 695
+"line": 696
 },
 {
 "key": "China",
 "file": "p1-figs.js",
-"line": 696
+"line": 697
 },
 {
 "key": "India",
 "file": "p1-figs.js",
-"line": 697
+"line": 698
 },
 {
 "key": "buyers, by what each would pay",
