@@ -17,7 +17,7 @@ const NS = 'http://www.w3.org/2000/svg';
 export const LAYERS = [
   { name: 'Methods', c: 'chalk', rooms: [
     ['Optimization', 'course.html?c=math'], ['Equilibrium', 'course.html?c=micro'], ['Strategy', 'course.html?c=games'],
-    ['Measurement', 'course.html?c=metrics'], ['Computation', 'https://quantecon.org/'], ['History', 'course.html?c=history']] },
+    ['Measurement', 'course.html?c=metrics'], ['Computation', 'archive.html#b-computation'], ['History', 'course.html?c=history']] },
   { name: 'Institutions', c: 'olive', rooms: [
     ['Property', 'course.html?c=development'], ['Taxes', 'course.html?c=public'], ['Contracts', 'course.html?c=micro'],
     ['Regulation', 'course.html?c=io'], ['Policy rules', 'course.html?c=macro'], ['Networks', 'beyond.html#b4']] },

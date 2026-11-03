@@ -11,7 +11,12 @@ neither the same work nor one it waits for. Such a reference is fine when it
 states a theorem that a later work proves, or hands a failure case to a later
 book; it is a mistake when the chapter cannot stand without the later one.
 
-    python3 tools/check_works.py        # exit status 1 if a chapter is unassigned or assigned twice
+The site draws the same order in Part 3, section 9, from books.js; this
+also checks that books.js reads every chapter in the work the plan gives it,
+and that its works wait for what the plan's do.
+
+    python3 tools/check_works.py        # exit status 1 if a chapter is unassigned or assigned twice,
+                                        # or books.js disagrees with the plan
 """
 
 import os
@@ -19,7 +24,9 @@ import re
 import sys
 from collections import Counter
 
-PLAN = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs", "textbook-plan.md")
+HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PLAN = os.path.join(HERE, "docs", "textbook-plan.md")
+SITE = os.path.join(HERE, "prototype", "traditional", "books.js")
 DEP = ("상태", "다루는 법", "근거와 반증", "연습")
 ALIAS = {"방법과 철학": "경제학의 방법과 철학", "중급 미시": "중급 미시경제학", "중급 거시": "중급 거시경제학", "원론": "경제원론", "계량": "계량경제학"}
 
@@ -121,6 +128,20 @@ def refs(lines, books):
     return out
 
 
+def site():
+    """books.js: (book number, chapter) -> work, and work -> works it waits for."""
+    text = open(SITE, encoding="utf-8").read()
+    assign, wait = {}, {}
+    for no, waits in re.findall(r"\{ no: (\d+), name: .*?waits: \[([\d, ]*)\]", text):
+        wait[int(no)] = {int(x) for x in re.findall(r"\d+", waits)}
+    for no, read_ in re.findall(r"\{ no: (\d+), id: '[\w-]+',.*?read: \{(.*?)\} \}", text, re.S):
+        for w, chs in re.findall(r"(\d+): (\[[^\]]*\]|R\(\d+, \d+\))", read_):
+            runs = [range(int(a), int(z) + 1) for a, z in re.findall(r"R\((\d+), (\d+)\)", chs)]
+            for c in [c for r in runs for c in r] + [int(x) for x in re.findall(r"\d+", re.sub(r"R\(\d+, \d+\)", "", chs))]:
+                assign[(int(no), c)] = int(w)
+    return assign, wait
+
+
 def main():
     lines, books, order = read()
     assign, wait = works(lines, books, order)
@@ -149,7 +170,18 @@ def main():
     print("%d references between chapters; %d point to a work not yet done" % (len(R), len(ahead)))
     for ws, wt, k, b, c, tb, n in sorted(ahead):
         print("  work %d -> %d  %s %d장 -> %s %d장  (%s)" % (ws, wt, b, c, tb, n, k))
-    return 1 if missing or twice else 0
+    S, Swait = site()
+    plan = {(order.index(b) + 1, c): w for (b, c), w in W.items()}
+    off = sorted(k for k in set(plan) | set(S) if plan.get(k) != S.get(k))
+    if off or Swait != wait:
+        print("books.js disagrees with the plan:")
+        for no, c in off:
+            print("  book %d, chapter %d: plan work %s, books.js work %s" % (no, c, plan.get((no, c)), S.get((no, c))))
+        if Swait != wait:
+            print("  waits: plan %s, books.js %s" % (sorted(wait.items()), sorted(Swait.items())))
+    else:
+        print("books.js agrees with the plan: %d chapters, %d works" % (len(S), len(Swait)))
+    return 1 if missing or twice or off or Swait != wait else 0
 
 
 if __name__ == "__main__":

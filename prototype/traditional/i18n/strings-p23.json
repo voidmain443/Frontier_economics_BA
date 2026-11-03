@@ -1885,299 +1885,934 @@
 "line": 346
 },
 {
-"key": "The core",
-"file": "p3.js",
-"line": 17
-},
-{
-"key": "The field courses",
-"file": "p3.js",
-"line": 17
-},
-{
-"key": "<a href=\"{0}?c={1}\"><b>{2}</b><span>{3}</span><i>{4}</i></a>",
-"file": "p3.js",
-"line": 24
-},
-{
 "key": "<td><a href=\"{0}\">{1}{2}</a> {3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td>",
 "file": "p3.js",
-"line": 38
+"line": 28
 },
 {
 "key": "Part {0}, the classical sequence",
 "file": "p3.js",
-"line": 57
+"line": 47
 },
 {
 "key": "The plan of the archive: four layers of what economics studies, six cells each, and every name a door to the course that teaches it.",
 "file": "p3.js",
-"line": 89
+"line": 79
 },
 {
 "key": "Roll the plan up and each layer is a ring of one wheel, Frank Knight’s wheel of wealth ({0}). Build it from the rim in. First the agents, where everything that circulates starts and ends.",
 "file": "p3.js",
-"line": 90
+"line": 80
 },
 {
 "key": "Then the markets, where agents meet: goods, labor, money, capital, foreign exchange, and the land and air that have no market until one is made. What the agents send one another starts to circulate through them; each route first carries one parcel alone.",
 "file": "p3.js",
-"line": 91
+"line": 81
 },
 {
 "key": "Then the institutions, the rules the agents meet under. Taxes start to flow through theirs.",
 "file": "p3.js",
-"line": 92
+"line": 82
 },
 {
 "key": "At the hub, the methods. They are not in the economy: they are the tools every other ring is read with, and Part {0} added one at five of its stages.",
 "file": "p3.js",
-"line": 93
+"line": 83
 },
 {
 "key": "The wheel as section {0} built it: every cell moving, every route running. No textbook figure draws all of this.",
 "file": "p3.js",
-"line": 100
+"line": 90
 },
 {
 "key": "Figure {0} moves one market: goods, and its price. Its buyers and sellers are there, but what they want and what they can make are given, so their cells are held, hatched. Everything else is left out and empties to its outline.",
 "file": "p3.js",
-"line": 101
+"line": 91
 },
 {
 "key": "What Figure {0} holds fixed is income, I = {1}. Income reaches households as wages, through the labor market, and that route has stopped where it was. Folded in Part {2}, this value was the figure’s hidden axis.",
 "file": "p3.js",
-"line": 102
+"line": 92
 },
 {
 "key": "Open the held cells and the wages move again: households earn what they spend, and firms hire the work they sell. Every market moves at once, as in Stage {0}.",
 "file": "p3.js",
-"line": 103
+"line": 93
 },
 {
 "key": "Figure {0}, IS–LM, moves goods and money together, with the households that consume and the firms that invest. It holds the price level, government spending and the money supply.",
 "file": "p3.js",
-"line": 104
+"line": 94
 },
 {
 "key": "It leaves out banks, other countries, and the land and air. A model is a choice of what moves, what is held and what is left out.",
 "file": "p3.js",
-"line": 105
+"line": 95
 },
 {
 "key": "The classical sequence of Part {0}, as states of the wheel. It starts with almost all of it held or left out.",
 "file": "p3.js",
-"line": 117
+"line": 107
 },
 {
 "key": "Stage {0} starts with one market. The households and firms behind its curves are held, and so is income.",
 "file": "p3.js",
-"line": 120
+"line": 110
 },
 {
 "key": "Stage {0} opens demand into households who choose. Optimization arrives at the hub.",
 "file": "p3.js",
-"line": 121
+"line": 111
 },
 {
 "key": "Stage {0} opens supply into firms that choose. Income and the wage are still held.",
 "file": "p3.js",
-"line": 122
+"line": 112
 },
 {
 "key": "Stage {0} relaxes price-taking. No agent or market opens: two firms stop taking the price as given, and strategy arrives at the hub.",
 "file": "p3.js",
-"line": 123
+"line": 113
 },
 {
 "key": "Stage {0} opens income and wages, the last held cell. Every market now moves at once.",
 "file": "p3.js",
-"line": 124
+"line": 114
 },
 {
 "key": "Stage {0} adds the capital and money markets, the government, and the central bank with its rules.",
 "file": "p3.js",
-"line": 125
+"line": 115
 },
 {
 "key": "Stage {0} measures what the wheel produces. Nothing new moves; beside the hub stand Korea’s output and employment.",
 "file": "p3.js",
-"line": 126
+"line": 116
 },
 {
 "key": "Stage {0} adds one thing per field course: other countries, banks, the land and air, property, history. Two cells never move: networks and computation.",
 "file": "p3.js",
-"line": 127
+"line": 117
 },
 {
 "key": "The fifth relation adds no cell. The same structure returns in another: the household’s tangency of Figure {0} prices assets in the capital market of Figure {1}.",
 "file": "p3.js",
-"line": 131
+"line": 121
 },
 {
 "key": "Every model makes assumptions about the agents in its moving cells. Eight run through Part {0}.",
 "file": "p3.js",
-"line": 140
+"line": 130
 },
 {
 "key": "Six of them Part {0} relaxes itself: price-taking at strategy, full information at contracts, complete markets in the land and air, equilibrium at once in the labor market, consistent choice among households, and data that speak for themselves at measurement.",
 "file": "p3.js",
-"line": 141
+"line": 131
 },
 {
 "key": "Two it never relaxes head-on. The first is the representative agent: one firm stands for all firms, one household for all households. Drawn that way, every firm on the wheel is the same size.",
 "file": "p3.js",
-"line": 142
+"line": 132
 },
 {
 "key": "Relaxed, the firms are as unequal as Zipf’s law says, a few giants and a long tail, and households differ in income too.",
 "file": "p3.js",
-"line": 143
+"line": 133
 },
 {
 "key": "The second is no connections: any household buys from any firm, through the market.",
 "file": "p3.js",
-"line": 144
+"line": 134
 },
 {
 "key": "Relaxed, each household is tied to a few firms, firms to their suppliers, banks to one another, and what moves travels along the ties.",
 "file": "p3.js",
-"line": 145
+"line": 135
 },
 {
 "key": "Unlike and connected: the two assumptions Part {0} keeps to the end are what Part {1} relaxes, in the two cells it builds.",
 "file": "p3.js",
-"line": 146
+"line": 136
 },
 {
 "key": "A unit of the textbook is one model, in nine fields. This is Figure {0}’s.",
 "file": "p3.js",
-"line": 159
+"line": 149
 },
 {
 "key": "Its question: where does a demand curve come from? Demand lives in the goods market.",
 "file": "p3.js",
-"line": 160
+"line": 150
 },
 {
 "key": "It moves one cell: the households, each choosing the best bundle it can afford. Everything else is left out.",
 "file": "p3.js",
-"line": 161
+"line": 151
 },
 {
 "key": "It holds two values: the price of x, one per budget line, which is its hidden axis, and income.",
 "file": "p3.js",
-"line": 162
+"line": 152
 },
 {
 "key": "Its one change opens a cell that Figure {0} held. There, demand was given; here, it is a list of choices.",
 "file": "p3.js",
-"line": 163
+"line": 153
 },
 {
 "key": "It assumes one household stands for all. Drawn as it assumes, every household is the same size.",
 "file": "p3.js",
-"line": 164
+"line": 154
 },
 {
 "key": "Its method is optimization, at the hub: the best affordable bundle, a tangency.",
 "file": "p3.js",
-"line": 165
+"line": 155
 },
 {
 "key": "Its evidence: in Hunan, poor households given cheaper rice bought less of it, a demand curve that slopes up (Jensen and Miller {0}).",
 "file": "p3.js",
-"line": 166
+"line": 156
 },
 {
 "key": "It builds on Figure {0} and returns in Figure {1}’s demand surface and in labor supply.",
 "file": "p3.js",
-"line": 167
+"line": 157
 },
 {
 "key": "The route of Part {0} is one way through the wheel.",
 "file": "p3.js",
-"line": 182
+"line": 172
 },
 {
 "key": "By a question, why are some countries rich: from all markets at once to capital, institutions, history and the largest firms.",
 "file": "p3.js",
-"line": 183
+"line": 173
 },
 {
 "key": "By an agent, the household: its choice, its saving, its consumption in macroeconomics, its portfolio, and its departures from the model.",
 "file": "p3.js",
-"line": 184
+"line": 174
 },
 {
 "key": "By a market, labor: the firm’s demand for it, unemployment, who sets the wage, how to measure it, and jobs found through ties.",
 "file": "p3.js",
-"line": 185
+"line": 175
 },
 {
 "key": "By an assumption, no connections: from Figure {0}, where anyone trades with anyone, through networks to the banks a loss travels between.",
 "file": "p3.js",
-"line": 186
+"line": 176
 },
 {
 "key": "By a method, optimization: one tool at the hub, used by the household, the firm, the central bank and the investor.",
 "file": "p3.js",
-"line": 187
+"line": 177
 },
 {
 "key": "Five ways through, and the route of Part {0} among them. The archive keeps the classical sequence as one way in, not the only one.",
 "file": "p3.js",
+"line": 178
+},
+{
+"key": "The eight works on the wheel. A cell moves once a work has had the reader write it down and work with it. Before the first work, nothing moves.",
+"file": "p3.js",
+"line": 184
+},
+{
+"key": "Work {0} reads Principles beside Economic reasoning, from one market to the open economy. Most cells of the rings move, as Part {1}’s sequence and the foreign cell set them. The hub stays empty: Principles uses its methods without deriving them.",
+"file": "p3.js",
+"line": 185
+},
+{
+"key": "Work {0} solves. Mathematics I, probability, and the first parts of micro and game theory bring optimization and strategy to the hub, and hidden information to contracts.",
+"file": "p3.js",
+"line": 186
+},
+{
+"key": "Work {0} proves. Mathematics II, and the chapters of micro and game theory that wait for it, bring equilibrium: when it exists, is unique and stable, and where each fails.",
+"file": "p3.js",
+"line": 187
+},
+{
+"key": "Work {0} builds the whole economy in Intermediate macroeconomics: time, money, the state, other countries, and the money banks create. Banks start to move.",
+"file": "p3.js",
 "line": 188
+},
+{
+"key": "Work {0} measures, on a line of its own after Work {1}: the rest of Probability and statistics, and Econometrics. Measurement joins the hub.",
+"file": "p3.js",
+"line": 189
+},
+{
+"key": "Work {0} computes, once Works {1}, {2} and {3} are done. Computation and networks, the two cells Part {4} never moves, start to move: solved in code, households and firms can be unlike, and tied to one another.",
+"file": "p3.js",
+"line": 190
+},
+{
+"key": "Work {0} reviews and answers, in three or more of the eleven field books. Each adds one thing to the core. History joins the hub, and property and regulation join the institutions.",
+"file": "p3.js",
+"line": 191
+},
+{
+"key": "Work {0} asks again what economics has known and how, and ends in a first paper. By then every cell of the wheel has moved in some work.",
+"file": "p3.js",
+"line": 192
 },
 {
 "key": "Section",
 "file": "p3.js",
-"line": 195
+"line": 206
 },
 {
 "key": "A new archive",
 "file": "p3.js",
-"line": 195
+"line": 206
 },
 {
 "key": "The units of Parts {0} and {1}",
 "file": "p3.js",
-"line": 33
+"line": 23
 },
 {
 "key": "Unit",
 "file": "p3.js",
-"line": 33
+"line": 23
 },
 {
 "key": "Moves",
 "file": "p3.js",
-"line": 33
+"line": 23
 },
 {
 "key": "Holds",
 "file": "p3.js",
-"line": 33
+"line": 23
 },
 {
 "key": "Its one change",
 "file": "p3.js",
-"line": 33
+"line": 23
 },
 {
 "key": "Method",
 "file": "p3.js",
-"line": 33
+"line": 23
 },
 {
 "key": "Part {0},",
 "file": "p3.js",
-"line": 38
+"line": 28
 },
 {
 "key": "the start",
 "file": "p3.js",
+"line": 28
+},
+{
+"key": "{0} / span {1}",
+"file": "p3-works.js",
+"line": 23
+},
+{
+"key": "<li><a href=\"#b-{0}\"><span class=\"bk\">{1}<span class=\"vh\">{2}</span></span><span class=\"ticks\" aria-hidden=\"true\">{3}</span></a></li>",
+"file": "p3-works.js",
+"line": 29
+},
+{
+"key": "waits for nothing",
+"file": "p3-works.js",
+"line": 31
+},
+{
+"key": "<h{0}><span class=\"wno\">{1}</span>{2}</h{3}><p class=\"hands\">{4}</p><p class=\"after\">{5}</p><ul class=\"reads\">{6}</ul>",
+"file": "p3-works.js",
+"line": 32
+},
+{
+"key": "<defs><marker id=\"wire-head\" viewBox=\"{0} {1} {2} {3}\" refX=\"{4}\" refY=\"{5}\" markerWidth=\"{6}\" markerHeight=\"{7}\" orient=\"auto\"><path d=\"M{8} L{9} L{10} z\"/></marker></defs>",
+"file": "p3-works.js",
+"line": 55
+},
+{
+"key": "The core: ten books",
+"file": "p3-works.js",
+"line": 87
+},
+{
+"key": "The field books: three or more of eleven",
+"file": "p3-works.js",
+"line": 87
+},
+{
+"key": "The last book",
+"file": "p3-works.js",
+"line": 87
+},
+{
+"key": "<a href=\"{0}?c={1}\">{2}</a>",
+"file": "p3-works.js",
+"line": 90
+},
+{
+"key": "<a href=\"#w-{0}\">{1}</a>",
+"file": "p3-works.js",
+"line": 91
+},
+{
+"key": "<a href=\"#w-{0}\">{1}</a> ({2})",
+"file": "p3-works.js",
+"line": 91
+},
+{
+"key": "<tr id=\"b-{0}\"><td><span class=\"bno\">{1}</span>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>",
+"file": "p3-works.js",
+"line": 92
+},
+{
+"key": "<tbody><tr class=\"grp\"><th colspan=\"{0}\">{1}</th></tr>{2}</tbody>",
+"file": "p3-works.js",
+"line": 94
+},
+{
+"key": "<div class=\"partslist books\"><table><caption>{0}</caption>{1}{2}</table></div>",
+"file": "p3-works.js",
+"line": 96
+},
+{
+"key": "Book",
+"file": "p3-works.js",
+"line": 86
+},
+{
+"key": "The question it answers",
+"file": "p3-works.js",
+"line": 86
+},
+{
+"key": "Chapters",
+"file": "p3-works.js",
+"line": 86
+},
+{
+"key": "Read in work",
+"file": "p3-works.js",
+"line": 86
+},
+{
+"key": "At the hub, or the one thing it changes",
+"file": "p3-works.js",
+"line": 86
+},
+{
+"key": "The twenty-two books",
+"file": "p3-works.js",
+"line": 96
+},
+{
+"key": "Read",
+"file": "books.js",
+"line": 12
+},
+{
+"key": "unit cards and conditional paragraphs",
+"file": "books.js",
+"line": 12
+},
+{
+"key": "Solve",
+"file": "books.js",
+"line": 14
+},
+{
+"key": "a one-page derivation",
+"file": "books.js",
+"line": 14
+},
+{
+"key": "Prove",
+"file": "books.js",
+"line": 15
+},
+{
+"key": "a one-page proof, and where it fails",
+"file": "books.js",
+"line": 15
+},
+{
+"key": "Build the economy",
+"file": "books.js",
+"line": 16
+},
+{
+"key": "a reversal review",
+"file": "books.js",
+"line": 16
+},
+{
+"key": "Measure",
+"file": "books.js",
+"line": 17
+},
+{
+"key": "a refutation plan, and its estimate",
+"file": "books.js",
+"line": 17
+},
+{
+"key": "Compute",
+"file": "books.js",
+"line": 18
+},
+{
+"key": "a computation report",
+"file": "books.js",
+"line": 18
+},
+{
+"key": "Review and answer",
+"file": "books.js",
+"line": 19
+},
+{
+"key": "a referee report and a policy memo, in three fields or more",
+"file": "books.js",
+"line": 19
+},
+{
+"key": "Question and write",
+"file": "books.js",
+"line": 20
+},
+{
+"key": "a first paper",
+"file": "books.js",
+"line": 20
+},
+{
+"key": "Economic reasoning: models, conditions, evidence",
+"file": "books.js",
+"line": 27
+},
+{
+"key": "Reasoning",
+"file": "books.js",
+"line": 27
+},
+{
+"key": "What logical form does an economic claim have, and when can it be called wrong?",
+"file": "books.js",
+"line": 28
+},
+{
+"key": "method: the conditional, holding fixed, refutation, causes, writing",
+"file": "books.js",
+"line": 29
+},
+{
+"key": "Principles of economics",
+"file": "books.js",
+"line": 30
+},
+{
+"key": "Principles",
+"file": "books.js",
+"line": 30
+},
+{
+"key": "From one market to the whole economy, what does economics hold fixed, and what does it solve?",
+"file": "books.js",
+"line": 31
+},
+{
+"key": "the start: the core in seed form",
+"file": "books.js",
+"line": 32
+},
+{
+"key": "Mathematics for economists I: optimization and comparative statics",
+"file": "books.js",
+"line": 33
+},
+{
+"key": "Math I",
+"file": "books.js",
+"line": 33
+},
+{
+"key": "How is a chooser’s problem solved, and how does the answer move when a held value moves?",
+"file": "books.js",
+"line": 34
+},
+{
+"key": "Mathematics for economists II: analysis and topology",
+"file": "books.js",
+"line": 36
+},
+{
+"key": "Math II",
+"file": "books.js",
+"line": 36
+},
+{
+"key": "When does an equilibrium exist, and when is it unique, continuous and stable?",
+"file": "books.js",
+"line": 37
+},
+{
+"key": "Equilibrium: existence, and the grounds of comparative statics",
+"file": "books.js",
 "line": 38
+},
+{
+"key": "Probability and statistics",
+"file": "books.js",
+"line": 39
+},
+{
+"key": "Prob. & stats",
+"file": "books.js",
+"line": 39
+},
+{
+"key": "How are an uncertain world and its data put into numbers?",
+"file": "books.js",
+"line": 40
+},
+{
+"key": "the grounds of Measurement",
+"file": "books.js",
+"line": 41
+},
+{
+"key": "Intermediate microeconomics",
+"file": "books.js",
+"line": 42
+},
+{
+"key": "Micro",
+"file": "books.js",
+"line": 42
+},
+{
+"key": "When households and firms choose, where does the market settle, and does it get there?",
+"file": "books.js",
+"line": 43
+},
+{
+"key": "opens households and firms, then all markets at once",
+"file": "books.js",
+"line": 44
+},
+{
+"key": "Game theory",
+"file": "books.js",
+"line": 45
+},
+{
+"key": "Games",
+"file": "books.js",
+"line": 45
+},
+{
+"key": "What does one choose when another’s choice changes one’s own result?",
+"file": "books.js",
+"line": 46
+},
+{
+"key": "Strategy; relaxes price-taking (A{0})",
+"file": "books.js",
+"line": 47
+},
+{
+"key": "Intermediate macroeconomics",
+"file": "books.js",
+"line": 48
+},
+{
+"key": "Macro",
+"file": "books.js",
+"line": 48
+},
+{
+"key": "What sets the output, prices and employment of a whole open economy?",
+"file": "books.js",
+"line": 49
+},
+{
+"key": "adds time, money, the state, other countries, and the money banks create",
+"file": "books.js",
+"line": 50
+},
+{
+"key": "Econometrics",
+"file": "books.js",
+"line": 51
+},
+{
+"key": "Metrics",
+"file": "books.js",
+"line": 51
+},
+{
+"key": "How are relations read from data?",
+"file": "books.js",
+"line": 52
+},
+{
+"key": "Measurement; relaxes that data show relationships (A{0})",
+"file": "books.js",
+"line": 53
+},
+{
+"key": "Computational economics",
+"file": "books.js",
+"line": 54
+},
+{
+"key": "Computing",
+"file": "books.js",
+"line": 54
+},
+{
+"key": "How is a model solved that cannot be solved on the page?",
+"file": "books.js",
+"line": 55
+},
+{
+"key": "Computation: unlike and connected agents, solved by simulation",
+"file": "books.js",
+"line": 56
+},
+{
+"key": "International trade",
+"file": "books.js",
+"line": 57
+},
+{
+"key": "Trade",
+"file": "books.js",
+"line": 57
+},
+{
+"key": "Who gains from trade between countries, and who loses inside each of them?",
+"file": "books.js",
+"line": 58
+},
+{
+"key": "adds a second country’s goods and factors",
+"file": "books.js",
+"line": 59
+},
+{
+"key": "International finance",
+"file": "books.js",
+"line": 60
+},
+{
+"key": "Intl finance",
+"file": "books.js",
+"line": 60
+},
+{
+"key": "What sets exchange rates, current accounts and the room for national policy?",
+"file": "books.js",
+"line": 61
+},
+{
+"key": "the exchange rate as an asset price, crises, and the network of capital flows",
+"file": "books.js",
+"line": 62
+},
+{
+"key": "Money and banking",
+"file": "books.js",
+"line": 63
+},
+{
+"key": "Money & banking",
+"file": "books.js",
+"line": 63
+},
+{
+"key": "When do banks fail, how does a crisis spread, and what stops it?",
+"file": "books.js",
+"line": 64
+},
+{
+"key": "adds the risks of balance sheets, and their regulation",
+"file": "books.js",
+"line": 65
+},
+{
+"key": "Public economics",
+"file": "books.js",
+"line": 66
+},
+{
+"key": "Public",
+"file": "books.js",
+"line": 66
+},
+{
+"key": "When should the state tax, spend or insure, and how much does it cost?",
+"file": "books.js",
+"line": 67
+},
+{
+"key": "adds the state as one who chooses",
+"file": "books.js",
+"line": 68
+},
+{
+"key": "Labor economics",
+"file": "books.js",
+"line": 69
+},
+{
+"key": "How are wages and employment set, and why do they differ so much between people?",
+"file": "books.js",
+"line": 70
+},
+{
+"key": "adds people as what is traded, and the friction of matching",
+"file": "books.js",
+"line": 71
+},
+{
+"key": "Industrial organization",
+"file": "books.js",
+"line": 72
+},
+{
+"key": "How do firms compete when markets are not perfectly competitive?",
+"file": "books.js",
+"line": 73
+},
+{
+"key": "adds strategy between firms",
+"file": "books.js",
+"line": 74
+},
+{
+"key": "Development economics",
+"file": "books.js",
+"line": 75
+},
+{
+"key": "Development",
+"file": "books.js",
+"line": 75
+},
+{
+"key": "Why do some countries stay poor, and what helps the poor in them?",
+"file": "books.js",
+"line": 76
+},
+{
+"key": "relaxes complete markets (A{0})",
+"file": "books.js",
+"line": 77
+},
+{
+"key": "Environmental economics",
+"file": "books.js",
+"line": 78
+},
+{
+"key": "Environment",
+"file": "books.js",
+"line": 78
+},
+{
+"key": "How should a society price damage to the environment, including damage far in the future?",
+"file": "books.js",
+"line": 79
+},
+{
+"key": "adds a very long horizon",
+"file": "books.js",
+"line": 80
+},
+{
+"key": "Financial economics",
+"file": "books.js",
+"line": 81
+},
+{
+"key": "Finance",
+"file": "books.js",
+"line": 81
+},
+{
+"key": "What is a risky future payment worth today?",
+"file": "books.js",
+"line": 82
+},
+{
+"key": "adds the price of risk",
+"file": "books.js",
+"line": 83
+},
+{
+"key": "Behavioral economics",
+"file": "books.js",
+"line": 84
+},
+{
+"key": "Behavioral",
+"file": "books.js",
+"line": 84
+},
+{
+"key": "What changes when people are not the agents of the core courses?",
+"file": "books.js",
+"line": 85
+},
+{
+"key": "relaxes consistent choice (A{0})",
+"file": "books.js",
+"line": 86
+},
+{
+"key": "Economic history",
+"file": "books.js",
+"line": 87
+},
+{
+"key": "Econ history",
+"file": "books.js",
+"line": 87
+},
+{
+"key": "How did the world economy become what it is?",
+"file": "books.js",
+"line": 88
+},
+{
+"key": "History: time outside the model",
+"file": "books.js",
+"line": 89
+},
+{
+"key": "Methods and philosophy of economics",
+"file": "books.js",
+"line": 90
+},
+{
+"key": "Philosophy",
+"file": "books.js",
+"line": 90
+},
+{
+"key": "What has economics known, how did it come to know it, and where was it wrong?",
+"file": "books.js",
+"line": 91
+},
+{
+"key": "method, read a second time, and the first paper",
+"file": "books.js",
+"line": 92
 },
 {
 "key": "Opens",
@@ -2575,11 +3210,6 @@
 "line": 53
 },
 {
-"key": "Trade",
-"file": "ontology.js",
-"line": 54
-},
-{
 "key": "the relative price",
 "file": "ontology.js",
 "line": 54
@@ -2883,6 +3513,11 @@
 "key": "what the wheel produces",
 "file": "ontology.js",
 "line": 103
+},
+{
+"key": "The field courses",
+"file": "ontology.js",
+"line": 104
 },
 {
 "key": "one thing per course",
@@ -3661,6 +4296,26 @@
 },
 {
 "key": "{0} weeks",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "The core",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "after {0}",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "after {0}, {1}",
+"file": "(built at run time)",
+"line": 0
+},
+{
+"key": "after {0}, {1}, {2}",
 "file": "(built at run time)",
 "line": 0
 }

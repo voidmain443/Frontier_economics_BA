@@ -756,8 +756,8 @@ body.site-page .desk { padding-bottom: 96px; }
 .transition { margin-top: 2.6em; padding-top: 0.9em; border-top: 1px solid var(--rule); color: var(--ink-2); font-style: italic; }
 
 .note.later b, .builds b { font: 600 15px var(--draft); color: var(--ink); letter-spacing: 0.01em; margin-right: 0.35em; }
-.note.later a, .builds a, .stage p a, .stage li a { color: var(--cobalt); text-decoration: none; border-bottom: 1px solid rgba(42, 85, 160, 0.35); }
-.note.later a:hover, .builds a:hover, .stage p a:hover { border-bottom-color: var(--cobalt); }
+.note.later a, .builds a, .stage p a, .stage li a, .stage td a { color: var(--cobalt); text-decoration: none; border-bottom: 1px solid rgba(42, 85, 160, 0.35); }
+.note.later a:hover, .builds a:hover, .stage p a:hover, .stage td a:hover { border-bottom-color: var(--cobalt); }
 
 /* figures with two panels */
 .panels.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -894,6 +894,59 @@ details.units td { font-size: 14.5px; }
 .p3 .plot .lb.room, .plot .lb.note.held { paint-order: stroke; stroke: var(--sheet); stroke-width: 4px; stroke-linejoin: round; }
 .plot a.room-door:hover .lb.room, .plot a.room-door:focus .lb.room { fill: var(--cobalt); text-decoration: underline; }
 .p3 .paths { max-width: 760px; }
+
+/* Part 3, Figure 3.12: the eight works, placed by what they wait for, with
+   the arrows drawn between them (p3-works.js); each work's number is a
+   balloon, as an item is numbered on a drawing */
+.works { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 24px; row-gap: 22px; margin: 0 0 0.4em; }
+.work { position: relative; z-index: 1; align-self: start; padding: 7px 9px 9px; border: 1.5px solid var(--ink); background: var(--sheet); }
+.work.mid { align-self: center; }
+.work:target { outline: 2px solid var(--cobalt); outline-offset: 3px; }
+.work h3 { margin: 0; font: 600 17px/1.15 var(--draft); }
+.work .wno { display: inline-grid; place-items: center; width: 21px; height: 21px; margin-right: 6px; border: 1.5px solid var(--ink); border-radius: 50%; font: 600 13px/1 var(--draft); vertical-align: 1px; }
+.work .hands { margin: 4px 0 7px; font: italic 14px/1.3 var(--serif); }
+.work .after { display: none; }
+.reads { margin: 0; padding: 0; list-style: none; }
+#w-7 .reads { column-count: 2; column-gap: 16px; }
+.reads li { break-inside: avoid; }
+.reads a { display: flex; align-items: center; justify-content: space-between; gap: 6px; color: var(--ink); text-decoration: none; font: 500 14px/1.55 var(--draft); }
+.reads a:hover .bk { color: var(--cobalt); text-decoration: underline; }
+.reads a:focus-visible { outline: 2px solid var(--madder); outline-offset: 1px; }
+.ticks { display: flex; flex: none; gap: 1.6px; }
+.ticks i { width: 1.6px; height: 10px; background: var(--ink); }
+.ticks i.off { opacity: 0.2; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.wires { position: absolute; inset: 0; z-index: 0; overflow: visible; pointer-events: none; }
+.wires path { fill: none; stroke: var(--ink); stroke-width: 1.3; }
+.wires marker path { fill: var(--ink); stroke: none; }
+@media (min-width: 761px) {
+  .work { grid-column: var(--c); grid-row: var(--r); }
+}
+@media (max-width: 760px) {
+  .works { grid-template-columns: minmax(0, 1fr); row-gap: 10px; }
+  .wires { display: none; }
+  .work .after { display: block; margin: 0 0 6px; font: 500 13px var(--draft); color: var(--ink-2); }
+}
+/* the twenty-two books, and the tests of each work */
+.books td:first-child { width: 14em; font: 600 15.5px/1.35 var(--serif); text-align: left; }
+.books td:nth-child(2) { font-weight: 400; }
+.books td:nth-child(3) { width: 4em; font: 500 15px var(--draft); text-align: center; }
+.books td:nth-child(4) { width: 9em; font: 500 15px/1.4 var(--draft); }
+.books .bno { margin-right: 0.45em; font: 500 15px var(--draft); color: var(--ink-2); }
+.books tr.grp th { background: rgba(31, 35, 30, 0.05); }
+.books tr:target td { background: rgba(42, 85, 160, 0.08); }
+@media (max-width: 760px) {
+  .books { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .books table { min-width: 720px; }
+}
+details.tests ol { max-width: 760px; margin: 0.8em 0 0; padding-left: 1.6em; }
+details.tests li { margin: 0.9em 0; line-height: 1.5; }
+details.tests li::marker { font: 600 17px var(--draft); }
+details.tests b { font: 600 17px var(--draft); }
+details.tests p { margin: 0.15em 0 0.25em; }
+details.tests ol.three { margin: 0; padding-left: 1.7em; list-style: none; counter-reset: test; }
+details.tests ol.three li { margin: 0.2em 0; counter-increment: test; }
+details.tests ol.three li::before { content: '(' counter(test) ')'; display: inline-block; width: 1.7em; margin-left: -1.7em; font: 500 15px var(--draft); }
 
 /* ---------- the caption of a story told in the folded space ---------- */
 

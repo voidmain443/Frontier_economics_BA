@@ -6,26 +6,16 @@
 
 import { FIGS } from './p3-figs.js';
 import { SPACE_FIGS, SPACE_CONSTRUCTS } from './p3-space.js';
-import { COURSES } from './curriculum.js';
+import { WORKS } from './books.js';
+import { drawWorks, bookIndex } from './p3-works.js';
 import { setupPage } from './page.js';
 import { PLACE_P1, BUILD_P3, placeOfLink, stopIndex } from './wheel.js';
 import { MODELS, MODELS_P2, RELATIONS, STAGES, stateOf, stageState, MEASURED } from './ontology.js';
 import { t, localHref } from './i18n.js';
 
-// the textbooks, with the question each answers
-const host = document.querySelector('#course-index');
-for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
-  const h = document.createElement('h3');
-  h.textContent = t(name);
-  const ul = document.createElement('ul');
-  ul.className = 'course-grid';
-  for (const c of COURSES.filter((x) => x.side === side)) {
-    const li = document.createElement('li');
-    li.innerHTML = `<a href="${localHref('course.html')}?c=${c.id}"><b>${t(c.short)}</b><span>${t(c.name)}</span><i>${t(c.question ?? `${c.weeks.length} weeks`)}</i></a>`;
-    ul.appendChild(li);
-  }
-  host.append(h, ul);
-}
+// the textbooks: the eight works (Figure 3.12) and the twenty-two books
+drawWorks(document.querySelector('#works'));
+bookIndex(document.querySelector('#book-index'));
 
 // every unit of Parts 1 and 2, in four of its nine fields
 const rel = Object.fromEntries(RELATIONS.map((r) => [r.id, r.name]));
@@ -188,8 +178,29 @@ const constructs = {
     { say: 'Five ways through, and the route of Part 1 among them. The archive keeps the classical sequence as one way in, not the only one.' },
   ], [all], true),
 
+  // the eight works, each setting moving the cells its books teach, on top of
+  // the cells of the works before it (books.js)
+  '3.12': told([
+    { say: 'The eight works on the wheel. A cell moves once a work has had the reader write it down and work with it. Before the first work, nothing moves.' },
+    { say: 'Work 1 reads Principles beside Economic reasoning, from one market to the open economy. Most cells of the rings move, as Part 1’s sequence and the foreign cell set them. The hub stays empty: Principles uses its methods without deriving them.', dur: 1.4 },
+    { say: 'Work 2 solves. Mathematics I, probability, and the first parts of micro and game theory bring optimization and strategy to the hub, and hidden information to contracts.' },
+    { say: 'Work 3 proves. Mathematics II, and the chapters of micro and game theory that wait for it, bring equilibrium: when it exists, is unique and stable, and where each fails.' },
+    { say: 'Work 4 builds the whole economy in Intermediate macroeconomics: time, money, the state, other countries, and the money banks create. Banks start to move.' },
+    { say: 'Work 5 measures, on a line of its own after Work 2: the rest of Probability and statistics, and Econometrics. Measurement joins the hub.' },
+    { say: 'Work 6 computes, once Works 3, 4 and 5 are done. Computation and networks, the two cells Part 1 never moves, start to move: solved in code, households and firms can be unlike, and tied to one another.', dur: 1.6 },
+    { say: 'Work 7 reviews and answers, in three or more of the eleven field books. Each adds one thing to the core. History joins the hub, and property and regulation join the institutions.', dur: 1.4 },
+    { say: 'Work 8 asks again what economics has known and how, and ends in a first paper. By then every cell of the wheel has moved in some work.' },
+  ], [
+    cells([]),
+    ...WORKS.map((w, i) => {
+      const upto = WORKS.slice(0, i + 1).flatMap((x) => x.adds);
+      const coded = w.no >= 6 ? { unlike: true, tied: true } : {};
+      return cells(upto, [], { lit: w.adds, ...coded });
+    }),
+  ], true),
+
   // section 5: what holding still requires (p3-space.js)
   ...SPACE_CONSTRUCTS,
 };
 
-await setupPage({ figs: { ...FIGS, ...SPACE_FIGS }, constructs, files: ['us-phillips'], world: {}, archive: { figure: '3.1', end: '#a8', near: ['#a5', '#a6'], routes }, build: BUILD_P3, stages: 9, unit: 'Section', part: 'Part 3', name: 'A new archive' });
+await setupPage({ figs: { ...FIGS, ...SPACE_FIGS }, constructs, files: ['us-phillips'], world: {}, archive: { figure: '3.1', end: '#a9', near: ['#a5', '#a6'], routes }, build: BUILD_P3, stages: 9, unit: 'Section', part: 'Part 3', name: 'A new archive' });

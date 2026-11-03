@@ -16,15 +16,16 @@ import re
 ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prototype", "traditional")
 GROUPS = {
     "p1": ["p1-figs.js", "p1-fold.js", "market.js", "geo3d.js"],
-    "p23": ["p2-figs.js", "p2-fold.js", "p2-models.js", "p3-figs.js", "p3-space.js", "p3.js", "ontology.js", "wheel.js",
-            "course.js", "page.js", "fold.js", "ladder.js"],
+    "p23": ["p2-figs.js", "p2-fold.js", "p2-models.js", "p3-figs.js", "p3-space.js", "p3.js", "p3-works.js", "books.js", "ontology.js",
+            "wheel.js", "course.js", "page.js", "fold.js", "ladder.js"],
     "curriculum": ["curriculum.js"],
 }
 # strings built at run time from parts, whose keys the scripts cannot show
 MANUAL = {"p23": ["Stage {0} of {1}", "Section {0} of {1}", "Course {0} of {1}", "Part {0}", "Part {0}, Figure {1}",
                   "Figure {0}", "{0} weeks", "The core", "The field courses", "Cross-Section", "held", "Held fixed",
                   "{0}<i> min</i>", "The fold needs WebGPU with HTML-in-Canvas.", "The flat page is complete on its own.",
-                  "Could not fold the page:", "The fold could not start:", "Lay the page flat", "Fold the page into space"]}
+                  "Could not fold the page:", "The fold could not start:", "Lay the page flat", "Fold the page into space",
+                  "after {0}", "after {0}, {1}", "after {0}, {1}, {2}"]}
 
 CLASS = set("""k thin thick dash faint md cb oc ol note halo small room step stop col held out tick lb rm it guide ln area
 dot ring arr axis xl tag madder cobalt olive ochre chalk white violet door route cno two panels wide dense sub

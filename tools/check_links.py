@@ -42,8 +42,18 @@ def courses():
     return out
 
 
+def drawn():
+    """Ids that p3-works.js draws into Part 3 from books.js: a row for each book
+    (b-...) and a box for each work (w-...)."""
+    text = read("books.js")
+    return {"b-" + b for b in re.findall(r"\bid: '([\w-]+)', side:", text)} | {"w-" + w for w in re.findall(r"\{ no: (\d+), name:", text)}
+
+
 def main():
     ids = {p: set(ID.findall(read(p))) for p in PAGES}
+    for p in PAGES:
+        if p.startswith("archive."):
+            ids[p] |= drawn()
     known = courses()
     files = sorted(f for f in os.listdir(ROOT) if f.endswith((".html", ".js")))
     bad = []

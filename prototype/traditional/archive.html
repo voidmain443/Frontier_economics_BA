@@ -285,8 +285,35 @@
 
   <section class="stage" id="a9" data-no="9" data-name="The textbooks">
     <h2><span class="no">9</span>The textbooks</h2>
-    <div class="adds"><p><span class="rev" aria-label="Revision 9">9</span>Every door, and what to read next.</p></div>
-    <div id="course-index"></div>
+    <div class="adds"><p><span class="rev" aria-label="Revision 9">9</span>Twenty-two books, read in eight works.</p></div>
+    <p>The archive needs textbooks written to it. In them each chapter is a unit: one model, with what it holds fixed, the mathematics its conclusion rests on, the data that could refute it, and a page for the reader to write. The plan has twenty-two books and 301 chapters. Ten make the core and eleven are field books. The last one, read after the field books, asks again what economics has known and how. Five of the twenty-two are new to the archive: Economic reasoning, a second volume of mathematics, Probability and statistics, Computational economics, and Methods and philosophy.</p>
+    <p>The books are not ordered by semester or year. They are ordered by eight works, each a thing the reader has to do and hand in. A work is done when what it hands in passes three tests on a case the books do not contain, however long that takes, and a book or a work may take more than a year. Reading can run ahead of the order. Only what is handed in follows it.</p>
+
+    <figure class="fig wide works-fig" data-fig="3.12" id="f3-12">
+      <div class="works" id="works"></div>
+      <figcaption><span class="fig-no">Figure 3.12</span>The eight works. An arrow runs from a work to a work that waits for it. Under each work are the books it reads, one tick a chapter; a pale tick is a chapter of the same book read in another work. Folded, each work sets moving the cells of the wheel its books teach.</figcaption>
+      <p class="held"><span>Held fixed</span>time. A work’s place shows what it waits for, not when it starts or how long it takes.</p>
+    </figure>
+    <p>After Work 2 the order splits in two. One line proves, then builds the whole economy (Works 3 and 4); the other measures (Work 5). Neither waits for the other. Computing waits for both lines, and the field books wait for the economy and for measurement. Three books are read across two works, because some of their chapters wait for chapters of another book. Intermediate microeconomics reads general equilibrium only after the fixed-point theorem of Mathematics II; Game theory reads the choice among several equilibria only after their stability.</p>
+    <p>The order can be checked against the chapters themselves. Of the 960 places where one chapter refers to another, 28 point to a work not yet done. Ten of them state a theorem that a later work proves, which is why Work 2 asks the reader to check a theorem’s assumptions and not to prove it. The other eighteen hand a case where a result fails on to a later book. A first draft had one more: the first chapter of Mathematics II used the definition of convergence in probability from chapter 5 of Probability and statistics, which sat in Work 5. Chapters 5 and 6 of that book were moved to Work 2.</p>
+
+    <details class="units tests">
+      <summary>What each work hands in, and its three tests</summary>
+      <ol>
+        <li><b>Read</b><p>Three claims: a sentence about the economy from a newspaper, one from the Bank of Korea’s Monetary Policy Report, and a figure of Part 2. For each, a unit card and a conditional paragraph.</p><ol class="three"><li>Every held cell has its value.</li><li>The deciding condition is a property of the model: the sign of a slope, or which of two sizes is larger.</li><li>The refutation condition names a data series that can be measured and the direction it would move.</li></ol></li>
+        <li><b>Solve</b><p>A choice problem, such as a household choosing its hours on the rising and falling ranges of Korea’s earned income tax credit. A one-page derivation of the optimum and its comparative statics.</p><ol class="three"><li>The condition that fixes the sign is an inequality.</li><li>The assumptions of each theorem used are checked for this problem; the proofs wait for Work 3.</li><li>One conditional paragraph from Work 1 is rewritten as this inequality.</li></ol></li>
+        <li><b>Prove</b><p>An economy, such as two households trading two goods. A one-page proof that its equilibrium exists and is locally unique, and whether price adjustment reaches it.</p><ol class="three"><li>Every assumption of every theorem used is written out and checked for this economy.</li><li>One assumption is dropped, and a case is built on the same economy where the conclusion fails.</li><li>One sentence of the form “other things equal” that the proof allows is written, with the range of the hidden axis over which it holds.</li></ol></li>
+        <li><b>Build the economy</b><p>A conclusion about the whole economy, such as “a trillion won of government spending raises output by more than a trillion won”. A two-page reversal review.</p><ol class="three"><li>Every cell and assumption that would reverse the conclusion or change its size is listed: other countries, the money banks create, unlike households, expectations.</li><li>For each, the threshold at which the conclusion changes is derived from the model.</li><li>For Korea, the measured value and its source say which side of the threshold the economy is on. <a href="#f3-9">Figure 3.9</a> does this for the spending multiplier.</li></ol></li>
+        <li><b>Measure</b><p>A claim written in Works 1 to 4. A two-page refutation plan, and the estimate.</p><ol class="three"><li>What the data would show if the claim were wrong is written down, with a date, before the estimate; as <a href="#f3-7">Figure 3.7</a> shows, an axis chosen after the test rescues any data.</li><li>A design is set up and passes its checks: balance before assignment, no manipulation near a threshold, no trend before treatment.</li><li>It is estimated on public data, such as ECOS, KOSIS or OpenDART, and someone else gets the same numbers from the same code and data.</li></ol></li>
+        <li><b>Compute</b><p>A model the page cannot solve, such as the distribution of unlike households, the clearing of debts between banks, or a branch of a folded equilibrium surface like <a href="#f3-6">Figure 3.6</a>’s. Code and a three-page report.</p><ol class="three"><li>In a special case with a closed-form solution, the code returns that solution.</li><li>The conclusion survives changes of grid, tolerance and starting values; where it does not, that becomes a condition of the conclusion.</li><li>Someone else gets the same numbers and figures from the code alone.</li></ol></li>
+        <li><b>Review and answer</b><p>In each field, a real report and a policy question. A three-page referee report and a two-page policy memo.</p><ol class="three"><li>The referee report finds what the report holds fixed, with its values, and names one assumption that could reverse its conclusion.</li><li>The memo states its recommendation as a conditional, and says what it recommends when the condition fails.</li><li>Both say how the one thing the field adds to the core changes the conclusion. Work 8 waits for three fields or more.</li></ol></li>
+        <li><b>Question and write</b><p>A model the reader chooses. A first paper of about fifteen pages, referee reports on two other readers’ papers, and replies to the reports received. The tests are set by the last chapter of Methods and philosophy: the paper must find what is held fixed, rewrite its claim as a conditional, give the mathematics it rests on, state what would refute it with a design to test that, and say all of it in writing.</p></li>
+      </ol>
+    </details>
+
+    <p>Each of the six methods at the hub now has a book that teaches it: optimization in Mathematics I, equilibrium in Mathematics II, strategy in Game theory, measurement in Probability and statistics and Econometrics, computation in Computational economics, and history in Economic history. Computation is one of the two cells Part 1 never moves, and no course taught it. Seventeen of the books are the archive’s existing courses, and their names open the course pages, which describe each course as it is taught now. The five new books have no page yet.</p>
+    <div id="book-index"></div>
+    <p class="aha">The order of the books is the order of what a reader must be able to do, and it can be checked chapter by chapter.</p>
     <p class="transition">The archive is a proposal, not a finished machine. Its cells are the courses that already exist, read through the models they teach. What it adds is the wheel that shows what each model moves, holds and leaves out, and how the models connect.</p>
   </section>
 </article>
@@ -298,7 +325,7 @@
   <div class="tb-row tb-counts">
     <div><span class="tb-k">Cells</span><span class="tb-v">24</span></div>
     <div><span class="tb-k">Models</span><span class="tb-v">38</span></div>
-    <div><span class="tb-k">Courses</span><span class="tb-v">17</span></div>
+    <div><span class="tb-k">Books</span><span class="tb-v">22</span></div>
   </div>
   <button class="tb-unfold" id="unfold" type="button" aria-pressed="false" hidden>Fold the page into space</button>
   <p class="tb-status" id="tb-status" role="status"></p>
