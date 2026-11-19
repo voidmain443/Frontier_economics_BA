@@ -1,0 +1,3587 @@
+{
+ "source": "docs/textbook-plan.md (tools/split_plan.py)",
+ "site": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#a9",
+ "works": [
+  {
+   "no": 1,
+   "name": {
+    "en": "Read",
+    "ko": "읽기"
+   },
+   "hands": {
+    "en": "unit cards and conditional paragraphs",
+    "ko": "단원 카드와 조건문 단락"
+   },
+   "waits": []
+  },
+  {
+   "no": 2,
+   "name": {
+    "en": "Solve",
+    "ko": "풀이"
+   },
+   "hands": {
+    "en": "a one-page derivation",
+    "ko": "한 쪽 분량의 유도"
+   },
+   "waits": [
+    1
+   ]
+  },
+  {
+   "no": 3,
+   "name": {
+    "en": "Prove",
+    "ko": "증명"
+   },
+   "hands": {
+    "en": "a one-page proof, and where it fails",
+    "ko": "한 쪽 분량의 증명과 증명이 성립하지 않는 경우"
+   },
+   "waits": [
+    2
+   ]
+  },
+  {
+   "no": 4,
+   "name": {
+    "en": "Build the economy",
+    "ko": "경제 전체의 모형화"
+   },
+   "hands": {
+    "en": "a reversal review",
+    "ko": "뒤집힘 검토"
+   },
+   "waits": [
+    3
+   ]
+  },
+  {
+   "no": 5,
+   "name": {
+    "en": "Measure",
+    "ko": "측정"
+   },
+   "hands": {
+    "en": "a refutation plan, and its estimate",
+    "ko": "반증 계획서와 추정 결과"
+   },
+   "waits": [
+    2
+   ]
+  },
+  {
+   "no": 6,
+   "name": {
+    "en": "Compute",
+    "ko": "계산"
+   },
+   "hands": {
+    "en": "a computation report",
+    "ko": "계산 보고서"
+   },
+   "waits": [
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "no": 7,
+   "name": {
+    "en": "Review and answer",
+    "ko": "심사와 답변"
+   },
+   "hands": {
+    "en": "a referee report and a policy memo, in three fields or more",
+    "ko": "각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모"
+   },
+   "waits": [
+    4,
+    5
+   ]
+  },
+  {
+   "no": 8,
+   "name": {
+    "en": "Question and write",
+    "ko": "질문과 논문"
+   },
+   "hands": {
+    "en": "a first paper",
+    "ko": "첫 논문"
+   },
+   "waits": [
+    6,
+    7
+   ]
+  }
+ ],
+ "books": [
+  {
+   "no": 1,
+   "id": "reasoning",
+   "side": "core",
+   "file": "docs/books/01-reasoning.md",
+   "name": {
+    "en": "Economic reasoning: models, conditions, evidence",
+    "ko": "경제학적 사고: 모형, 조건, 증거"
+   },
+   "question": {
+    "en": "What logical form does an economic claim have, and when can it be called wrong?",
+    "ko": "경제학의 주장은 어떤 논리 형식으로 이루어지며, 어떤 경우에 틀렸다고 할 수 있는가?"
+   },
+   "takes": {
+    "en": "method: the conditional, holding fixed, refutation, causes, writing",
+    "ko": "방법론: 조건문, 고정, 반증, 인과, 글쓰기"
+   },
+   "works": {
+    "1": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": null,
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-reasoning",
+   "shelf": {
+    "std": [
+     {
+      "t": "McCloskey, Economical Writing, 3rd ed., University of Chicago Press 2019",
+      "u": null
+     },
+     {
+      "t": "Thomson, A Guide for the Young Economist, 2nd ed., MIT Press 2011",
+      "u": null
+     },
+     {
+      "t": "Boumans and Davis, Economic Methodology: Understanding Economics as a Science, 2nd ed., Palgrave 2016",
+      "u": null
+     },
+     {
+      "t": "Reiss, Philosophy of Economics: A Contemporary Introduction, Routledge 2013",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Rubinstein, Economic Fables, Open Book Publishers 2012",
+      "u": "https://books.openedition.org/obp/310"
+     },
+     {
+      "t": "Osborne and Rubinstein, Models in Microeconomic Theory, 2nd ed., Open Book Publishers 2023",
+      "u": "https://www.economics.utoronto.ca/osborne/mmt/"
+     },
+     {
+      "t": "Huntington-Klein, The Effect, Chapman & Hall/CRC (1st ed. free online; 2nd ed. 2025 in print)",
+      "u": "https://theeffectbook.net/"
+     }
+    ],
+    "ko": []
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "주장과 조건문",
+     "question": "\"태풍이 지나간 뒤 배추값이 올랐다. 그러므로 공급이 줄었다\"는 추론은 타당한가?"
+    },
+    {
+     "no": 2,
+     "title": "고정한다: 마셜의 우리와 숨은 축",
+     "question": "'다른 조건이 같다면'은 무엇을 어떤 값에 고정한다는 말인가?"
+    },
+    {
+     "no": 3,
+     "title": "모형은 세계다: 법칙적 기계와 나이트의 바퀴",
+     "question": "그림 한 장짜리 모형은 무엇에 대해 참인가?"
+    },
+    {
+     "no": 4,
+     "title": "양손잡이: 두 경로와 결정적 조건",
+     "question": "최저임금을 올리면 고용은 줄어드는가?"
+    },
+    {
+     "no": 5,
+     "title": "반증 가능성: 포퍼, 뒤엠–콰인, 라카토슈",
+     "question": "1970년대에 실업과 인플레이션이 함께 오르자, 반증된 것은 무엇이었는가?"
+    },
+    {
+     "no": 6,
+     "title": "가정의 현실성: 프리드먼과 새뮤얼슨, 로드릭의 결정적 가정",
+     "question": "거래자가 아무 계산 없이 호가를 내도 시장은 효율적인가?"
+    },
+    {
+     "no": 7,
+     "title": "경향의 법칙: 밀과 하우스먼",
+     "question": "쌀값이 올랐는데 쌀을 더 샀다면 수요의 법칙은 틀렸는가?"
+    },
+    {
+     "no": 8,
+     "title": "인과: 상관에서 설계로(하벨모, 무작위 실험)",
+     "question": "학급이 작으면 성적이 오르는가?"
+    },
+    {
+     "no": 9,
+     "title": "불변성: 루카스 비판",
+     "question": "과거 자료에서 측정한 실업과 인플레이션의 관계로 새 통화정책 규칙을 평가할 수 있는가?"
+    },
+    {
+     "no": 10,
+     "title": "모형을 고른다: 케인스가 해러드에게 쓴 편지와 로드릭",
+     "question": "2022년 한국의 물가 상승에는 어느 모형이 맞는가?"
+    },
+    {
+     "no": 11,
+     "title": "실증과 규범: 흄, 로빈스, 애로",
+     "question": "'이 세금은 효율적이다'와 '이 세금은 공정하다'는 어떻게 다른 문장인가?"
+    },
+    {
+     "no": 12,
+     "title": "쓰기: 맥클로스키와 조건문 단락",
+     "question": "한 쪽의 경제학 논증은 어떤 순서로 쓰는가?"
+    }
+   ]
+  },
+  {
+   "no": 2,
+   "id": "principles",
+   "side": "core",
+   "file": "docs/books/02-principles.md",
+   "name": {
+    "en": "Principles of economics",
+    "ko": "경제원론"
+   },
+   "question": {
+    "en": "From one market to the whole economy, what does economics hold fixed, and what does it solve?",
+    "ko": "시장 하나에서 경제 전체에 이르기까지, 경제학은 무엇을 고정하고 무엇을 푸는가?"
+   },
+   "takes": {
+    "en": "the start: the core in seed form",
+    "ko": "출발점: 핵심의 기본 형태"
+   },
+   "works": {
+    "1": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=principles",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-principles",
+   "shelf": {
+    "std": [
+     {
+      "t": "Mankiw, Principles of Economics, 11th ed., Cengage 2026",
+      "u": null
+     },
+     {
+      "t": "Krugman and Wells, Economics, 7th ed., Macmillan 2024",
+      "u": null
+     },
+     {
+      "t": "Acemoglu, Laibson and List, Economics, 3rd ed., Pearson 2024",
+      "u": null
+     },
+     {
+      "t": "Stevenson and Wolfers, Principles of Economics, 3rd ed., Macmillan 2026",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "CORE, The Economy 2.0: Microeconomics, Macroeconomics",
+      "u": "https://books.core-econ.org/the-economy/"
+     },
+     {
+      "t": "OpenStax, Principles of Economics, 3rd ed. (CC BY)",
+      "u": "https://openstax.org/books/principles-economics-3e/pages/preface"
+     }
+    ],
+    "ko": [
+     {
+      "t": "이준구·이창용, 『경제학원론』 7판, 문우사 2025",
+      "u": null
+     },
+     {
+      "t": "김대식·노영기·안국신·이종철·박성용, 『현대 경제학원론』 8판, 박영사 2025",
+      "u": null
+     },
+     {
+      "t": "조순·정운찬·전성인·김영식, 『경제학원론』 12판, 율곡출판사 2024",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "수요와 공급",
+     "question": "배추값은 왜 그 자리에 정해지는가?"
+    },
+    {
+     "no": 2,
+     "title": "균형은 있는가: 조건문과 중간값 정리",
+     "question": "시장 하나에서 모든 구매자와 판매자를 만족시키는 가격은 언제 있고, 가격은 그곳으로 가는가?"
+    },
+    {
+     "no": 3,
+     "title": "탄력성과 시간",
+     "question": "휘발유값이 오르면 소비는 얼마나, 언제 줄어드는가?"
+    },
+    {
+     "no": 4,
+     "title": "세금과 잉여",
+     "question": "세금은 누가 내고, 무엇을 없애는가?"
+    },
+    {
+     "no": 5,
+     "title": "가계의 선택과 수요",
+     "question": "수요곡선은 어디서 오는가?"
+    },
+    {
+     "no": 6,
+     "title": "기업과 비용",
+     "question": "기업은 주어진 가격에서 얼마를 생산하는가?"
+    },
+    {
+     "no": 7,
+     "title": "진입과 장기 균형",
+     "question": "이윤이 나는 산업에서는 왜 이윤이 사라지는가?"
+    },
+    {
+     "no": 8,
+     "title": "독점과 소수의 기업",
+     "question": "판매자가 적으면 가격은 얼마나 높은가?"
+    },
+    {
+     "no": 9,
+     "title": "교환과 특화",
+     "question": "모든 것을 더 잘하는 사람과도 왜 거래하는가?"
+    },
+    {
+     "no": 10,
+     "title": "공공재와 외부효과",
+     "question": "모두가 함께 쓰는 것은 왜 너무 적게 만들어지고, 그 양은 누가 정하는가?"
+    },
+    {
+     "no": 11,
+     "title": "경제 전체를 측정한다",
+     "question": "한 나라의 산출과 물가는 어떻게 측정하는가?"
+    },
+    {
+     "no": 12,
+     "title": "자본의 축적과 성장",
+     "question": "왜 어떤 나라는 부유한가?"
+    },
+    {
+     "no": 13,
+     "title": "소득과 지출: 절약의 역설",
+     "question": "모든 가계가 저축을 늘리면 경제 전체의 저축은 느는가?"
+    },
+    {
+     "no": 14,
+     "title": "화폐, 금리, 총수요",
+     "question": "정부가 지출을 늘리면 산출은 얼마 느는가, 그리고 그 답은 중앙은행이 무엇을 고정하느냐에 달렸는가?"
+    },
+    {
+     "no": 15,
+     "title": "개방경제: 환율과 순수출",
+     "question": "원/달러 환율이 오르면 한국의 물가와 산출은 어떻게 움직이고, 정부 지출의 효과는 왜 달라지는가?"
+    },
+    {
+     "no": 16,
+     "title": "인플레이션, 실업, 기대",
+     "question": "정책은 인플레이션을 실업과 바꿀 수 있는가?"
+    },
+    {
+     "no": 17,
+     "title": "데이터에 관계가 드러나는가",
+     "question": "가격과 수량의 점들은 수요곡선인가?"
+    }
+   ]
+  },
+  {
+   "no": 3,
+   "id": "math1",
+   "side": "core",
+   "file": "docs/books/03-math1.md",
+   "name": {
+    "en": "Mathematics for economists I: optimization and comparative statics",
+    "ko": "경제수학 I: 최적화와 비교정학"
+   },
+   "question": {
+    "en": "How is a chooser’s problem solved, and how does the answer move when a held value moves?",
+    "ko": "선택하는 주체의 문제는 어떻게 풀며, 고정한 값이 변하면 해는 어떻게 변하는가?"
+   },
+   "takes": {
+    "en": "Optimization",
+    "ko": "최적화"
+   },
+   "works": {
+    "2": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=math",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-math1",
+   "shelf": {
+    "std": [
+     {
+      "t": "Sydsæter, Hammond, Strøm and Carvajal, Essential Mathematics for Economic Analysis, 6th ed., Pearson 2021",
+      "u": null
+     },
+     {
+      "t": "Chiang and Wainwright, Fundamental Methods of Mathematical Economics, 4th ed., McGraw-Hill 2005",
+      "u": null
+     },
+     {
+      "t": "Hoy, Livernois, McKenna, Rees and Stengos, Mathematics for Economics, 4th ed., MIT Press 2022",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Boyd and Vandenberghe, Convex Optimization, Cambridge University Press 2004",
+      "u": "https://web.stanford.edu/~boyd/cvxbook/"
+     },
+     {
+      "t": "QuantEcon, A First Course in Quantitative Economics with Python",
+      "u": "https://intro.quantecon.org/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "김성현, 『경제수학 강의』, 한빛아카데미 2023",
+      "u": null
+     },
+     {
+      "t": "강창민, 『경제수학』, 박영사 2024",
+      "u": null
+     },
+     {
+      "t": "김완진, 『경제수학』 2판, 홍문사 2019",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "모형의 언어: 집합, 함수, 조건문",
+     "question": "수요와 공급의 교점은 어떤 식의 해이고, '소득이 오르면 가격이 오른다'는 어떤 명제인가?"
+    },
+    {
+     "no": 2,
+     "title": "한 변수의 미분",
+     "question": "비용이나 세금이 1원 오르면 구매자가 내는 가격은 얼마 오르는가?"
+    },
+    {
+     "no": 3,
+     "title": "적분과 2차 근사: 잉여와 자중손실",
+     "question": "세금이 없애는 잉여는 얼마이고, 왜 세율의 제곱처럼 느는가?"
+    },
+    {
+     "no": 4,
+     "title": "행렬과 연립방정식",
+     "question": "한 시장에 매긴 세금은 옆 시장의 가격을 얼마나 움직이는가?"
+    },
+    {
+     "no": 5,
+     "title": "산업연관: 역행렬과 급수",
+     "question": "한 산업에 대한 수요 1원은 경제 전체에서 얼마의 산출을 끌어내는가?"
+    },
+    {
+     "no": 6,
+     "title": "여러 변수의 함수: 생산함수",
+     "question": "노동을 한 시간 더 쓰면 산출은 얼마 느는가?"
+    },
+    {
+     "no": 7,
+     "title": "제약 없는 최적화: 이윤",
+     "question": "기업은 자본과 노동을 얼마씩 쓰는가?"
+    },
+    {
+     "no": 8,
+     "title": "제약 있는 최적화: 라그랑주 승수",
+     "question": "살 수 있는 묶음 가운데 가장 좋은 것은 어디에 있는가?"
+    },
+    {
+     "no": 9,
+     "title": "부등식 제약: 쿤–터커 조건과 꺾인 예산선",
+     "question": "세금 제도가 예산선을 꺾으면 사람들은 어디에 모이는가?"
+    },
+    {
+     "no": 10,
+     "title": "비교정학: 음함수 정리",
+     "question": "이자율이 오르면 가계는 저축을 늘리는가?"
+    },
+    {
+     "no": 11,
+     "title": "포락선 정리: 모든 크기의 공장",
+     "question": "장기 비용곡선은 왜 모든 단기 곡선의 아래에 놓이는가?"
+    },
+    {
+     "no": 12,
+     "title": "균형 방정식계의 비교정학: IS–LM의 야코비 행렬",
+     "question": "정부 지출 1원은 산출을 얼마 늘리고, 그 답은 무엇을 고정했느냐에 어떻게 달려 있는가?"
+    },
+    {
+     "no": 13,
+     "title": "차분방정식: 솔로 모형과 첫 계산",
+     "question": "저축률이 오르면 1인당 자본은 어디로, 어떤 경로로 가는가?"
+    },
+    {
+     "no": 14,
+     "title": "미분방정식과 수렴 속도",
+     "question": "가난한 지역은 부유한 지역을 얼마나 빨리 따라잡는가?"
+    }
+   ]
+  },
+  {
+   "no": 4,
+   "id": "math2",
+   "side": "core",
+   "file": "docs/books/04-math2.md",
+   "name": {
+    "en": "Mathematics for economists II: analysis and topology",
+    "ko": "경제수학 II: 해석과 위상"
+   },
+   "question": {
+    "en": "When does an equilibrium exist, and when is it unique, continuous and stable?",
+    "ko": "균형은 어떤 조건에서 존재하며, 어떤 조건에서 유일하고 연속적이며 안정적인가?"
+   },
+   "takes": {
+    "en": "Equilibrium: existence, and the grounds of comparative statics",
+    "ko": "균형: 존재와 비교정학의 근거"
+   },
+   "works": {
+    "3": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ]
+   },
+   "course_page": null,
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-math2",
+   "shelf": {
+    "std": [
+     {
+      "t": "Sundaram, A First Course in Optimization Theory, Cambridge University Press 1996",
+      "u": null
+     },
+     {
+      "t": "Ok, Real Analysis with Economic Applications, Princeton University Press 2007",
+      "u": null
+     },
+     {
+      "t": "Border, Fixed Point Theorems with Applications to Economics and Game Theory, Cambridge University Press 1985",
+      "u": null
+     },
+     {
+      "t": "Mas-Colell, Whinston and Green, Microeconomic Theory, Oxford University Press 1995, ch. 17",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Sargent and Stachurski, Dynamic Programming, vol. I, Cambridge University Press 2025",
+      "u": "https://dp.quantecon.org/"
+     },
+     {
+      "t": "Sargent and Stachurski, Economic Networks, Cambridge University Press",
+      "u": "https://networks.quantecon.org/"
+     },
+     {
+      "t": "Stachurski, Economic Dynamics: Theory and Computation, 2nd ed.",
+      "u": "https://johnstachurski.net/edtc"
+     }
+    ],
+    "ko": []
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "거리와 수렴",
+     "question": "거래 가격이 균형으로 '좁혀 든다'는 말은 무슨 뜻인가?"
+    },
+    {
+     "no": 2,
+     "title": "열린 집합, 닫힌 집합, 콤팩트 집합",
+     "question": "살 수 있는 묶음의 집합은 언제 '가장 좋은 묶음'을 담을 수 있는가?"
+    },
+    {
+     "no": 3,
+     "title": "연속성과 바이어슈트라스 정리",
+     "question": "가장 좋은 묶음은 언제 있으며, 그것이 있다는 주장은 자료로 반증할 수 있는가?"
+    },
+    {
+     "no": 4,
+     "title": "선택의 연속성: 대응과 베르주의 최댓값 정리",
+     "question": "가격이 조금 바뀌면 선택도 조금만 바뀌는가?"
+    },
+    {
+     "no": 5,
+     "title": "고정점 정리 I: 브라우어 정리와 에지워스 상자의 균형",
+     "question": "에지워스 상자의 균형은 왜 있으며, 있다는 것은 그곳에 이른다는 뜻인가?"
+    },
+    {
+     "no": 6,
+     "title": "고정점 정리 II: 가쿠타니 정리와 내시 균형",
+     "question": "상대의 산출에 반응하는 두 기업의 균형은 언제 있는가?"
+    },
+    {
+     "no": 7,
+     "title": "생산이 있는 경제의 존재와 볼록성",
+     "question": "수확이 일정하거나 체증하는 기업이 있어도 경쟁 균형은 있는가?"
+    },
+    {
+     "no": 8,
+     "title": "분리 초평면 정리와 후생경제학 제2정리",
+     "question": "계약곡선 위의 어느 배분이든 가격과 정액 이전으로 이룰 수 있는가?"
+    },
+    {
+     "no": 9,
+     "title": "음함수 정리의 증명과 두 시장의 비교정학",
+     "question": "소득이 오르면 균형은 E에서 E′로 매끄럽게 가는가, 그리고 옆 시장을 거치면 부호가 바뀌는가?"
+    },
+    {
+     "no": 10,
+     "title": "정칙 경제와 국소 유일성",
+     "question": "균형이 여럿이어도 비교정학은 의미를 가지는가?"
+    },
+    {
+     "no": 11,
+     "title": "균형 곡면: 숨은 축 위의 다양체와 접힌 곳",
+     "question": "예금 보장을 조금 바꾸었는데 왜 경제가 다른 균형으로 뛰는가?"
+    },
+    {
+     "no": 12,
+     "title": "안정성: 타토느망, 랴푸노프 함수, 대응 원리",
+     "question": "균형이 있는데도 가격이 그곳에 이르지 않을 수 있는가?"
+    },
+    {
+     "no": 13,
+     "title": "소넨샤인–만텔–드브뢰 정리와 대표 주체",
+     "question": "개인이 모두 합리적이면 시장 전체의 수요에 대해 무엇을 말할 수 있는가?"
+    },
+    {
+     "no": 14,
+     "title": "축약 사상 정리와 동적 계획법",
+     "question": "끝없이 이어지는 저축 계획의 가치는 왜 하나로 정해지는가?"
+    },
+    {
+     "no": 15,
+     "title": "페론–프로베니우스 정리와 호킨스–사이먼 조건",
+     "question": "한 부문의 최종수요 1원은 언제 모든 부문에서 음이 아닌 산출을 끌어내는가?"
+    },
+    {
+     "no": 16,
+     "title": "단조 사상과 타르스키 고정점",
+     "question": "은행들이 서로 빚질 때 누가 얼마를 갚는지는 왜 정해지는가?"
+    }
+   ]
+  },
+  {
+   "no": 5,
+   "id": "probability",
+   "side": "core",
+   "file": "docs/books/05-probability.md",
+   "name": {
+    "en": "Probability and statistics",
+    "ko": "확률과 통계"
+   },
+   "question": {
+    "en": "How are an uncertain world and its data put into numbers?",
+    "ko": "불확실한 세계와 그 자료는 어떻게 수량화하는가?"
+   },
+   "takes": {
+    "en": "the grounds of Measurement",
+    "ko": "측정의 근거"
+   },
+   "works": {
+    "2": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "5": [
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ]
+   },
+   "course_page": null,
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-probability",
+   "shelf": {
+    "std": [
+     {
+      "t": "Hansen, Probability and Statistics for Economists, Princeton University Press 2022 (data and code free)",
+      "u": null
+     },
+     {
+      "t": "DeGroot and Schervish, Probability and Statistics, 4th ed., Addison-Wesley",
+      "u": null
+     },
+     {
+      "t": "Casella and Berger, Statistical Inference, 2nd ed., Duxbury 2002",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Seeing Theory, Brown University",
+      "u": "https://seeing-theory.brown.edu/"
+     },
+     {
+      "t": "James, Witten, Hastie and Tibshirani, An Introduction to Statistical Learning (R 2021, Python 2023)",
+      "u": "https://www.statlearning.com/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "류근관, 『통계학』 3판, 법문사 2013",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "확률 공간: 상태의 목록",
+     "question": "'비가 올 확률 30%'는 무엇을 말하며, 틀렸다고 말할 수 있는가?"
+    },
+    {
+     "no": 2,
+     "title": "베이즈 갱신과 정보 폭포",
+     "question": "앞사람들의 선택을 본 사람은 언제 자기 정보를 버리는가?"
+    },
+    {
+     "no": 3,
+     "title": "확률 변수, 기댓값, 분산",
+     "question": "상관이 낮은 두 자산을 섞으면 위험은 얼마나 줄어드는가?"
+    },
+    {
+     "no": 4,
+     "title": "조건부 기대: 숨은 품질과 합리적 기대",
+     "question": "가격만 본 구매자는 차의 품질을 얼마로 예상하는가?"
+    },
+    {
+     "no": 5,
+     "title": "큰 수의 법칙",
+     "question": "예금자 100명 가운데 일찍 돈이 필요한 사람은 언제 '4분의 1'인가?"
+    },
+    {
+     "no": 6,
+     "title": "중심극한정리와 분산의 논리",
+     "question": "같은 크기의 기업 N개가 독립인 충격을 받으면 총산출은 얼마나 흔들리는가?"
+    },
+    {
+     "no": 7,
+     "title": "지브라의 법칙과 로그정규 분포",
+     "question": "기업이 자기 크기에 비례해 자라면 크기의 분포는 어떤 모양이 되는가?"
+    },
+    {
+     "no": 8,
+     "title": "거듭제곱 법칙과 두꺼운 꼬리",
+     "question": "기업과 도시의 크기에는 왜 전형적인 값이 없는가?"
+    },
+    {
+     "no": 9,
+     "title": "평균이 실패할 때: 입자 가설",
+     "question": "가장 큰 기업들의 충격은 왜 평균으로 상쇄되지 않는가?"
+    },
+    {
+     "no": 10,
+     "title": "추정: 꼬리 지수를 표본에서 측정한다",
+     "question": "상장 기업 수백 개로 ζ를 어떻게 추정하고, 그 값은 얼마나 정확한가?"
+    },
+    {
+     "no": 11,
+     "title": "신뢰구간과 검정: 주가는 마구걸음을 걷는가",
+     "question": "오늘의 수익률은 내일의 수익률을 예측하는가?"
+    },
+    {
+     "no": 12,
+     "title": "여러 번 검정하면: 다중 검정과 출판 편의",
+     "question": "수백 개의 '요인'이 주식 수익률을 설명한다면 무엇을 믿는가?"
+    },
+    {
+     "no": 13,
+     "title": "부트스트랩: 공식이 없을 때의 표준오차",
+     "question": "가계 소득 분포의 지니계수는 얼마나 정확한가?"
+    },
+    {
+     "no": 14,
+     "title": "순열 검정: 추첨이 만든 분포",
+     "question": "목표 비율이 ½인 미인 대회와 ⅔인 대회에서 첫 회의 추측은 다른가?"
+    },
+    {
+     "no": 15,
+     "title": "베이즈 추론과 부분 합동: 대표 주체와 다른 단위 사이",
+     "question": "시군구마다의 고용률을 작은 표본으로 어떻게 추정하는가?"
+    },
+    {
+     "no": 16,
+     "title": "마르코프 연쇄와 소득 이동",
+     "question": "오늘 소득 하위 20%인 가계는 10년 뒤 어디에 있는가?"
+    }
+   ]
+  },
+  {
+   "no": 6,
+   "id": "micro",
+   "side": "core",
+   "file": "docs/books/06-micro.md",
+   "name": {
+    "en": "Intermediate microeconomics",
+    "ko": "중급 미시경제학"
+   },
+   "question": {
+    "en": "When households and firms choose, where does the market settle, and does it get there?",
+    "ko": "가계와 기업이 선택할 때 시장은 어디에 자리 잡으며, 실제로 그 자리에 도달하는가?"
+   },
+   "takes": {
+    "en": "opens households and firms, then all markets at once",
+    "ko": "가계와 기업의 선택을 드러내고, 이어 모든 시장의 동시 균형을 드러낸다"
+   },
+   "works": {
+    "2": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     13,
+     14
+    ],
+    "3": [
+     11,
+     12,
+     15,
+     16
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=micro",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-micro",
+   "shelf": {
+    "std": [
+     {
+      "t": "Varian and Melitz, Intermediate Microeconomics, 10th ed., Norton 2024",
+      "u": null
+     },
+     {
+      "t": "Nicholson and Snyder, Microeconomic Theory, 13th ed., Cengage",
+      "u": null
+     },
+     {
+      "t": "Goolsbee, Levitt and Syverson, Microeconomics, 4th ed., Macmillan 2024",
+      "u": null
+     },
+     {
+      "t": "Kreps, Microeconomic Foundations I and II, Princeton University Press 2013, 2023",
+      "u": null
+     },
+     {
+      "t": "Mas-Colell, Whinston and Green, Microeconomic Theory, Oxford University Press 1995",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Osborne and Rubinstein, Models in Microeconomic Theory, 2nd ed., Open Book Publishers 2023",
+      "u": "https://www.economics.utoronto.ca/osborne/mmt/"
+     },
+     {
+      "t": "Bowles and Halliday, Microeconomics: Competition, Conflict, and Coordination, Oxford University Press 2022",
+      "u": "http://simondhalliday.com/microeconomics/bowleshalliday_final_2022.pdf"
+     },
+     {
+      "t": "Bowles and Chen, Allocation, Distribution and Policy, Open Book Publishers",
+      "u": "https://books.openbookpublishers.com/10.11647/obp.0466.pdf"
+     }
+    ],
+    "ko": [
+     {
+      "t": "이준구·최승주, 『미시경제학』 8판, 문우사 2024",
+      "u": null
+     },
+     {
+      "t": "김영산·왕규호, 『미시경제학』 3판, 박영사 2020 (배포 중단)",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "선호와 효용",
+     "question": "고르는 것을 보고 무엇을 알 수 있는가?"
+    },
+    {
+     "no": 2,
+     "title": "예산과 최적 선택",
+     "question": "소비자는 왜 그 묶음을 사는가?"
+    },
+    {
+     "no": 3,
+     "title": "수요: 대체효과와 소득효과",
+     "question": "가격이 오르면 수요는 반드시 줄어드는가?"
+    },
+    {
+     "no": 4,
+     "title": "시장 수요와 후생",
+     "question": "개인의 수요는 어떻게 더해지고, 가격 변화의 손익은 어떻게 측정하는가?"
+    },
+    {
+     "no": 5,
+     "title": "시점 간 선택",
+     "question": "이자율이 오르면 가계는 더 저축하는가?"
+    },
+    {
+     "no": 6,
+     "title": "불확실성과 보험",
+     "question": "위험한 소득을 가진 가계는 보험에 얼마나 드는가?"
+    },
+    {
+     "no": 7,
+     "title": "기술과 비용",
+     "question": "같은 산출을 가장 싸게 만드는 방법은 무엇이고, 임금이 오르면 기업은 자본을 더 쓰는가?"
+    },
+    {
+     "no": 8,
+     "title": "경쟁시장과 진입",
+     "question": "경쟁시장의 장기 가격은 무엇이 정하는가?"
+    },
+    {
+     "no": 9,
+     "title": "독점과 가격 차별",
+     "question": "판매자가 하나면 가격과 산출은 어떻게 달라지는가?"
+    },
+    {
+     "no": 10,
+     "title": "과점: 쿠르노 경쟁과 가격 수용의 극한",
+     "question": "판매자가 늘면 가격은 경쟁 가격에 이르는가?"
+    },
+    {
+     "no": 11,
+     "title": "교환 경제의 일반균형",
+     "question": "모든 시장이 한꺼번에 청산되는 가격은 있는가, 그 가격은 하나인가?"
+    },
+    {
+     "no": 12,
+     "title": "생산과 후생정리",
+     "question": "경쟁균형은 효율적인가, 그리고 효율적인 배분은 모두 시장으로 얻을 수 있는가?"
+    },
+    {
+     "no": 13,
+     "title": "외부효과와 공공재",
+     "question": "시장이 없는 것은 얼마나 만들어지는가?"
+    },
+    {
+     "no": 14,
+     "title": "숨은 정보",
+     "question": "판매자만 품질을 알면 시장은 어떻게 되는가?"
+    },
+    {
+     "no": 15,
+     "title": "누가 가격을 바꾸는가: 조정과 안정성",
+     "question": "모두가 가격을 받아들인다면, 11장의 균형 가격은 누가 어떻게 찾는가?"
+    },
+    {
+     "no": 16,
+     "title": "대표 주체와 소넨샤인–만텔–드브뢰 정리",
+     "question": "개인이 모두 합리적이면 시장 전체도 한 사람처럼 움직이는가?"
+    }
+   ]
+  },
+  {
+   "no": 7,
+   "id": "games",
+   "side": "core",
+   "file": "docs/books/07-games.md",
+   "name": {
+    "en": "Game theory",
+    "ko": "게임이론"
+   },
+   "question": {
+    "en": "What does one choose when another’s choice changes one’s own result?",
+    "ko": "다른 사람의 선택이 자신의 결과를 바꿀 때, 사람은 무엇을 선택하는가?"
+   },
+   "takes": {
+    "en": "Strategy; relaxes price-taking (A3)",
+    "ko": "전략. 가격 수용 가정(A3)을 완화한다"
+   },
+   "works": {
+    "2": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "3": [
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=games",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-games",
+   "shelf": {
+    "std": [
+     {
+      "t": "Osborne, An Introduction to Game Theory, Oxford University Press 2004",
+      "u": null
+     },
+     {
+      "t": "Maschler, Solan and Zamir, Game Theory, 2nd ed., Cambridge University Press 2020",
+      "u": null
+     },
+     {
+      "t": "Tadelis, Game Theory: An Introduction, Princeton University Press 2013",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Osborne and Rubinstein, A Course in Game Theory, MIT Press 1994",
+      "u": "https://www.economics.utoronto.ca/osborne/cgt/"
+     },
+     {
+      "t": "Sargent and Stachurski, Economic Networks, Cambridge University Press",
+      "u": "https://networks.quantecon.org/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "김광호, 『게임이론』 3판, 교문사 2025",
+      "u": null
+     },
+     {
+      "t": "왕규호, 『게임이론』, 박영사 2005",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "게임으로 쓴다: 경기자, 전략, 보수",
+     "question": "내 이윤이 경쟁자의 산출에 달려 있으면 무엇을 적어야 하는가?"
+    },
+    {
+     "no": 2,
+     "title": "내시 균형과 조정",
+     "question": "모두가 상대에게 최적으로 대응하면 결과는 어디에 정해지는가?"
+    },
+    {
+     "no": 3,
+     "title": "혼합 전략과 균형의 존재",
+     "question": "순수 전략 균형이 없는 게임에도 균형은 있는가?"
+    },
+    {
+     "no": 4,
+     "title": "가격 경쟁과 용량",
+     "question": "판매자 둘만으로 가격이 한계비용까지 내려가는가?"
+    },
+    {
+     "no": 5,
+     "title": "공공재 게임과 공유지",
+     "question": "모두가 쓰는 것에 각자 얼마를 내는가?"
+    },
+    {
+     "no": 6,
+     "title": "순서가 있는 게임",
+     "question": "실행되지 않을 위협을 어떻게 가려내는가?"
+    },
+    {
+     "no": 7,
+     "title": "혁신 경쟁: 대체 효과와 선점 효과",
+     "question": "시장지배력은 혁신을 늘리는가, 줄이는가?"
+    },
+    {
+     "no": 8,
+     "title": "흥정",
+     "question": "둘이 함께 만든 몫은 어떻게 나뉘는가?"
+    },
+    {
+     "no": 9,
+     "title": "반복 게임과 담합",
+     "question": "내일의 이윤이 오늘의 이탈을 막는가?"
+    },
+    {
+     "no": 10,
+     "title": "숨은 가치와 경매",
+     "question": "상대가 얼마나 원하는지 모를 때 얼마를 부르는가?"
+    },
+    {
+     "no": 11,
+     "title": "신호",
+     "question": "행동은 말이 전하지 못하는 것을 전하는가?"
+    },
+    {
+     "no": 12,
+     "title": "인출 사태와 균형 선택",
+     "question": "같은 은행, 같은 예금자에게 균형이 둘이면 경제는 어느 쪽에 있는가?"
+    },
+    {
+     "no": 13,
+     "title": "추론 수준",
+     "question": "다른 사람들이 몇 단계까지 생각하는가?"
+    },
+    {
+     "no": 14,
+     "title": "학습과 진화",
+     "question": "경기자는 균형에 어떻게 이르고, 언제 이르지 못하는가?"
+    },
+    {
+     "no": 15,
+     "title": "연결망 위의 게임",
+     "question": "이웃하고만 경기하면 무엇이 달라지는가?"
+    }
+   ]
+  },
+  {
+   "no": 8,
+   "id": "macro",
+   "side": "core",
+   "file": "docs/books/08-macro.md",
+   "name": {
+    "en": "Intermediate macroeconomics",
+    "ko": "중급 거시경제학"
+   },
+   "question": {
+    "en": "What sets the output, prices and employment of a whole open economy?",
+    "ko": "개방경제 전체의 산출, 물가, 고용은 무엇으로 결정되는가?"
+   },
+   "takes": {
+    "en": "adds time, money, the state, other countries, and the money banks create",
+    "ko": "시간, 화폐, 국가, 외국, 은행이 창출하는 화폐를 더한다"
+   },
+   "works": {
+    "4": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=macro",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-macro",
+   "shelf": {
+    "std": [
+     {
+      "t": "Blanchard, Macroeconomics, 9th ed., Pearson 2024",
+      "u": null
+     },
+     {
+      "t": "Mankiw, Macroeconomics, 12th ed., Worth 2025",
+      "u": null
+     },
+     {
+      "t": "Jones, Macroeconomics, 6th ed., Norton 2024",
+      "u": null
+     },
+     {
+      "t": "Romer, Advanced Macroeconomics, 5th ed., McGraw-Hill 2019",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Carlin and Soskice, Macroeconomics: Institutions, Instability, and Inequality, 2nd ed., Oxford University Press 2024",
+      "u": "https://sites.google.com/site/wendycarlinucl/new-book"
+     },
+     {
+      "t": "CORE, The Economy 2.0: Macroeconomics",
+      "u": "https://books.core-econ.org/the-economy/"
+     },
+     {
+      "t": "Garín, Lester and Sims, Intermediate Macroeconomics",
+      "u": "https://sites.nd.edu/esims/textbook/"
+     },
+     {
+      "t": "Campante, Sturzenegger and Velasco, Advanced Macroeconomics: An Easy Guide, LSE Press 2021",
+      "u": "https://eprints.lse.ac.uk/112475/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "이종화·신관호, 『거시경제학』 4판, 박영사 2024",
+      "u": null
+     },
+     {
+      "t": "김경수·박대근, 『거시경제학』 7판, 박영사 2025",
+      "u": null
+     },
+     {
+      "t": "정운찬·김영식·이재원, 『거시경제론』 13판, 율곡출판사 2022",
+      "u": null
+     },
+     {
+      "t": "이종화·김진일, 『동태적 거시경제학: 성장과 변동』 2판, 박영사 2026",
+      "u": null
+     },
+     {
+      "t": "블랑샤르, 『거시경제학』 9판, 한빛아카데미 2026",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "국민계정",
+     "question": "한 해 동안 경제 전체가 만든 것은 얼마이고, 물가는 얼마나 올랐는가?"
+    },
+    {
+     "no": 2,
+     "title": "장기의 폐쇄경제",
+     "question": "가격이 신축적이면 산출, 임금, 이자율은 무엇이 정하는가?"
+    },
+    {
+     "no": 3,
+     "title": "장기의 소규모 개방경제",
+     "question": "나라 밖에서 빌리고 빌려줄 수 있으면 정부 지출은 무엇을 밀어내는가?"
+    },
+    {
+     "no": 4,
+     "title": "솔로 모형",
+     "question": "노동자 1인당 자본은 왜 어느 수준에서 멈추는가?"
+    },
+    {
+     "no": 5,
+     "title": "기술과 내생적 성장",
+     "question": "성장을 지속시키는 것은 무엇이고, 그것은 누가 만드는가?"
+    },
+    {
+     "no": 6,
+     "title": "총자본은 하나의 양인가: 케임브리지 자본 논쟁",
+     "question": "이자율이 내리면 경제는 더 자본 집약적인 기술을 쓰는가?"
+    },
+    {
+     "no": 7,
+     "title": "소비와 저축",
+     "question": "이자율이 오르면 경제 전체의 저축은 늘어나는가?"
+    },
+    {
+     "no": 8,
+     "title": "화폐와 인플레이션",
+     "question": "장기에 물가 수준은 무엇이 정하는가?"
+    },
+    {
+     "no": 9,
+     "title": "실업과 노동시장",
+     "question": "일할 사람과 빈 일자리가 함께 있는데 왜 실업자가 있는가?"
+    },
+    {
+     "no": 10,
+     "title": "단기: IS–LM",
+     "question": "물가가 아직 움직이지 않을 때 산출은 무엇이 정하는가?"
+    },
+    {
+     "no": 11,
+     "title": "먼델–플레밍",
+     "question": "환율이 움직이고 자본이 드나들면 재정정책은 산출을 늘리는가?"
+    },
+    {
+     "no": 12,
+     "title": "은행의 화폐와 금리를 정하는 중앙은행",
+     "question": "통화량은 누가 정하는가?"
+    },
+    {
+     "no": 13,
+     "title": "총수요와 총공급: 수입 원가와 환율",
+     "question": "2022년 한국의 물가는 왜 올랐는가?"
+    },
+    {
+     "no": 14,
+     "title": "기대와 필립스 곡선",
+     "question": "정책은 인플레이션을 주고 실업을 줄일 수 있는가?"
+    },
+    {
+     "no": 15,
+     "title": "통화정책 규칙",
+     "question": "중앙은행은 금리를 어떻게 정해야 하는가?"
+    },
+    {
+     "no": 16,
+     "title": "재정정책과 국가채무",
+     "question": "국가채무는 언제 문제가 되는가?"
+    },
+    {
+     "no": 17,
+     "title": "서로 다른 가계",
+     "question": "1원을 누가 받는지가 총지출을 바꾸는가?"
+    },
+    {
+     "no": 18,
+     "title": "연결된 기업",
+     "question": "한 산업에 대한 충격은 왜 평균으로 상쇄되지 않는가?"
+    }
+   ]
+  },
+  {
+   "no": 9,
+   "id": "metrics",
+   "side": "core",
+   "file": "docs/books/09-metrics.md",
+   "name": {
+    "en": "Econometrics",
+    "ko": "계량경제학"
+   },
+   "question": {
+    "en": "How are relations read from data?",
+    "ko": "자료에서 관계를 어떻게 파악하는가?"
+   },
+   "takes": {
+    "en": "Measurement; relaxes that data show relationships (A8)",
+    "ko": "측정. ‘데이터에 관계가 드러난다’는 가정(A8)을 완화한다"
+   },
+   "works": {
+    "5": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=metrics",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-metrics",
+   "shelf": {
+    "std": [
+     {
+      "t": "Wooldridge, Introductory Econometrics, 8th ed., Cengage 2025",
+      "u": null
+     },
+     {
+      "t": "Stock and Watson, Introduction to Econometrics, 4th ed., Pearson 2019",
+      "u": null
+     },
+     {
+      "t": "Hansen, Econometrics, Princeton University Press 2022",
+      "u": null
+     },
+     {
+      "t": "Angrist and Pischke, Mostly Harmless Econometrics, Princeton University Press 2009",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Huntington-Klein, The Effect, Chapman & Hall/CRC (1st ed. free online; 2nd ed. 2025 in print)",
+      "u": "https://theeffectbook.net/"
+     },
+     {
+      "t": "Cunningham, Causal Inference: The Mixtape (2nd ed., The Remix, Yale University Press 2026)",
+      "u": "https://mixtape.scunning.com/"
+     },
+     {
+      "t": "Chernozhukov, Hansen, Kallus, Spindler and Syrgkanis, Applied Causal Inference Powered by ML and AI",
+      "u": "https://causalml-book.org/"
+     },
+     {
+      "t": "Hyndman and Athanasopoulos, Forecasting: Principles and Practice, 3rd ed.",
+      "u": "https://otexts.com/fpp3/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "한치록, 『계량경제학 강의』 5판, 박영사 2024",
+      "u": null
+     },
+     {
+      "t": "한치록, 『패널데이터강의』 4판, 박영사 2024",
+      "u": null
+     },
+     {
+      "t": "울드리지, 『계량경제학 1』 8판, 박상수·한치록 옮김, 박영사 2026",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "회귀는 조건부 평균이다",
+     "question": "이전소득 1원이 늘면 지출은 얼마나 느는가?"
+    },
+    {
+     "no": 2,
+     "title": "다중회귀: 다른 원인을 고정한다",
+     "question": "소득을 고정하면 쌀값 보조는 쌀 수요를 얼마나 바꾸는가?"
+    },
+    {
+     "no": 3,
+     "title": "표준오차와 추론",
+     "question": "건강보험은 건강을 바꿨다고 말할 수 있는가?"
+    },
+    {
+     "no": 4,
+     "title": "누락 변수와 측정 오차",
+     "question": "교육 1년의 수익은 얼마인가?"
+    },
+    {
+     "no": 5,
+     "title": "동시성",
+     "question": "거래 자료에서 수요곡선을 읽을 수 있는가?"
+    },
+    {
+     "no": 6,
+     "title": "무작위 실험",
+     "question": "가난한 소기업에 자본을 주면 얼마를 버는가?"
+    },
+    {
+     "no": 7,
+     "title": "결론은 설정에 얼마나 민감한가",
+     "question": "같은 자료에서 통제 변수를 바꾸면 결론이 바뀌는가?"
+    },
+    {
+     "no": 8,
+     "title": "도구변수",
+     "question": "무역은 나라의 소득을 올리는가?"
+    },
+    {
+     "no": 9,
+     "title": "이중차분",
+     "question": "최저임금 인상은 고용을 줄였는가?"
+    },
+    {
+     "no": 10,
+     "title": "회귀불연속",
+     "question": "학급이 작아지면 성적이 오르는가?"
+    },
+    {
+     "no": 11,
+     "title": "서로 다른 효과",
+     "question": "평균 처치 효과는 누구의 효과인가?"
+    },
+    {
+     "no": 12,
+     "title": "연결된 단위",
+     "question": "처치가 이웃에게 번지면 무엇을 측정하는가?"
+    },
+    {
+     "no": 13,
+     "title": "시계열과 정책 충격",
+     "question": "기준금리를 올리면 물가와 산출은 언제, 얼마나 움직이는가?"
+    },
+    {
+     "no": 14,
+     "title": "루카스 비판",
+     "question": "정책이 바뀌면 추정한 관계도 바뀌는가?"
+    },
+    {
+     "no": 15,
+     "title": "시뮬레이션으로 측정한다",
+     "question": "손으로 풀리지 않는 모형은 어떻게 자료에 맞추는가?"
+    }
+   ]
+  },
+  {
+   "no": 10,
+   "id": "computation",
+   "side": "core",
+   "file": "docs/books/10-computation.md",
+   "name": {
+    "en": "Computational economics",
+    "ko": "계산경제학"
+   },
+   "question": {
+    "en": "How is a model solved that cannot be solved on the page?",
+    "ko": "지면에서 풀 수 없는 모형은 어떻게 푸는가?"
+   },
+   "takes": {
+    "en": "Computation: unlike and connected agents, solved by simulation",
+    "ko": "계산: 시뮬레이션으로 푸는 서로 다르고 연결된 주체"
+   },
+   "works": {
+    "6": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ]
+   },
+   "course_page": null,
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-computation",
+   "shelf": {
+    "std": [
+     {
+      "t": "Judd, Numerical Methods in Economics, MIT Press 1998",
+      "u": null
+     },
+     {
+      "t": "Miranda and Fackler, Applied Computational Economics and Finance, MIT Press 2002",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "QuantEcon lectures (Python, JAX, Julia)",
+      "u": "https://quantecon.org/lectures/"
+     },
+     {
+      "t": "Sargent and Stachurski, Dynamic Programming, vol. I, Cambridge University Press 2025",
+      "u": "https://dp.quantecon.org/"
+     },
+     {
+      "t": "Axtell and Farmer, “Agent-Based Modeling in Economics and Finance”, Journal of Economic Literature 63(1), 2025",
+      "u": "https://www.aeaweb.org/doi/10.1257/jel.20221319"
+     }
+    ],
+    "ko": []
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "기계 위의 수: 부동소수점과 조건수",
+     "question": "두 곡선이 거의 평행하면 컴퓨터가 계산한 균형은 얼마나 믿을 만한가?"
+    },
+    {
+     "no": 2,
+     "title": "근 찾기: 이분법과 뉴턴법",
+     "question": "세 재화 경제의 균형 가격을 기계는 어떻게 찾는가?"
+    },
+    {
+     "no": 3,
+     "title": "균형 곡면 따라가기: 연속법",
+     "question": "숨은 축을 움직일 때 계산은 균형을 어떻게 따라가며, 접힌 곳에서는 무엇이 일어나는가?"
+    },
+    {
+     "no": 4,
+     "title": "고정점의 계산: 스카프의 알고리즘",
+     "question": "존재 증명은 어떻게 계산의 방법이 되었는가?"
+    },
+    {
+     "no": 5,
+     "title": "상미분방정식과 스카프의 나선",
+     "question": "계산한 가격 경로가 바깥으로 벌어지면, 그것은 경제의 성질인가 계산의 산물인가?"
+    },
+    {
+     "no": 6,
+     "title": "가치함수 반복",
+     "question": "끝없는 저축 계획을 컴퓨터는 어떻게 풀고, 답은 몇 자리까지 맞는가?"
+    },
+    {
+     "no": 7,
+     "title": "몬테카를로: 서로 다른 기업",
+     "question": "기업 400개를 컴퓨터로 키우면 무엇을 알 수 있고, 그 결과는 몇 번 돌려야 믿는가?"
+    },
+    {
+     "no": 8,
+     "title": "서로 다른 가계: 분포의 균형",
+     "question": "보험이 없는 소득 위험 아래에서 부의 분포와 이자율은 어떻게 함께 정해지는가?"
+    },
+    {
+     "no": 9,
+     "title": "행위자 기반 모형: 제로 지능 이중경매",
+     "question": "무작위로 호가하는 거래자들의 시장은 왜 균형 근처에서 거래하는가?"
+    },
+    {
+     "no": 10,
+     "title": "연결망의 계산: 작은 세상과 사슬",
+     "question": "지름길 몇 개는 거리를 얼마나 줄이며, 연결 하나를 끊으면 누가 갈라지는가?"
+    },
+    {
+     "no": 11,
+     "title": "산업연관의 계산: 한국은행 표에서 승수까지",
+     "question": "운송장비 최종수요 1원이 2.36원을 끌어낸다는 수는 어떻게 계산하고, 얼마나 믿을 수 있는가?"
+    },
+    {
+     "no": 12,
+     "title": "은행 사이의 전염: 청산의 계산",
+     "question": "손실 4는 왜 고리에서는 은행 셋을, 완전 연결망에서는 하나를 파산시키는가?"
+    },
+    {
+     "no": 13,
+     "title": "검증과 재현: 시뮬레이션은 언제 논증이 되는가",
+     "question": "이 책의 계산 결과를 다른 사람이 믿으려면 무엇이 있어야 하는가?"
+    }
+   ]
+  },
+  {
+   "no": 11,
+   "id": "trade",
+   "side": "field",
+   "file": "docs/books/11-trade.md",
+   "name": {
+    "en": "International trade",
+    "ko": "국제무역론"
+   },
+   "question": {
+    "en": "Who gains from trade between countries, and who loses inside each of them?",
+    "ko": "나라 사이의 교역에서 누가 이득을 보고, 각 나라 안에서는 누가 손해를 보는가?"
+   },
+   "takes": {
+    "en": "adds a second country’s goods and factors",
+    "ko": "둘째 나라의 재화와 생산요소를 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=trade",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-trade",
+   "shelf": {
+    "std": [
+     {
+      "t": "Krugman, Obstfeld and Melitz, International Economics: Theory and Policy, 12th ed., Pearson 2022",
+      "u": null
+     },
+     {
+      "t": "Feenstra and Taylor, International Trade, 6th ed., Macmillan Learning 2027",
+      "u": null
+     },
+     {
+      "t": "Feenstra, Advanced International Trade: Theory and Evidence, 2nd ed., Princeton University Press 2016",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Suranovic, International Trade: Theory and Policy, Saylor Foundation 2010 (CC BY-NC-SA)",
+      "u": "https://open.umn.edu/opentextbooks/textbooks/international-trade-theory-and-policy"
+     },
+     {
+      "t": "Costinot and Donaldson, International Economics I, MIT OpenCourseWare 14.581, 2013",
+      "u": "https://ocw.mit.edu/courses/14-581-international-economics-i-spring-2013/pages/syllabus/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "크루그먼·옵스펠드·멜리츠, 『국제경제학: 이론과 정책』 12판, 김승년·이연호·최혜린·허정 옮김, 한빛아카데미 2022",
+      "u": null
+     },
+     {
+      "t": "김신행·김태기, 『국제경제론』 8판, 법문사 2024",
+      "u": null
+     },
+     {
+      "t": "권철우·이재민·황석준·황욱, 『국제무역론』, 박영사 2023",
+      "u": null
+     },
+     {
+      "t": "표학길·김영한, 『국제무역과 통상』, 청람 2024",
+      "u": null
+     },
+     {
+      "t": "살바토레, 『살바토레의 국제무역론』 13판, 최낙일 옮김, 시그마프레스 2021",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "비교우위",
+     "question": "모든 재화를 더 적은 노동으로 만드는 나라는 왜 다른 나라와 교역하는가?"
+    },
+    {
+     "no": 2,
+     "title": "특정 요소와 나라 안의 분배",
+     "question": "나라 전체가 무역으로 얻을 때 나라 안에서는 누가 잃는가?"
+    },
+    {
+     "no": 3,
+     "title": "요소 부존과 요소 가격",
+     "question": "노동이 풍부한 나라에서 무역은 누구의 소득을 올리는가?"
+    },
+    {
+     "no": 4,
+     "title": "수확 체증과 다양성",
+     "question": "기술과 부존이 비슷한 두 나라는 왜 같은 종류의 재화를 서로 사고파는가?"
+    },
+    {
+     "no": 5,
+     "title": "중력과 무역 비용",
+     "question": "두 나라 사이의 교역량은 무엇이 정하는가?"
+    },
+    {
+     "no": 6,
+     "title": "관세와 교역조건",
+     "question": "큰 나라는 관세로 이득을 볼 수 있는가?"
+    },
+    {
+     "no": 7,
+     "title": "무역 협정",
+     "question": "두 나라 모두 관세를 낮추면 둘 다 이득인데, 왜 혼자서는 낮추지 않는가?"
+    },
+    {
+     "no": 8,
+     "title": "보호의 정치경제",
+     "question": "나라의 후생을 낮추는 관세가 왜 선택되는가?"
+    },
+    {
+     "no": 9,
+     "title": "이질적 기업",
+     "question": "같은 산업 안에서 왜 일부 기업만 수출하는가?"
+    },
+    {
+     "no": 10,
+     "title": "조정의 시간",
+     "question": "무역 충격을 받은 지역의 노동자는 얼마나 오래 손실을 보는가?"
+    },
+    {
+     "no": 11,
+     "title": "공급망과 부가가치 무역",
+     "question": "한국의 수출 1원 가운데 한국에서 만들어진 것은 얼마인가?"
+    }
+   ]
+  },
+  {
+   "no": 12,
+   "id": "intlfin",
+   "side": "field",
+   "file": "docs/books/12-intlfin.md",
+   "name": {
+    "en": "International finance",
+    "ko": "국제금융론"
+   },
+   "question": {
+    "en": "What sets exchange rates, current accounts and the room for national policy?",
+    "ko": "환율, 경상수지, 국가 정책의 재량 범위는 어떻게 결정되는가?"
+   },
+   "takes": {
+    "en": "the exchange rate as an asset price, crises, and the network of capital flows",
+    "ko": "자산 가격으로서의 환율, 위기, 자본 이동의 연결망"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=intlfin",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-intlfin",
+   "shelf": {
+    "std": [
+     {
+      "t": "Krugman, Obstfeld and Melitz, International Economics: Theory and Policy, 12th ed., Pearson 2022, Parts 3–4",
+      "u": null
+     },
+     {
+      "t": "Feenstra and Taylor, International Macroeconomics, 6th ed., Macmillan Learning 2027",
+      "u": null
+     },
+     {
+      "t": "Uribe and Schmitt-Grohé, Open Economy Macroeconomics, Princeton University Press 2017",
+      "u": null
+     },
+     {
+      "t": "Obstfeld and Rogoff, Foundations of International Macroeconomics, MIT Press 1996",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Schmitt-Grohé, Uribe and Woodford, International Macroeconomics: A Modern Approach, Princeton University Press 2022",
+      "u": null
+     },
+     {
+      "t": "Brunnermeier and Reis, A Crash Course on Crises, Princeton University Press 2023",
+      "u": null
+     },
+     {
+      "t": "Caballero, Economic Crises, MIT OpenCourseWare 14.454, 2026",
+      "u": "https://ocw.mit.edu/courses/14-454-economic-crises-spring-2026/pages/syllabus/"
+     },
+     {
+      "t": "Suranovic, International Finance: Theory and Policy, Saylor Foundation 2010 (CC BY-NC-SA)",
+      "u": "https://open.umn.edu/opentextbooks/textbooks/international-finance-theory-and-policy"
+     }
+    ],
+    "ko": [
+     {
+      "t": "김인준·이영섭, 『국제금융론』 4판, 율곡출판사 2019",
+      "u": null
+     },
+     {
+      "t": "안홍식·최문정, 『국제금융론』 8판, 삼영사 2024",
+      "u": null
+     },
+     {
+      "t": "박준서·이순호·최동현, 『국제금융론: 이론과 위기 및 대응』, 자유아카데미 2024",
+      "u": null
+     },
+     {
+      "t": "국제금융연구회, 『글로벌 시대의 국제금융론』 6판, 시대가치 2022",
+      "u": null
+     },
+     {
+      "t": "한국은행, 『한국의 외환시장과 외환제도』, 한국은행 2023",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "경상수지는 시점 간 선택이다",
+     "question": "한 나라는 왜 외국에서 빌리고, 언제 갚는가?"
+    },
+    {
+     "no": 2,
+     "title": "환율은 자산 가격이다",
+     "question": "미래 환율에 대한 기대가 바뀌면 오늘의 환율은 왜 바로 움직이는가?"
+    },
+    {
+     "no": 3,
+     "title": "장기의 환율과 구매력 평가",
+     "question": "장기에 환율은 어디로 가는가?"
+    },
+    {
+     "no": 4,
+     "title": "오버슈팅",
+     "question": "통화량이 한 번 늘면 환율은 왜 장기 값보다 더 멀리 갔다가 돌아오는가?"
+    },
+    {
+     "no": 5,
+     "title": "환율은 예측되는가",
+     "question": "2~4장의 모형으로 다음 달 환율을 맞힐 수 있는가?"
+    },
+    {
+     "no": 6,
+     "title": "평가절하와 무역수지",
+     "question": "원화가 절하되면 무역수지는 좋아지는가?"
+    },
+    {
+     "no": 7,
+     "title": "1997년: 고정환율과 투기적 공격",
+     "question": "외환보유액이 남아 있는데 환율 제도는 왜 한꺼번에 포기되는가?"
+    },
+    {
+     "no": 8,
+     "title": "트릴레마를 측정한다",
+     "question": "고정환율을 택한 나라는 실제로 자기 통화정책을 잃는가?"
+    },
+    {
+     "no": 9,
+     "title": "통화 동맹",
+     "question": "여러 나라가 한 통화를 쓰면 무엇을 얻고 무엇을 잃는가?"
+    },
+    {
+     "no": 10,
+     "title": "자본 유입의 급정지",
+     "question": "빌려주던 외국이 한꺼번에 자금을 거두면 무슨 일이 일어나는가?"
+    },
+    {
+     "no": 11,
+     "title": "서로 다른 대차대조표",
+     "question": "같은 절하가 왜 어떤 기업에는 이득이고 어떤 기업에는 파산인가?"
+    },
+    {
+     "no": 12,
+     "title": "나라 사이의 전염",
+     "question": "교역이 거의 없는 두 나라에 위기가 왜 함께 오는가?"
+    }
+   ]
+  },
+  {
+   "no": 13,
+   "id": "banking",
+   "side": "field",
+   "file": "docs/books/13-banking.md",
+   "name": {
+    "en": "Money and banking",
+    "ko": "화폐금융론"
+   },
+   "question": {
+    "en": "When do banks fail, how does a crisis spread, and what stops it?",
+    "ko": "은행은 언제 파산하며, 위기는 어떻게 확산되고, 무엇으로 위기를 막는가?"
+   },
+   "takes": {
+    "en": "adds the risks of balance sheets, and their regulation",
+    "ko": "대차대조표의 위험과 위험 규제를 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=banking",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-banking",
+   "shelf": {
+    "std": [
+     {
+      "t": "Mishkin, The Economics of Money, Banking, and Financial Markets, 13th ed., Pearson 2022",
+      "u": null
+     },
+     {
+      "t": "Freixas and Rochet, Microeconomics of Banking, 2nd ed., MIT Press 2008",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "CORE, The Economy 2.0: Macroeconomics, §6.8 “Money creation in a modern economy”, 2025 (CC BY-NC-ND)",
+      "u": "https://books.core-econ.org/the-economy/macroeconomics/06-financial-sector-08-money-creation-in-modern-economy.html"
+     },
+     {
+      "t": "McLeay, Radia and Thomas, “Money creation in the modern economy”, Bank of England Quarterly Bulletin 2014 Q1",
+      "u": "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy"
+     },
+     {
+      "t": "Gorton and Tallman, Fighting Financial Crises: Learning from the Past, University of Chicago Press 2018",
+      "u": null
+     },
+     {
+      "t": "Mehrling, Economics of Money and Banking, Columbia University on Coursera",
+      "u": "https://www.coursera.org/learn/money-banking"
+     }
+    ],
+    "ko": [
+     {
+      "t": "정운찬·김홍범·김진일, 『화폐와 금융시장』 6판, 율곡출판사 2022",
+      "u": null
+     },
+     {
+      "t": "미쉬킨, 『미쉬킨의 화폐와 금융』 12판, 2021",
+      "u": null
+     },
+     {
+      "t": "박기영, 『금융경제학: 파이썬을 활용한 금융시장과 통화정책의 이해』, 시그마프레스 2026",
+      "u": null
+     },
+     {
+      "t": "윤택, 『거시금융경제학』 2판, 박영사 2025",
+      "u": null
+     },
+     {
+      "t": "노상채·김창범, 『화폐금융론』 6판, 박영사 2019",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "은행은 왜 있는가",
+     "question": "저축하는 가계는 왜 기업에 직접 빌려주지 않고 은행에 맡기는가?"
+    },
+    {
+     "no": 2,
+     "title": "대차대조표의 위험",
+     "question": "은행은 언제 지급불능이 되고, 언제 지급불능이 아닌데도 지급하지 못하는가?"
+    },
+    {
+     "no": 3,
+     "title": "금리 위험",
+     "question": "정책금리가 오르면 은행의 가치는 오르는가 내리는가?"
+    },
+    {
+     "no": 4,
+     "title": "인출 사태는 균형이다",
+     "question": "건전한 은행에서도 예금자들은 왜 한꺼번에 예금을 찾는가?"
+    },
+    {
+     "no": 5,
+     "title": "인출 사태는 언제 일어나는가",
+     "question": "같은 기초 여건에서 인출이 일어나기도 하고 일어나지 않기도 한다면, 위기의 확률은 무엇이 정하는가?"
+    },
+    {
+     "no": 6,
+     "title": "예금 보장과 최종 대부자",
+     "question": "예금보험과 중앙은행의 대출은 인출 사태를 어떻게 없애고, 그 비용은 무엇인가?"
+    },
+    {
+     "no": 7,
+     "title": "도매 자금의 인출과 헐값 매각",
+     "question": "예금이 아니라 금융기관끼리의 단기 자금이 빠지면 무슨 일이 일어나는가?"
+    },
+    {
+     "no": 8,
+     "title": "은행 사이의 전염",
+     "question": "한 은행의 손실은 언제 다른 은행의 파산이 되는가?"
+    },
+    {
+     "no": 9,
+     "title": "서로 다른 차주",
+     "question": "같은 기준금리 인상이 왜 어떤 가계의 지출은 크게 줄이고 어떤 가계의 지출은 거의 바꾸지 않는가?"
+    },
+    {
+     "no": 10,
+     "title": "은행 자본 규제",
+     "question": "은행에 자기자본을 더 쌓게 하면 경제는 더 안전해지는가, 대출이 줄어드는가?"
+    },
+    {
+     "no": 11,
+     "title": "위기는 예측되는가",
+     "question": "신용이 빠르게 늘면 위기가 오는가?"
+    },
+    {
+     "no": 12,
+     "title": "거시건전성 규제",
+     "question": "은행 하나하나가 규제를 지켜도 은행 체계 전체는 왜 위험할 수 있는가?"
+    }
+   ]
+  },
+  {
+   "no": 14,
+   "id": "public",
+   "side": "field",
+   "file": "docs/books/14-public.md",
+   "name": {
+    "en": "Public economics",
+    "ko": "공공경제학"
+   },
+   "question": {
+    "en": "When should the state tax, spend or insure, and how much does it cost?",
+    "ko": "국가는 언제 과세하고, 지출하고, 보험을 제공해야 하며, 그 비용은 얼마인가?"
+   },
+   "takes": {
+    "en": "adds the state as one who chooses",
+    "ko": "선택하는 주체로서 국가를 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=public",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-public",
+   "shelf": {
+    "std": [
+     {
+      "t": "Gruber, Public Finance and Public Policy, 8th ed., Macmillan Learning 2026",
+      "u": null
+     },
+     {
+      "t": "Stiglitz and Rosengard, Economics of the Public Sector, 4th ed., Norton 2015",
+      "u": null
+     },
+     {
+      "t": "Hindriks and Myles, Intermediate Public Economics, 2nd ed., MIT Press 2013",
+      "u": null
+     },
+     {
+      "t": "Atkinson and Stiglitz, Lectures on Public Economics, updated ed., Princeton University Press 2015",
+      "u": null
+     },
+     {
+      "t": "Salanié, The Economics of Taxation, 2nd ed., MIT Press 2011",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Saez, Econ 131 Undergraduate Public Economics, UC Berkeley 2025 (slides with LaTeX source)",
+      "u": "https://eml.berkeley.edu/~saez/course131/course131.html"
+     },
+     {
+      "t": "Saez and Shapiro, Econ 230A Graduate Public Economics, UC Berkeley 2026",
+      "u": "https://eml.berkeley.edu/~saez/course/course.html"
+     },
+     {
+      "t": "Chetty and Bruich, Using Big Data to Solve Economic and Social Problems, Harvard 2019",
+      "u": "https://opportunityinsights.org/course/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "이준구·조명환, 『재정학』 7판, 문우사 2026",
+      "u": null
+     },
+     {
+      "t": "나성린·전영섭·홍성훈·허은정, 『공공경제학』 5판, 박영사 2022",
+      "u": null
+     },
+     {
+      "t": "임봉욱, 『공공경제학』 6판, 율곡출판사 2022",
+      "u": null
+     },
+     {
+      "t": "Rosen·Gayer·Civan, 『Rosen의 재정학』 10판, 이영·전영준·이철인·김진영 옮김, 한국맥그로힐 2020",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "후생 정리와 국가의 자리",
+     "question": "시장이 효율적이라면 국가는 무엇을 하는가?"
+    },
+    {
+     "no": 2,
+     "title": "조세 귀착",
+     "question": "세금은 누가 내는가?"
+    },
+    {
+     "no": 3,
+     "title": "세금의 비용",
+     "question": "세율을 두 배로 올리면 비용은 몇 배가 되는가?"
+    },
+    {
+     "no": 4,
+     "title": "공공재",
+     "question": "모두가 쓰는 재화를 시장은 왜 덜 공급하는가?"
+    },
+    {
+     "no": 5,
+     "title": "교정세",
+     "question": "세금이 손실이 아니라 이득이 되는 때는 언제인가?"
+    },
+    {
+     "no": 6,
+     "title": "차선: 왜곡 하나를 없애면 후생이 오르는가",
+     "question": "다른 시장에 세금이 남아 있을 때 한 시장의 세금을 없애면 무엇이 일어나는가?"
+    },
+    {
+     "no": 7,
+     "title": "사회의 선호: 애로의 불가능성",
+     "question": "개인들의 선호를 합쳐 사회의 선호를 만들 수 있는가?"
+    },
+    {
+     "no": 8,
+     "title": "다수결과 중위 투표자",
+     "question": "공공재의 양은 누가 정하는가?"
+    },
+    {
+     "no": 9,
+     "title": "사회보험과 역선택",
+     "question": "국가는 왜 보험 가입을 의무로 하는가?"
+    },
+    {
+     "no": 10,
+     "title": "실업보험의 크기",
+     "question": "실업급여는 얼마가 적당한가?"
+    },
+    {
+     "no": 11,
+     "title": "램지: 무엇에 과세할 것인가",
+     "question": "같은 세수를 가장 적은 손실로 거두려면 어느 재화에 과세하는가?"
+    },
+    {
+     "no": 12,
+     "title": "서로 다른 가계: 세금과 이전은 누구에게서 누구에게 가는가",
+     "question": "대표 가계를 소득 5분위로 나누면 재정의 모습은 어떻게 달라지는가?"
+    },
+    {
+     "no": 13,
+     "title": "멀리스: 소득세의 세율표",
+     "question": "능력을 볼 수 없는 국가는 소득에 얼마의 세율을 매겨야 하는가?"
+    },
+    {
+     "no": 14,
+     "title": "부채와 이전: 누가 받는가가 중요한가",
+     "question": "세금을 미루고 지금 이전을 주면 소비가 늘어나는가?"
+    }
+   ]
+  },
+  {
+   "no": 15,
+   "id": "labor",
+   "side": "field",
+   "file": "docs/books/15-labor.md",
+   "name": {
+    "en": "Labor economics",
+    "ko": "노동경제학"
+   },
+   "question": {
+    "en": "How are wages and employment set, and why do they differ so much between people?",
+    "ko": "임금과 고용은 어떻게 정해지며, 사람마다 왜 그렇게 크게 다른가?"
+   },
+   "takes": {
+    "en": "adds people as what is traded, and the friction of matching",
+    "ko": "거래 대상인 사람과 매칭 마찰을 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=labor",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-labor",
+   "shelf": {
+    "std": [
+     {
+      "t": "Borjas, Labor Economics, 9th ed., McGraw Hill 2024",
+      "u": null
+     },
+     {
+      "t": "Ehrenberg, Smith and Hallock, Modern Labor Economics: Theory and Public Policy, 15th ed., Routledge 2025",
+      "u": null
+     },
+     {
+      "t": "Cahuc, Carcillo and Zylberberg, Labor Economics, 2nd ed., MIT Press 2014",
+      "u": null
+     },
+     {
+      "t": "Pissarides, Equilibrium Unemployment Theory, 2nd ed., MIT Press 2000",
+      "u": null
+     },
+     {
+      "t": "Manning, Monopsony in Motion, Princeton University Press 2003",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Sargent and Stachurski, “Job Search I: The McCall Search Model”, QuantEcon",
+      "u": "https://python.quantecon.org/mccall_model.html"
+     },
+     {
+      "t": "Manning, “Monopsony in Labor Markets: A Review”, ILR Review 74(1), 2021 (accepted version)",
+      "u": "https://researchonline.lse.ac.uk/id/eprint/103482/1/MonopsonyILR_Revision.pdf"
+     },
+     {
+      "t": "Card and Krueger, Myth and Measurement, 20th anniversary ed., Princeton University Press 2016",
+      "u": null
+     }
+    ],
+    "ko": [
+     {
+      "t": "Borjas, 『노동경제학』 9판, 강창희·박철성·송헌재 옮김, 시그마프레스 2025",
+      "u": null
+     },
+     {
+      "t": "송민정·반가운·손정순, 『노동경제학』, 한국방송통신대학교출판문화원 2025",
+      "u": null
+     },
+     {
+      "t": "남성일, 『쉬운 노동경제학』, 박영사 2017",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "노동공급: 여가가 재화다",
+     "question": "임금이 오르면 사람은 더 일하는가?"
+    },
+    {
+     "no": 2,
+     "title": "노동수요: 기업을 반대쪽에서 읽는다",
+     "question": "임금이 오르면 기업은 얼마나 덜 고용하는가?"
+    },
+    {
+     "no": 3,
+     "title": "최저임금과 임금을 정하는 고용주",
+     "question": "최저임금은 일자리를 줄이는가?"
+    },
+    {
+     "no": 4,
+     "title": "인적자본: 교육은 투자다",
+     "question": "1년 더 배우면 임금은 얼마나 오르는가?"
+    },
+    {
+     "no": 5,
+     "title": "신호: 졸업장은 무엇을 알리는가",
+     "question": "교육이 생산성을 올리지 않아도 임금을 올릴 수 있는가?"
+    },
+    {
+     "no": 6,
+     "title": "보상 격차: 위험한 일은 더 받는가",
+     "question": "같은 사람이 일자리에 따라 다른 임금을 받는 이유는 무엇인가?"
+    },
+    {
+     "no": 7,
+     "title": "차별",
+     "question": "생산성이 같은 노동자가 집단에 따라 다른 임금을 받는가?"
+    },
+    {
+     "no": 8,
+     "title": "탐색과 실업의 흐름",
+     "question": "빈 일자리와 실업자가 함께 있는데 왜 실업이 남는가?"
+    },
+    {
+     "no": 9,
+     "title": "임금 협상",
+     "question": "짝지어진 노동자와 고용주는 잉여를 어떻게 나누는가?"
+    },
+    {
+     "no": 10,
+     "title": "일하면서 찾는다: 마찰이 만드는 임금 결정력",
+     "question": "고용주가 많은데도 기업은 왜 임금을 정할 수 있는가?"
+    },
+    {
+     "no": 11,
+     "title": "느린 임금: 명목임금은 왜 내려가지 않는가",
+     "question": "실업이 높은데 왜 임금은 바로 내려가지 않는가?"
+    },
+    {
+     "no": 12,
+     "title": "연결망과 일자리: 약한 연결",
+     "question": "일자리 소식은 누구를 거쳐 오는가?"
+    },
+    {
+     "no": 13,
+     "title": "서로 다른 노동자: 임금 분포",
+     "question": "왜 임금 격차는 커졌는가?"
+    }
+   ]
+  },
+  {
+   "no": 16,
+   "id": "io",
+   "side": "field",
+   "file": "docs/books/16-io.md",
+   "name": {
+    "en": "Industrial organization",
+    "ko": "산업조직론"
+   },
+   "question": {
+    "en": "How do firms compete when markets are not perfectly competitive?",
+    "ko": "시장이 완전경쟁이 아닐 때 기업은 어떻게 경쟁하는가?"
+   },
+   "takes": {
+    "en": "adds strategy between firms",
+    "ko": "기업 사이의 전략을 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=io",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-io",
+   "shelf": {
+    "std": [
+     {
+      "t": "Pepall, Richards and Norman, Industrial Organization: Contemporary Theory and Empirical Applications, 5th ed., Wiley 2014",
+      "u": null
+     },
+     {
+      "t": "Cabral, Introduction to Industrial Organization, 2nd ed., MIT Press 2017",
+      "u": null
+     },
+     {
+      "t": "Belleflamme and Peitz, Industrial Organization: Markets and Strategies, 2nd ed., Cambridge University Press 2015",
+      "u": null
+     },
+     {
+      "t": "Tirole, The Theory of Industrial Organization, MIT Press 1988",
+      "u": null
+     },
+     {
+      "t": "Motta, Competition Policy: Theory and Practice, Cambridge University Press 2004",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Hortaçsu and Joo, Structural Econometric Modeling in Industrial Organization and Quantitative Marketing, Princeton University Press 2023",
+      "u": null
+     },
+     {
+      "t": "Belleflamme and Peitz, The Economics of Platforms: Concepts and Strategy, Cambridge University Press 2021",
+      "u": null
+     },
+     {
+      "t": "Conlon and Gortmaker, PyBLP: documentation and tutorials (Python)",
+      "u": "https://pyblp.readthedocs.io/en/stable/"
+     },
+     {
+      "t": "Aguirregabiria, Collard-Wexler and Ryan, “Dynamic Games in Empirical Industrial Organization”, Handbook of Industrial Organization vol. 4, 2021 (arXiv)",
+      "u": "https://arxiv.org/abs/2109.01725"
+     }
+    ],
+    "ko": [
+     {
+      "t": "정갑영·김동훈·최윤정, 『산업조직론』 7판, 박영사 2025",
+      "u": null
+     },
+     {
+      "t": "박종국, 『산업조직론』 4판, 법문사 2023",
+      "u": null
+     },
+     {
+      "t": "김광두·공명재, 『산업조직론』 2판, 율곡출판사 2021",
+      "u": null
+     },
+     {
+      "t": "Pepall·Richards·Norman, 『산업조직론』 5판, 김대욱 옮김, 텍스트북스 2024",
+      "u": null
+     },
+     {
+      "t": "티롤, 『티롤의 산업조직론』, 추기능 옮김, 추경 2024",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "진입과 시장의 크기",
+     "question": "한 시장에는 기업이 몇 개 들어서는가?"
+    },
+    {
+     "no": 2,
+     "title": "독점의 가격표",
+     "question": "시장지배력을 가진 기업은 왜 가격을 하나만 매기지 않는가?"
+    },
+    {
+     "no": 3,
+     "title": "쿠르노와 베르트랑",
+     "question": "두 판매자는 수량으로 경쟁하는가, 가격으로 경쟁하는가?"
+    },
+    {
+     "no": 4,
+     "title": "제품 차별화",
+     "question": "비슷한 물건을 파는 기업은 서로 얼마나 떨어져 자리 잡는가?"
+    },
+    {
+     "no": 5,
+     "title": "시장지배력을 측정한다",
+     "question": "가격이 한계비용보다 얼마나 높은지 자료로 알 수 있는가?"
+    },
+    {
+     "no": 6,
+     "title": "진입 저지와 설비",
+     "question": "기존 기업은 진입자를 막을 수 있는가?"
+    },
+    {
+     "no": 7,
+     "title": "시장지배력과 혁신",
+     "question": "경쟁은 혁신을 늘리는가, 줄이는가?"
+    },
+    {
+     "no": 8,
+     "title": "담합",
+     "question": "경쟁자들은 왜 함께 가격을 올리고, 그 합의는 언제 끝나는가?"
+    },
+    {
+     "no": 9,
+     "title": "경매",
+     "question": "판매자는 어떤 규칙으로 팔아야 가장 많이 받는가?"
+    },
+    {
+     "no": 10,
+     "title": "합병",
+     "question": "두 경쟁자가 합치면 가격은 얼마나 오르는가?"
+    },
+    {
+     "no": 11,
+     "title": "기업 크기의 분포: 대표 기업은 없다",
+     "question": "가장 큰 몇 기업이 경제 전체를 움직이는가?"
+    },
+    {
+     "no": 12,
+     "title": "연결된 기업: 공급망과 수직 관계",
+     "question": "한 산업의 충격은 공급망을 따라 어디까지 가는가?"
+    },
+    {
+     "no": 13,
+     "title": "플랫폼: 양면 시장",
+     "question": "한쪽에는 무료로 팔고 다른 쪽에는 높은 수수료를 받는 이유는 무엇인가?"
+    }
+   ]
+  },
+  {
+   "no": 17,
+   "id": "development",
+   "side": "field",
+   "file": "docs/books/17-development.md",
+   "name": {
+    "en": "Development economics",
+    "ko": "개발경제학"
+   },
+   "question": {
+    "en": "Why do some countries stay poor, and what helps the poor in them?",
+    "ko": "왜 어떤 나라는 계속 가난하며, 그 나라의 빈곤층에게 무엇이 도움이 되는가?"
+   },
+   "takes": {
+    "en": "relaxes complete markets (A5)",
+    "ko": "완전 시장 가정(A5)을 완화한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=development",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-development",
+   "shelf": {
+    "std": [
+     {
+      "t": "Todaro and Smith, Economic Development, 13th ed., Pearson 2020",
+      "u": null
+     },
+     {
+      "t": "Ashraf and Weil, Economic Growth, 4th ed., Routledge 2025",
+      "u": null
+     },
+     {
+      "t": "Jones and Vollrath, Introduction to Economic Growth, 4th ed., Norton 2023",
+      "u": null
+     },
+     {
+      "t": "Ray, Development Economics, Princeton University Press 1998",
+      "u": null
+     },
+     {
+      "t": "Bardhan and Udry, Development Microeconomics, Oxford University Press 1999",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "de Janvry and Sadoulet, Development Economics: Theory and Practice, 2nd ed., Routledge 2021",
+      "u": null
+     },
+     {
+      "t": "Banerjee and Duflo, The Challenge of World Poverty, MIT OpenCourseWare 14.73, 2011",
+      "u": "https://ocw.mit.edu/courses/14-73-the-challenge-of-world-poverty-spring-2011/"
+     },
+     {
+      "t": "Duflo and Olken, Development Economics, MIT OpenCourseWare 14.771, 2021",
+      "u": "https://ocw.mit.edu/courses/14-771-development-economics-fall-2021/pages/syllabus"
+     },
+     {
+      "t": "Vollrath, Growth4ed: Python code for every figure in Jones and Vollrath, 4th ed.",
+      "u": "https://github.com/dvollrath/Growth4ed"
+     }
+    ],
+    "ko": [
+     {
+      "t": "강성진, 『경제발전론』 3판, 박영사 2026",
+      "u": null
+     },
+     {
+      "t": "김적교, 『한국의 경제발전』 2판, 박영사 2016",
+      "u": null
+     },
+     {
+      "t": "김인철, 『경제발전론』 2판, 박영사 2013",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "나라 사이의 소득을 측정한다",
+     "question": "1인당 소득으로 나라를 줄 세울 때 무엇을 같다고 두는가?"
+    },
+    {
+     "no": 2,
+     "title": "자본이 쌓이면 따라잡는가",
+     "question": "한국의 1인당 실질 GDP는 1960~2025년에 약 36배가 되었다. 솔로 모형은 이것을 얼마나 설명하는가?"
+    },
+    {
+     "no": 3,
+     "title": "재산권이 투자를 정한다",
+     "question": "땅을 잃을 수 있는 농민은 왜 밭을 묵혀 두지 않는가?"
+    },
+    {
+     "no": 4,
+     "title": "제도의 값은 역사가 정했다",
+     "question": "같은 시기에 식민지가 된 나라들의 오늘 소득은 왜 그렇게 다른가?"
+    },
+    {
+     "no": 5,
+     "title": "신용이 없으면 자본은 부를 따라간다",
+     "question": "스리랑카의 소기업에 현금을 무작위로 주면 왜 한 달에 약 5%를 버는가?"
+    },
+    {
+     "no": 6,
+     "title": "빌려주는 쪽은 빌리는 쪽을 보지 못한다",
+     "question": "대출자는 왜 금리를 올리는 대신 대출을 거절하는가?"
+    },
+    {
+     "no": 7,
+     "title": "보험이 없는 마을",
+     "question": "가뭄이 든 해에 농가는 소비를 줄이는가, 소를 파는가?"
+    },
+    {
+     "no": 8,
+     "title": "소작 계약: 위험과 유인을 한 계약에 담는다",
+     "question": "땅 주인은 왜 고정된 지대 대신 수확의 몫을 받는가?"
+    },
+    {
+     "no": 9,
+     "title": "떠나지 않는 농민: 이주와 구조 전환",
+     "question": "도시의 소득이 훨씬 높은데 농민은 왜 떠나지 않는가?"
+    },
+    {
+     "no": 10,
+     "title": "사람에 쌓는 자본: 건강과 교육",
+     "question": "학교를 지으면 아이들은 더 오래 배우고, 그 아이들은 더 버는가?"
+    },
+    {
+     "no": 11,
+     "title": "부의 분포가 경제의 길을 정한다",
+     "question": "평균 부가 같은 두 경제가 왜 다른 곳에 이르는가?"
+    },
+    {
+     "no": 12,
+     "title": "마을의 보험은 연결망을 따라간다",
+     "question": "같은 마을의 가구는 왜 가뭄의 손실을 똑같이 나누지 않는가?"
+    },
+    {
+     "no": 13,
+     "title": "한 마을의 실험은 나라의 정책이 되는가",
+     "question": "케냐의 마을에 현금을 주면 이웃 마을의 물가와 임금도 움직이는가?"
+    }
+   ]
+  },
+  {
+   "no": 18,
+   "id": "environmental",
+   "side": "field",
+   "file": "docs/books/18-environmental.md",
+   "name": {
+    "en": "Environmental economics",
+    "ko": "환경경제학"
+   },
+   "question": {
+    "en": "How should a society price damage to the environment, including damage far in the future?",
+    "ko": "사회는 먼 미래의 피해를 포함해 환경 피해에 어떻게 가격을 매겨야 하는가?"
+   },
+   "takes": {
+    "en": "adds a very long horizon",
+    "ko": "아주 긴 시간 지평을 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=environmental",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-environmental",
+   "shelf": {
+    "std": [
+     {
+      "t": "Kolstad and Netusil, Environmental Economics, 3rd ed., Oxford University Press 2026",
+      "u": null
+     },
+     {
+      "t": "Tietenberg and Lewis, Environmental and Natural Resource Economics, 12th ed., Routledge 2024",
+      "u": null
+     },
+     {
+      "t": "Keohane and Olmstead, Markets and the Environment, 2nd ed., Island Press 2016",
+      "u": null
+     },
+     {
+      "t": "Phaneuf and Requate, A Course in Environmental Economics, Cambridge University Press 2017",
+      "u": null
+     },
+     {
+      "t": "Gollier, Pricing the Planet's Future, Princeton University Press 2012",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Barrage and Nordhaus, “Policies, projections, and the social cost of carbon: Results from the DICE-2023 model”, PNAS 121(13), 2024",
+      "u": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10990119"
+     },
+     {
+      "t": "DICEModel.jl, a Julia port of DICE-2023 (MIT licence)",
+      "u": "https://sylvaticus.github.io/DICEModel.jl/dev"
+     },
+     {
+      "t": "Reed College, readings for Kolstad and Netusil, 3rd ed.: JEP and REEP articles by chapter",
+      "u": "https://www.reed.edu/economics/resources/environmental-economics-3rd-ed.html"
+     }
+    ],
+    "ko": [
+     {
+      "t": "권오상, 『환경경제학』 5판, 박영사 2025",
+      "u": null
+     },
+     {
+      "t": "이충기·박상수, 『환경경제학』, 한국방송통신대학교출판문화원 2023",
+      "u": null
+     },
+     {
+      "t": "이정전, 『환경경제학 이해』 개정판, 박영사 2011",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "오염은 값이 매겨지지 않은 거래다",
+     "question": "공장 굴뚝의 연기는 누구의 비용이고, 세금과 협상 가운데 무엇이 그것을 줄이는가?"
+    },
+    {
+     "no": 2,
+     "title": "모두가 쓰는 자원은 남용된다",
+     "question": "아무나 고기를 잡을 수 있는 바다에서는 왜 어족이 줄어드는가?"
+    },
+    {
+     "no": 3,
+     "title": "고갈되는 자원과 호텔링 규칙",
+     "question": "매장량이 정해진 석유는 언제 캐야 하고, 예고된 탄소세는 지금의 채굴을 늘리는가?"
+    },
+    {
+     "no": 4,
+     "title": "세금인가 배출권인가",
+     "question": "감축 비용을 모르는 규제자는 가격을 정해야 하는가, 양을 정해야 하는가?"
+    },
+    {
+     "no": 5,
+     "title": "한국 배출권거래제",
+     "question": "2015년에 문을 연 한국의 배출권 시장은 기업의 배출을 줄였는가?"
+    },
+    {
+     "no": 6,
+     "title": "피구세는 한계피해와 같아야 하는가",
+     "question": "노동소득세가 이미 있는 경제에서 탄소세 수입으로 소득세를 깎으면 두 번 이득인가?"
+    },
+    {
+     "no": 7,
+     "title": "시장이 없는 것의 값을 측정한다",
+     "question": "깨끗한 공기의 값은 집값에 얼마나 들어 있는가?"
+    },
+    {
+     "no": 8,
+     "title": "먼 미래를 얼마로 세는가",
+     "question": "백 년 뒤의 1원은 지금 얼마이고, 그 할인율은 시장에서 읽는가, 윤리로 정하는가?"
+    },
+    {
+     "no": 9,
+     "title": "한 세기 뒤에 오는 비용",
+     "question": "백 년 뒤에 오는 피해 10은 오늘의 비용 위에 얼마로 얹히는가?"
+    },
+    {
+     "no": 10,
+     "title": "탄소의 사회적 비용을 계산한다",
+     "question": "오늘 배출한 이산화탄소 1톤은 미래의 소비를 얼마나 줄이는가?"
+    },
+    {
+     "no": 11,
+     "title": "기후 협정은 나라 사이의 공공재 게임이다",
+     "question": "모든 나라가 이득을 보는 감축에 왜 각 나라는 적게 기여하는가?"
+    },
+    {
+     "no": 12,
+     "title": "탄소 가격은 공급망을 따라 전해진다",
+     "question": "발전소가 사는 배출권의 값은 자동차 값을 얼마나 올리는가?"
+    },
+    {
+     "no": 13,
+     "title": "탄소세는 누가 지는가",
+     "question": "같은 탄소세가 소득 하위 20% 가구와 상위 20% 가구에게 같은 부담인가?"
+    }
+   ]
+  },
+  {
+   "no": 19,
+   "id": "finance",
+   "side": "field",
+   "file": "docs/books/19-finance.md",
+   "name": {
+    "en": "Financial economics",
+    "ko": "금융경제학"
+   },
+   "question": {
+    "en": "What is a risky future payment worth today?",
+    "ko": "위험이 있는 미래 지급액은 오늘 얼마의 가치가 있는가?"
+   },
+   "takes": {
+    "en": "adds the price of risk",
+    "ko": "위험의 가격을 더한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=finance",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-finance",
+   "shelf": {
+    "std": [
+     {
+      "t": "Bodie, Kane and Marcus, Essentials of Investments, 13th ed. (2024 Release), McGraw Hill 2024",
+      "u": null
+     },
+     {
+      "t": "Bodie, Kane, Marcus and Racculia, Investments, 2026 Release, McGraw Hill 2026",
+      "u": null
+     },
+     {
+      "t": "Campbell, Financial Decisions and Markets, Princeton University Press 2018",
+      "u": null
+     },
+     {
+      "t": "Cochrane, Asset Pricing, revised ed., Princeton University Press 2005",
+      "u": null
+     },
+     {
+      "t": "Back, Asset Pricing and Portfolio Choice Theory, 2nd ed., Oxford University Press 2017",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Hansen, Sargent and Borovička, Risk, Uncertainty, and Value, QuantMFR (online, with Python notebooks)",
+      "u": "https://lphansen.github.io/QuantMFR/intro.html"
+     },
+     {
+      "t": "Cochrane, Asset Pricing: free online class, notes and lecture videos",
+      "u": "https://www.johnhcochrane.com/asset-pricing"
+     },
+     {
+      "t": "Nagel, Machine Learning in Asset Pricing, Princeton University Press 2021",
+      "u": null
+     },
+     {
+      "t": "Pedersen, Efficiently Inefficient, Princeton University Press 2015",
+      "u": null
+     }
+    ],
+    "ko": [
+     {
+      "t": "Bodie·Kane·Marcus, 『Bodie의 기본투자론』 12판, 남상구·최승두 옮김, 지필미디어 2022",
+      "u": null
+     },
+     {
+      "t": "이재하·한덕희, 『투자론』 3판, 박영사 2026",
+      "u": null
+     },
+     {
+      "t": "박기영, 『금융경제학: 파이썬을 활용한 금융시장과 통화정책의 이해』, 시그마프레스 2026",
+      "u": null
+     },
+     {
+      "t": "황수성·신진호, 『재무경제학』 2판, 정독 2023",
+      "u": null
+     },
+     {
+      "t": "변진호·위정범, 『투자론』 2판, 청람 2022",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "현재가치와 금리의 기간 구조",
+     "question": "3년 만기 국고채와 10년 만기 국고채의 금리는 왜 다른가?"
+    },
+    {
+     "no": 2,
+     "title": "분산 투자는 상관이다",
+     "question": "기대수익률이 낮은 자산을 섞으면 왜 위험이 줄어드는가?"
+    },
+    {
+     "no": 3,
+     "title": "시장과 함께 움직이는 위험만 값을 받는다",
+     "question": "변동이 큰 주식이 왜 반드시 높은 수익을 주지는 않는가?"
+    },
+    {
+     "no": 4,
+     "title": "모든 자산의 가격은 하나의 식이다",
+     "question": "소비가 부족한 해에 지급하는 자산은 왜 비싼가?"
+    },
+    {
+     "no": 5,
+     "title": "가격은 정보를 반영하는가",
+     "question": "실적 공시가 나온 날 주가는 언제 다 움직이는가?"
+    },
+    {
+     "no": 6,
+     "title": "효율적 시장에서 정보를 모을 이유",
+     "question": "가격이 모든 정보를 반영한다면 누가 돈을 들여 정보를 모으는가?"
+    },
+    {
+     "no": 7,
+     "title": "합리적 거래자는 왜 거래하는가",
+     "question": "모두가 합리적이고 같은 사전 믿음을 가진다면, 한국 주식시장의 거래량은 어디서 오는가?"
+    },
+    {
+     "no": 8,
+     "title": "무차익과 옵션의 가격",
+     "question": "주가가 어디로 갈지 몰라도 옵션의 값을 정할 수 있는가?"
+    },
+    {
+     "no": 9,
+     "title": "자본 구조는 기업 가치와 상관없는가",
+     "question": "빚을 늘리면 기업의 값이 오르는가?"
+    },
+    {
+     "no": 10,
+     "title": "대표 투자자는 없다",
+     "question": "한국 가계의 자산은 왜 대부분 실물 자산이고, 그것이 자산 가격에 무엇을 바꾸는가?"
+    },
+    {
+     "no": 11,
+     "title": "가격이 근본 가치로 가지 않을 때",
+     "question": "배당이 알려진 실험실의 자산 시장에서도 왜 거품이 생기는가?"
+    },
+    {
+     "no": 12,
+     "title": "같은 자산을 든 기관들",
+     "question": "한 펀드의 매도는 왜 다른 펀드의 손실이 되는가?"
+    }
+   ]
+  },
+  {
+   "no": 20,
+   "id": "behavioral",
+   "side": "field",
+   "file": "docs/books/20-behavioral.md",
+   "name": {
+    "en": "Behavioral economics",
+    "ko": "행동경제학"
+   },
+   "question": {
+    "en": "What changes when people are not the agents of the core courses?",
+    "ko": "사람이 핵심 과목에서 가정하는 주체와 다르면 무엇이 달라지는가?"
+   },
+   "takes": {
+    "en": "relaxes consistent choice (A6)",
+    "ko": "일관된 선택 가정(A6)을 완화한다"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=behavioral",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-behavioral",
+   "shelf": {
+    "std": [
+     {
+      "t": "Angner, A Course in Behavioral Economics, 3rd ed., Red Globe Press 2021",
+      "u": null
+     },
+     {
+      "t": "Wilkinson and Klaes, An Introduction to Behavioral Economics, 3rd ed., Palgrave 2017",
+      "u": null
+     },
+     {
+      "t": "Cartwright, Behavioral Economics, 4th ed., Routledge 2023",
+      "u": null
+     },
+     {
+      "t": "Dhami, The Foundations of Behavioral Economic Analysis, Oxford University Press 2016",
+      "u": null
+     },
+     {
+      "t": "Bernheim, DellaVigna and Laibson (eds.), Handbook of Behavioral Economics: Foundations and Applications, vols. 1–2, Elsevier 2018, 2019",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Schilbach, Psychology and Economics, MIT OpenCourseWare 14.13, 2020",
+      "u": "https://ocw.mit.edu/courses/14-13-psychology-and-economics-spring-2020/pages/syllabus/"
+     },
+     {
+      "t": "Congdon, Kling and Mullainathan, Policy and Choice: Public Finance Through the Lens of Behavioral Economics, 2011",
+      "u": null
+     }
+    ],
+    "ko": [
+     {
+      "t": "Angner, 『행동경제학 강의 노트』 3판, 이기홍 옮김, 에이콘출판 2022",
+      "u": null
+     },
+     {
+      "t": "홍훈, 『홍훈 교수의 행동경제학 강의』, 서해문집 2016",
+      "u": null
+     },
+     {
+      "t": "도모노 노리오, 『행동 경제학』 개정판, 이명희 옮김, 지형 2019",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "선택은 일관된가",
+     "question": "같은 선택지를 다르게 말하면 왜 다른 것을 고르는가?"
+    },
+    {
+     "no": 2,
+     "title": "현재 편향",
+     "question": "0일째에는 11일째의 110을 기다리겠다던 사람이 10일째에는 왜 100을 받는가?"
+    },
+    {
+     "no": 3,
+     "title": "기준점과 손실 회피",
+     "question": "산 값보다 시세가 떨어진 집의 주인은 왜 집을 높은 값에 내놓는가?"
+    },
+    {
+     "no": 4,
+     "title": "공정성과 호혜",
+     "question": "100 가운데 10을 주겠다는 제안을 왜 거절하는가?"
+    },
+    {
+     "no": 5,
+     "title": "보이는 가격만 산다",
+     "question": "가격표에 세금이 붙어 있으면 왜 덜 사는가?"
+    },
+    {
+     "no": 6,
+     "title": "믿음은 베이즈 규칙을 따르는가",
+     "question": "기저율을 바꾸어 알려 주어도 사람들의 확률 판단은 왜 거의 바뀌지 않는가?"
+    },
+    {
+     "no": 7,
+     "title": "과신과 거래",
+     "question": "공통의 사전 믿음을 가진 합리적 투자자는 서로 거래하지 않는데, 개인 투자자는 왜 그렇게 많이 거래하는가?"
+    },
+    {
+     "no": 8,
+     "title": "기본값을 정한다",
+     "question": "퇴직연금에 자동으로 가입시키면 왜 가입률이 오르고, 그것은 모든 사람에게 이득인가?"
+    },
+    {
+     "no": 9,
+     "title": "추론의 깊이가 다른 사람들",
+     "question": "0에서 100 사이의 수 가운데 평균의 3분의 2를 맞히는 게임에서 왜 0을 고르면 지는가?"
+    },
+    {
+     "no": 10,
+     "title": "편향은 시장에서 상쇄되는가",
+     "question": "몇 사람만 명목 가격에 속아도 물가는 늦게 맞추어지는가?"
+    },
+    {
+     "no": 11,
+     "title": "남이 하는 것을 따른다",
+     "question": "같은 부서의 동료가 퇴직연금에 가입하면 나도 가입하는가?"
+    },
+    {
+     "no": 12,
+     "title": "어느 선택이 그 사람의 후생인가",
+     "question": "오늘의 자아와 내일의 자아가 다르게 고르면, 정책은 누구의 선택을 따라야 하는가?"
+    }
+   ]
+  },
+  {
+   "no": 21,
+   "id": "history",
+   "side": "field",
+   "file": "docs/books/21-history.md",
+   "name": {
+    "en": "Economic history",
+    "ko": "경제사"
+   },
+   "question": {
+    "en": "How did the world economy become what it is?",
+    "ko": "세계경제는 어떻게 지금의 모습이 되었는가?"
+   },
+   "takes": {
+    "en": "History: time outside the model",
+    "ko": "역사: 모형 바깥의 시간"
+   },
+   "works": {
+    "7": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": "https://voidmain443.github.io/Frontier_economics_BA/course.ko.html?c=history",
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-history",
+   "shelf": {
+    "std": [
+     {
+      "t": "Allen, Global Economic History: A Very Short Introduction, Oxford University Press 2011",
+      "u": null
+     },
+     {
+      "t": "Persson, Sharp and Lampe, An Economic History of Europe: Knowledge, Institutions and Welfare, Prehistory to the Present, 3rd ed., Cambridge University Press 2025",
+      "u": null
+     },
+     {
+      "t": "Koyama and Rubin, How the World Became Rich, Polity 2022",
+      "u": null
+     },
+     {
+      "t": "Broadberry and Fukao (eds.), The Cambridge Economic History of the Modern World, vols. I–II, Cambridge University Press 2021",
+      "u": null
+     },
+     {
+      "t": "Feinstein and Thomas, Making History Count, 2002",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Cunningham, Causal Inference: The Mixtape, Yale University Press 2021 (online 2nd ed., The Remix, in progress)",
+      "u": "https://mixtape.scunning.com/"
+     },
+     {
+      "t": "EH.Net Encyclopedia, Economic History Association",
+      "u": "https://eh.net/encyclopedia/"
+     },
+     {
+      "t": "Maddison Project Database, 2023 release, GGDC",
+      "u": "https://www.rug.nl/ggdc/historicaldevelopment/maddison/"
+     }
+    ],
+    "ko": [
+     {
+      "t": "이헌창, 『한국경제통사』 9판, 해남 2021",
+      "u": null
+     },
+     {
+      "t": "송병건, 『경제사: 세계화와 세계 경제의 역사』 3판, 해남 2019",
+      "u": null
+     },
+     {
+      "t": "김낙년·박기주·박이택·차명수, 『한국의 장기통계』 1·2, 해남 2018",
+      "u": null
+     },
+     {
+      "t": "차명수, 『기아와 기적의 기원: 한국경제사, 1700~2010』, 해남 2014",
+      "u": null
+     },
+     {
+      "t": "이영훈, 『한국경제사』 I·II, 일조각 2016",
+      "u": null
+     },
+     {
+      "t": "앨런, 『세계경제사』 개정판, 이강국 옮김, 교유서가 2025",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "맬서스 경제",
+     "question": "1800년 이전에는 왜 기술이 나아져도 사람들이 부유해지지 않았는가?"
+    },
+    {
+     "no": 2,
+     "title": "대분기를 임금으로 측정한다",
+     "question": "1700년 런던의 노동자와 베이징의 노동자는 하루 임금으로 무엇을 살 수 있었는가?"
+    },
+    {
+     "no": 3,
+     "title": "산업혁명",
+     "question": "1800년 무렵의 영국에서는 왜 기술이 인구보다 빨리 자랐는가?"
+    },
+    {
+     "no": 4,
+     "title": "인구 변천",
+     "question": "소득이 오르는데 왜 아이는 줄어드는가, 그리고 인구가 많으면 1인당 소득은 내리는가 오르는가?"
+    },
+    {
+     "no": 5,
+     "title": "두 번의 세계화",
+     "question": "1870~1914년 대서양 경제에서 왜 임금은 수렴하고 땅값은 갈라졌는가?"
+    },
+    {
+     "no": 6,
+     "title": "금본위제와 대공황",
+     "question": "1929년 이후 금본위제를 일찍 떠난 나라는 왜 먼저 회복했는가?"
+    },
+    {
+     "no": 7,
+     "title": "브레턴우즈와 대인플레이션",
+     "question": "1970년대 미국의 인플레이션은 왜 오르고, 1980년대에는 왜 내려갔는가?"
+    },
+    {
+     "no": 8,
+     "title": "식민 규칙의 효과를 경계에서 측정한다",
+     "question": "나라 사이의 상관만으로 어떤 식민 규칙이 오늘의 소득을 바꾸었는지 알 수 있는가?"
+    },
+    {
+     "no": 9,
+     "title": "철도가 시장을 잇는다",
+     "question": "철도가 들어온 인도의 지역에서는 왜 곡물 값이 그 지역의 강우에 덜 반응했는가?"
+    },
+    {
+     "no": 10,
+     "title": "은행 공황은 예치의 연결망을 따라 전해졌다",
+     "question": "1930년 시골 은행의 정지는 왜 도시 은행의 예금 인출로 이어졌는가?"
+    },
+    {
+     "no": 11,
+     "title": "20세기의 분포: 압축과 재확대",
+     "question": "미국 상위 1%의 소득 비중은 왜 1940년대에 내려가고 1980년 이후 다시 올랐는가?"
+    },
+    {
+     "no": 12,
+     "title": "한국: 어느 모형이 어느 시기에 맞는가",
+     "question": "20세기 초에서 2025년까지 한국 경제의 각 시기에는 어느 모형이 맞는가?"
+    }
+   ]
+  },
+  {
+   "no": 22,
+   "id": "method",
+   "side": "last",
+   "file": "docs/books/22-method.md",
+   "name": {
+    "en": "Methods and philosophy of economics",
+    "ko": "경제학의 방법과 철학"
+   },
+   "question": {
+    "en": "What has economics known, how did it come to know it, and where was it wrong?",
+    "ko": "경제학은 무엇을 알아 왔고, 어떻게 알게 되었으며, 어디에서 틀렸는가?"
+   },
+   "takes": {
+    "en": "method, read a second time, and the first paper",
+    "ko": "방법론 다시 읽기와 첫 논문"
+   },
+   "works": {
+    "8": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "course_page": null,
+   "site_row": "https://voidmain443.github.io/Frontier_economics_BA/archive.ko.html#b-method",
+   "shelf": {
+    "std": [
+     {
+      "t": "Boumans and Davis, Economic Methodology: Understanding Economics as a Science, 2nd ed., Palgrave 2016",
+      "u": null
+     },
+     {
+      "t": "Reiss, Philosophy of Economics: A Contemporary Introduction, Routledge 2013",
+      "u": null
+     },
+     {
+      "t": "Hausman (ed.), The Philosophy of Economics: An Anthology, 3rd ed., Cambridge University Press 2008",
+      "u": null
+     },
+     {
+      "t": "Heilmann and Reiss (eds.), The Routledge Handbook of Philosophy of Economics, Routledge 2021",
+      "u": null
+     },
+     {
+      "t": "Morgan, The World in the Model: How Economists Work and Think, Cambridge University Press 2012",
+      "u": null
+     }
+    ],
+    "open": [
+     {
+      "t": "Huntington-Klein, The Effect: An Introduction to Research Design and Causality, Chapman & Hall/CRC 2021 (free web edition of the 1st ed.; 2nd ed. 2025 in print)",
+      "u": "https://theeffectbook.net/"
+     },
+     {
+      "t": "Head, “The Introduction Formula”",
+      "u": "https://blogs.ubc.ca/khead/research/research-advice/formula"
+     },
+     {
+      "t": "AEA, Data and Code Availability Policy, 2026",
+      "u": "https://www.aeaweb.org/journals/data/data-code-policy"
+     },
+     {
+      "t": "Cochrane, “Writing Tips for PhD Students”, 2005",
+      "u": "https://www.johnhcochrane.com/research-all/writing-tips-for-phd-studentsnbsp"
+     }
+    ],
+    "ko": [
+     {
+      "t": "홍태희, 『경제철학과 경제학방법론』, 박영사 2024",
+      "u": null
+     },
+     {
+      "t": "로드릭, 『그래도 경제학이다』, 이강국 옮김, 생각의힘 2016",
+      "u": null
+     },
+     {
+      "t": "조준현, 『철학으로서의 경제학』, 피앤씨미디어 2020",
+      "u": null
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "no": 1,
+     "title": "존재 증명은 무엇을 증명했는가",
+     "question": "애로와 드브뢰는 경쟁 균형이 존재함을 증명했다. 그 증명이 시장에 관해 말해 주는 것과 말해 주지 않는 것은 무엇인가?"
+    },
+    {
+     "no": 2,
+     "title": "소넨샤인–만텔–드브뢰 정리와 대표 주체",
+     "question": "개인이 모두 합리적이면 시장 전체의 수요도 '좋은' 모양을 가지는가?"
+    },
+    {
+     "no": 3,
+     "title": "스카프의 경제와 안정성",
+     "question": "균형이 있고 하나뿐이어도, 시장은 그 균형에 이르는가?"
+    },
+    {
+     "no": 4,
+     "title": "케임브리지 자본 논쟁",
+     "question": "서로 다른 기계와 건물과 재고를 하나의 양 K로 더할 수 있는가?"
+    },
+    {
+     "no": 5,
+     "title": "합리적 기대와 루카스 비판",
+     "question": "과거 자료로 추정한 관계로 아직 써 본 적 없는 정책을 평가할 수 있는가?"
+    },
+    {
+     "no": 6,
+     "title": "거시계량의 세 길: 구조 모형, VAR, 설계",
+     "question": "기준금리를 올리면 산출과 물가는 얼마나, 언제 움직이는가를 자료로 어떻게 아는가?"
+    },
+    {
+     "no": 7,
+     "title": "신뢰성 혁명과 그 한계",
+     "question": "설계가 있는 연구는 무엇을 믿을 만하게 만들었고, 무엇을 믿을 만하게 만들지 못했는가?"
+    },
+    {
+     "no": 8,
+     "title": "실험경제학과 행동경제학이 가정을 시험한 방법",
+     "question": "실험실의 학생 몇십 명의 선택이 시장과 사람에 관한 가정을 반증할 수 있는가?"
+    },
+    {
+     "no": 9,
+     "title": "복잡계와 행위자 기반 모형: 2부의 길",
+     "question": "균형 조건 없이 규칙을 따르는 주체들을 계산한 결과는 무엇을 설명하는가?"
+    },
+    {
+     "no": 10,
+     "title": "연결망 경제학",
+     "question": "누가 누구와 연결되었는가는 결과를 바꾸는가, 바꾼다면 언제인가?"
+    },
+    {
+     "no": 11,
+     "title": "경제학과 역사: 모형이 맞는 시기",
+     "question": "한 모형이 '맞는다'는 말은 시기를 빼고 할 수 있는가?"
+    },
+    {
+     "no": 12,
+     "title": "첫 논문 발표와 심사",
+     "question": "모형 하나를 골라, 그것이 무엇을 고정했고, 무엇에 기대며, 어디서 틀릴 수 있는지를 15쪽으로 논증할 수 있는가?"
+    }
+   ]
+  }
+ ]
+}

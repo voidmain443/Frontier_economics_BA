@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 2: 한 쪽 분량의 유도; 작업 5: 반증 계획서와 추정 결과 |
 | 사이트의 과목 페이지 | 없음 |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-3) 시점 간 선택 · [그림 5.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-3) 구매자는 숨은 축을 볼 수 없다 · [그림 8.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-3) 인출 사태는 균형이다 · [그림 8.4](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-4) 분산투자(diversification)는 상관관계의 문제이다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.5](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-5) 추론 단계가 0, 1, 2, 3인 경기자와 끝까지 추론해 균형에 이르…
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.3절 철학: 고정한다는 조항이 반증을 막을 때 · 7절 수학의 순서
+- **자료.** [금융감독원 전자공시 OpenDART](https://opendart.fss.or.kr/) 7곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 4곳 · [국가통계포털](https://kosis.kr/) 3곳 · [마이크로데이터 통합서비스(국가데이터처)](https://mdis.mods.go.kr/) 2곳 · [한국노동패널조사](https://www.kli.re.kr/klips) 2곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Hansen, Probability and Statistics for Economists, Princeton University Press 2022 (data and code free); DeGroot and Schervish, Probability and Statistics, 4th ed., Addison-Wesley; Casella and Berger, Statistical Inference, 2nd ed., Duxbury 2002
+- **공개·개혁 교재.** [Seeing Theory, Brown University](https://seeing-theory.brown.edu/); [James, Witten, Hastie and Tibshirani, An Introduction to Statistical Learning (R 2021, Python 2023)](https://www.statlearning.com/)
+- **한국어 교재.** 류근관, 『통계학』 3판, 법문사 2013
+
 ## 목차
 
 1. 확률 공간: 상태의 목록 — '비가 올 확률 30%'는 무엇을 말하며, 틀렸다고 말할 수 있는가?

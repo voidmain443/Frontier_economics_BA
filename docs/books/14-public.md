@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=public` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-2) 잉여, 그리고 세금이 막는 거래 · [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-3) 시점 간 선택 · [그림 5.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-1) 두 소비자가 상자를 이룬다 · [그림 5.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-2) 모두가 쓰는 재화 · [그림 5.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-3) 구매자는 숨은 축을 볼 수 없다 · [그림 6.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-2) AD는 IS–LM 균형의 목록이다 · [그림 8.5](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-5) 세금의 비용은 세율의 제곱에 비례해 커진다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소…
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다 · 6절 쓰기를 가르친다
+- **자료.** [국가통계포털](https://kosis.kr/) 4곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Gruber, Public Finance and Public Policy, 8th ed., Macmillan Learning 2026; Stiglitz and Rosengard, Economics of the Public Sector, 4th ed., Norton 2015; Hindriks and Myles, Intermediate Public Economics, 2nd ed., MIT Press 2013; Atkinson and Stiglitz, Lectures on Public Economics, updated ed., Princeton University Press 2015; Salanié, The Economics of Taxation, 2nd ed., MIT Press 2011
+- **공개·개혁 교재.** [Saez, Econ 131 Undergraduate Public Economics, UC Berkeley 2025 (slides with LaTeX source)](https://eml.berkeley.edu/~saez/course131/course131.html); [Saez and Shapiro, Econ 230A Graduate Public Economics, UC Berkeley 2026](https://eml.berkeley.edu/~saez/course/course.html); [Chetty and Bruich, Using Big Data to Solve Economic and Social Problems, Harvard 2019](https://opportunityinsights.org/course/)
+- **한국어 교재.** 이준구·조명환, 『재정학』 7판, 문우사 2026; 나성린·전영섭·홍성훈·허은정, 『공공경제학』 5판, 박영사 2022; 임봉욱, 『공공경제학』 6판, 율곡출판사 2022; Rosen·Gayer·Civan, 『Rosen의 재정학』 10판, 이영·전영준·이철인·김진영 옮김, 한국맥그로힐 2020
+
 ## 목차
 
 1. 후생 정리와 국가의 자리 — 시장이 효율적이라면 국가는 무엇을 하는가?

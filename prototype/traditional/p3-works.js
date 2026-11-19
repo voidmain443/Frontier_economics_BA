@@ -2,9 +2,10 @@
 // 3.12 draws the works in the order they wait for one another, each with what
 // it hands in and the chapters it reads, one tick a chapter; a pale tick is a
 // chapter of the same book read in another work. Below it, the twenty-two
-// books, each with its question and the works it is read in.
+// books, each with its question and the works it is read in, and the shelf:
+// the existing textbooks each book answers to (docs/next-series.md 4).
 
-import { WORKS, BOOKS, chaptersOf, runs } from './books.js';
+import { WORKS, BOOKS, SHELF, chaptersOf, runs } from './books.js';
 import { t, localHref, LANG } from './i18n.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -94,4 +95,18 @@ export function bookIndex(host) {
     return `<tbody><tr class="grp"><th colspan="5">${esc(t(name))}</th></tr>${rows}</tbody>`;
   }).join('');
   host.innerHTML = `<div class="partslist books"><table><caption>${t('The twenty-two books')}</caption>${head}${body}</table></div>`;
+}
+
+// the shelf: beside each book, the standard texts, the texts free online or
+// reworking the field, and the Korean texts; an empty Korean column is a gap
+// the book would fill
+export function bookShelf(host) {
+  const item = (x) => (x.u ? `<li><a href="${x.u}" rel="noopener">${esc(x.t)}</a></li>` : `<li>${esc(x.t)}</li>`);
+  const cell = (xs, none) => (xs.length ? `<ul>${xs.map(item).join('')}</ul>` : `<p class="none">${esc(t(none))}</p>`);
+  const rows = BOOKS.filter((b) => SHELF[b.id]).map((b) => {
+    const s = SHELF[b.id];
+    return `<tr><td><a href="#b-${b.id}"><span class="bno">${b.no}</span>${esc(t(b.name))}</a></td><td>${cell(s.std, 'none checked yet')}</td><td>${cell(s.open, 'none checked yet')}</td><td>${cell(s.ko, 'none: this book would be the first')}</td></tr>`;
+  }).join('');
+  const head = `<thead><tr><th>${t('Book')}</th><th>${t('Standard texts')}</th><th>${t('Free online, or reworking the field')}</th><th>${t('In Korean')}</th></tr></thead>`;
+  host.innerHTML = `<details class="units shelf-ref"><summary>${t('Beside each book: the existing textbooks')}</summary><p>${esc(t('Editions were checked on 16 November 2026 against the pages of publishers, authors and a Korean bookseller. A linked title is free online. Where the Korean column is empty, no current Korean textbook covers the book.'))}</p><div class="partslist shelf-table"><table>${head}<tbody>${rows}</tbody></table></div></details>`;
 }

@@ -12,6 +12,22 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=behavioral` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-2) 잉여, 그리고 세금이 막는 거래 · [그림 2.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-1) 살 수 있는 가장 좋은 묶음 · [그림 4.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f4-2) 실행되지 않을 위협 · [그림 8.9](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-9) 날이 다가오면 계획이 바뀐다
+- **2부 서로 다르고 연결된.** [그림 2.5](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-5) 추론 단계가 0, 1, 2, 3인 경기자와 끝까지 추론해 균형에 이르… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.10](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-10) 스카프의 경제
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Angner, A Course in Behavioral Economics, 3rd ed., Red Globe Press 2021; Wilkinson and Klaes, An Introduction to Behavioral Economics, 3rd ed., Palgrave 2017; Cartwright, Behavioral Economics, 4th ed., Routledge 2023; Dhami, The Foundations of Behavioral Economic Analysis, Oxford University Press 2016; Bernheim, DellaVigna and Laibson (eds.), Handbook of Behavioral Economics: Foundations and Applications, vols. 1–2, Elsevier 2018, 2019
+- **공개·개혁 교재.** [Schilbach, Psychology and Economics, MIT OpenCourseWare 14.13, 2020](https://ocw.mit.edu/courses/14-13-psychology-and-economics-spring-2020/pages/syllabus/); Congdon, Kling and Mullainathan, Policy and Choice: Public Finance Through the Lens of Behavioral Economics, 2011
+- **한국어 교재.** Angner, 『행동경제학 강의 노트』 3판, 이기홍 옮김, 에이콘출판 2022; 홍훈, 『홍훈 교수의 행동경제학 강의』, 서해문집 2016; 도모노 노리오, 『행동 경제학』 개정판, 이명희 옮김, 지형 2019
+
 ## 목차
 
 1. 선택은 일관된가 — 같은 선택지를 다르게 말하면 왜 다른 것을 고르는가?

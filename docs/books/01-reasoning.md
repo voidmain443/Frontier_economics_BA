@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 1: 단원 카드와 조건문 단락 |
 | 사이트의 과목 페이지 | 없음 |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-1) 수요와 공급 · [그림 5.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-3) 구매자는 숨은 축을 볼 수 없다 · [그림 8.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-3) 인출 사태는 균형이다 · [그림 8.7](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-7) 최저임금의 효과는 누가 임금을 정하는지에 달려 있다
+- **2부 서로 다르고 연결된.** [1절](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#b1) 곡선 하나의 이동 · [7절](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#b7) 오래된 논쟁의 재검토 · [9절](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#b9) 경제를 이해하는 데 필요한 것
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2절 '고정한다'의 세 얼굴 · 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다 · 8절 철학자로 기르는 두 권
+- **자료.** [국가통계포털](https://kosis.kr/) 4곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 3곳 · [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 2곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** McCloskey, Economical Writing, 3rd ed., University of Chicago Press 2019; Thomson, A Guide for the Young Economist, 2nd ed., MIT Press 2011; Boumans and Davis, Economic Methodology: Understanding Economics as a Science, 2nd ed., Palgrave 2016; Reiss, Philosophy of Economics: A Contemporary Introduction, Routledge 2013
+- **공개·개혁 교재.** [Rubinstein, Economic Fables, Open Book Publishers 2012](https://books.openedition.org/obp/310); [Osborne and Rubinstein, Models in Microeconomic Theory, 2nd ed., Open Book Publishers 2023](https://www.economics.utoronto.ca/osborne/mmt/); [Huntington-Klein, The Effect, Chapman & Hall/CRC (1st ed. free online; 2nd ed. 2025 in print)](https://theeffectbook.net/)
+- **한국어 교재.** 없음. 이 책이 첫 한국어 교재가 된다.
+
 ## 목차
 
 1. 주장과 조건문 — "태풍이 지나간 뒤 배추값이 올랐다. 그러므로 공급이 줄었다"는 추론은 타당한가?

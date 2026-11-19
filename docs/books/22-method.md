@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 8: 첫 논문 |
 | 사이트의 과목 페이지 | 없음 |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 5.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-1) 두 소비자가 상자를 이룬다 · [그림 6.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-1) 자본 축적 · [그림 6.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-3) 필립스 곡선(Phillips curve)은 기대에 따라 움직인다 · [그림 8.11](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-11) 1800년 이전에는 기술 진보가 인구를 늘렸다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.8](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-8) 2024년 한국의 부문 33개(한국은행 산업연관표, 국산, 생산자가격) · [그림 2.10](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-10) 스카프의 경제 · [그림 2.11](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-11) 최상위 학술지 세 곳에 실린 논문, 1963–2011년 · [그림 2.12](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-12) 여덟 가지 논쟁
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 1절 3부를 마친 사람이 할 수 있어야 하는 것 · 2절 '고정한다'의 세 얼굴 · 2.2절 증거: 자료에서 무엇을 고정했는가 · 2.3절 철학: 고정한다는 조항이 반증을 막을 때 · 4절 단순화가 낳는 모순을 가르친다 · 6절 쓰기를 가르친다 · 8절 철학자로 기르는 두 권
+- **자료.** [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 6곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 5곳 · [국가통계포털](https://kosis.kr/) 4곳 · [금융감독원 전자공시 OpenDART](https://opendart.fss.or.kr/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Boumans and Davis, Economic Methodology: Understanding Economics as a Science, 2nd ed., Palgrave 2016; Reiss, Philosophy of Economics: A Contemporary Introduction, Routledge 2013; Hausman (ed.), The Philosophy of Economics: An Anthology, 3rd ed., Cambridge University Press 2008; Heilmann and Reiss (eds.), The Routledge Handbook of Philosophy of Economics, Routledge 2021; Morgan, The World in the Model: How Economists Work and Think, Cambridge University Press 2012
+- **공개·개혁 교재.** [Huntington-Klein, The Effect: An Introduction to Research Design and Causality, Chapman & Hall/CRC 2021 (free web edition of the 1st ed.; 2nd ed. 2025 in print)](https://theeffectbook.net/); [Head, “The Introduction Formula”](https://blogs.ubc.ca/khead/research/research-advice/formula); [AEA, Data and Code Availability Policy, 2026](https://www.aeaweb.org/journals/data/data-code-policy); [Cochrane, “Writing Tips for PhD Students”, 2005](https://www.johnhcochrane.com/research-all/writing-tips-for-phd-studentsnbsp)
+- **한국어 교재.** 홍태희, 『경제철학과 경제학방법론』, 박영사 2024; 로드릭, 『그래도 경제학이다』, 이강국 옮김, 생각의힘 2016; 조준현, 『철학으로서의 경제학』, 피앤씨미디어 2020
+
 ## 목차
 
 1. 존재 증명은 무엇을 증명했는가 — 애로와 드브뢰는 경쟁 균형이 존재함을 증명했다. 그 증명이 시장에 관해 말해 주는 것과 말해 주지 않는 것은 무엇인가?

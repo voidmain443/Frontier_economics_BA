@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=history` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 6.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-1) 자본 축적 · [그림 6.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-2) AD는 IS–LM 균형의 목록이다 · [그림 6.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-3) 필립스 곡선(Phillips curve)은 기대에 따라 움직인다 · [그림 7.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-1) 산점도는 투영이다 · [그림 7.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-2) 가격의 점 구름은 수요곡선이 아니다 · [그림 8.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-1) 나라 안에서 누가 이득을 보는가 · [그림 8.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-3) 인출 사태는 균형이다 · [그림 8.11](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-11) 1800년 이전에는 기술 진보가 인구를 늘렸다
+- **2부 서로 다르고 연결된.** [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.7](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-7) 연구 자료가 아니라 모식도이다 · [그림 2.9](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-9) 완충 자본이 각각 1인 은행 열 곳
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.2절 증거: 자료에서 무엇을 고정했는가 · 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다
+- **자료.** [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 4곳 · [국가통계포털](https://kosis.kr/) 1곳 · [FRED(세인트루이스 연준)](https://fred.stlouisfed.org/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Allen, Global Economic History: A Very Short Introduction, Oxford University Press 2011; Persson, Sharp and Lampe, An Economic History of Europe: Knowledge, Institutions and Welfare, Prehistory to the Present, 3rd ed., Cambridge University Press 2025; Koyama and Rubin, How the World Became Rich, Polity 2022; Broadberry and Fukao (eds.), The Cambridge Economic History of the Modern World, vols. I–II, Cambridge University Press 2021; Feinstein and Thomas, Making History Count, 2002
+- **공개·개혁 교재.** [Cunningham, Causal Inference: The Mixtape, Yale University Press 2021 (online 2nd ed., The Remix, in progress)](https://mixtape.scunning.com/); [EH.Net Encyclopedia, Economic History Association](https://eh.net/encyclopedia/); [Maddison Project Database, 2023 release, GGDC](https://www.rug.nl/ggdc/historicaldevelopment/maddison/)
+- **한국어 교재.** 이헌창, 『한국경제통사』 9판, 해남 2021; 송병건, 『경제사: 세계화와 세계 경제의 역사』 3판, 해남 2019; 김낙년·박기주·박이택·차명수, 『한국의 장기통계』 1·2, 해남 2018; 차명수, 『기아와 기적의 기원: 한국경제사, 1700~2010』, 해남 2014; 이영훈, 『한국경제사』 I·II, 일조각 2016; 앨런, 『세계경제사』 개정판, 이강국 옮김, 교유서가 2025
+
 ## 목차
 
 1. 맬서스 경제 — 1800년 이전에는 왜 기술이 나아져도 사람들이 부유해지지 않았는가?

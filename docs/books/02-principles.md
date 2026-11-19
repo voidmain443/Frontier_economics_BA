@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 1: 단원 카드와 조건문 단락 |
 | 사이트의 과목 페이지 | `course.html?c=principles` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-1) 수요와 공급 · [그림 1.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-2) 잉여, 그리고 세금이 막는 거래 · [그림 1.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-3) 탄력성은 시간이 지나면서 커진다 · [그림 2.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-1) 살 수 있는 가장 좋은 묶음 · [그림 2.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-2) 수요는 선택의 목록이다 · [그림 3.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f3-1) 모든 규모의 공장과 포락선 · [그림 3.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f3-2) 가격이 비용의 최솟값에 이를 때까지 이어지는 진입 · [그림 4.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f4-1) 두 판매자 · [그림 5.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-1) 두 소비자가 상자를 이룬다 · [그림 5.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-2) 모두가 쓰는 재화 · [그림 6.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-1) 자본 축적 · [그림 6.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-2) AD는 IS–LM 균형의 목록이다 · [그림 6.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-3) 필립스 곡선(Phillips curve)은 기대에 따라 움직인다 · [그림 7.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-1) 산점도는 투영이다 · [그림 7.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-2) 가격의 점 구름은 수요곡선이 아니다 · [그림 8.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-2) 오늘의 환율은 내일에 달려 있다
+- **2부 서로 다르고 연결된.** [그림 2.1](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-1) 한국, 2020–2024년 · [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [1절](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#b1) 곡선 하나의 이동
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 4절 단순화가 낳는 모순을 가르친다 · 5절 핵심의 규칙을 다시 쓴다 · 6절 쓰기를 가르친다 · 7절 수학의 순서
+- **자료.** [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 6곳 · [국가통계포털](https://kosis.kr/) 2곳 · [Penn World Table](https://www.rug.nl/ggdc/productivity/pwt/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Mankiw, Principles of Economics, 11th ed., Cengage 2026; Krugman and Wells, Economics, 7th ed., Macmillan 2024; Acemoglu, Laibson and List, Economics, 3rd ed., Pearson 2024; Stevenson and Wolfers, Principles of Economics, 3rd ed., Macmillan 2026
+- **공개·개혁 교재.** [CORE, The Economy 2.0: Microeconomics, Macroeconomics](https://books.core-econ.org/the-economy/); [OpenStax, Principles of Economics, 3rd ed. (CC BY)](https://openstax.org/books/principles-economics-3e/pages/preface)
+- **한국어 교재.** 이준구·이창용, 『경제학원론』 7판, 문우사 2025; 김대식·노영기·안국신·이종철·박성용, 『현대 경제학원론』 8판, 박영사 2025; 조순·정운찬·전성인·김영식, 『경제학원론』 12판, 율곡출판사 2024
+
 ## 목차
 
 1. 수요와 공급 — 배추값은 왜 그 자리에 정해지는가?

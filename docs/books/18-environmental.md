@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=environmental` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-2) 잉여, 그리고 세금이 막는 거래 · [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-3) 시점 간 선택 · [그림 5.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-2) 모두가 쓰는 재화 · [그림 6.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-1) 자본 축적 · [그림 7.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-1) 산점도는 투영이다 · [그림 8.6](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-6) 한 세기 뒤에 발생하는 비용
+- **2부 서로 다르고 연결된.** [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.8](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-8) 2024년 한국의 부문 33개(한국은행 산업연관표, 국산, 생산자가격)
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.3절 철학: 고정한다는 조항이 반증을 막을 때 · 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다 · 6절 쓰기를 가르친다
+- **자료.** [국가통계포털](https://kosis.kr/) 5곳 · [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 3곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 1곳 · [금융감독원 전자공시 OpenDART](https://opendart.fss.or.kr/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Kolstad and Netusil, Environmental Economics, 3rd ed., Oxford University Press 2026; Tietenberg and Lewis, Environmental and Natural Resource Economics, 12th ed., Routledge 2024; Keohane and Olmstead, Markets and the Environment, 2nd ed., Island Press 2016; Phaneuf and Requate, A Course in Environmental Economics, Cambridge University Press 2017; Gollier, Pricing the Planet's Future, Princeton University Press 2012
+- **공개·개혁 교재.** [Barrage and Nordhaus, “Policies, projections, and the social cost of carbon: Results from the DICE-2023 model”, PNAS 121(13), 2024](https://pmc.ncbi.nlm.nih.gov/articles/PMC10990119); [DICEModel.jl, a Julia port of DICE-2023 (MIT licence)](https://sylvaticus.github.io/DICEModel.jl/dev); [Reed College, readings for Kolstad and Netusil, 3rd ed.: JEP and REEP articles by chapter](https://www.reed.edu/economics/resources/environmental-economics-3rd-ed.html)
+- **한국어 교재.** 권오상, 『환경경제학』 5판, 박영사 2025; 이충기·박상수, 『환경경제학』, 한국방송통신대학교출판문화원 2023; 이정전, 『환경경제학 이해』 개정판, 박영사 2011
+
 ## 목차
 
 1. 오염은 값이 매겨지지 않은 거래다 — 공장 굴뚝의 연기는 누구의 비용이고, 세금과 협상 가운데 무엇이 그것을 줄이는가?

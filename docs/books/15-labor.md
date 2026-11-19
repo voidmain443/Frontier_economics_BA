@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=labor` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 2.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-1) 살 수 있는 가장 좋은 묶음 · [그림 2.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-2) 수요는 선택의 목록이다 · [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-3) 시점 간 선택 · [그림 3.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f3-1) 모든 규모의 공장과 포락선 · [그림 5.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-3) 구매자는 숨은 축을 볼 수 없다 · [그림 6.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-3) 필립스 곡선(Phillips curve)은 기대에 따라 움직인다 · [그림 7.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-1) 산점도는 투영이다 · [그림 8.7](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-7) 최저임금의 효과는 누가 임금을 정하는지에 달려 있다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.10](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-10) 스카프의 경제
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.1절 수학: 왜 위상수학까지 배우는가 · 3절 양손잡이 경제학자의 형식 · 6절 쓰기를 가르친다
+- **자료.** [국가통계포털](https://kosis.kr/) 1곳 · [금융감독원 전자공시 OpenDART](https://opendart.fss.or.kr/) 1곳 · [한국노동패널조사](https://www.kli.re.kr/klips) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Borjas, Labor Economics, 9th ed., McGraw Hill 2024; Ehrenberg, Smith and Hallock, Modern Labor Economics: Theory and Public Policy, 15th ed., Routledge 2025; Cahuc, Carcillo and Zylberberg, Labor Economics, 2nd ed., MIT Press 2014; Pissarides, Equilibrium Unemployment Theory, 2nd ed., MIT Press 2000; Manning, Monopsony in Motion, Princeton University Press 2003
+- **공개·개혁 교재.** [Sargent and Stachurski, “Job Search I: The McCall Search Model”, QuantEcon](https://python.quantecon.org/mccall_model.html); [Manning, “Monopsony in Labor Markets: A Review”, ILR Review 74(1), 2021 (accepted version)](https://researchonline.lse.ac.uk/id/eprint/103482/1/MonopsonyILR_Revision.pdf); Card and Krueger, Myth and Measurement, 20th anniversary ed., Princeton University Press 2016
+- **한국어 교재.** Borjas, 『노동경제학』 9판, 강창희·박철성·송헌재 옮김, 시그마프레스 2025; 송민정·반가운·손정순, 『노동경제학』, 한국방송통신대학교출판문화원 2025; 남성일, 『쉬운 노동경제학』, 박영사 2017
+
 ## 목차
 
 1. 노동공급: 여가가 재화다 — 임금이 오르면 사람은 더 일하는가?

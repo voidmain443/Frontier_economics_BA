@@ -20,7 +20,7 @@ const page = await setupPage({
   // Korea's 2022 prices and rates (2.1), households by fifths of income (2.4),
   // and its input-output table (2.8)
   files: ['korea-households', 'korea-io', 'rates-2022'],
-  stages: 8,
+  stages: 9,
   unit: 'Section',
   part: 'Part 2',
   name: 'Unlike and connected',

@@ -149,6 +149,10 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
   if (!adapter) return { supported: false, reason: 'No WebGPU adapter is available.' };
   const device = await adapter.requestDevice({ requiredLimits: { maxTextureDimension2D: adapter.limits.maxTextureDimension2D } });
   device.addEventListener('uncapturederror', (e) => console.error('[webgpu]', e.error.message));
+  // HTML-in-Canvas as Chrome 157 ships it: the canvas declares drawable
+  // content, and each element drawn into a texture is marked drawable (156
+  // needed only layoutsubtree, which stays for it)
+  canvas.setAttribute('content', 'drawable');
   const gctx = canvas.getContext('webgpu');
   const format = navigator.gpu.getPreferredCanvasFormat();
   gctx.configure({ device, format, alphaMode: 'premultiplied' });
@@ -208,6 +212,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     clone.removeAttribute('id');
     clone.setAttribute('aria-hidden', 'true');
     clone.inert = true;
+    clone.setAttribute('drawable', '');
     clone.style.cssText = `width:${W}px;margin:0;pointer-events:none;`;
     canvas.appendChild(clone);
     try {
@@ -238,6 +243,7 @@ export async function createFold({ canvas, sheet, labelsRoot, constructs, data =
     clone.removeAttribute('id');
     clone.setAttribute('aria-hidden', 'true');
     clone.inert = true;
+    clone.setAttribute('drawable', '');
     clone.style.cssText = `width:${W}px;margin:0;pointer-events:none;`;
     canvas.appendChild(clone);
     try {

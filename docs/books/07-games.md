@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 2: 한 쪽 분량의 유도; 작업 3: 한 쪽 분량의 증명과 증명이 성립하지 않는 경우 |
 | 사이트의 과목 페이지 | `course.html?c=games` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 3.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f3-2) 가격이 비용의 최솟값에 이를 때까지 이어지는 진입 · [그림 4.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f4-1) 두 판매자 · [그림 4.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f4-2) 실행되지 않을 위협 · [그림 5.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-2) 모두가 쓰는 재화 · [그림 5.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-3) 구매자는 숨은 축을 볼 수 없다 · [그림 8.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-3) 인출 사태는 균형이다 · [그림 8.8](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-8) 담합은 미래 때문에 유지된다
+- **2부 서로 다르고 연결된.** [그림 2.5](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-5) 추론 단계가 0, 1, 2, 3인 경기자와 끝까지 추론해 균형에 이르… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.9](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-9) 완충 자본이 각각 1인 은행 열 곳 · [그림 2.10](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-10) 스카프의 경제 · [2절](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#b2) 교과서가 제쳐 둔 것
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.1절 수학: 왜 위상수학까지 배우는가 · 2.3절 철학: 고정한다는 조항이 반증을 막을 때 · 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다
+- **자료.** [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 1곳 · [국가통계포털](https://kosis.kr/) 1곳 · [한국노동패널조사](https://www.kli.re.kr/klips) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Osborne, An Introduction to Game Theory, Oxford University Press 2004; Maschler, Solan and Zamir, Game Theory, 2nd ed., Cambridge University Press 2020; Tadelis, Game Theory: An Introduction, Princeton University Press 2013
+- **공개·개혁 교재.** [Osborne and Rubinstein, A Course in Game Theory, MIT Press 1994](https://www.economics.utoronto.ca/osborne/cgt/); [Sargent and Stachurski, Economic Networks, Cambridge University Press](https://networks.quantecon.org/)
+- **한국어 교재.** 김광호, 『게임이론』 3판, 교문사 2025; 왕규호, 『게임이론』, 박영사 2005
+
 ## 목차
 
 1. 게임으로 쓴다: 경기자, 전략, 보수 — 내 이윤이 경쟁자의 산출에 달려 있으면 무엇을 적어야 하는가?

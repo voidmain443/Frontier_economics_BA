@@ -12,6 +12,22 @@
 | 작업의 산출물 | 작업 6: 계산 보고서 |
 | 사이트의 과목 페이지 | 없음 |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-1) 수요와 공급 · [그림 5.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-1) 두 소비자가 상자를 이룬다 · [그림 8.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-3) 인출 사태는 균형이다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.8](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-8) 2024년 한국의 부문 33개(한국은행 산업연관표, 국산, 생산자가격) · [그림 2.9](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-9) 완충 자본이 각각 1인 은행 열 곳 · [그림 2.10](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-10) 스카프의 경제 · [5절](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#b5) 수학이 어려워진 이유
+- **자료.** [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 3곳 · [국가통계포털](https://kosis.kr/) 3곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 2곳 · [금융감독원 전자공시 OpenDART](https://opendart.fss.or.kr/) 2곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Judd, Numerical Methods in Economics, MIT Press 1998; Miranda and Fackler, Applied Computational Economics and Finance, MIT Press 2002
+- **공개·개혁 교재.** [QuantEcon lectures (Python, JAX, Julia)](https://quantecon.org/lectures/); [Sargent and Stachurski, Dynamic Programming, vol. I, Cambridge University Press 2025](https://dp.quantecon.org/); [Axtell and Farmer, “Agent-Based Modeling in Economics and Finance”, Journal of Economic Literature 63(1), 2025](https://www.aeaweb.org/doi/10.1257/jel.20221319)
+- **한국어 교재.** 없음. 이 책이 첫 한국어 교재가 된다.
+
 ## 목차
 
 1. 기계 위의 수: 부동소수점과 조건수 — 두 곡선이 거의 평행하면 컴퓨터가 계산한 균형은 얼마나 믿을 만한가?

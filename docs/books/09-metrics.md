@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 5: 반증 계획서와 추정 결과 |
 | 사이트의 과목 페이지 | `course.html?c=metrics` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-1) 수요와 공급 · [그림 6.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-3) 필립스 곡선(Phillips curve)은 기대에 따라 움직인다 · [그림 7.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-1) 산점도는 투영이다 · [그림 7.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-2) 가격의 점 구름은 수요곡선이 아니다 · [그림 8.7](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-7) 최저임금의 효과는 누가 임금을 정하는지에 달려 있다 · [그림 8.10](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-10) 자본은 이미 자본이 있는 사람에게 간다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.4](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-4) 2025년 한국 가계의 소득 5분위별 가구당 월 처분가능소득 대비 소… · [그림 2.5](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-5) 추론 단계가 0, 1, 2, 3인 경기자와 끝까지 추론해 균형에 이르… · [그림 2.6](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-6) 고리 위의 80명 · [그림 2.8](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-8) 2024년 한국의 부문 33개(한국은행 산업연관표, 국산, 생산자가격) · [그림 2.11](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-11) 최상위 학술지 세 곳에 실린 논문, 1963–2011년
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.1절 수학: 왜 위상수학까지 배우는가 · 2.2절 증거: 자료에서 무엇을 고정했는가 · 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다 · 6절 쓰기를 가르친다
+- **자료.** [국가통계포털](https://kosis.kr/) 6곳 · [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 2곳 · [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 1곳 · [한국노동패널조사](https://www.kli.re.kr/klips) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Wooldridge, Introductory Econometrics, 8th ed., Cengage 2025; Stock and Watson, Introduction to Econometrics, 4th ed., Pearson 2019; Hansen, Econometrics, Princeton University Press 2022; Angrist and Pischke, Mostly Harmless Econometrics, Princeton University Press 2009
+- **공개·개혁 교재.** [Huntington-Klein, The Effect, Chapman & Hall/CRC (1st ed. free online; 2nd ed. 2025 in print)](https://theeffectbook.net/); [Cunningham, Causal Inference: The Mixtape (2nd ed., The Remix, Yale University Press 2026)](https://mixtape.scunning.com/); [Chernozhukov, Hansen, Kallus, Spindler and Syrgkanis, Applied Causal Inference Powered by ML and AI](https://causalml-book.org/); [Hyndman and Athanasopoulos, Forecasting: Principles and Practice, 3rd ed.](https://otexts.com/fpp3/)
+- **한국어 교재.** 한치록, 『계량경제학 강의』 5판, 박영사 2024; 한치록, 『패널데이터강의』 4판, 박영사 2024; 울드리지, 『계량경제학 1』 8판, 박상수·한치록 옮김, 박영사 2026
+
 ## 목차
 
 1. 회귀는 조건부 평균이다 — 이전소득 1원이 늘면 지출은 얼마나 느는가?

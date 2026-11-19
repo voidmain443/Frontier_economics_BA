@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=intlfin` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-3) 시점 간 선택 · [그림 6.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-3) 필립스 곡선(Phillips curve)은 기대에 따라 움직인다 · [그림 6.4](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-4) 중앙은행은 필립스 곡선 위에서 선택한다 · [그림 7.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-2) 가격의 점 구름은 수요곡선이 아니다 · [그림 8.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-2) 오늘의 환율은 내일에 달려 있다 · [그림 8.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-3) 인출 사태는 균형이다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.9](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-9) 완충 자본이 각각 1인 은행 열 곳
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다 · 5절 핵심의 규칙을 다시 쓴다 · 9절 교재 설계안에 반영할 것
+- **자료.** [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 22곳 · [FRED(세인트루이스 연준)](https://fred.stlouisfed.org/) 5곳 · [금융감독원 전자공시 OpenDART](https://opendart.fss.or.kr/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Krugman, Obstfeld and Melitz, International Economics: Theory and Policy, 12th ed., Pearson 2022, Parts 3–4; Feenstra and Taylor, International Macroeconomics, 6th ed., Macmillan Learning 2027; Uribe and Schmitt-Grohé, Open Economy Macroeconomics, Princeton University Press 2017; Obstfeld and Rogoff, Foundations of International Macroeconomics, MIT Press 1996
+- **공개·개혁 교재.** Schmitt-Grohé, Uribe and Woodford, International Macroeconomics: A Modern Approach, Princeton University Press 2022; Brunnermeier and Reis, A Crash Course on Crises, Princeton University Press 2023; [Caballero, Economic Crises, MIT OpenCourseWare 14.454, 2026](https://ocw.mit.edu/courses/14-454-economic-crises-spring-2026/pages/syllabus/); [Suranovic, International Finance: Theory and Policy, Saylor Foundation 2010 (CC BY-NC-SA)](https://open.umn.edu/opentextbooks/textbooks/international-finance-theory-and-policy)
+- **한국어 교재.** 김인준·이영섭, 『국제금융론』 4판, 율곡출판사 2019; 안홍식·최문정, 『국제금융론』 8판, 삼영사 2024; 박준서·이순호·최동현, 『국제금융론: 이론과 위기 및 대응』, 자유아카데미 2024; 국제금융연구회, 『글로벌 시대의 국제금융론』 6판, 시대가치 2022; 한국은행, 『한국의 외환시장과 외환제도』, 한국은행 2023
+
 ## 목차
 
 1. 경상수지는 시점 간 선택이다 — 한 나라는 왜 외국에서 빌리고, 언제 갚는가?

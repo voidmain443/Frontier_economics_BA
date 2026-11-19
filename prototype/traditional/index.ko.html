@@ -8,9 +8,8 @@
 <meta name="description" content="경제학을 가르쳐 온 방식, 평평한 교과서로는 나타낼 수 없는 내용, 그리고 경제학을 다르게 가르치는 아카이브 제안.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=IBM+Plex+Sans+KR:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="site-page">
@@ -28,6 +27,12 @@
     <h1>단면</h1>
     <p class="lede">경제학 교과서에서는 세계를 평평한 단면으로 그린다. 나머지를 모두 고정한 시장 하나, 수백만 가구를 대표하는 가계 하나가 그런 단면이다. 이 프로젝트에서는 이 단면이 무엇을 잘라 낸 결과인지, 단면으로는 무엇을 나타낼 수 없는지, 그리고 단면 없이 경제학을 어떻게 가르칠 수 있는지를 묻는다.</p>
   </header>
+
+  <figure class="fig wide hero" id="f0">
+    <div class="fig-art" id="hero-fig"></div>
+    <figcaption><span class="fig-no">그림 0</span>단면 A–A. 가격 p와 수량 q, 소득 I로 이루어진 수요 곡면 p(q, I)를 소득 I = I<sub>0</sub>에서 자르면 교과서의 수요곡선 D(p; I<sub>0</sub>)이 남는다. 소득이 I<sub>1</sub>로 오르면 수요곡선이 이동하며, 이 이동은 같은 곡면의 다른 단면으로 옮겨 간 결과이다.</figcaption>
+    <p class="held"><span>고정한 조건</span>소득 I = I<sub>0</sub>. 교과서의 그림은 모두 이처럼 무엇인가를 고정해 얻은 단면이다.</p>
+  </figure>
 
   <ol class="parts-index">
     <li>
@@ -53,30 +58,21 @@
     </li>
   </ol>
 
-  <section class="textbooks">
-    <h2>교과서</h2>
-    <p>교과 과정의 과목마다 별도의 페이지가 있다. 각 페이지에는 주차별 내용, 그 과목이 1부와 2부에서 나오는 곳, 다음에 읽을 외부 자료를 실었다.</p>
-    <div id="course-index"></div>
+  <section class="textbooks" id="books">
+    <h2>교과서 22권</h2>
+    <p>3부에서 제안하는 교과서는 22권, 301장이다. 장마다 모형 하나를 다루며, 그 모형이 고정한 조건과 값, 결론의 바탕이 되는 수학, 결론을 반증할 수 있는 자료, 독자가 직접 쓰는 글을 함께 적는다. 책은 학기가 아니라 독자가 해내야 하는 여덟 가지 작업의 순서로 읽는다. 책 이름을 누르면 3부의 표에서 그 책이 답하는 질문과 읽는 작업을 볼 수 있다.</p>
+    <ol class="works-legend" id="works-legend" aria-label="여덟 가지 작업"></ol>
+    <div id="book-shelf"></div>
+    <p class="courses-now"><b>지금의 학교 과목</b>1부에서 다룬 학부 과목 17개는 과목 페이지에서 주차별로 볼 수 있다. <span id="course-index"></span></p>
   </section>
 </main>
 </div>
 
+<script type="module" src="landing.js"></script>
 <script type="module">
   import { COURSES } from './curriculum.js';
   import { t, localHref } from './i18n.js';
-  const host = document.querySelector('#course-index');
-  for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
-    const h = document.createElement('h3');
-    h.textContent = t(name);
-    const ul = document.createElement('ul');
-    ul.className = 'course-grid';
-    for (const c of COURSES.filter((x) => x.side === side)) {
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="${localHref('course.html')}?c=${c.id}"><b>${t(c.short)}</b><span>${t(c.name)}</span><i>${t(`${c.weeks.length} weeks`)}</i></a>`;
-      ul.appendChild(li);
-    }
-    host.append(h, ul);
-  }
+  document.querySelector('#course-index').innerHTML = COURSES.map((c) => `<a href="${localHref('course.html')}?c=${c.id}">${t(c.name)}</a>`).join('<span class="sep" aria-hidden="true"> · </span>');
 </script>
 </body>
 </html>

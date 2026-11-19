@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 2: 한 쪽 분량의 유도 |
 | 사이트의 과목 페이지 | `course.html?c=math` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-1) 수요와 공급 · [그림 1.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-2) 잉여, 그리고 세금이 막는 거래 · [그림 2.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-1) 살 수 있는 가장 좋은 묶음 · [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f2-3) 시점 간 선택 · [그림 3.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f3-1) 모든 규모의 공장과 포락선 · [그림 6.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-1) 자본 축적 · [그림 6.4](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f6-4) 중앙은행은 필립스 곡선 위에서 선택한다
+- **2부 서로 다르고 연결된.** [그림 2.8](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-8) 2024년 한국의 부문 33개(한국은행 산업연관표, 국산, 생산자가격) · [그림 2.9](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-9) 완충 자본이 각각 1인 은행 열 곳
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 3절 양손잡이 경제학자의 형식 · 6절 쓰기를 가르친다 · 7절 수학의 순서
+- **자료.** [한국은행 경제통계시스템](https://ecos.bok.or.kr/) 5곳 · [국가통계포털](https://kosis.kr/) 4곳 · [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 2곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Sydsæter, Hammond, Strøm and Carvajal, Essential Mathematics for Economic Analysis, 6th ed., Pearson 2021; Chiang and Wainwright, Fundamental Methods of Mathematical Economics, 4th ed., McGraw-Hill 2005; Hoy, Livernois, McKenna, Rees and Stengos, Mathematics for Economics, 4th ed., MIT Press 2022
+- **공개·개혁 교재.** [Boyd and Vandenberghe, Convex Optimization, Cambridge University Press 2004](https://web.stanford.edu/~boyd/cvxbook/); [QuantEcon, A First Course in Quantitative Economics with Python](https://intro.quantecon.org/)
+- **한국어 교재.** 김성현, 『경제수학 강의』, 한빛아카데미 2023; 강창민, 『경제수학』, 박영사 2024; 김완진, 『경제수학』 2판, 홍문사 2019
+
 ## 목차
 
 1. 모형의 언어: 집합, 함수, 조건문 — 수요와 공급의 교점은 어떤 식의 해이고, '소득이 오르면 가격이 오른다'는 어떤 명제인가?

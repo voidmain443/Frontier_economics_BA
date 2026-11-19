@@ -8,8 +8,7 @@
 <meta name="description" content="How economics has been taught, what the flat textbook cannot show, and a proposal for an archive that teaches it differently.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/cmu-serif.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="site-page">
@@ -27,6 +26,12 @@
     <h1>Cross-Section</h1>
     <p class="lede">An economics textbook draws the world as flat slices: one market with everything else held still, one household standing for millions. This project asks what those slices are cut from, what they cannot show, and how economics could be taught without them.</p>
   </header>
+
+  <figure class="fig wide hero" id="f0">
+    <div class="fig-art" id="hero-fig"></div>
+    <figcaption><span class="fig-no">Figure 0</span>Section A–A. Cut the demand surface p(q, I) of price, quantity and income at income I = I<sub>0</sub>, and what remains is the textbook’s demand curve D(p; I<sub>0</sub>). When income rises to I<sub>1</sub> the curve shifts: the shift is a move to another section of the same surface.</figcaption>
+    <p class="held"><span>Held fixed</span>Income, at I = I<sub>0</sub>. Every figure in a textbook is a section like this, made by holding something still.</p>
+  </figure>
 
   <ol class="parts-index">
     <li>
@@ -52,30 +57,21 @@
     </li>
   </ol>
 
-  <section class="textbooks">
-    <h2>The textbooks</h2>
-    <p>Each course of the sequence has its own page: its weeks, where it appears in Parts 1 and 2, and outside material to read next.</p>
-    <div id="course-index"></div>
+  <section class="textbooks" id="books">
+    <h2>Twenty-two textbooks</h2>
+    <p>Part 3 proposes twenty-two textbooks, 301 chapters. Each chapter is one model, and sets down what it holds fixed and at what value, the mathematics its conclusion rests on, the data that could refute it, and a piece the reader writes. The books are read not by semester but in the order of eight works the reader has to do. A book’s name opens its row in Part 3: the question it answers and the works it is read in.</p>
+    <ol class="works-legend" id="works-legend" aria-label="The eight works"></ol>
+    <div id="book-shelf"></div>
+    <p class="courses-now"><b>The courses as taught now</b>The seventeen undergraduate courses of Part 1 have pages of their own, week by week. <span id="course-index"></span></p>
   </section>
 </main>
 </div>
 
+<script type="module" src="landing.js"></script>
 <script type="module">
   import { COURSES } from './curriculum.js';
   import { t, localHref } from './i18n.js';
-  const host = document.querySelector('#course-index');
-  for (const [side, name] of [['core', 'The core'], ['field', 'The field courses']]) {
-    const h = document.createElement('h3');
-    h.textContent = t(name);
-    const ul = document.createElement('ul');
-    ul.className = 'course-grid';
-    for (const c of COURSES.filter((x) => x.side === side)) {
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="${localHref('course.html')}?c=${c.id}"><b>${t(c.short)}</b><span>${t(c.name)}</span><i>${t(`${c.weeks.length} weeks`)}</i></a>`;
-      ul.appendChild(li);
-    }
-    host.append(h, ul);
-  }
+  document.querySelector('#course-index').innerHTML = COURSES.map((c) => `<a href="${localHref('course.html')}?c=${c.id}">${t(c.name)}</a>`).join('<span class="sep" aria-hidden="true"> · </span>');
 </script>
 </body>
 </html>

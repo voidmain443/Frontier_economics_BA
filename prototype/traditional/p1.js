@@ -6,6 +6,10 @@ import { CONSTRUCTS } from './p1-fold.js';
 import { regressionData } from './figures.js';
 import { setupPage } from './page.js';
 import { PLACE_P1, BUILD_P1 } from './wheel.js';
+import { partOneSources } from './p1-refs.js';
+
+// the closing sources, before the page is measured
+partOneSources();
 
 await setupPage({
   figs: FIGS,

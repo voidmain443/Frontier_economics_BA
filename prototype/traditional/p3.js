@@ -7,7 +7,7 @@
 import { FIGS } from './p3-figs.js';
 import { SPACE_FIGS, SPACE_CONSTRUCTS } from './p3-space.js';
 import { WORKS } from './books.js';
-import { drawWorks, bookIndex } from './p3-works.js';
+import { drawWorks, bookIndex, bookShelf } from './p3-works.js';
 import { setupPage } from './page.js';
 import { PLACE_P1, BUILD_P3, placeOfLink, stopIndex } from './wheel.js';
 import { MODELS, MODELS_P2, RELATIONS, STAGES, stateOf, stageState, MEASURED } from './ontology.js';
@@ -16,6 +16,7 @@ import { t, localHref } from './i18n.js';
 // the textbooks: the eight works (Figure 3.12) and the twenty-two books
 drawWorks(document.querySelector('#works'));
 bookIndex(document.querySelector('#book-index'));
+bookShelf(document.querySelector('#book-shelf-ref'));
 
 // every unit of Parts 1 and 2, in four of its nine fields
 const rel = Object.fromEntries(RELATIONS.map((r) => [r.id, r.name]));

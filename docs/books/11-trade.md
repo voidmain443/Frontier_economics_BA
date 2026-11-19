@@ -12,6 +12,23 @@
 | 작업의 산출물 | 작업 7: 각론 세 분야 이상에서 쓴 심사 보고서와 정책 메모 |
 | 사이트의 과목 페이지 | `course.html?c=trade` (1부의 학교 과정, 주차별) |
 
+## 이 권을 쓸 때 볼 곳
+
+설계의 본문이 가리키는 사이트의 그림과 절, 3부의 토대, 자료이다. `tools/split_plan.py`가 본문에서 뽑았으므로 설계를 고치면 이 목록도 바뀐다. 자료 뒤의 수는 설계에서 그 자료를 언급한 횟수이다.
+
+- **1부 고전 교과서.** [그림 1.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f1-2) 잉여, 그리고 세금이 막는 거래 · [그림 3.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f3-2) 가격이 비용의 최솟값에 이를 때까지 이어지는 진입 · [그림 5.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f5-1) 두 소비자가 상자를 이룬다 · [그림 7.2](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f7-2) 가격의 점 구름은 수요곡선이 아니다 · [그림 8.1](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-1) 나라 안에서 누가 이득을 보는가 · [그림 8.8](https://voidmain443.github.io/Frontier_economics_BA/classical.ko.html#f8-8) 담합은 미래 때문에 유지된다
+- **2부 서로 다르고 연결된.** [그림 2.3](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-3) 우선적 연결(preferential attachment)로 키운 기업… · [그림 2.8](https://voidmain443.github.io/Frontier_economics_BA/beyond.ko.html#f2-8) 2024년 한국의 부문 33개(한국은행 산업연관표, 국산, 생산자가격)
+- **3부의 토대** ([`docs/part3-foundations.md`](https://github.com/voidmain443/Frontier_economics_BA/blob/main/docs/part3-foundations.md)). 2.1절 수학: 왜 위상수학까지 배우는가 · 3절 양손잡이 경제학자의 형식 · 4절 단순화가 낳는 모순을 가르친다 · 6절 쓰기를 가르친다
+- **자료.** [한국은행 산업연관표](https://www.bok.or.kr/portal/main/contents.do?menuNo=200672) 8곳 · [국가통계포털](https://kosis.kr/) 1곳
+
+## 참고 서가
+
+판과 연도는 2026-11-16에 출판사, 저자, 알라딘의 페이지와 대조했다(`prototype/traditional/books.js`의 `SHELF`). 링크가 걸린 책은 온라인에서 무료로 읽을 수 있다. 빌릴 것과 피할 것, 이용허락은 `docs/next-series.md` 3절과 4절에 있다.
+
+- **표준 교재.** Krugman, Obstfeld and Melitz, International Economics: Theory and Policy, 12th ed., Pearson 2022; Feenstra and Taylor, International Trade, 6th ed., Macmillan Learning 2027; Feenstra, Advanced International Trade: Theory and Evidence, 2nd ed., Princeton University Press 2016
+- **공개·개혁 교재.** [Suranovic, International Trade: Theory and Policy, Saylor Foundation 2010 (CC BY-NC-SA)](https://open.umn.edu/opentextbooks/textbooks/international-trade-theory-and-policy); [Costinot and Donaldson, International Economics I, MIT OpenCourseWare 14.581, 2013](https://ocw.mit.edu/courses/14-581-international-economics-i-spring-2013/pages/syllabus/)
+- **한국어 교재.** 크루그먼·옵스펠드·멜리츠, 『국제경제학: 이론과 정책』 12판, 김승년·이연호·최혜린·허정 옮김, 한빛아카데미 2022; 김신행·김태기, 『국제경제론』 8판, 법문사 2024; 권철우·이재민·황석준·황욱, 『국제무역론』, 박영사 2023; 표학길·김영한, 『국제무역과 통상』, 청람 2024; 살바토레, 『살바토레의 국제무역론』 13판, 최낙일 옮김, 시그마프레스 2021
+
 ## 목차
 
 1. 비교우위 — 모든 재화를 더 적은 노동으로 만드는 나라는 왜 다른 나라와 교역하는가?

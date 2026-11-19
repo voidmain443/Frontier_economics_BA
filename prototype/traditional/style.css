@@ -1,13 +1,20 @@
 /* Engineering computation paper on a drafting desk; unfolds into a cyanotype. */
 
 :root {
-  --desk: #c6cec3;
-  --sheet: #eef2ea;
-  --grid-minor: rgba(84, 132, 96, 0.09);
-  --grid-major: rgba(84, 132, 96, 0.2);
-  --ink: #1f231e;
-  --ink-2: #545c51;
-  --rule: #9db097;
+  /* the drafting table, the sheet on it, and the plates the figures are drawn on */
+  --desk: #1d242a;
+  --desk-ink: #d6dde3;
+  --sheet: #f7f6f1;
+  --plate: #fbfbf8;
+  --grid-minor: rgba(42, 85, 160, 0.055);
+  --grid-major: rgba(42, 85, 160, 0.12);
+  --ink: #1c2024;
+  --ink-2: #565d63;
+  --ink-3: #868c91;
+  --hair: rgba(28, 32, 36, 0.16);
+  --rule: #cfd1c9;
+  /* ochre for text: the figure stroke is too light to read as type (3.5:1) */
+  --ochre-ink: #8a5f12;
   --cobalt: #2a55a0;
   --madder: #b03b3b;
   --olive: #587620;
@@ -15,8 +22,10 @@
   --blueprint: #0e2b4a;
   --chalk: #dce7f3;
   --redline: #ff9a86;
-  --serif: 'CMU Serif', 'Latin Modern Roman', 'Times New Roman', serif;
-  --draft: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  /* Source Serif 4 for Latin, close to Noto Serif KR's own Latin in x-height
+     (0.492 against 0.516); Hangul falls through to Noto Serif KR */
+  --serif: 'Source Serif 4', 'Noto Serif KR', 'AppleMyungjo', Georgia, serif;
+  --draft: 'Barlow Condensed', 'IBM Plex Sans KR', 'Arial Narrow', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -40,28 +49,23 @@ i, em { font-style: italic; }
 
 .desk { padding: 56px 24px 220px; }
 
+/* the sheet is plain paper: running text never sits on the grid (the grid
+   lines, 10px apart, cut through letters at varying heights). The grid is
+   kept for the plates the figures are drawn on (.fig-art). */
 .sheet {
   position: relative;
   max-width: 1180px;
   margin: 0 auto;
   padding: 96px 72px 140px 132px;
   background-color: var(--sheet);
-  background-image:
-    linear-gradient(var(--grid-major) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
-    linear-gradient(var(--grid-minor) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
-  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
-  background-position: -1px -1px;
-  border: 1px solid #93a68d;
-  box-shadow: 0 30px 60px -36px rgba(25, 40, 25, 0.5);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 48px 90px -40px rgba(0, 0, 0, 0.75);
 }
 
 .sheet::before {
   content: '';
   position: absolute;
   inset: 24px;
-  border: 1.5px solid var(--ink);
+  border: 1.25px solid var(--ink);
   pointer-events: none;
 }
 
@@ -73,7 +77,7 @@ i, em { font-style: italic; }
   width: 36px;
   border-right: 1px solid var(--ink);
   font: 500 15px/1 var(--draft);
-  color: var(--ink-2);
+  color: var(--ink-3);
 }
 
 .zones span {
@@ -103,10 +107,15 @@ h1 {
 }
 
 h2 {
-  font: 500 clamp(52px, 6vw, 84px)/0.95 var(--draft);
+  font: 500 clamp(48px, 5.4vw, 76px)/0.98 var(--draft);
   letter-spacing: -0.01em;
   margin: 0 0 14px;
 }
+/* on the landing page a section title stands over a hairline; in the parts
+   the revision note under the title draws the rule */
+.landing h2 { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--hair); max-width: 980px; }
+.opening p a { color: var(--cobalt); text-decoration: none; border-bottom: 1px solid rgba(42, 85, 160, 0.35); }
+.opening p a:hover { border-bottom-color: var(--cobalt); }
 
 h2 .no {
   display: inline-block;
@@ -179,17 +188,44 @@ sub, sup { font-size: 0.68em; line-height: 0; }
 
 /* ---------- figures ---------- */
 
-.fig { margin: 2.2em 0 0.6em; max-width: 720px; }
-.fig.wide { max-width: 940px; }
+.fig { margin: 2.4em 0 0.8em; max-width: 760px; }
+.fig.wide { max-width: 980px; }
+
+/* a plate: the drawing's own patch of computation paper, with its frame and
+   corner ticks. The fold measures the plot box inside, not the plate. */
+.fig-art {
+  position: relative;
+  padding: 18px 20px 14px;
+  background-color: var(--plate);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -1px -1px;
+  border: 1px solid var(--hair);
+}
+.fig-art::before, .fig-art::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--ink);
+  pointer-events: none;
+}
+.fig-art::before { left: -1px; top: -1px; border-left-width: 1.5px; border-top-width: 1.5px; }
+.fig-art::after { right: -1px; bottom: -1px; border-right-width: 1.5px; border-bottom-width: 1.5px; }
 
 .fig-art svg { display: block; width: 100%; height: auto; overflow: visible; }
 
 figcaption {
   max-width: 640px;
-  margin-top: 0.8em;
-  font-size: 15.5px;
-  line-height: 1.5;
+  margin-top: 0.9em;
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--ink-2);
+  text-wrap: pretty;
 }
 
 .fig-no {
@@ -243,10 +279,11 @@ figcaption {
 .partslist table {
   width: 100%;
   border-collapse: collapse;
-  border: 1.5px solid var(--ink);
-  background: var(--sheet);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  background: transparent;
   font-size: 15.5px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .partslist caption {
@@ -258,17 +295,19 @@ figcaption {
 
 .partslist th {
   font: 600 15px var(--draft);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   text-align: left;
-  padding: 7px 10px;
-  border: 1px solid var(--ink);
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid var(--ink);
+  vertical-align: bottom;
 }
 
 .partslist td {
-  padding: 7px 10px;
-  border: 1px solid var(--ink);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--hair);
   vertical-align: top;
 }
+.partslist tr:last-child td { border-bottom: 0; }
 
 .partslist td:first-child { font: 500 16px var(--draft); text-align: center; width: 3em; }
 .partslist td:nth-child(2) { font-weight: 700; }
@@ -281,9 +320,9 @@ figcaption {
   right: 20px;
   bottom: 20px;
   z-index: 50;
-  width: 330px;
+  width: 300px;
   background: var(--sheet);
-  border: 1.5px solid var(--ink);
+  border: 1.25px solid var(--ink);
   font-family: var(--draft);
   color: var(--ink);
   box-shadow: 0 16px 40px -18px rgba(0, 0, 0, 0.45);
@@ -332,6 +371,19 @@ body.unfolded .titleblock {
 }
 
 body.unfolded .tb-unfold { background: var(--chalk); color: var(--blueprint); }
+
+/* on a window too narrow to hold the block beside the sheet, it keeps its
+   name and the fold, and opens the rest on hover or keyboard focus */
+@media (max-width: 1560px) and (min-width: 761px) {
+  body:not(.unfolded) .titleblock { width: 260px; }
+  body:not(.unfolded) .titleblock .tb-sub,
+  body:not(.unfolded) .titleblock .tb-counts { display: none; }
+  body:not(.unfolded) .titleblock:hover .tb-sub,
+  body:not(.unfolded) .titleblock:focus-within .tb-sub { display: block; }
+  body:not(.unfolded) .titleblock:hover .tb-counts,
+  body:not(.unfolded) .titleblock:focus-within .tb-counts { display: grid; }
+  body:not(.unfolded) .tb-unfold { padding: 9px 12px; font-size: 17px; }
+}
 
 /* ---------- unfolded: the stage takes over ---------- */
 
@@ -587,29 +639,54 @@ body.unfolded.turning { cursor: grabbing; }
 /* ---------- the site: three parts and the textbooks ---------- */
 nav.site {
   position: fixed;
-  top: 14px;
-  left: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  font: 500 15px/1 var(--draft);
+  align-items: stretch;
+  height: 46px;
+  padding: 0 12px;
+  background: #171d22;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font: 500 16px/1 var(--draft);
+  letter-spacing: 0.01em;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
 }
 nav.site a {
   display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 6px 10px 5px;
-  color: var(--ink);
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+  color: var(--desk-ink);
   text-decoration: none;
-  background: rgba(238, 242, 234, 0.92);
-  border: 1px solid var(--ink-2);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
-nav.site a span { font-weight: 600; color: var(--madder); }
-nav.site a.site-home { font-weight: 600; background: var(--ink); color: var(--sheet); border-color: var(--ink); }
-nav.site a[aria-current='page'] { border-color: var(--ink); box-shadow: inset 0 -3px 0 var(--madder); }
-nav.site a:hover { background: #fff; }
-nav.site a:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
+nav.site a span { font-weight: 600; color: var(--redline); }
+nav.site a.site-home { font-weight: 600; font-size: 19px; color: #fff; padding-left: 6px; padding-right: 18px; }
+nav.site a[aria-current='page'] { color: #fff; box-shadow: inset 0 -2px 0 var(--redline); }
+nav.site a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+nav.site a:focus-visible { outline: 2px solid var(--redline); outline-offset: -4px; }
+/* how far down the page the reader is, where the browser can tell */
+@supports (animation-timeline: scroll()) {
+  nav.site::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 45px;
+    width: 100%;
+    height: 2px;
+    background: var(--redline);
+    transform-origin: 0 50%;
+    animation: read-progress linear both;
+    animation-timeline: scroll(root);
+    pointer-events: none;
+  }
+  body.site-page nav.site::after { display: none; }
+}
+@keyframes read-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 body.unfolded nav.site { display: none; }
 
 /* in an exhibit the panel lists the parts in play */
@@ -618,42 +695,110 @@ body.unfolded nav.site { display: none; }
 #expo-labels a.xl:hover { color: #fff; }
 #expo-labels a.xl i { font-style: normal; font: 600 11px var(--draft); color: var(--redline); margin-right: 4px; }
 
-.desk { padding-top: 72px; }
+.desk { padding-top: 86px; }
 body.site-page .desk { padding-bottom: 96px; }
 .sheet.landing { padding-bottom: 96px; }
 
-.parts-index { list-style: none; margin: 2.4em 0 3em; padding: 0; display: grid; gap: 14px; }
+/* the landing page: the three parts as a register of drawings */
+.parts-index { list-style: none; margin: 3em 0 4em; padding: 0; border-top: 1.5px solid var(--ink); max-width: 980px; }
+.parts-index li { border-bottom: 1px solid var(--hair); }
 .parts-index a {
   display: grid;
-  grid-template-columns: 64px 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 18px;
-  padding: 18px 22px 20px;
+  grid-template-columns: 96px 1fr;
+  column-gap: 20px;
+  padding: 26px 12px 28px 0;
   color: var(--ink);
   text-decoration: none;
-  border: 1.5px solid var(--ink);
-  border-left-width: 5px;
-  background: rgba(238, 242, 234, 0.85);
+  transition: background 0.2s;
 }
-.parts-index a:hover { background: #fff; }
-.parts-index a:focus-visible { outline: 2px solid var(--madder); outline-offset: 3px; }
-.pi-no { grid-row: 1 / 3; font: 600 54px/0.9 var(--draft); color: var(--madder); }
-.pi-title { font: 600 26px/1.2 var(--draft); }
-.pi-text { margin-top: 6px; max-width: 64ch; line-height: 1.55; }
+.parts-index a:hover { background: rgba(42, 85, 160, 0.04); }
+.parts-index a:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
+.pi-no { grid-row: 1 / 3; font: 500 76px/0.82 var(--draft); color: transparent; -webkit-text-stroke: 1.4px var(--ink); text-align: center; transition: color 0.2s; }
+.parts-index a:hover .pi-no { color: var(--madder); -webkit-text-stroke-color: var(--madder); }
+.pi-title { font: 600 28px/1.15 var(--draft); }
+.pi-title::after { content: ' →'; color: var(--madder); opacity: 0; transition: opacity 0.2s; }
+.parts-index a:hover .pi-title::after { opacity: 1; }
+.pi-text { margin-top: 8px; max-width: 640px; line-height: 1.6; color: var(--ink-2); }
 
-.textbooks h3 { margin-top: 1.4em; }
-.course-grid { list-style: none; padding: 0; margin: 0.6em 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-.course-grid a { display: grid; gap: 2px; padding: 10px 12px; color: var(--ink); text-decoration: none; border: 1px solid var(--ink-2); background: var(--sheet); }
-.course-grid a:hover { border-color: var(--ink); background: #fff; }
-.course-grid a:focus-visible { outline: 2px solid var(--madder); outline-offset: 2px; }
-.course-grid b { font: 600 18px/1.1 var(--draft); }
-.course-grid span { font-size: 0.92em; }
-.course-grid i { font-size: 0.8em; color: var(--ink-2); }
+/* Figure 0, section A–A */
+.landing .opening { margin-bottom: 48px; }
+.fig.hero { margin: 0 0 0; max-width: 980px; }
+.hero-plot .hero-floor { fill: rgba(28, 32, 36, 0.03); stroke: var(--ink-2); stroke-width: 0.8; }
+.hero-plot .hero-strip { stroke: none; }
+.hero-plot .ln.hero-mesh { stroke: var(--ink); stroke-width: 0.7; opacity: 0.5; }
+.hero-plot .hero-plane { fill: rgba(42, 85, 160, 0.08); stroke: var(--cobalt); stroke-width: 1; stroke-dasharray: 6 4; }
+.hero-plot .hero-cut { stroke: var(--madder); stroke-width: 1.4; stroke-dasharray: 22 5 3 5; fill: none; }
+.hero-plot .lb.hero-sec { font: 600 21px var(--draft); fill: var(--madder); letter-spacing: 0.02em; }
+.hero-plot .hero-sheet { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; }
+
+/* the books: the eight works, then the shelf */
+.textbooks { max-width: 980px; }
+.textbooks > p { max-width: 640px; }
+.works-legend { list-style: none; margin: 1.8em 0 2.6em; padding: 14px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 22px; border-top: 1px solid var(--hair); }
+.works-legend li { display: grid; grid-template-columns: 30px 1fr; align-items: baseline; line-height: 1.35; }
+.works-legend b { font: 600 17px/1.2 var(--draft); }
+.works-legend i { grid-column: 2; font-size: 14px; color: var(--ink-2); }
+.wk {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1.4px solid var(--ink);
+  border-radius: 50%;
+  font: 600 13px/1 var(--draft);
+  font-style: normal;
+  color: var(--ink);
+}
+.shelf-group { margin: 0 0 2.8em; }
+.shelf-group h3 { margin: 0 0 4px; font-size: 24px; }
+.shelf-note { margin: 0 0 12px; font-size: 15.5px; color: var(--ink-2); }
+.shelf {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  border-top: 3px solid var(--spine, var(--ink));
+  border-left: 1px solid var(--hair);
+}
+.shelf-core { --spine: var(--cobalt); }
+.shelf-field { --spine: var(--olive); }
+.shelf-last { --spine: var(--madder); }
+.shelf li { display: flex; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.shelf a {
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 4px;
+  min-height: 168px;
+  padding: 12px 14px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.shelf a:hover { background: #fff; }
+.shelf a:focus-visible { outline: 2px solid var(--madder); outline-offset: -2px; }
+.bk-no { font: 500 15px/1 var(--draft); color: var(--spine); letter-spacing: 0.04em; }
+.bk-name { font: 600 19px/1.2 var(--draft); }
+.shelf a:hover .bk-name { color: var(--cobalt); }
+.bk-q { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.bk-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font: 500 14px var(--draft); color: var(--ink-2); }
+.bk-works { display: flex; gap: 3px; }
+.bk-works .wk { width: 19px; height: 19px; font-size: 11.5px; border-width: 1.2px; }
+.courses-now { max-width: 760px; margin-top: 1.4em; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+.courses-now b { display: block; font: 600 16px var(--draft); color: var(--ink); letter-spacing: 0.02em; }
+.courses-now a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hair); white-space: nowrap; }
+.courses-now a:hover { color: var(--cobalt); border-bottom-color: var(--cobalt); }
+.courses-now .sep { color: var(--ink-3); }
+@media (max-width: 860px) {
+  .works-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 720px) {
-  nav.site { position: static; margin: 10px 12px 0; }
-  .desk { padding: 16px 12px 120px; }
-  .parts-index a { grid-template-columns: 44px 1fr; }
-  .pi-no { font-size: 40px; }
+  nav.site { padding: 0 4px; }
+  nav.site a { padding: 0 10px; }
+  .desk { padding: 62px 0 120px; }
+  .parts-index a { grid-template-columns: 52px 1fr; column-gap: 12px; }
+  .pi-no { font-size: 46px; }
 }
 
 /* ---------- part 2: the project list ---------- */
@@ -684,7 +829,7 @@ body.site-page .desk { padding-bottom: 96px; }
 /* a course's path of units (course.js) */
 .units-path { max-width: 760px; margin: 1.2em 0 0; padding-left: 1.8em; }
 .units-path li { margin: 0 0 0.7em; line-height: 1.45; }
-.units-path li::marker { font: 600 17px var(--draft); color: var(--ochre); }
+.units-path li::marker { font: 600 17px var(--draft); color: var(--ochre-ink); }
 .units-path a { color: var(--ink); }
 .units-path a b { font: 600 17px var(--draft); margin-right: 0.3em; }
 .units-path span { display: block; color: var(--ink-2); font-size: 0.95em; }
@@ -939,6 +1084,34 @@ details.units td { font-size: 14.5px; }
   .books { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .books table { min-width: 720px; }
 }
+/* the shelf beside the books: three columns of existing textbooks */
+.shelf-ref > p { max-width: 640px; font-size: 15.5px; color: var(--ink-2); }
+.shelf-table table { font-size: 14px; line-height: 1.45; }
+.shelf-table td:first-child { width: 11em; font: 600 15px/1.35 var(--serif); }
+.shelf-table td:first-child a { color: var(--ink); text-decoration: none; }
+.shelf-table .bno { display: block; font: 500 14px var(--draft); color: var(--ink-3); }
+.shelf-table td:first-child a:hover { color: var(--cobalt); }
+.shelf-table td:nth-child(2) { font-weight: 400; }
+.shelf-table td:last-child { font-style: normal; }
+.shelf-table ul { margin: 0; padding: 0; list-style: none; }
+.shelf-table li { margin: 0 0 0.45em; padding-left: 0.9em; text-indent: -0.9em; }
+.shelf-table li a { color: var(--cobalt); text-decoration: none; border-bottom: 1px solid rgba(42, 85, 160, 0.3); }
+.shelf-table .none { margin: 0; color: var(--madder); font-style: italic; max-width: none; }
+@media (max-width: 760px) {
+  .shelf-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .shelf-table table { min-width: 760px; }
+}
+/* Part 1's sources: the textbooks each stage follows (a shelf table), then
+   references with a hanging indent, each ending in the places that use it */
+.p1-texts { margin: 1.4em 0 0; }
+.refs { max-width: 760px; margin: 0.8em 0 1.4em; padding: 0; list-style: none; font-size: 15.5px; line-height: 1.5; }
+.refs li { margin: 0 0 0.6em; padding-left: 1.4em; text-indent: -1.4em; }
+.refs a { color: var(--cobalt); text-decoration: none; border-bottom: 1px solid rgba(42, 85, 160, 0.3); }
+.refs a:hover { border-bottom-color: var(--cobalt); }
+.refs .at { margin-left: 0.2em; font: 500 14px var(--draft); letter-spacing: 0.02em; }
+.refs .at::before { content: '→ '; color: var(--ink-3); }
+.stage > ul.refs { padding-left: 0; max-width: 760px; margin: 0.8em 0 1.4em; }
+.refs .at a { white-space: nowrap; }
 details.tests ol { max-width: 760px; margin: 0.8em 0 0; padding-left: 1.6em; }
 details.tests li { margin: 0.9em 0; line-height: 1.5; }
 details.tests li::marker { font: 600 17px var(--draft); }
@@ -983,13 +1156,32 @@ body:not(.unfolded) .story { display: none; }
 @media (max-width: 640px) { .story { padding: 12px 14px 10px; } .story .say { font-size: 16px; } }
 
 /* the Korean twin of each page (docs/i18n.md): Hangul set in Noto Serif KR
-   beside Computer Modern, and in IBM Plex Sans KR beside Barlow Condensed */
+   beside Source Serif 4, and in IBM Plex Sans KR beside Barlow Condensed
+   (x-height 0.516 against 0.506, cap height 0.698 against 0.700) */
 :root:lang(ko) {
-  --serif: 'CMU Serif', 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+  --serif: 'Source Serif 4', 'Noto Serif KR', 'AppleMyungjo', serif;
   --draft: 'Barlow Condensed', 'IBM Plex Sans KR', 'Apple SD Gothic Neo', sans-serif;
 }
-:lang(ko) body, :lang(ko) .sheet { word-break: keep-all; overflow-wrap: anywhere; }
+/* Hangul has no italic: a slanted Hangul is the browser's fake. Set in
+   Korean, the italic voices (asides, questions, notes) stay upright; Latin
+   variables inside <i> keep their true italic */
+:lang(ko) .lede, :lang(ko) .aha, :lang(ko) .transition, :lang(ko) .wk-q, :lang(ko) .projects span,
+:lang(ko) .course-links a span, :lang(ko) .partslist td:last-child, :lang(ko) .work .hands,
+:lang(ko) .shelf-table .none, :lang(ko) .works-legend i, :lang(ko) .plot .lb.note,
+:lang(ko) .xl.tag.held, :lang(ko) .xl.tag.measured i { font-style: normal; }
+:lang(ko) .aha { font-weight: 600; }
+/* nor is it faked: Hangul inside an <i> stays upright */
+:lang(ko) body { font-synthesis: none; }
+:lang(ko) p, :lang(ko) li, :lang(ko) figcaption { text-wrap: pretty; }
+:lang(ko) h1, :lang(ko) h2, :lang(ko) h3, :lang(ko) .lede { text-wrap: balance; }
+:lang(ko) body, :lang(ko) .sheet { word-break: keep-all; overflow-wrap: break-word; }
+:lang(ko) body { font-size: 18px; line-height: 1.8; }
+:lang(ko) .lede { line-height: 1.6; }
+:lang(ko) h1, :lang(ko) h2 { letter-spacing: -0.02em; }
+:lang(ko) figcaption, :lang(ko) .held { line-height: 1.65; }
+@media (max-width: 760px) { :lang(ko) body { font-size: 16.5px; line-height: 1.75; } .lede { font-size: 20px; } }
 /* the two languages, side by side; the one being read is filled */
-nav.site .langs { display: inline-flex; margin-left: 10px; }
-nav.site .langs a + a { border-left: 0; }
-nav.site .langs a[aria-current='true'] { background: var(--ink); color: var(--sheet); border-color: var(--ink); cursor: default; }
+nav.site .langs { display: inline-flex; margin-left: auto; border-left: 1px solid rgba(255, 255, 255, 0.08); }
+nav.site .langs a { padding: 0 12px; font-size: 15px; }
+nav.site .langs a:last-child { border-right: 0; }
+nav.site .langs a[aria-current='true'] { color: #fff; background: rgba(255, 255, 255, 0.08); cursor: default; }
